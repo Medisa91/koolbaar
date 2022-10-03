@@ -1,0 +1,101 @@
+@mixin custom-input-styles($width, $height, $margin, $padding, $border-radius, $bg-color,
+    $font-family, $font-size, $line-height, $align, $color, $property: null, $value: null) {
+
+    @if $property  !=null {
+        #{$property}: $value
+    }
+
+    width: $width;
+    height: $height;
+    margin: $margin;
+    padding: $padding;
+    border-radius: $border-radius;
+    background-color: $bg-color;
+    font-family: $font-family;
+    font-size: $font-size;
+    line-height: $line-height;
+    text-align: $align;
+    color: $color;
+    outline: none;
+}
+
+@mixin custom-select-styles($width, $margin, $padding, $border-radius, $bg-color,
+    $font-family,
+    $font-size,
+    $font-weight,
+    $line-height,
+    $align,
+    $color,
+    $property: null, $value: null) {
+
+    @if $property  !=null {
+        #{$property}: $value
+    }
+
+    width: $width;
+    margin: $margin;
+    padding: $padding;
+    border-radius: $border-radius;
+    background-color: $bg-color;
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    text-align: $align;
+    color: $color;
+    // border: solid 1px #d6d6d6;
+}
+
+
+@mixin custom-logo-ellipse($width, $height, $padding, $bg-color) {
+    width: $width;
+    height: $height;
+    padding: $padding;
+    background-color: $bg-color;
+}
+
+@mixin custom-text-style($font-family, $font-size, $font-weight, $line-height, $align, $color) {
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    text-align: $align;
+    color: $color;
+}
+
+@mixin custom-btn-style($width, $height, $margin, $padding, $border-radius, $font-family, $font-size, $font-weight, $line-height, $align, $color, $property: null, $value: null) {
+    @if $property  !=null {
+        #{$property}: $value
+    }
+    width: $width;
+    height: $height;
+    margin: $margin;
+    padding: $padding;
+    border-radius: $border-radius;
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    text-align: $align;
+    color: $color;
+}
+
+@mixin custom-box-style($width, $height, $margin, $padding, $object-fit, $box-shadow, $bg-color) {
+    width: $width;
+    height: $height;
+    margin: $margin;
+    padding: $padding;
+    object-fit: $object-fit;
+    box-shadow: $box-shadow;
+    background-color: $bg-color;
+}
+
+@mixin custom-card-style($width, $height, $margin, $padding, $border-radius, $border, $bg-color) {
+    width: $width;
+    height: $height;
+    margin: $margin;
+    padding: $padding;
+    border-radius: $border-radius;
+    border: $border;
+    background-color: $bg-color;
+}
