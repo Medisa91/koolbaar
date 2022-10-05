@@ -1,13 +1,18 @@
 import React, { useState , useRef} from "react";
-import { Input, GoogleMap } from "components";
+import { Input, GoogleMap, Uploader,Button } from "components";
 import UserAvatar from "./../../assets/images/user-avatar.png";
 import { Col, Row } from "react-bootstrap";
 
 export const Register: React.FC = () => {
   const [avatar, setAvatar] = useState(UserAvatar);
   const [changeImageStyle, setChangeImageStyle] = useState(false);
+  const [checked, setChecked] = useState(false);
 
-  const profileImg = useRef();
+  // const profileImg = useRef();
+
+  const handleChange = () => { 
+    setChecked(!checked); 
+  }; 
 
   const updateAvatars = (e) => {
     setAvatar(URL.createObjectURL(e.target.files[0]));
@@ -31,7 +36,7 @@ export const Register: React.FC = () => {
               type="file"
               className="avatar-control-file"
               onChange={updateAvatars}
-              ref={profileImg}
+              // ref={profileImg}
             />
           </div>
           <div className="profile-box-container">
@@ -118,6 +123,32 @@ export const Register: React.FC = () => {
             />
           </Col>
         </Row>
+        <Row>
+          <Uploader title="Upload Passport front page" />
+        </Row>
+        <Row>
+          <Uploader title="Upload ID Driving License/PR Card/ Green Card/National Card)" />
+        </Row>
+        <div>
+          <label className="checkbox-container">
+            I agree with the terms and condition defined on this{" "}
+            <a href="/" style={{ textDecorationLine: "underline" }}>
+              link
+            </a>
+            .
+            <input type="checkbox" checked={checked} onChange={handleChange} />
+            <span className="checkmark"></span>
+          </label>
+        </div>
+        <div>
+          <Button
+            variant="primary"
+            data-test="docs-btn-anchor"           
+            className="submit-request-btn mt-4"
+          >
+            Submit Request
+          </Button>
+        </div>
       </div>
     </>
   );

@@ -21,27 +21,27 @@ export const PackageCard: React.FC = () => {
     setShowMoreDetail(true);
     setFade(true);
   };
-    useEffect(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 5000);
-    }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
 
   return (
     <div className="flex-grow-1 request-info-wrapper mb-3">
       <Row style={size.width < 768 ? { width: "318px", margin: "auto" } : null}>
-        {(data?.plugins ?? []).map((plugin) => (
-          <>
-            {loading ? (
-              <Col lg={3} md={4} sm={12}>
+        {loading
+          ? (data?.plugins ?? []).map((plugin) => (
+              <Col key={plugin.name} lg={3} md={4} sm={12}>
                 <SkeletonGrid />
               </Col>
-            ) : (
+            ))
+          : (data?.plugins ?? []).map((plugin) => (
               <Col
+                key={plugin.name}
                 lg={3}
                 md={4}
                 sm={12}
-                key={plugin.name}
                 className={`${size.width < 768 && "p-0"} mb-5`}
                 style={size.width < 768 ? { width: "318px" } : null}
                 data-testid="container"
@@ -155,9 +155,7 @@ export const PackageCard: React.FC = () => {
                   />
                 )}
               </Col>
-            )}
-          </>
-        ))}
+            ))}
       </Row>
     </div>
   );

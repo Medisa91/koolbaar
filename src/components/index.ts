@@ -17,3 +17,4 @@ export { Filters } from "./filters";
 export { AvailableRequests } from "./availableRequests";
 export { SkeletonGrid } from "./skeleton";
 export { GoogleMap } from "./googleMap";
+export { Uploader } from "./dropZone";

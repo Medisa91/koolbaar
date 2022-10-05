@@ -4,6 +4,7 @@ import { Input } from "components";
 import Select from 'react-select';
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
+import { Link } from "react-router-dom";
 
 interface IProps {
   isAfterSearch: boolean;
@@ -65,9 +66,9 @@ const [isOpenModal, setIsOpenModal] = useState(false);
               : "First and Last Flight Number"}
           </span>
           {isAfterSearch && (
-            <a onClick={openTravelInfoModal} className="not-have-ticket-title">
+            <Link to="/" onClick={openTravelInfoModal} className="not-have-ticket-title">
               I don't have ticket
-            </a>
+            </Link>
           )}
           <Input
             size="sm"

@@ -754,7 +754,10 @@ body {
 }
 
 .custom-textarea-register {
-  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
+  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, rgb(152, 152, 152), border, solid 1px #d6d6d6);
+  &::placeholder{
+    color: #989898
+  }
 }
 
 .bm-menu-wrap {
@@ -854,14 +857,99 @@ body {
 
 .half-custom-input-register{
   @include custom-input-styles(263px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);
-  font-weight: $weight-bold;
+  &::placeholder{
+    color: #989898;
+  }
 }
 
 .full-custom-input-register{
-  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);
-  font-weight: $weight-bold;
+  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);  
+  &::placeholder{
+    color: #989898;
+  }
 }
 
-.map-wrapper{
-  
+.upload-title{
+  @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, center, $primary);
+  display: inline-block;
+  margin: 22px 0 18px 0;
+}
+
+.thumb-title{
+  @include custom-text-style($Inter-font, $font-14, $weight-500, 1.21, center, #a7a7a7);
+  width: 111px;
+  height: 56px;
+  margin: auto
+}
+
+.checkbox-container {
+  @include custom-text-style($Inter-font, $font-14, $weight-bold, 2.21, left, $primary);
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  padding-left: 45px;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  padding: 5px 5px 6px 6px;
+  border-radius: 5px;
+  background-color: #eee;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #eee;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  // background-color: #2196F3;  
+  background-color: #eee;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 12px;
+  top: 5px;
+  width: 10px;
+  height: 20px;
+  border: solid #cfcfcf;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.submit-request-btn {
+  @include custom-btn-style(197px, 55px, 24px 3.5px 0 404px, 18px 35px 17px, 5px,
+    $Inter-font, $font-16, $weight-600, 1.25, left, $white );
 }

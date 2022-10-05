@@ -13,7 +13,7 @@ export interface InputProps extends InputGroupProps, React.HTMLAttributes<HTMLEl
   textArea?: boolean,
   rows?: number,
   label?: any,
-  ref?: React.RefObject<HTMLInputElement>
+  // ref?: React.RefObject<HTMLInputElement>
 }
 
 export type IInput = InputProps;
@@ -25,7 +25,7 @@ export const Input: React.FC<IInput> = ({
   className,
   textArea = false,
   type,
-  ref,
+  // ref,
   rows,
   label,
   ...rest
@@ -45,7 +45,7 @@ export const Input: React.FC<IInput> = ({
           className={className}
           type={type}
           id={_id}
-          ref={ref}
+          // ref={ref}
         />
       </BaseInput>
     </>
