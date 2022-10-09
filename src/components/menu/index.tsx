@@ -78,7 +78,7 @@ export const Menu: React.FC = () => {
         </Navbar>
       )}
       {showSidebar && (
-        <RightSidebar isOpen={showSidebar} setIsOpen={setShowSidebar} />
+        <RightSidebar isOpen={showSidebar} setIsOpen={setShowSidebar} sidebarType="login" />
       )}
     </>
   );

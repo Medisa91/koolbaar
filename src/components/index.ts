@@ -10,6 +10,7 @@ export { TabOne } from "./tabContent/TabOne";
 export { TabTwo } from "./tabContent/TabTwo";
 export { Tabs } from "./tabsContainer";
 export { RightSidebar } from "./sidebar";
+export { AcceptOffer } from "./acceptOffer";
 export { Login } from "./login";
 export { Register } from "./register";
 export { FlightInfo } from "./flightInfo";

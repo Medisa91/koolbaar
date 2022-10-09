@@ -11,6 +11,7 @@ export const Header: React.FC = () => {
   const handleLoginSidebar = () => {
     setShowSidebar(!showSidebar);
   }
+
   return (
     <>
       {size?.width < 768 ? (
@@ -40,7 +41,7 @@ export const Header: React.FC = () => {
         </Row>
       )}
       {showSidebar && (
-        <RightSidebar isOpen={showSidebar} setIsOpen={setShowSidebar} />
+        <RightSidebar isOpen={showSidebar} setIsOpen={setShowSidebar} sidebarType="login" />
       )}
     </>
   );

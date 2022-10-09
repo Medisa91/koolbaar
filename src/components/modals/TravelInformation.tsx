@@ -1,33 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Modal } from "react-bootstrap";
 import Select, { components } from "react-select";
-import DatePicker from "react-modern-calendar-datepicker";
+import DatePicker from "react-datepicker";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "components";
+import { MonthNumber } from "helper/convertMonthNameToNumber";
+import { DepartureOptions, ArrivalOptions } from "helper/interface";
 
 interface IProps {
   isOpen: boolean;
   setIsOpen: (key: any) => void;
+  fromData: DepartureOptions;
+  toData: ArrivalOptions;
 }
 
-export const TravelInformation: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
-  const screenSize = UseWindowSize();
-  const [from, setFrom] = useState({});
-  const [to, setTo] = useState({});
-  const [selectedDepartureDay, setSelectedDepartureDay] = useState(null);
-  const [selectedArrivalDay, setSelectedArrivalDay] = useState(null);
-  // const [options, setOptions] = useState([]);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [index, setIndex] = useState(5);
-  // const initialPosts = slice(post, 0, index);
-  const handleClose = () => setIsOpen(false);
+export const TravelInformation: React.FC<IProps> = ({
+  isOpen,
+  setIsOpen,
+  fromData,
+  toData,
+}) => {
+  const separatedFromDate = fromData.fromDate.split(" ");
+  const separatedFromHour = separatedFromDate[3].split(":");
+  const separatedToDate = toData.toDate.split(" ");
+  const separatedToHour = separatedToDate[3].split(":");
+  const defaultFromDate = new Date(
+    parseInt(separatedFromDate[2]),
+    MonthNumber(separatedFromDate[1]),
+    parseInt(separatedFromDate[0]),
+    parseInt(separatedFromHour[0]),
+    parseInt(separatedFromHour[1]),
+    0,
+    0
+  );
+  const defaultToDate = new Date(
+    parseInt(separatedToDate[2]),
+    MonthNumber(separatedToDate[1]),
+    parseInt(separatedToDate[0]),
+    parseInt(separatedToHour[0]),
+    parseInt(separatedToHour[1]),
+    0,
+    0
+  );
 
-  const options = [
-    { value: 1, label: "Destination 1" },
-    { value: 2, label: "Destination 2" }
-  ];
+  const screenSize = UseWindowSize();
+  const [from, setFrom] = useState({
+    value: fromData.from,
+    label: fromData.from,
+  });
+  const [to, setTo] = useState({ value: toData.to, label: toData.to });
+  const [fromDate, setFromDate] = useState(defaultFromDate);
+  const [toDate, setToDate] = useState(defaultToDate);
+  const [departureData, setDepartureData] = useState([]);
+  const [arrivalData, setArrivalData] = useState([]);
+  const handleClose = () => setIsOpen(false);
 
   // const getCountriesName = () => {
   //   fetch("https://countriesnow.space/api/v0.1/countries")
@@ -57,6 +85,11 @@ export const TravelInformation: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
   const handleToChange = (selected) => {
     setTo(selected);
   };
+
+  useEffect(() => {
+    setDepartureData([{ value: fromData.from, label: fromData.from }]);
+    setArrivalData([{ value: toData.to, label: toData.to }]);
+  }, [fromData, toData]);
 
   const customStyle = {
     control: (styles) => ({
@@ -105,7 +138,7 @@ export const TravelInformation: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
                   className="custom-select-from-city d-inline-block"
                   value={from}
                   onChange={handleFromChange}
-                  options={options}
+                  options={departureData}
                   components={{
                     IndicatorSeparator: () => null,
                     MenuList: SelectMenuButton,
@@ -122,7 +155,7 @@ export const TravelInformation: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
                   className="custom-select-from-city d-inline-block"
                   value={to}
                   onChange={handleToChange}
-                  options={options}
+                  options={arrivalData}
                   components={{
                     IndicatorSeparator: () => null,
                   }}
@@ -135,13 +168,21 @@ export const TravelInformation: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
             <Col xs={6} className="select-date-wrapper pr-0">
               <div>
                 <span className="flight-date-title">Departure date</span>
-                <DatePicker
+                {/* <DatePicker
                   value={selectedDepartureDay}
                   inputClassName="custom-datepicker"
                   onChange={setSelectedDepartureDay}
                   // inputPlaceholder={<FontAwesomeIcon icon={faCalendar} />}
                   shouldHighlightWeekends
                   calendarPopperPosition="bottom"
+                /> */}
+                <DatePicker
+                  className="custom-datepicker"
+                  selected={fromDate}
+                  onChange={(date) => setFromDate(date)}
+                  timeInputLabel="Time:"
+                  dateFormat="MM/dd/yyyy h:mm aa"
+                  showTimeInput
                 />
                 <div className="datepicket-icon-wrapper">
                   <FontAwesomeIcon icon={faCalendar} />
@@ -151,13 +192,21 @@ export const TravelInformation: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
             <Col xs={6} className="select-date-wrapper pr-0">
               <div>
                 <span className="flight-date-title">Arrival date</span>
-                <DatePicker
+                {/* <DatePicker
                   value={selectedArrivalDay}
                   inputClassName="custom-datepicker"
                   onChange={setSelectedArrivalDay}
                   // inputPlaceholder={<FontAwesomeIcon icon={faCalendar} />}
                   shouldHighlightWeekends
                   calendarPopperPosition="bottom"
+                /> */}
+                <DatePicker
+                  className="custom-datepicker"
+                  selected={toDate}
+                  onChange={(date) => setToDate(date)}
+                  timeInputLabel="Time:"
+                  dateFormat="MM/dd/yyyy h:mm aa"
+                  showTimeInput
                 />
                 <div className="datepicket-icon-wrapper">
                   <FontAwesomeIcon icon={faCalendar} />

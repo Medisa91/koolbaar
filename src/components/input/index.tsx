@@ -26,6 +26,7 @@ export const Input: React.FC<IInput> = ({
   textArea = false,
   type,
   // ref,
+  value,
   rows,
   label,
   ...rest
@@ -45,6 +46,7 @@ export const Input: React.FC<IInput> = ({
           className={className}
           type={type}
           id={_id}
+          value={value}
           // ref={ref}
         />
       </BaseInput>

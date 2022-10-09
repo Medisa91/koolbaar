@@ -1,7 +1,20 @@
-import React, { FC } from "react";
+import React, { FC , useState, useEffect} from "react";
 import LocationIcon from "../../assets/images/svg/location.svg";
 
-export const ArrivalInfo: FC<{}> = () => {
+interface IProps {
+  onSelectArrivalInfo: Function
+}
+
+export const ArrivalInfo: FC<IProps> = ({onSelectArrivalInfo}) => {
+  const [arrivalData, setArrivalData] = useState({
+    to: "Canada, Toronto",
+    toDate: "25 AUG 2021 20:15"
+  });
+
+  useEffect(() => {
+    onSelectArrivalInfo(arrivalData)
+  }, [])
+
   return (
     <div>
       <div className="text-align-last-left">
@@ -15,7 +28,7 @@ export const ArrivalInfo: FC<{}> = () => {
         </span>
       </div>
       <div className="text-align-last-left">
-        <span className="search-departure-destination">All countries</span>
+        <span className="search-departure-destination">{arrivalData.to}</span>
       </div>
       <div className="text-align-last-left">
         <span className="search-departure-date">25 AUG 2021</span>

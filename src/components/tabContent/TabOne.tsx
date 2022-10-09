@@ -6,10 +6,18 @@ import { ArrivalInfo } from "./ArrivalInfo";
 import PlaneIcon from "../../assets/images/plane.png";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { DepartureOptions, ArrivalOptions } from "helper/interface";
 
 export const TabOne: FC<{}> = () => {
   const size = UseWindowSize();
   const [isAfterSearch, setIsAfterSearch] = useState(false);
+  const [travelDepartureInfoData, setTravelDepartureInfoData] =
+    useState<DepartureOptions>({ from: "", fromDate: "" });
+  const [travelArrivalInfoData, setTravelArrivalInfoData] =
+    useState<ArrivalOptions>({
+      to: "",
+      toDate: "",
+    });
 
   useEffect(() => {
     setTimeout(() => {
@@ -17,15 +25,27 @@ export const TabOne: FC<{}> = () => {
     }, 5000);
   }, []);
 
+  const handleDepartureInfo = (data) => {
+    setTravelDepartureInfoData(data);
+  };
+
+  const handleArrivalInfo = (data) => {
+    setTravelArrivalInfoData(data);
+  };
+
   return (
     <Row className="tabs-wrapper">
       <Col lg={6} md={6} sm={12}>
         <Row>
           <Col lg={7} md={7} sm={12}>
-            <FlightSelect isAfterSearch={isAfterSearch} />
+            <FlightSelect
+              isAfterSearch={isAfterSearch}
+              travelDepartureInfoData={travelDepartureInfoData}
+              travelArrivalInfoData={travelArrivalInfoData}
+            />
           </Col>
           <Col lg={5} md={5} sm={12} className="departure-info-wrapper">
-            <DepartureInfo />
+            <DepartureInfo onSelectDepartureInfo={handleDepartureInfo} />
           </Col>
         </Row>
       </Col>
@@ -50,7 +70,7 @@ export const TabOne: FC<{}> = () => {
       <Col lg={5} md={5} sm={12}>
         <Row>
           <Col>
-            <ArrivalInfo />
+            <ArrivalInfo onSelectArrivalInfo={handleArrivalInfo} />
           </Col>
           <Col>
             {isAfterSearch ? (

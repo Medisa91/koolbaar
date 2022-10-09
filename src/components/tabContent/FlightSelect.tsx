@@ -1,20 +1,35 @@
 import React, { FC, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Input } from "components";
-import Select from 'react-select';
+import Select from "react-select";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
 import { Link } from "react-router-dom";
+import { DepartureOptions, ArrivalOptions } from "helper/interface";
 
 interface IProps {
   isAfterSearch: boolean;
+  travelDepartureInfoData: DepartureOptions;
+  travelArrivalInfoData: ArrivalOptions;
 }
 
-export const FlightSelect: FC<IProps> = ({isAfterSearch}) => {
+export const FlightSelect: FC<IProps> = ({
+  isAfterSearch,
+  travelDepartureInfoData,
+  travelArrivalInfoData,
+}) => {
   const size = UseWindowSize();
 
-const [selectedOption, setSelectedOption] = useState({ value: 1, label: "Direct" });
-const [isOpenModal, setIsOpenModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState({
+    value: 1,
+    label: "Direct",
+  });
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [fromData, setFromData] = useState<DepartureOptions>({
+    from: "",
+    fromDate: "",
+  });
+  const [toData, setToData] = useState<ArrivalOptions>({ to: "", toDate: "" });
 
   const options = [
     { value: 1, label: "Direct" },
@@ -34,9 +49,11 @@ const [isOpenModal, setIsOpenModal] = useState(false);
     setSelectedOption(selected);
   };
 
-  const openTravelInfoModal =() => {
-    setIsOpenModal(!isOpenModal)
-  }
+  const openTravelInfoModal = () => {
+    setIsOpenModal(!isOpenModal);
+    setFromData(travelDepartureInfoData);
+    setToData(travelArrivalInfoData);
+  };
 
   return (
     <Row>
@@ -66,7 +83,11 @@ const [isOpenModal, setIsOpenModal] = useState(false);
               : "First and Last Flight Number"}
           </span>
           {isAfterSearch && (
-            <Link to="/" onClick={openTravelInfoModal} className="not-have-ticket-title">
+            <Link
+              to="/"
+              onClick={openTravelInfoModal}
+              className="not-have-ticket-title"
+            >
               I don't have ticket
             </Link>
           )}
@@ -86,9 +107,14 @@ const [isOpenModal, setIsOpenModal] = useState(false);
           />
         </div>
       </Col>
-        {isOpenModal && (
-          <TravelInformation isOpen={isOpenModal} setIsOpen={setIsOpenModal} />
-        )}
+      {isOpenModal && (
+        <TravelInformation
+          fromData={fromData}
+          toData={toData}
+          isOpen={isOpenModal}
+          setIsOpen={setIsOpenModal}
+        />
+      )}
     </Row>
   );
 };

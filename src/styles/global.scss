@@ -26,6 +26,16 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.modal-open,
+.modal-open .modal {
+  overflow: hidden;
+}
+
+.modal-open{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .custom-input {
   @include custom-input-styles(252px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
 }
@@ -554,6 +564,7 @@ body {
   color: $white;
   border-radius: 5px 5px 0px 0px;
   text-align-last: center;
+  opacity: 0.83;
 }
 
 .profile-dropdown {
@@ -663,7 +674,8 @@ body {
   border: solid 1px #c8c8c8;
 }
 
-.login-wrapper {
+.login-wrapper,
+.offer-wrapper {
   padding: 80px 18px 50px;
   margin: auto
 }
@@ -677,7 +689,8 @@ body {
   }
 }
 
-.login-form {
+.login-form,
+.offer-form {
   h1 {
     @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $gray6);
     margin-bottom: 30px
@@ -755,7 +768,8 @@ body {
 
 .custom-textarea-register {
   @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, rgb(152, 152, 152), border, solid 1px #d6d6d6);
-  &::placeholder{
+
+  &::placeholder {
     color: #989898
   }
 }
@@ -773,7 +787,8 @@ body {
   top: 0
 }
 
-.login-slider-container {
+.login-slider-container,
+.offer-slider-container {
   width: 657px;
   margin: auto;
 }
@@ -791,7 +806,7 @@ body {
   cursor: pointer
 }
 
-.modal-body{
+.modal-body {
   padding: 0
 }
 
@@ -829,7 +844,7 @@ body {
   .datepicket-icon-wrapper {
     display: inline-block;
     color: $black;
-    margin: 25px 0 30px -30px;
+    margin: 25px 0 30px -50px;
     position: absolute;
   }
 
@@ -844,38 +859,40 @@ body {
   text-align-last: center;
 }
 
-.profile-box-container{
+.profile-box-container {
   position: relative;
 }
 
-.short-label{
+.short-label {
   @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, #6a6a6a);
   left: 36px;
-  top:15px;
+  top: 15px;
   position: absolute;
 }
 
-.half-custom-input-register{
+.half-custom-input-register {
   @include custom-input-styles(263px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);
-  &::placeholder{
+
+  &::placeholder {
     color: #989898;
   }
 }
 
-.full-custom-input-register{
-  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);  
-  &::placeholder{
+.full-custom-input-register {
+  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);
+
+  &::placeholder {
     color: #989898;
   }
 }
 
-.upload-title{
+.upload-title {
   @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, center, $primary);
   display: inline-block;
   margin: 22px 0 18px 0;
 }
 
-.thumb-title{
+.thumb-title {
   @include custom-text-style($Inter-font, $font-14, $weight-500, 1.21, center, #a7a7a7);
   width: 111px;
   height: 56px;
@@ -914,12 +931,12 @@ body {
 }
 
 /* On mouse-over, add a grey background color */
-.checkbox-container:hover input ~ .checkmark {
+.checkbox-container:hover input~.checkmark {
   background-color: #eee;
 }
 
 /* When the checkbox is checked, add a blue background */
-.checkbox-container input:checked ~ .checkmark {
+.checkbox-container input:checked~.checkmark {
   // background-color: #2196F3;  
   background-color: #eee;
 }
@@ -932,7 +949,7 @@ body {
 }
 
 /* Show the checkmark when checked */
-.checkbox-container input:checked ~ .checkmark:after {
+.checkbox-container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -952,4 +969,79 @@ body {
 .submit-request-btn {
   @include custom-btn-style(197px, 55px, 24px 3.5px 0 404px, 18px 35px 17px, 5px,
     $Inter-font, $font-16, $weight-600, 1.25, left, $white );
+}
+
+.offer-sidebar {
+  .bm-overlay {
+    left: 0;
+  }
+}
+
+.pickup-input-wrapper {
+  span {
+    @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, left, $primary);
+  }
+
+  .custom-input-pickup {
+    @include custom-input-styles(111px, 50px, 0 15px 12px 13px, 16px 0 17px 20px, 5px, $white, $Inter-font,
+      $font-14, 1.21, left, $primary, border, solid 1px #d6d6d6);
+
+    &::placeholder {
+      color: $primary
+    }
+  }
+
+  .custom-input-from {
+    @extend .custom-input-pickup;
+    width: 310px;
+    margin: 0 1px 12px 16px
+  }
+
+  .custom-input-on-from {
+    @extend .custom-input-pickup;
+    width: 261px;
+    margin: 12px 19px 13px 14px;
+  }
+
+  .custom-input-and {
+    @extend .custom-input-pickup;
+    width: 220px;
+    margin: 12px 1px 13px 20px;
+  }
+
+  .custom-input-at {
+    @extend .custom-input-pickup;
+    width: 547px;
+    margin: 13px 0 12px 20px;
+  }
+
+  .custom-input-on-to {
+    @extend .custom-input-pickup;
+    width: 546px;
+    margin: 13px 0 12px 16px;
+  }
+
+  .custom-input-for {
+    @extend .custom-input-pickup;
+    width: 118px;
+    margin: 11px 23px 30px 14px;
+  }
+
+  .custom-input-via {
+    @extend .custom-input-pickup;
+    width: 191px;
+    margin: 11px 24px 30px 23px;
+  }
+
+  .custom-input-number {
+    @extend .custom-input-pickup;
+    width: 110px;
+    margin: 12px 1px 30px 13px;
+  }
+  .custom-input-message{
+    @extend .custom-input-pickup;
+    width: 579px;
+    height: 197px;
+    margin: 15px 1px 0 0;
+  }
 }

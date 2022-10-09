@@ -1,7 +1,8 @@
 import "styles/app.scss";
 import "styles/global.scss";
 import "styles/responsive.scss";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { Provider } from "react-redux";
 import store from "redux/store";
 import "./i18n";

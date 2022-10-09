@@ -4,10 +4,14 @@ import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
-export function Filters() {
+interface IProp {
+  onSelectTypeFilter: (key: any) => void;
+}
+
+export const Filters: React.FC<IProp> = ({ onSelectTypeFilter }) => {
   const screenSize = UseWindowSize();
 
-  const [type, setType] = useState({ value: 1, label: "Type" });
+  const [type, setType] = useState({ value: 0, label: "All" });
   const [size, setSize] = useState({ value: 1, label: "Size" });
   const [deliveryType, setDeliveryType] = useState({
     value: 1,
@@ -19,19 +23,32 @@ export function Filters() {
       ...styles,
       height: screenSize?.width < 768 ? 34 : 47,
     }),
-    option: (styles) => ({ ...styles, color: "#00043d" }),
+    option: (styles) => ({
+      ...styles,
+      color: "#00043d",
+      backgroundColor: "#f3f3f3",
+    }),
     singleValue: (styles) => ({
       ...styles,
       color: "#00043d",
     }),
   };
 
-  const typeOptions = [{ value: 1, label: "Type" }];
+  const typeOptions = [
+    { value: 0, label: "All" },
+    { value: 1, label: "Cloths" },
+    { value: 2, label: "Documents" },
+    { value: 3, label: "Accessories" },
+    { value: 4, label: "Cosmetics" },
+    { value: 5, label: "Medicine" },
+    { value: 6, label: "Gadget" },
+  ];
   const sizeOptions = [{ value: 1, label: "Size" }];
   const deliveryTypeOptions = [{ value: 1, label: "Delivery Type" }];
 
   const handleTypeChange = (selected) => {
     setType(selected);
+    onSelectTypeFilter(selected);
   };
 
   const handleSizeChange = (selected) => {
