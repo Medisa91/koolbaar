@@ -124,10 +124,18 @@ export const Register: React.FC = () => {
           </Col>
         </Row>
         <Row>
-          <Uploader title="Upload Passport front page" />
+          <section className="container" style={{width: "601px"}}>
+            <Uploader
+              title="Upload Passport front page"
+            />
+          </section>
         </Row>
         <Row>
-          <Uploader title="Upload ID Driving License/PR Card/ Green Card/National Card)" />
+          <section className="container" style={{width: "601px"}}>
+            <Uploader
+              title="Upload ID Driving License/PR Card/ Green Card/National Card)"
+            />
+          </section>
         </Row>
         <div>
           <label className="checkbox-container">
@@ -143,7 +151,7 @@ export const Register: React.FC = () => {
         <div>
           <Button
             variant="primary"
-            data-test="docs-btn-anchor"           
+            data-test="docs-btn-anchor"
             className="submit-request-btn mt-4"
           >
             Submit Request

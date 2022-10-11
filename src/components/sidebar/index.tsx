@@ -1,5 +1,5 @@
 import React from "react";
-import {Login, AcceptOffer} from "components"
+import { Login, AcceptOffer, SendRequest } from "components";
 import { slide as Menu } from 'react-burger-menu'
 
 interface IProps {
@@ -23,6 +23,8 @@ export const RightSidebar: React.FC<IProps> = ({ isOpen, setIsOpen, sidebarType 
         <Login />
       ) : sidebarType === "offer" ? (
         <AcceptOffer />
+      ) : sidebarType === "request" ? (
+        <SendRequest />
       ) : null}
     </Menu>
   );

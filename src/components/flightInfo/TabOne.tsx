@@ -22,7 +22,7 @@ export const TabOne: FC<{}> = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsAfterSearch(true);
-    }, 5000);
+    }, 3000);
   }, []);
 
   const handleDepartureInfo = (data) => {

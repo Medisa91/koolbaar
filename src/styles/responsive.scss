@@ -126,11 +126,11 @@
     }
 
     .custom-input-flight-type {
-        @include custom-input-styles(210px, 41px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
+        @include custom-input-styles(210px, 41px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
     }
 
     .after-custom-input-flight-type {
-        @include custom-input-styles(210px, 41px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
+        @include custom-input-styles(210px, 41px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
     }
 
     .flight-type-title,
@@ -140,7 +140,7 @@
 
     .custom-select-flight-type>div {
         @include custom-select-styles(100px, 8px 0 0 0, 0, 5px,
-            white, $Inter-font, $font-12, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+            white, $Inter-font, $font-12, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
     }
 
     .tabs-component [role="tabpanel"] {
@@ -239,6 +239,19 @@
         .nav-link {
             @include custom-btn-style(unset, unset, 0, 0, none,
                 $poppins-font, $font-16, $weight-normal, 2.2, left, $white );
+        }
+    }
+
+    .search-departure-info {
+        margin-bottom: 0.4rem;
+    }
+
+    .search-departure-more-title {
+        margin-bottom: 0.2rem;
+
+        img {
+            width: 9px;
+            height: 11px;
         }
     }
 

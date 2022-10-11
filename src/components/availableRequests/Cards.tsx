@@ -154,6 +154,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             isOpen={showSidebar}
             setIsOpen={setShowSidebar}
             sidebarType="offer"
+            // sidebarType="request"
           />
         </div>
       )}

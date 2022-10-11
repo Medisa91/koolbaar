@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tabs } from "components";
-import { TabOne } from "components/tabContent/TabOne";
-import { TabTwo } from "components/tabContent/TabTwo";
+import { TabOne } from "./TabOne";
+import { TabTwo } from "./TabTwo";
 import FlightIcon from "../../assets/images/svg/flight.svg";
 import HotelIcon from "../../assets/images/svg/hotel.svg";
 
@@ -27,7 +27,7 @@ const tabs: TabsType = [
   },
 ];
 
-export function FlightInfo() {
+export const FlightInfo: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<number>(tabs[0].index);
 
   return (
@@ -37,4 +37,4 @@ export function FlightInfo() {
       </div>
     </div>
   );
-}
+};

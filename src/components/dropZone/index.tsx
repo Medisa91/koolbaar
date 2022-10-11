@@ -6,7 +6,7 @@ const baseStyle = {
   borderWidth: 1,
   borderColor: "#d6d6d6",
   borderStyle: "solid",
-  width: "601px",
+  width: "100%",
   height: "174px",
   margin: "0 0 29px",
   padding: "60px 135px 50px 93px",
@@ -108,14 +108,14 @@ export const Uploader: React.FC<IProp> = ({ title }) => {
 
   return (
     <>
-      <section className="container">
-      <span className="upload-title">{title}</span>
+      <>
+        <span className="upload-title">{title}</span>
         <div {...getRootProps({ style })}>
           <input {...getInputProps()} />
           <p className="thumb-title">Drop images here or click to upload</p>
         </div>
         <aside style={thumbsContainer}>{thumbs}</aside>
-      </section>
+      </>
     </>
   );
 };

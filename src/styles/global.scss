@@ -37,7 +37,7 @@ body {
 }
 
 .custom-input {
-  @include custom-input-styles(252px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
+  @include custom-input-styles(252px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
 }
 
 .img-banner-Wrapper {
@@ -244,7 +244,7 @@ body {
 
 .custom-select-flight-type>div {
   @include custom-select-styles(100px, 8px 0 0 0, 0, 5px,
-    white, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+    white, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
 }
 
 .custom-select-from-city>div {
@@ -271,15 +271,15 @@ body {
 
 
 .custom-input-login {
-  @include custom-input-styles(252px, 50px, 0, 0 0 0 15px, 5px, $white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6)
+  @include custom-input-styles(252px, 50px, 0, 0 0 0 15px, 5px, $white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8)
 }
 
 .custom-input-flight-type {
-  @include custom-input-styles(210px, 55px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
+  @include custom-input-styles(210px, 55px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
 }
 
 .after-custom-input-flight-type {
-  @include custom-input-styles(253px, 55px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px #d6d6d6)
+  @include custom-input-styles(253px, 55px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
 }
 
 .custom-input-flight-type::placeholder,
@@ -339,16 +339,16 @@ body {
   @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
 
   .custom-select-filter-type>div {
-    @include custom-select-styles(144px, 0 15px 0 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+    @include custom-select-styles(144px, 0 15px 0 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
   }
 
   .custom-select-filter-size>div {
     @include custom-select-styles(140px, 0 15px 0 0, 0, 5px,
-      $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+      $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
   }
 
   .custom-select-filter-delivery>div {
-    @include custom-select-styles(166px, 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+    @include custom-select-styles(166px, 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
   }
 
 }
@@ -691,7 +691,8 @@ body {
 }
 
 .login-wrapper,
-.offer-wrapper {
+.offer-wrapper,
+.request-wrapper {
   padding: 80px 18px 50px;
   margin: auto
 }
@@ -706,7 +707,8 @@ body {
 }
 
 .login-form,
-.offer-form {
+.offer-form,
+.request-form {
   h1 {
     @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $gray6);
     margin-bottom: 30px
@@ -783,7 +785,7 @@ body {
 }
 
 .custom-textarea-register {
-  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, rgb(152, 152, 152), border, solid 1px #d6d6d6);
+  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, rgb(152, 152, 152), border, solid 1px $gray8);
 
   &::placeholder {
     color: #989898
@@ -804,7 +806,8 @@ body {
 }
 
 .login-slider-container,
-.offer-slider-container {
+.offer-slider-container,
+.request-slider-container {
   width: 657px;
   margin: auto;
 }
@@ -887,7 +890,7 @@ body {
 }
 
 .half-custom-input-register {
-  @include custom-input-styles(263px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);
+  @include custom-input-styles(263px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8);
 
   &::placeholder {
     color: #989898;
@@ -895,7 +898,7 @@ body {
 }
 
 .full-custom-input-register {
-  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px #d6d6d6);
+  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8);
 
   &::placeholder {
     color: #989898;
@@ -937,7 +940,6 @@ body {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -950,30 +952,24 @@ body {
   background-color: #eee;
 }
 
-/* On mouse-over, add a grey background color */
 .checkbox-container:hover input~.checkmark {
   background-color: #eee;
 }
 
-/* When the checkbox is checked, add a blue background */
 .checkbox-container input:checked~.checkmark {
-  // background-color: #2196F3;  
   background-color: #eee;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .checkbox-container input:checked~.checkmark:after {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .checkbox-container .checkmark:after {
   left: 12px;
   top: 5px;
@@ -1004,7 +1000,7 @@ body {
 
   .custom-input-pickup {
     @include custom-input-styles(111px, 50px, 0 15px 12px 13px, 16px 0 17px 20px, 5px, $white, $Inter-font,
-      $font-14, 1.21, left, $primary, border, solid 1px #d6d6d6);
+      $font-14, 1.21, left, $primary, border, solid 1px $gray8);
 
     &::placeholder {
       color: $primary
@@ -1066,4 +1062,222 @@ body {
     margin: 15px 1px 0 0;
     padding: 31px 23px;
   }
+}
+
+.send-input-wrapper {
+  .send-pack-title {
+    @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, left, $primary);
+    margin: 13px 0 36px 0;
+    width: 121px;
+  }
+
+  .custom-input-send {
+    @include custom-input-styles(165px, 50px, 0 18px 16px, 16px 16px 17px 15px, 5px, $white, $Inter-font,
+      $font-14, 1.21, left, $primary, border, solid 1px $gray8);
+
+    &::placeholder {
+      color: $primary
+    }
+  }
+
+  .weight-title {
+    @extend .send-pack-title;
+    width: 63px;
+    margin: 13px 0 36px 16px;
+  }
+
+  .custom-input-weight {
+    @extend .custom-input-send;
+    width: 162px;
+    margin: 0 5px 16px 11px;
+    padding: 16px 16px 17px 16px;
+  }
+
+  .value-title {
+    @extend .send-pack-title;
+    width: 83px;
+    margin: 33px 3px 35px;
+  }
+
+  .custom-input-value {
+    @extend .custom-input-send;
+    width: 96px;
+    margin: 0px 0 19px 46px;
+    padding: 16px 15px 17px;
+  }
+
+  .custom-input-size-width {
+    @extend .custom-input-send;
+    width: 75px;
+    margin: 0px 11px 18px 15px;
+    padding: 16px 10px 17px 15px;
+    border: solid 1px $gray8;
+
+    &::placeholder {
+      opacity: 0.43;
+    }
+  }
+
+  .custom-input-size-height {
+    @extend .custom-input-send;
+    width: 75px;
+    margin: 0px 10px 19px 0;
+    padding: 15px 10px 18px 16px;
+    border: solid 1px $gray8;
+
+    &::placeholder {
+      opacity: 0.43;
+    }
+  }
+
+  .custom-input-size-length {
+    @extend .custom-input-send;
+    width: 75px;
+    margin: 0px 7px 19px 0;
+    padding: 15px 10px 18px 14px;
+    border: solid 1px $gray8;
+
+    &::placeholder {
+      opacity: 0.43;
+    }
+  }
+
+  .size-title {
+    @extend .send-pack-title;
+    width: 56px;
+    margin: 32px 0px 36px 23px;
+  }
+
+  .custom-input-from {
+    @extend .custom-input-send;
+    width: 490px;
+    margin: 0px 5px 14px 3px;
+    padding: 16px 15px 17px 15px;
+  }
+
+  .from-title {
+    @extend .send-pack-title;
+    width: 34px;
+    margin: 0 50px 47px 0;
+  }
+
+  .custom-input-post-kind {
+    @extend .custom-input-send;
+    width: 132px;
+    margin: 0px 13px 14px 2px;
+    padding: 16px 12px 17px 9px;
+  }
+
+  .and-title {
+    @extend .send-pack-title;
+    width: 26px;
+    margin: 0px 57px 48px 0;
+  }
+
+  .custom-input-at-request {
+    @extend .custom-input-send;
+    width: 320px;
+    margin: 0px 0 14px 4px;
+    padding: 16px 31px 17px 15px;
+  }
+
+  .at-title {
+    @extend .send-pack-title;
+    width: 14px;
+    margin: 29px 6px 32px 0;
+  }
+
+
+  .custom-input-between {
+    @extend .custom-input-send;
+    width: 215px;
+    margin: 0 8px 12px 3px;
+    padding: 16px 15px 17px 15px;
+  }
+
+  .between-title {
+    @extend .send-pack-title;
+    width: 58px;
+    margin: 48px 24px 23px 0;
+  }
+
+  .custom-input-to-request {
+    @extend .custom-input-send;
+    width: 224px;
+    margin: 0 4px 12px 8px;
+    padding: 16px 15px 17px 15px;
+  }
+
+  .to-title {
+    @extend .send-pack-title;
+    width: 16px;
+    margin: 30px 9px 29px 11px;
+  }
+
+
+  .custom-input-and-offer {
+    @extend .custom-input-send;
+    width: 214px;
+    margin: 0 18px 34px 4px;
+    padding: 16px 15px 17px 15px;
+  }
+
+  .and-offer-title {
+    @extend .send-pack-title;
+    width: 62px;
+    margin: 44px 18px 2px 0;
+  }
+
+  .custom-input-message {
+    @extend .custom-input-send;
+    width: 579px;
+    height: 197px;
+    margin: 15px 1px 0 0;
+    padding: 31px 23px;
+  }
+
+  .message-title {
+    @extend .send-pack-title;
+  }
+}
+
+.text-align-last-left {
+  text-align-last: left;
+}
+
+.search-departure-info,
+.search-arrival-info {
+  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.5, left, #bdbdbd);
+}
+
+.search-departure-more-title,
+.search-arrival-more-title {
+  @include custom-text-style($poppins-font, $font-17, $weight-bold, 1.85, left, $gray6);
+
+  img {
+    width: 13px;
+    height: 15px;
+    margin-right: 5px;
+    vertical-align: unset;
+  }
+}
+
+.search-departure-more,
+.search-arrival-more {
+  @include custom-text-style($poppins-font, $font-14, $weight-normal, 1.5, left, #8f8f8f);
+}
+
+.change-flight-plane-icon {
+  width: 46px;
+  height: 46px;
+  opacity: 0.22;
+}
+
+.change-flight-text {
+  @include custom-text-style($poppins-font, $font-14, $weight-normal, 1.5, left, $primary);
+  margin-top: 5px;
+}
+
+.search-btn{
+  @include custom-btn-style(120px, 77px, 0, 0, 5px, $poppins-font, $font-18, $weight-500, 1.5, center, $white );
 }
