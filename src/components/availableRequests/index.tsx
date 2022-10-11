@@ -8,14 +8,18 @@ import { Option } from "helper/interface";
 
 interface IProps {
   type: Option;
+  size: Option;
+  deliveryType: Option;
 }
 
-export const AvailableRequests: React.FC<IProps> = ({ type }) => {
-  const size = UseWindowSize();
+export const AvailableRequests: React.FC<IProps> = ({ type, size, deliveryType }) => {
+  const windowSize = UseWindowSize();
   return (
     <div className="requests-info-wrapper">
-      {size?.width >= 768 && <h2 className="mt-2 mb-4">Available Requests</h2>}
-      {size?.width < 768 && (
+      {windowSize?.width >= 768 && (
+        <h2 className="mt-2 mb-4">Available Requests</h2>
+      )}
+      {windowSize?.width < 768 && (
         <Row
           className="my-4"
           style={{ width: "360px", margin: "auto", alignItems: "center" }}
@@ -38,7 +42,7 @@ export const AvailableRequests: React.FC<IProps> = ({ type }) => {
           </Col>
         </Row>
       )}
-      <PackageCard type={type} />
+      <PackageCard type={type} size={size} deliveryType={deliveryType} />
     </div>
   );
 };

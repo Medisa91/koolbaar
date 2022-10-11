@@ -2,52 +2,44 @@
   "name": "koolbaar",
   "items": [
     {
-      "name": "React-Bootstrap",
+      "name": "one",
       "label": "Cloths",
-      "description": "Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit.",
-      "url": "https://getbootstrap.com/docs/5.0/getting-started/introduction/"
+      "size": 1.2
     },
     {
-      "name": "SASS/SCSS",
+      "name": "two",
       "label": "Gadget",
-      "description": "Sass is a stylesheet language that’s compiled to CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax.",
-      "url": "https://sass-lang.com/documentation"
+      "size": 6
     },
     {
-      "name": "React Redux",
+      "name": "three",
       "label": "Documents",
-      "description": "Redux helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.",
-      "url": "https://redux.js.org/introduction/getting-started"
+      "size": 1.5
     },
     {
-      "name": "next-i18next",
+      "name": "four",
       "label": "Cloths",
-      "description": "react-i18next is a powerful internationalization framework for React / React Native which is based on i18next. Check out the history of i18next and when react-i18next was introduced.",
-      "url": "https://react.i18next.com"
+      "size": 5
     },
     {
-      "name": "eslint",
+      "name": "five",
       "label": "Cosmetics",
-      "description": "",
-      "url": ""
+      "size": 3.5
     },
     {
-      "name": "Testing Library",
+      "name": "six",
       "label": "Accessories",
-      "description": "The React Testing Library is a very light-weight solution for testing React components. It provides light utility functions on top of react-dom and react-dom/test-utils.",
-      "url": "https://testing-library.com/docs/"
+      "size": 2
     },
     {
-      "name": "Cypress",
+      "name": "seven",
       "label": "Medicine",
-      "description": "Fast, easy and reliable testing for anything that runs in a browser.",
-      "url": "https://docs.cypress.io/guides/overview/why-cypress.html"
+      "size": 11
     },
     {
-      "name": "test",
+      "name": "eight",
       "label": "Gadget",
-      "description": "Fast, easy and reliable testing for anything that runs in a browser.",
-      "url": "https://docs.cypress.io/guides/overview/why-cypress.html"
+      "size": 4.3
     }
   ]
 }

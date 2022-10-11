@@ -2,6 +2,7 @@ import "styles/app.scss";
 import "styles/global.scss";
 import "styles/responsive.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import 'photoswipe/dist/photoswipe.css'
 
 import { Provider } from "react-redux";
 import store from "redux/store";

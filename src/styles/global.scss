@@ -31,7 +31,7 @@ body {
   overflow: hidden;
 }
 
-.modal-open{
+.modal-open {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -339,16 +339,16 @@ body {
   @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
 
   .custom-select-filter-type>div {
-    @include custom-select-styles(144px, 0 15px 0 0, 0, 5px, transparent, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+    @include custom-select-styles(144px, 0 15px 0 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
   }
 
   .custom-select-filter-size>div {
     @include custom-select-styles(140px, 0 15px 0 0, 0, 5px,
-      transparent, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+      $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
   }
 
   .custom-select-filter-delivery>div {
-    @include custom-select-styles(166px, 0, 0, 5px, transparent, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
+    @include custom-select-styles(166px, 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px #d6d6d6);
   }
 
 }
@@ -582,9 +582,25 @@ body {
 
   .dropdown-menu {
     background: $white;
-    padding: 7px;
-    margin-left: -20px !important;
+    padding: 12px;
+    margin-left: -23% !important;
+    margin-top: 2px !important;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 0;
+      height: 0;
+      border-bottom: solid 7px #fff;
+      border-left: solid 7px transparent;
+      border-right: solid 7px transparent;
+    }
   }
+
 }
 
 .main-footer {
@@ -908,7 +924,11 @@ body {
   padding-left: 45px;
 }
 
-/* Hide the browser's default checkbox */
+.gov-checkbox-container {
+  line-height: 1.21;
+  margin-top: 21px;
+}
+
 .checkbox-container input {
   position: absolute;
   opacity: 0;
@@ -1038,10 +1058,12 @@ body {
     width: 110px;
     margin: 12px 1px 30px 13px;
   }
-  .custom-input-message{
+
+  .custom-input-message {
     @extend .custom-input-pickup;
     width: 579px;
     height: 197px;
     margin: 15px 1px 0 0;
+    padding: 31px 23px;
   }
 }

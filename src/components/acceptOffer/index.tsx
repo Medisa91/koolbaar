@@ -14,9 +14,20 @@ export const AcceptOffer: React.FC = () => {
     for: "",
     via: "",
     number: "",
-    message: "",
+    message:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod massa augue, non venenatis eros sollicitudin eget. Curabitur velit risus, consequat non dolor in, consectetur commodo urna.",
   });
-  
+  const [termsChecked, setTermsChecked] = useState(false)
+  const [governmentChecked, setGovernmentChecked] = useState(false)
+
+  const handleTermsCheckedChange = () => { 
+    setTermsChecked(!termsChecked); 
+  }; 
+
+  const handleGovernmentChange = () => { 
+    setGovernmentChecked(!governmentChecked); 
+  }; 
+
   // const handleClick = (): void => {
   //   if (!offerData.offerType || !offerData.age || !offerData.img) {
   //     return;
@@ -176,6 +187,48 @@ export const AcceptOffer: React.FC = () => {
             </div>
           </div>
         </Col>
+        <Col xs={12} className="offer-form">
+          <div style={{ marginTop: "30px" }}>
+            <label className="checkbox-container">
+              I agree with the terms and condition defined on this{" "}
+              <a href="/" style={{ textDecorationLine: "underline" }}>
+                link
+              </a>
+              .
+              <input
+                type="checkbox"
+                checked={termsChecked}
+                onChange={handleTermsCheckedChange}
+              />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+        </Col>
+        <Col xs={12} className="offer-form">
+          <div>
+            <label className="checkbox-container gov-checkbox-container">
+              I accept that this offer includes all expenses except the one
+              forced by the government like import fee taxes, etc.,{" "}
+              <input
+                type="checkbox"
+                checked={governmentChecked}
+                onChange={handleGovernmentChange}
+              />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+        </Col>
+        {/* <Col xs={12} className="offer-form"> */}
+        <div style={{ marginTop: "24px" }}>
+          <Button
+            variant="primary"
+            data-test="docs-btn-anchor"
+            className="submit-request-btn mt-4"
+          >
+            Submit Request
+          </Button>
+        </div>
+        {/* </Col> */}
       </Row>
     </div>
   );

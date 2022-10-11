@@ -3,20 +3,24 @@ import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { typeOptions, sizeOptions, deliveryTypeOptions } from "helper/options";
 
 interface IProp {
   onSelectTypeFilter: (key: any) => void;
+  onSelectSizeFilter: (key: any) => void;
+  onSelectDeliveryTypeFilter: (key: any) => void;
 }
 
-export const Filters: React.FC<IProp> = ({ onSelectTypeFilter }) => {
+export const Filters: React.FC<IProp> = ({
+  onSelectTypeFilter,
+  onSelectSizeFilter,
+  onSelectDeliveryTypeFilter,
+}) => {
   const screenSize = UseWindowSize();
 
   const [type, setType] = useState({ value: 0, label: "All" });
-  const [size, setSize] = useState({ value: 1, label: "Size" });
-  const [deliveryType, setDeliveryType] = useState({
-    value: 1,
-    label: "Delivery Type",
-  });
+  const [size, setSize] = useState({ value: 1, label: "All" });
+  const [deliveryType, setDeliveryType] = useState({ value: 1, label: "All" });
 
   const customStyle = {
     control: (styles) => ({
@@ -34,17 +38,7 @@ export const Filters: React.FC<IProp> = ({ onSelectTypeFilter }) => {
     }),
   };
 
-  const typeOptions = [
-    { value: 0, label: "All" },
-    { value: 1, label: "Cloths" },
-    { value: 2, label: "Documents" },
-    { value: 3, label: "Accessories" },
-    { value: 4, label: "Cosmetics" },
-    { value: 5, label: "Medicine" },
-    { value: 6, label: "Gadget" },
-  ];
-  const sizeOptions = [{ value: 1, label: "Size" }];
-  const deliveryTypeOptions = [{ value: 1, label: "Delivery Type" }];
+  
 
   const handleTypeChange = (selected) => {
     setType(selected);
@@ -53,10 +47,12 @@ export const Filters: React.FC<IProp> = ({ onSelectTypeFilter }) => {
 
   const handleSizeChange = (selected) => {
     setSize(selected);
+    onSelectSizeFilter(selected);
   };
 
   const handleDeliveryTypeChange = (selected) => {
     setDeliveryType(selected);
+    onSelectDeliveryTypeFilter(selected);
   };
 
   return (
@@ -114,4 +110,4 @@ export const Filters: React.FC<IProp> = ({ onSelectTypeFilter }) => {
       )}
     </>
   );
-}
+};
