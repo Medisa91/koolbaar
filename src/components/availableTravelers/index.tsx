@@ -13,7 +13,7 @@ interface IProps {
   deliveryType: Option;
 }
 
-export const AvailableRequests: React.FC<IProps> = ({
+export const AvailableTravelers: React.FC<IProps> = ({
   type,
   size,
   deliveryType,
@@ -22,7 +22,7 @@ export const AvailableRequests: React.FC<IProps> = ({
   return (
     <div className="requests-info-wrapper">
       {windowSize?.width >= 768 && (
-        <h2 className="mt-2 mb-4">Available Requests</h2>
+        <h2 className="mt-2 mb-4">Available Travelers</h2>
       )}
       {windowSize?.width < 768 && (
         <Row
@@ -30,7 +30,7 @@ export const AvailableRequests: React.FC<IProps> = ({
           style={{ width: "360px", margin: "auto", alignItems: "center" }}
         >
           <Col xs={6}>
-            <h2>Available Requests</h2>
+            <h2>Available Travelers</h2>
           </Col>
           <Col xs={6} className="pl-0 text-right">
             <a className="filter-responsive-btn" href="/">
@@ -42,7 +42,7 @@ export const AvailableRequests: React.FC<IProps> = ({
               href="/"
               className="add-travel-btn"
             >
-              Add my travel
+              Add my request
             </Button>
           </Col>
         </Row>

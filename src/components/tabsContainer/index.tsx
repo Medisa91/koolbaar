@@ -14,14 +14,6 @@ type TabsProps = {
   className?: string;
 };
 
-/**
- * Avalible Props
- * @param className string
- * @param tab Array of object
- * @param selectedTab number
- * @param onClick Function to set the active tab
- * @param orientation Tab orientation Vertical | Horizontal
- */
 export const Tabs: FC<TabsProps> = ({
   className = "tabs-component",
   tabs = [],

@@ -4,17 +4,21 @@ import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { typeOptions, sizeOptions, deliveryTypeOptions } from "helper/options";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface IProp {
   onSelectTypeFilter: (key: any) => void;
   onSelectSizeFilter: (key: any) => void;
   onSelectDeliveryTypeFilter: (key: any) => void;
+  tab: number
 }
 
 export const Filters: React.FC<IProp> = ({
   onSelectTypeFilter,
   onSelectSizeFilter,
   onSelectDeliveryTypeFilter,
+  tab
 }) => {
   const screenSize = UseWindowSize();
 
@@ -38,8 +42,6 @@ export const Filters: React.FC<IProp> = ({
     }),
   };
 
-  
-
   const handleTypeChange = (selected) => {
     setType(selected);
     onSelectTypeFilter(selected);
@@ -61,6 +63,15 @@ export const Filters: React.FC<IProp> = ({
         <div className="filter-info-wrapper">
           <Row>
             <Col xs={6}>
+              {tab === 2 && (
+                <Button
+                  variant="white"
+                  data-test="docs-btn-anchor"
+                  className="before-filter-btn"
+                >
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </Button>
+              )}
               <Select
                 className="custom-select-filter-type d-inline-block"
                 value={type}
@@ -101,8 +112,17 @@ export const Filters: React.FC<IProp> = ({
                   href="/"
                   className="add-travel-btn"
                 >
-                  Add my travel
+                  {tab === 1 ? "Add my travel" : "Add my request"}
                 </Button>
+                {tab === 2 && (
+                  <Button
+                    variant="white"
+                    data-test="docs-btn-anchor"
+                    className="after-filter-btn"
+                  >
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </Button>
+                )}
               </div>
             </Col>
           </Row>

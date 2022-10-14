@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs } from "components";
 import { TabOne } from "./TabOne";
 import { TabTwo } from "./TabTwo";
 import FlightIcon from "../../assets/images/svg/flight.svg";
 import HotelIcon from "../../assets/images/svg/hotel.svg";
+
+interface IProps {
+  onSelectTab: (key: any) => void;
+}
 
 type TabsType = {
   label: string;
@@ -27,8 +31,12 @@ const tabs: TabsType = [
   },
 ];
 
-export const FlightInfo: React.FC = () => {
+export const FlightInfo: React.FC<IProps> = ({ onSelectTab }) => {
   const [selectedTab, setSelectedTab] = useState<number>(tabs[0].index);
+
+  useEffect(() => {
+    onSelectTab(selectedTab);
+  }, [selectedTab]);
 
   return (
     <div className="flight-box-container">

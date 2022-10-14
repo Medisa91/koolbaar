@@ -1,0 +1,45 @@
+{
+  "name": "koolbaar",
+  "items": [
+    {
+      "name": "one",
+      "label": "Jacob Arlington",
+      "size": 1.2
+    },
+    {
+      "name": "two",
+      "label": "Jacob Arlington",
+      "size": 6
+    },
+    {
+      "name": "three",
+      "label": "Jacob Arlington",
+      "size": 1.5
+    },
+    {
+      "name": "four",
+      "label": "Jacob Arlington",
+      "size": 5
+    },
+    {
+      "name": "five",
+      "label": "Jacob Arlington",
+      "size": 3.5
+    },
+    {
+      "name": "six",
+      "label": "Jacob Arlington",
+      "size": 2
+    },
+    {
+      "name": "seven",
+      "label": "Jacob Arlington",
+      "size": 11
+    },
+    {
+      "name": "eight",
+      "label": "Jacob Arlington",
+      "size": 4.3
+    }
+  ]
+}

@@ -44,11 +44,11 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade }) => {
         <FontAwesomeIcon icon={faClose} />
       </Button>
       <Card
-        className={`package-card-wrapper mb-3 request-card-wrapper ${
+        className={`request-package-card-wrapper mb-3 request-card-wrapper ${
           fade ? "fadeIn" : ""
         } ${fadeOut ? "fadeOut" : ""}`}
       >
-        <Card.Header className="card-cover-header">
+        <Card.Header className="request-card-cover-header">
           <div>
             <span>Owner:</span> Jacob Arlington
             <Dropdown
@@ -61,9 +61,9 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade }) => {
                 className="px-0 mx-0"
               >
                 {openProfileBox ? (
-                  <img src={CertificateGreenIcon} alt="profile-img" />
+                  <img className="card-cover-certificate" src={CertificateGreenIcon} alt="profile-img" />
                 ) : (
-                  <img src={CertificateYellowIcon} alt="profile-img" />
+                  <img className="card-cover-certificate" src={CertificateYellowIcon} alt="profile-img" />
                 )}
               </Dropdown.Toggle>
 
@@ -99,7 +99,7 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade }) => {
             <span>Accepted Delivery Type:</span> Pickup,Post, Drop Off
           </div>
         </Card.Header>
-        <Card.Body className="request-card-border location-card-info card-cover-body">
+        <Card.Body className="request-card-border location-card-info request-card-cover-body">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             euismod massa augue, non venenatis

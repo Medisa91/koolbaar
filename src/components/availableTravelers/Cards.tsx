@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Dropdown } from "react-bootstrap";
 import { Button, RightSidebar } from "components";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose, faCheck } from "@fortawesome/free-solid-svg-icons";
+import CertificateYellowIcon from "../../assets/images/svg/verified-yellow.svg";
+import CertificateGreenIcon from "../../assets/images/svg/verified-green.svg";
 
 interface IProps {
   data: {
@@ -17,6 +21,19 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMoreDetail, setShowMoreDetail] = useState(false);
   const [fade, setFade] = useState(false);
+  const [showCover, setShowCover] = useState(false);
+  const [openProfileBox, setOpenProfileBox] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  const handleShow = () => {
+    setShowCover(!showCover);
+    setFadeOut(true);
+  };
+
+  const handleSelect = (show) => {
+    setOpenProfileBox(show);
+  };
+
   const windowSize = UseWindowSize();
 
   const handleOfferSidebar = () => {
@@ -32,7 +49,6 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     setFade(true);
   };
 
-
   return (
     <Col
       key={data?.name}
@@ -43,7 +59,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
       style={windowSize.width < 768 ? { width: "318px" } : null}
       data-testid="container"
     >
-      <Card className="request-package-card-wrapper">
+      <Card className="traveler-package-card-wrapper">
         <Card.Header className="card-request-header">
           <Row>
             <Col xs={3} className="text-left header-card-titles">
@@ -54,9 +70,54 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="text-left">15:15</span>
               </div>
             </Col>
-            <Col xs={6} className="text-center header-card-plane">
+            <Col xs={6} className="text-center header-card-plane px-1">
               <div>
-                <span className="fw-bold">{data?.label}</span>
+                <span>
+                  {data?.label}{" "}
+                  <Dropdown
+                    className="profile-dropdown d-inline ml-1 traveler-dropdown"
+                    onToggle={handleSelect}
+                  >
+                    <Dropdown.Toggle
+                      variant="transparent"
+                      id="dropdown-basic"
+                      className="px-0 mx-0"
+                    >
+                      {openProfileBox ? (
+                        <img src={CertificateGreenIcon} alt="profile-img" />
+                      ) : (
+                        <img src={CertificateYellowIcon} alt="profile-img" />
+                      )}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">
+                        <FontAwesomeIcon className="mr-2" icon={faCheck} />{" "}
+                        Profile Picture
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">
+                        <FontAwesomeIcon className="mr-2" icon={faCheck} />{" "}
+                        Valid Passport
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">
+                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ID Validation (Passport)
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">
+                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        Proof of address
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">
+                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        Successful Transaction (10+)
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">
+                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        Rating ( 4.5/5 )
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </span>
               </div>
               <div>
                 <span className="mb-0">
@@ -80,45 +141,27 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             </Col>
           </Row>
         </Card.Header>
-        <Card.Body className="card-request-body">
+        <Card.Body className="card-request-body pt-3">
           <Row>
             <Col xs={7} className="request-body-info">
               <div>
-                <span className="card-text">Size: 35*35*36</span>
+                <span className="card-text">Max Size: 35*35*36</span>
               </div>
               <div>
-                <span className="card-text">Weight: {data?.size}KG</span>
+                <span className="card-text">Max Item Value: 250$</span>
               </div>
               <div>
-                <span className="card-text">Item Value: 250$</span>
+                <span className="card-text">Max Weight: {data?.size}KG</span>
               </div>
             </Col>
-            <Col xs={5} className="request-body-package">
-              <div>
-                <span>Package ID</span>
-              </div>
-              <div>
-                <span>TRV2569857</span>
-              </div>
-            </Col>
-          </Row>
-          <Row className="mt-2">
-            <Col xs={7} className="request-body-date">
-              <div>
-                <span className="card-text">Shipping Deadline:</span>
-              </div>
-              <div>
-                <span className="card-text">05/05/2022</span>
-              </div>
-            </Col>
-            <Col xs={5} style={{ textAlign: "right" }}>
+            <Col xs={5} className="request-body-package text-right">
               <Button
                 variant="primary"
                 data-test="docs-btn-anchor"
                 href="/"
-                className="offer-btn"
+                className="rating-btn"
               >
-                Offer $120
+                Rating <span>5.0</span>
               </Button>
             </Col>
           </Row>
@@ -138,10 +181,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Button
             variant="warning"
             data-test="docs-btn-anchor"
-            className="make-offer-btn"
+            className="send-request-btn"
             onClick={handleOfferSidebar}
           >
-            Accept / Make Offer
+            Send Request
           </Button>
         </Card.Footer>
       </Card>
@@ -153,8 +196,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <RightSidebar
             isOpen={showSidebar}
             setIsOpen={setShowSidebar}
-            sidebarType="offer"
-            // sidebarType="request"
+            sidebarType="request"
           />
         </div>
       )}

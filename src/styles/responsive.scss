@@ -79,7 +79,7 @@
 
 
     .flight-info-wrapper {
-        @include custom-box-style(360px, 400px, 0px auto 26.8px auto, 0, contain, 0 24px 100px 0 rgba(0, 0, 0, 0.1), transparent);
+        @include custom-box-style(360px, auto, 0px auto 26.8px auto, 0, contain, 0 24px 100px 0 rgba(0, 0, 0, 0.1), transparent);
     }
 
     .request-info-wrapper {
@@ -190,7 +190,12 @@
         }
     }
 
-    .package-card-wrapper {
+    .request-package-card-wrapper {
+        width: 318px;
+        height: 228px;
+    }
+
+    .traveler-package-card-wrapper {
         width: 318px;
         height: 228px;
     }
@@ -199,7 +204,15 @@
         width: 318px;
 
         .request-card-wrapper {
-            @include custom-card-style(318px, 228px, 0, 0, 5px 0px 5px 5px, none, $primary);
+            @include custom-card-style(318px, 228px, 0, 0, 5px 0px 5px 5px, none, rgb(0 4 61 / 83%));
+        }
+    }
+
+    .more-detail-wrapper {
+        width: 318px;
+
+        .travelers-card-wrapper {
+            @include custom-card-style(318px, 228px, 0, 0, 5px 0px 5px 5px, none, rgb(0 4 61 / 83%));
         }
     }
 
@@ -246,14 +259,39 @@
         margin-bottom: 0.4rem;
     }
 
+    .search-arrival-info,
+    .search-departure-info {
+        @include custom-text-style($poppins-font, $font-14, $weight-normal, 1.5, left, #bdbdbd);
+    }
+
+    .search-arrival-more-title,
     .search-departure-more-title {
-        margin-bottom: 0.2rem;
+        @include custom-text-style($poppins-font, $font-12, $weight-bold, 1.5, left, $gray6);
+        display: inline-block;
+        width: 100px;
 
         img {
-            width: 9px;
-            height: 11px;
+            width: 10px;
+            height: 10px;
         }
     }
+
+    .search-departure-more,
+    .search-arrival-more {
+        margin-left: 15px;
+    }
+
+    .responsive-change-flight-btn {
+        @include custom-btn-style(146px, 48px, 21px 15px 0 0, 0, 5px, $poppins-font, $font-14, $weight-500, 1.5, center, $primary , border, 1px solid $primary);
+    }
+
+    .responsive-search-btn {
+        @include custom-btn-style(163px, 48px, 21px 0 0 0, 0, 5px, $poppins-font, $font-14, $weight-500, 1.5, center, $white );
+    }
+
+    .traveler-card-cover-body {
+        width: 318px;
+      }
 
 }
 
