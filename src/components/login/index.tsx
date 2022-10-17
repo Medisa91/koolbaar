@@ -2,23 +2,26 @@ import React from "react";
 import { Input, Button, Register } from "components";
 import { Col, Row } from "react-bootstrap";
 import { GoogleLogin } from "react-google-login";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
-const clientId = "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com"
+const clientId =
+  "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com";
 
 export const Login: React.FC = () => {
+  const size = UseWindowSize();
 
-const onSuccess = (res) => {
-  console.log("[Login Success] currentUser:", res.profileObj);
-}
+  const onSuccess = (res) => {
+    console.log("[Login Success] currentUser:", res.profileObj);
+  };
 
-const onFailure = (res) => {
-  console.log("[Login Failed] res:", res);
-}
+  const onFailure = (res) => {
+    console.log("[Login Failed] res:", res);
+  };
 
   return (
     <div className="login-slider-container">
       <Row className="login-wrapper">
-        <Col className="login-form" xs={5}>
+        <Col className="login-form" lg={5} md={5} xs={12}>
           <h1>Login</h1>
           <Input
             size="sm"
@@ -35,18 +38,19 @@ const onFailure = (res) => {
           <Button
             variant="primary"
             data-test="docs-btn-anchor"
-            href="/"
             className="login-btn mt-4"
           >
             Login
           </Button>
         </Col>
-        <Col xs={2} className="right-line-wrapper pr-1">
-          <div className="right-line-separate-login">
-            <span>OR</span>
-          </div>
-        </Col>
-        <Col className="login-via-form pl-0" xs={5}>
+        {size.width >= 768 && (
+          <Col xs={2} className="right-line-wrapper pr-1">
+            <div className="right-line-separate-login">
+              <span>OR</span>
+            </div>
+          </Col>
+        )}
+        <Col className={`login-via-form ${size.width < 768 ? "pl-3 mt-5": "pl-0"}`} lg={5} md={5} xs={12}>
           <h1>Login Via</h1>
           <Button variant="info" className="facebook-btn">
             Facebook

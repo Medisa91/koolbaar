@@ -291,8 +291,143 @@
 
     .traveler-card-cover-body {
         width: 318px;
-      }
+    }
 
+    .login-slider-container,
+    .offer-slider-container,
+    .request-slider-container {
+        width: 400px;
+        margin: auto;
+
+        input,
+        button,
+        a {
+            width: 100%;
+        }
+    }
+
+    .custom-textarea-register {
+        width: 238px !important;
+        padding: 36px 13px 25px 19px;
+    }
+
+    .short-label {
+        font-size: $font-12;
+        top: 12px;
+    }
+
+    .request-card-cover-body {
+        width: 318px;
+    }
+
+    .pickup-input-wrapper {
+        .custom-input-pickup {
+            width: 270px
+        }
+
+        .custom-input-from {
+            width: 218px
+        }
+
+        .custom-input-on-from {
+            width: 280px
+        }
+
+        .custom-input-and {
+            width: 267px
+        }
+
+        .custom-input-at {
+            width: 282px;
+        }
+
+        .custom-input-on-to {
+            width: 282px;
+        }
+
+        .custom-input-for {
+            width: 275px;
+        }
+
+        .custom-input-via {
+            width: 263px;
+        }
+
+        .custom-input-number {
+            width: 280px;
+        }
+
+        .custom-input-message {
+            width: 345px;
+        }
+    }
+
+    .send-input-wrapper {
+        .custom-input-send {
+            width: 178px;
+        }
+
+
+        .custom-input-weight {
+            width: 240px;
+        }
+
+        .custom-input-value {
+            margin: 0px 0 19px 20px;
+            width: 209px;
+        }
+
+        .from-title {
+            margin: 0 16px 47px 0;
+        }
+
+        .and-title {
+            margin: 0px 25px 48px 0;
+        }
+
+        .custom-input-from {
+            width: 266px;
+        }
+
+        .custom-input-post-kind {
+            width: 365px;
+        }
+
+        .custom-input-at-request {
+            width: 295px;
+        }
+
+        .custom-input-between {
+            width: 233px;
+        }
+
+        .custom-input-to-request {
+            width: 286px;
+        }
+
+        .custom-input-and-offer {
+            width: 233px;
+            margin: 0 0px 34px 4px;
+        }
+
+        .custom-input-message {
+            width: 345px;
+        }
+
+        .send-pack-title,
+        .message-title,
+        .and-offer-title,
+        .to-title,
+        .between-title,
+        .at-title,
+        .and-title,
+        .from-title,
+        .size-title,
+        .value-title,
+        .weight-title {
+            margin-left: 0;
+        }
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {}

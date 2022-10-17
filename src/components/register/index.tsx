@@ -1,9 +1,11 @@
 import React, { useState , useRef} from "react";
-import { Input, GoogleMap, Uploader,Button } from "components";
+import { Input, GoogleMapAPI, Uploader,Button } from "components";
 import UserAvatar from "./../../assets/images/user-avatar.png";
 import { Col, Row } from "react-bootstrap";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
 export const Register: React.FC = () => {
+  const size = UseWindowSize();
   const [avatar, setAvatar] = useState(UserAvatar);
   const [changeImageStyle, setChangeImageStyle] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -103,7 +105,7 @@ export const Register: React.FC = () => {
           </Col>
         </Row>
         <div className="map-wrapper">
-          <GoogleMap />
+          <GoogleMapAPI />
         </div>
         <Row className="mt-4">
           <Col xs={6} className="mb-4">
@@ -124,17 +126,19 @@ export const Register: React.FC = () => {
           </Col>
         </Row>
         <Row>
-          <section className="container" style={{width: "601px"}}>
-            <Uploader
-              title="Upload Passport front page"
-            />
+          <section
+            className="container"
+            style={size.width < 768 ? { width: "400px" } : { width: "601px" }}
+          >
+            <Uploader title="Upload Passport front page" />
           </section>
         </Row>
         <Row>
-          <section className="container" style={{width: "601px"}}>
-            <Uploader
-              title="Upload ID Driving License/PR Card/ Green Card/National Card)"
-            />
+          <section
+            className="container"
+            style={size.width < 768 ? { width: "400px" } : { width: "601px" }}
+          >
+            <Uploader title="Upload ID Driving License/PR Card/ Green Card/National Card)" />
           </section>
         </Row>
         <div>

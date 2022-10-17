@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button, Register } from "components";
+import { Input, Button } from "components";
 import { Col, Row } from "react-bootstrap";
 
 export const AcceptOffer: React.FC = () => {

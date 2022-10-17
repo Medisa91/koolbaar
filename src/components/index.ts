@@ -15,6 +15,6 @@ export { FlightInfo } from "./flightInfo";
 export { Filters } from "./filters";
 export { AvailableRequests } from "./availableRequests";
 export { AvailableTravelers } from "./availableTravelers";
-export { GoogleMap } from "./googleMap";
+export { GoogleMapAPI } from "./googleMap";
 export { Uploader } from "./dropZone";
 export { SkeletonGrid } from "./skeleton";

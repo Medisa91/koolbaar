@@ -1,54 +1,52 @@
-import React, { useRef, useState } from "react";
-import GoogleMapReact from "google-map-react";
+import React, { useState, useEffect } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-export const GoogleMap: React.FC = () => {
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627,
-    },
-    zoom: 11,
-  };
-  const mapRef = useRef(null);
+const containerStyle = {
+  width: "601px",
+  height: "213px",
+};
 
-  const [position, setPosition] = useState({
-    lat: 41,
-    lng: -71,
+const responsiveContainerStyle = {
+  width: "360px",
+  height: "213px",
+};
+
+export const GoogleMapAPI: React.FC = () => {
+  const size = UseWindowSize();
+  const [location, setLocation] = useState({
+    lat: 49,
+    lng: -123,
   });
 
-  function handleLoad(map) {
-    mapRef.current = map;
-  }
+    useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  }, [])
 
-  function handleCenter() {
-    if (!mapRef.current) return;
-
-    const newPos = mapRef.current.getCenter().toJSON();
-    setPosition(newPos);
-  }
-
-  const handleApiLoaded = (map, maps) => {
-    console.log(map, maps)
-    // use map and maps objects
+  const handleMarkLocation = (e) => {
+    // console.log(e.latLng.lat(), e.latLng.lng())
+    setLocation({
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    });
   };
 
-  
-
   return (
-    <div style={{ width: "601px", height: "213px" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAtDg1xWnADH7dCR_ZaJmhwTqMmQo9-VGM" }}
-        // defaultCenter={defaultProps.center}
-        onLoad={handleLoad}
-        onDragEnd={handleCenter}
-        center={position}
-        defaultZoom={defaultProps.zoom}
-        yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+    <LoadScript googleMapsApiKey="AIzaSyAtDg1xWnADH7dCR_ZaJmhwTqMmQo9-VGM">
+      <GoogleMap
+        mapContainerStyle={
+          size.width < 768 ? responsiveContainerStyle : containerStyle
+        }
+        center={location}
+        zoom={10}
       >
-        <AnyReactComponent text="My Marker" />
-      </GoogleMapReact>
-    </div>
+        <Marker draggable position={location} onDragEnd={handleMarkLocation} />
+      </GoogleMap>
+    </LoadScript>
   );
 };

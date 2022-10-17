@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Input, Button, Uploader } from "components";
 import { Col, Row } from "react-bootstrap";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
 export const SendRequest: React.FC = () => {
+  const size = UseWindowSize();
   const [offerData, setOfferData] = useState({
     offerType: "",
     from: "",
@@ -175,7 +177,9 @@ export const SendRequest: React.FC = () => {
           </div>
         </Col>
         <Col xs={12} className="request-form">
-          <div style={{ width: "580px"}}>
+          <div
+            style={size.width < 768 ? { width: "345px" } : { width: "580px" }}
+          >
             <Uploader title="Upload package photo" />
           </div>
         </Col>
