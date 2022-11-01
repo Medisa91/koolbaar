@@ -1,0 +1,29 @@
+{
+  "name": "koolbaar",
+  "items": [
+    {
+      "name": "one",
+      "label": "Cloths",
+      "size": 1.2,
+      "status": "Accepted"
+    },
+    {
+      "name": "two",
+      "label": "Gadget",
+      "size": 6,
+      "status": "Pending"
+    },
+    {
+      "name": "three",
+      "label": "Documents",
+      "size": 1.5,
+      "status": "Delivered"
+    },
+    {
+      "name": "six",
+      "label": "Accessories",
+      "size": 2,
+      "status": "Pending"
+    }
+  ]
+}

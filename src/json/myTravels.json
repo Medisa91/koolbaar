@@ -1,0 +1,15 @@
+{
+  "name": "koolbaar",
+  "items": [
+    {
+      "name": "one",
+      "label": "Jacob Arlington",
+      "size": 1.2
+    },
+    {
+      "name": "two",
+      "label": "Jacob Arlington",
+      "size": 6
+    }    
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "koolbaar",
+  "items": [
+    {
+      "name": "one",
+      "label": "Accessories",
+      "size": 1.2
+    },
+    {
+      "name": "two",
+      "label": "Medicine",
+      "size": 6
+    },
+    {
+      "name": "three",
+      "label": "Gadget",
+      "size": 1.5
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import data from "travelers.json";
+import data from "json/travelers.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
 import { Option } from "helper/interface";

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Button, Register } from "components";
 import { Col, Row } from "react-bootstrap";
 import { GoogleLogin } from "react-google-login";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import {
+  fetchTodos,
+  fetchParticularTodo,
+} from "../../features/todo/todo-actions";
 
 const clientId =
   "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com";
@@ -18,8 +23,36 @@ export const Login: React.FC = () => {
     console.log("[Login Failed] res:", res);
   };
 
+  // const [todo_id, setTodo_id] = useState(1);
+  // const dispatch = useAppDispatch();
+  // const alltodos = useAppSelector((state) => state.todo.all_todos);
+  // const particularTodo = useAppSelector((state) => state.todo.particular_todo);
+
+  // const clickHandler = () => {
+  //   dispatch(fetchTodos());
+  // };
+  // const searchHandler = () => {
+  //   dispatch(fetchParticularTodo(todo_id));
+  // };
+  // const checkTodo = (): boolean => {
+  //   if (alltodos.length == 0) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
   return (
     <div className="login-slider-container">
+      {/* <button onClick={clickHandler}>All Todos</button>
+      <button onClick={searchHandler}> Find </button>
+      {checkTodo() &&
+        alltodos.map((todo) => (
+          <div className="todo-container" key={todo.id}>
+            <p className="todo-child1">{todo.id}</p>
+            <p className="todo-child2">{todo.userId}</p>
+            <p className="todo-child3">{todo.title}</p>
+          </div>
+        ))} */}
       <Row className="login-wrapper">
         <Col className="login-form" lg={5} md={5} xs={12}>
           <h1>Login</h1>
@@ -50,7 +83,14 @@ export const Login: React.FC = () => {
             </div>
           </Col>
         )}
-        <Col className={`login-via-form ${size.width < 768 ? "pl-3 mt-5": "pl-0"}`} lg={5} md={5} xs={12}>
+        <Col
+          className={`login-via-form ${
+            size.width < 768 ? "pl-3 mt-5" : "pl-0"
+          }`}
+          lg={5}
+          md={5}
+          xs={12}
+        >
           <h1>Login Via</h1>
           <Button variant="info" className="facebook-btn">
             Facebook
@@ -60,7 +100,7 @@ export const Login: React.FC = () => {
             render={(renderProps) => (
               <Button
                 onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
+                // disabled={renderProps.disabled}
                 variant="danger"
                 className="google-btn mt-4"
                 // href="https://localhost/signin-google"

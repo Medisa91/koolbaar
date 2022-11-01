@@ -2,26 +2,23 @@ import "styles/app.scss";
 import "styles/global.scss";
 import "styles/responsive.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import 'photoswipe/dist/photoswipe.css'
-
-import { Provider } from "react-redux";
-import store from "redux/store";
+import "photoswipe/dist/photoswipe.css";
 import "./i18n";
+import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, Login } from "pages";
+import { Home, Login, Dashboard } from "pages";
 
 function App(): JSX.Element {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </Provider>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

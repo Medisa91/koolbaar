@@ -83,7 +83,13 @@ body {
 
 .header-wrapper {
   align-items: center;
-  margin-top: 30px;
+  padding: 30px 0;
+}
+
+.dashboard-header-wrapper {
+  background: $primary;
+  align-items: center;
+  padding: 30px 0;
 }
 
 .tabs-wrapper {
@@ -362,11 +368,39 @@ body {
   @include custom-btn-style(170px, 47px, auto, 13px 0, 5px, $Inter-font, $font-16, $weight-600, 1.25, center, $white );
 }
 
+.add-new-travel {
+  @include custom-btn-style(118px, 35px, 0 44px, 8.8px 20px 9.2px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white );
+
+}
+
 .requests-info-wrapper {
   @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
 
   h2 {
     @include custom-text-style($Inter-font, $font-17, $weight-600, 1.18, left, $gray6);
+  }
+}
+
+.dashboard-travels-info-wrapper {
+  @extend .requests-info-wrapper;
+
+  h2 {
+    display: inline-block;
+    margin: 37px 0 56px 0;
+  }
+}
+
+.receive-offer-wrapper {
+  @extend .requests-info-wrapper;
+  margin: 0 auto;
+
+  h2 {
+    font-size: $font-22;
+  }
+
+  .parcel-title {
+    font-weight: $weight-300;
+    margin-left: 7px;
   }
 }
 
@@ -376,11 +410,38 @@ body {
 
 .card-request-header,
 .card-request-body,
-.card-request-footer {
+.card-request-footer,
+.card-receive-footer {
   padding: 5px 16px;
 }
 
-.card-request-footer {
+.card-received-body {
+  // width: 589.5px;
+  height: 201.8px;
+  padding: 15px 0;
+  background: #fbfbfb;
+  border-radius: 5px;
+
+  .row {
+    height: 166px;
+    // width: 589.5px;
+    margin: auto;
+    align-items: baseline;
+    align-content: center;
+  }
+}
+
+.card-receive-side-info {
+  height: 166px;
+  margin: 2.2px 0 12.5px;
+  border-right: solid 1px rgb(112 112 112 / 8%);
+  max-width: 60px;
+  text-align: center;
+  padding: 0;
+}
+
+.card-request-footer,
+.card-receive-footer {
   display: flex;
 }
 
@@ -393,10 +454,35 @@ body {
   @include custom-text-style($Inter-font, $font-12, $weight-600, 1.25, left, $primary);
 }
 
+.rotate-plane-wrapper {
+  transform: rotate(90deg);
+  margin: 33px -35px 25px -35px
+}
+
 .card-request-icon {
   width: 9px;
   height: 9px;
   margin: 0 5px;
+}
+
+.bell-request-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+}
+
+.notification-count {
+  background-color: #9b151d;
+  width: 25px;
+  height: 25px;
+  display: block;
+  margin-top: -40px;
+  margin-left: 30px;
+  border-radius: 50%;
+  color: $white;
+  text-align: center;
+  font-weight: $weight-bold;
+  position: absolute
 }
 
 .header-card-plane p:last-child {
@@ -410,7 +496,8 @@ body {
 }
 
 .request-body-info>div,
-.request-body-date>div {
+.request-body-date>div,
+.receive-body-info>div {
   line-height: 15px;
 }
 
@@ -419,7 +506,64 @@ body {
   @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, $black);
 }
 
+.size-received-container {
+  span {
+    @include custom-text-style($Inter-font, $font-12, $weight-normal, 0.9, left, $black);
+
+    .receive-expire-date {
+      @include custom-box-style(61px, 15px, 0px auto, 1px 5px 2px 6px, contain, none, none);
+      border-radius: 3px;
+      color: $white;
+      font-size: $font-10;
+    }
+
+    .warning-receive-expire-date {
+      background: $warning;
+    }
+
+    .success-receive-expire-date {
+      background: #269200;
+    }
+
+    .danger-receive-expire-date {
+      background: #ff0c0c;
+    }
+  }
+}
+
+.shipping-received-container {
+  @extend .size-received-container;
+
+  span {
+    line-height: 1.67;
+  }
+
+}
+
 .request-body-package {
+  div {
+    line-height: 15px;
+    text-align: right;
+  }
+
+  span {
+    @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, right, $black);
+  }
+}
+
+.myPackages-body-card {
+  @extend .request-body-package;
+
+  div {
+    text-align: left;
+  }
+}
+
+.receive-body-offer {
+  align-self: baseline;
+  top: 15px;
+  margin-left: auto;
+
   div {
     line-height: 15px;
     text-align: right;
@@ -442,6 +586,23 @@ body {
   }
 }
 
+.request-amount {
+  @extend.rating-btn;
+  width: 67px;
+  height: 47px;
+  padding: 7px 7px 7px 8px;
+
+  span {
+    font-size: $font-12;
+  }
+}
+
+.offer-my-package-btn {
+  @extend .request-amount;
+  padding: 7px 15px 7px 16px;
+  line-height: 1.55;
+}
+
 .card-request-footer {
   height: 52px;
   background: linear-gradient(to bottom, #d4d4d4, rgba(255, 255, 255, 0));
@@ -449,9 +610,48 @@ body {
   padding: 10px;
 }
 
+.card-receive-footer {
+  @extend .card-request-footer;
+  background: #f6f6f6
+}
+
 .more-detail-btn {
-  @include custom-btn-style(97px, 31px, 0, 8px 10px 7px 13px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, right, $black, border, solid 1px #dedede);
+  @include custom-btn-style(97px, 31px, 0, 8px 10px 7px 13px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, center, $black, border, solid 1px #dedede);
   margin-right: auto;
+}
+
+.receive-more-detail-btn {
+  @include custom-btn-style(165px, 35px, 0, 9px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $primary, border, solid 1px $primary);
+}
+
+.reject-btn {
+  @include custom-btn-style(165px, 35px, 0, 9px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white, border, solid 1px #ff0c0c);
+  background: $reject
+}
+
+.accept-btn {
+  @include custom-btn-style(165px, 35px, 0, 9px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white, border, solid 1px $primary);
+}
+
+.edit-travel-btn {
+  @extend .more-detail-btn;
+  width: 78.5px;
+  height: 30px;
+  padding: 7px 18px 8px 18px;
+}
+
+.remove-travel-btn {
+  @extend .more-detail-btn;
+  width: 30.2px;
+  height: 30px;
+  padding: 9px 10.2px 8px 10px;
+
+  svg {
+    width: 10px;
+    height: 13px;
+    font-size: $font-12;
+    color: $primary;
+  }
 }
 
 .make-offer-btn {
@@ -462,6 +662,11 @@ body {
 .send-request-btn {
   @include custom-btn-style(145px, 31px, 0 0 0 10px, 8px 10px 7px 13px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, center, $white);
   margin-left: auto;
+}
+
+.view-request-btn {
+  @extend .send-request-btn;
+  width: 129px;
 }
 
 @keyframes fade-in-keyframes {
@@ -580,6 +785,17 @@ body {
     @extend .request-card-wrapper;
     height: 204px
   }
+
+  .offers-card-info-wrapper {
+    @extend .request-card-wrapper;
+    width: 590px;
+    height: 212px;
+  }
+}
+
+.dashboard-more-detail-wrapper {
+  width: 590px;
+  height: 212px;
 }
 
 .request-card-cover-header {
@@ -603,6 +819,12 @@ body {
 .traveler-card-cover-body {
   height: 174px;
   width: 279px;
+  padding: 0px 9px 5px 15px
+}
+
+.offer-card-cover-body {
+  height: 212px;
+  width: 590px;
   padding: 0px 9px 5px 15px
 }
 
@@ -754,6 +976,19 @@ body {
 .traveler-package-card-wrapper {
   width: 279px;
   height: 204px;
+}
+
+.my-package-card-wrapper {
+  width: 280px;
+  height: 229px;
+}
+
+.receive-offer-card-wrapper {
+  width: 589.5px;
+  height: 266px;
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  border: solid 1px #d8d8d8;
 }
 
 @keyframes slide {
@@ -1433,6 +1668,148 @@ body {
   font-size: 1.3em;
 }
 
-.bm-cross{
+.bm-cross {
   background-color: $primary;
+}
+
+.user-profile-avatar {
+  width: 46px;
+  height: 46px;
+  margin-left: 16px;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.title-dashboard {
+  @include custom-box-style(1920px, 126px, 0, 44px 0 43px 360px, contain, none, #f5f5f5);
+
+  h2 {
+    @include custom-text-style($Inter-font, $font-32, $weight-500, 1.22, left, $gray6);
+  }
+}
+
+
+.requests-info-wrapper {
+  @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
+
+  h2 {
+    @include custom-text-style($Inter-font, $font-17, $weight-600, 1.18, left, $gray6);
+  }
+}
+
+.received-card-label {
+  @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, $primary);
+}
+
+.offer-status-btn {
+  @include custom-btn-style(93.2px, 110px, 0 4px 0 auto, 0, 5px, $Inter-font, $font-18, $weight-normal, 1.8, center, $white, border, none);
+  display: block;
+
+  .offer-box-btn {
+    text-align: center;
+    height: 70px;
+    background: $primary;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 17px;
+
+    span {
+      @include custom-text-style($Inter-font, $font-20, $weight-normal, 1.25, center, $white);
+    }
+  }
+
+  .status-box-btn {
+    text-align: center;
+    height: 40px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px;
+    @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, center, $white);
+  }
+
+  .success-box-btn {
+    background: #269200;
+  }
+
+  .danger-box-btn {
+    background: #ff0c0c;
+  }
+
+  .warning-box-btn {
+    background: $warning;
+  }
+}
+
+.report-problem-btn {
+  @include custom-btn-style(93px, 60px, 12px 4px 0 auto, 13px 15px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $gray6, border, 2px solid $primary);
+  display: block;
+  background: $white;
+}
+
+.delivered-box-info {
+  @include custom-box-style(162px, 193px, -12px 0 0 0, 21.2px 0px 18px 18px, contain, none, $primary);
+  border-radius: 5px;
+
+  p {
+    @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, $white);
+  }
+}
+
+.send-offer-wrapper,
+.dashboard-travels-info-wrapper {
+  @extend .receive-offer-wrapper;
+  margin: 0 auto;
+}
+
+.detail-cover-wrapper {
+  height: 155px;
+  margin: 29px 35px;
+  border-left: 1px solid #c5c5c5;
+}
+
+.offer-deliver-bullet {
+  width: 13px;
+  height: 13px;
+  margin: 4px 12px -3px -22PX;
+  background-color: #fff;
+  display: inline-block;
+  border-radius: 50%;
+  top: 0px;
+  position: absolute;
+}
+
+.deliver-status {
+  div {
+    position: absolute;
+
+    &:first-child {
+      top: -4px;
+    }
+
+    &:nth-child(2) {
+      top: 56px;
+    }
+
+    &:last-child {
+      top: 112px;
+    }
+  }
+
+}
+
+.offer-deliver-status {
+  @include custom-text-style($Inter-font, $font-12 !important, $weight-600 !important, 1.92 !important, left, $white);
+  margin-left: 5px;
+  margin-bottom: 0
+}
+
+.offer-deliver-status-desc {
+  @extend .offer-deliver-status;
+  font-weight: $weight-normal !important;
+}
+
+.note-offer-detail{
+  @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.5, left, $white);
 }

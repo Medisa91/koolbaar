@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import data from "json/requests.json";
+import data from "json/receives.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
 import { Option } from "helper/interface";
 import { Cards } from "./Cards";
 
 interface IProps {
-  type: Option;
-  size: Option;
-  deliveryType: Option;
+  display: Option;
 }
 
-export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
+export const PackageCard: React.FC<IProps> = ({ display }) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
 
@@ -21,12 +19,6 @@ export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
       setLoading(false);
     }, 3000);
   }, []);
-
-  const getSizeRange = (size) => {
-    if (size < 5) return "0KG - 5KG";
-    else if (size >= 5 && size < 10) return "5KG - 10KG";
-    else return "10KG - 20KG";
-  };
 
   return (
     <>
@@ -44,15 +36,9 @@ export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
             ))
           ) : (
             <>
-              {type.label !== "All"
+              {display.label !== "All"
                 ? data?.items
-                    ?.filter((filter) => filter.label === type.label)
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : size.label !== "All"
-                ? data?.items
-                    ?.filter(
-                      (filter) => getSizeRange(filter.size) === size.label
-                    )
+                    ?.filter((filter) => filter.label === display.label)
                     ?.map((item, idx) => <Cards key={idx} data={item} />)
                 : data?.items?.map((item, idx) => (
                     <Cards key={idx} data={item} />

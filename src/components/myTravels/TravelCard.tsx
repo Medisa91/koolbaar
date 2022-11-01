@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import data from "json/requests.json";
+import data from "json/myTravels.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
-import { Option } from "helper/interface";
 import { Cards } from "./Cards";
 
-interface IProps {
-  type: Option;
-  size: Option;
-  deliveryType: Option;
-}
-
-export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
+export const TravelCard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
 
@@ -44,19 +37,9 @@ export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
             ))
           ) : (
             <>
-              {type.label !== "All"
-                ? data?.items
-                    ?.filter((filter) => filter.label === type.label)
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : size.label !== "All"
-                ? data?.items
-                    ?.filter(
-                      (filter) => getSizeRange(filter.size) === size.label
-                    )
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : data?.items?.map((item, idx) => (
-                    <Cards key={idx} data={item} />
-                  ))}
+              {data?.items?.map((item, idx) => (
+                <Cards key={idx} data={item} />
+              ))}
             </>
           )}
         </Row>
