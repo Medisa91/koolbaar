@@ -19,6 +19,8 @@ export { SentOffer } from "./sentOffers";
 export { Filters } from "./filters";
 export { AvailableRequests } from "./availableRequests";
 export { AvailableTravelers } from "./availableTravelers";
+export { FinancialInfo } from "./financialInfo";
+export { PersonalInfo } from "./personalInfo";
 export { GoogleMapAPI } from "./googleMap";
 export { Uploader } from "./dropZone";
 export { SkeletonGrid } from "./skeleton";

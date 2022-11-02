@@ -1108,7 +1108,7 @@ body {
 }
 
 .custom-textarea-register {
-  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, rgb(152, 152, 152), border, solid 1px $gray8);
+  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, $black, border, solid 1px $gray8);
 
   &::placeholder {
     color: #989898
@@ -1214,17 +1214,21 @@ body {
 
 .half-custom-input-register {
   @include custom-input-styles(263px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8);
+  font-weight: $weight-600;
 
   &::placeholder {
     color: #989898;
+    font-weight: $weight-normal
   }
 }
 
 .full-custom-input-register {
   @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8);
+  font-weight: $weight-600;
 
   &::placeholder {
     color: #989898;
+    font-weight: $weight-normal
   }
 }
 
@@ -1810,6 +1814,138 @@ body {
   font-weight: $weight-normal !important;
 }
 
-.note-offer-detail{
+.note-offer-detail {
   @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.5, left, $white);
+  margin-top: 35px
+}
+
+.account-title {
+  @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $primary);
+  margin: 35px 0 50px 0
+}
+
+.balance-wrapper {
+  @include custom-box-style(575px, 93px, 0, 23px 35px 20px 41px, contain, none, #f6f6f6);
+  border-radius: 10px;
+
+  h1 {
+    @include custom-text-style($Inter-font, $font-22, $weight-600, 1.18, left, $primary);
+    display: inline-block;
+
+    span {
+      font-weight: $weight-bold;
+    }
+  }
+
+  .withdraw-btn {
+    @include custom-btn-style(128px, 50px, 0 0 0 180px, 16px 31px 17px, 5px, $Inter-font, $font-14, $weight-600, 1.21, center, $white);
+  }
+}
+
+.payment-wrapper {
+  @include custom-box-style(575px, 595px, 17px 0 17px 0, 28px 33px 25px 25px, contain, none, #f6f6f6);
+  border-radius: 10px;
+
+  h2 {
+    @include custom-text-style($Inter-font, $font-20, $weight-600, 1.2, left, $primary);
+  }
+
+  .payment-card-info {
+    @include custom-box-style(517px, 205px, 0, 31px 30px 38px 31px, contain, none, $white);
+    border-radius: 5px;
+    border: solid 1px #dcdcdc;
+  }
+}
+
+.visa-card-img {
+  width: 70px
+}
+
+.paypal-card-img {
+  width: 100px
+}
+
+.visa-card-number {
+  @include custom-text-style($Karla-font, $font-20, $weight-normal, 1.35, left, #a7adb4);
+  display: block;
+  margin-top: 40px;
+}
+
+.paypal-card-account {
+  @extend .visa-card-number;
+  font-size: $font-16
+}
+
+.visa-card-expiration,
+.paypal-card-added {
+  @include custom-text-style($Karla-font, $font-12, $weight-normal, 1.33, left, #c8cfd6);
+  display: block;
+  letter-spacing: 0.12px;
+  margin-top: 25px;
+}
+
+.card-radio-btn {
+  width: 26px;
+  height: 26px;
+}
+
+input[type='radio']:after {
+  border: solid 1px #c3cfe2;
+  // background-color: #fff;
+}
+
+.add-new-card-btn {
+  @include custom-btn-style(517px, 50px, 15px 0 0 0, 28px 33px 25px 25px, 10px, $Inter-font, $font-16, $weight-bold, 0, center, $white);
+}
+
+.transaction-wrapper {
+  @include custom-box-style(575px, 578px, 17px 0 17px 0, 28px 33px 25px 25px, contain, none, #f6f6f6);
+  border-radius: 10px;
+
+  h2 {
+    @include custom-text-style($Inter-font, $font-20, $weight-600, 1.2, left, $primary);
+  }
+}
+
+.transaction-box {
+  @include custom-box-style(516px, 66px, 0 0 16px, 12px 26px 14px 14px, contain, none, $white);
+  border-radius: 4px;
+  // -webkit-filter: blur(10px);
+  // filter: blur(10px);
+  box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+}
+
+.icon-transaction-wrapper {
+  @include custom-box-style(38px, 38px, 2px 0 0 0, 9px 10px, contain, none, #f3f3f4);
+  border-radius: 4px;
+
+  img {
+    width: 20px;
+    height: 20px;
+    vertical-align: super;
+  }
+}
+
+.transaction-amount-wrapper {
+  align-self: center;
+  text-align: right;
+
+  span {
+    @include custom-text-style($Karla-font, $font-20, $weight-500, 1.29, right, #ff2626);
+    letter-spacing: 0.94px;
+  }
+}
+
+.transaction-name {
+  @include custom-text-style($Karla-font, $font-17, $weight-500, 1.36, left, #27282a);
+  letter-spacing: 1px;
+}
+
+.transaction-date {
+  @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, #8a8c93);
+}
+
+.load-more-btn {
+  @include custom-btn-style(516px, 50px, 23px 0 0 0, 0, 10px, $Inter-font, $font-16, $weight-bold, 1.25, center, #1e2254, border, 1px solid #1e2254);
+  background: transparent;
 }
