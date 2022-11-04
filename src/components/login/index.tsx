@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Input, Button, Register } from "components";
 import { Col, Row } from "react-bootstrap";
 import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import {
   fetchTodos,
   fetchParticularTodo,
 } from "../../features/todo/todo-actions";
+// import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 
 const clientId =
   "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com";
@@ -21,6 +23,10 @@ export const Login: React.FC = () => {
 
   const onFailure = (res) => {
     console.log("[Login Failed] res:", res);
+  };
+
+  const responseFacebook = (response) => {
+    console.log(response);
   };
 
   // const [todo_id, setTodo_id] = useState(1);
@@ -92,9 +98,15 @@ export const Login: React.FC = () => {
           xs={12}
         >
           <h1>Login Via</h1>
-          <Button variant="info" className="facebook-btn">
-            Facebook
-          </Button>
+
+          <FacebookLogin
+            appId="598976655336817"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={responseFacebook}
+            cssClass="facebook-btn"
+            textButton="Facebook"
+          />
           <GoogleLogin
             clientId={clientId}
             render={(renderProps) => (
@@ -113,7 +125,7 @@ export const Login: React.FC = () => {
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
           />
-          <span className="mt-4 d-block">
+          <span className="mt-4 d-block forget-password-text">
             Forgot password? Click <a href="/">Here</a>
           </span>
         </Col>

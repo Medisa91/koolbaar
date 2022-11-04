@@ -6,8 +6,8 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "components";
-import { MonthNumber } from "helper/convertMonthNameToNumber";
-import { DepartureOptions, ArrivalOptions } from "helper/interface";
+import { MonthNumber } from "utilities/convertMonthNameToNumber";
+import { DepartureOptions, ArrivalOptions } from "utilities/interface";
 
 interface IProps {
   isOpen: boolean;

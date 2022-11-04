@@ -5,7 +5,7 @@ import Select from "react-select";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
 import { Link } from "react-router-dom";
-import { DepartureOptions, ArrivalOptions } from "helper/interface";
+import { DepartureOptions, ArrivalOptions } from "utilities/interface";
 
 interface IProps {
   isAfterSearch: boolean;

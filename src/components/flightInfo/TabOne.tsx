@@ -6,7 +6,7 @@ import { ArrivalInfo } from "./ArrivalInfo";
 import PlaneIcon from "../../assets/images/plane.png";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { DepartureOptions, ArrivalOptions } from "helper/interface";
+import { DepartureOptions, ArrivalOptions } from "utilities/interface";
 
 export const TabOne: FC<{}> = () => {
   const size = UseWindowSize();

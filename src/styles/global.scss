@@ -1044,7 +1044,7 @@ body {
     margin-bottom: 30px
   }
 
-  span {
+  .forget-password-text {
     @include custom-text-style($Inter-font, $font-14, $weight-normal, 4.5, left, #353a67);
   }
 }
@@ -1076,6 +1076,7 @@ body {
 
 .facebook-btn {
   @include custom-btn-style(240px, 50px, auto, 14.1px 88px 15.9px 76px, 7px, $Inter-font, $font-16, $weight-600, 1.25, center, $white );
+  background-color: $primary
 }
 
 .google-btn {
