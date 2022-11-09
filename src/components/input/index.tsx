@@ -13,6 +13,7 @@ export interface InputProps extends InputGroupProps, React.HTMLAttributes<HTMLEl
   textArea?: boolean,
   rows?: number,
   label?: any,
+  name?: string,
   // ref?: React.RefObject<HTMLInputElement>
 }
 
@@ -22,6 +23,7 @@ export const Input: React.FC<IInput> = ({
   id,
   placeholder,
   size,
+  name,
   className,
   textArea = false,
   type,
@@ -29,6 +31,7 @@ export const Input: React.FC<IInput> = ({
   value,
   rows,
   label,
+  onChange,
   ...rest
 }) => {
   const [_id] = useState(id || `basic-input-${Math.random()}`);
@@ -47,6 +50,8 @@ export const Input: React.FC<IInput> = ({
           type={type}
           id={_id}
           value={value}
+          onChange={onChange}
+          name={name}
           // ref={ref}
         />
       </BaseInput>

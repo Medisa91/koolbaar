@@ -5,7 +5,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { PackageCard } from "./PackageCard";
-import { Option } from "utilities/interface";
+import { Option } from "helpers/interface";
 
 interface IProps {
   type: Option;

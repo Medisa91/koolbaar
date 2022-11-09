@@ -3,6 +3,7 @@ import "styles/global.scss";
 import "styles/responsive.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "photoswipe/dist/photoswipe.css";
+import 'react-toastify/dist/ReactToastify.css';
 import "./i18n";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Login, Dashboard, Profile } from "pages";

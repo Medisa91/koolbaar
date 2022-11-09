@@ -1,30 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { typeOptions, sizeOptions, deliveryTypeOptions } from "utilities/options";
+import { typeOptions, sizeOptions, deliveryTypeOptions } from "helpers/options";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { useAppDispatch, useAppSelector } from "redux/store";
+// import { allPackagesType } from "redux/slices/types";
+import { showTypes } from "redux/slices/types";
+import { getAllPackagesType } from "redux/actions/types";
 
 interface IProp {
   onSelectTypeFilter: (key: any) => void;
   onSelectSizeFilter: (key: any) => void;
   onSelectDeliveryTypeFilter: (key: any) => void;
-  tab: number
+  tab: number;
 }
 
 export const Filters: React.FC<IProp> = ({
   onSelectTypeFilter,
   onSelectSizeFilter,
   onSelectDeliveryTypeFilter,
-  tab
+  tab,
 }) => {
+  const dispatch = useAppDispatch();
   const screenSize = UseWindowSize();
 
   const [type, setType] = useState({ value: 0, label: "All" });
   const [size, setSize] = useState({ value: 1, label: "All" });
   const [deliveryType, setDeliveryType] = useState({ value: 1, label: "All" });
+  const types = useAppSelector(showTypes);
 
   const customStyle = {
     control: (styles) => ({
@@ -42,6 +51,14 @@ export const Filters: React.FC<IProp> = ({
     }),
   };
 
+  useEffect(() => {
+    dispatch(getAllPackagesType());
+  }, []);
+
+  useEffect(() => {
+    console.log(types);
+  }, [types]);
+
   const handleTypeChange = (selected) => {
     setType(selected);
     onSelectTypeFilter(selected);
@@ -58,7 +75,7 @@ export const Filters: React.FC<IProp> = ({
   };
 
   return (
-    <>
+    <>      
       {screenSize.width >= 768 && (
         <div className="filter-info-wrapper">
           <Row>

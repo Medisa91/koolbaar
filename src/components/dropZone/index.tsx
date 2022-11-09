@@ -53,15 +53,17 @@ const thumbInner = {
 
 const img = {
   display: "block",
-  width: "auto",
-  height: "100%",
+  width: "100%",
+  height: "fit-content",
 } as React.CSSProperties;
 
 interface IProp {
   title: string;
+  photo?: File;
+  setPhoto?: React.Dispatch<React.SetStateAction<File>>;
 }
 
-export const Uploader: React.FC<IProp> = ({ title }) => {
+export const Uploader: React.FC<IProp> = ({ title, photo, setPhoto }) => {
   const { isFocused, isDragAccept, isDragReject } = useDropzone({
     accept: { "image/*": [] },
   });
@@ -71,6 +73,7 @@ export const Uploader: React.FC<IProp> = ({ title }) => {
     accept: {
       "image/*": [],
     },
+
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
@@ -79,8 +82,10 @@ export const Uploader: React.FC<IProp> = ({ title }) => {
           })
         )
       );
+      setPhoto(acceptedFiles[0]);
     },
   });
+
   const style = useMemo(
     () => ({
       ...baseStyle,

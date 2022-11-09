@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import data from "json/requests.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
-import { Option } from "utilities/interface";
+import { Option } from "helpers/interface";
 import { Cards } from "./Cards";
 
 interface IProps {

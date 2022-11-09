@@ -4,12 +4,6 @@ import { Col, Row } from "react-bootstrap";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import {
-  fetchTodos,
-  fetchParticularTodo,
-} from "../../features/todo/todo-actions";
-// import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 
 const clientId =
   "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com";
@@ -29,36 +23,8 @@ export const Login: React.FC = () => {
     console.log(response);
   };
 
-  // const [todo_id, setTodo_id] = useState(1);
-  // const dispatch = useAppDispatch();
-  // const alltodos = useAppSelector((state) => state.todo.all_todos);
-  // const particularTodo = useAppSelector((state) => state.todo.particular_todo);
-
-  // const clickHandler = () => {
-  //   dispatch(fetchTodos());
-  // };
-  // const searchHandler = () => {
-  //   dispatch(fetchParticularTodo(todo_id));
-  // };
-  // const checkTodo = (): boolean => {
-  //   if (alltodos.length == 0) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
-
   return (
     <div className="login-slider-container">
-      {/* <button onClick={clickHandler}>All Todos</button>
-      <button onClick={searchHandler}> Find </button>
-      {checkTodo() &&
-        alltodos.map((todo) => (
-          <div className="todo-container" key={todo.id}>
-            <p className="todo-child1">{todo.id}</p>
-            <p className="todo-child2">{todo.userId}</p>
-            <p className="todo-child3">{todo.title}</p>
-          </div>
-        ))} */}
       <Row className="login-wrapper">
         <Col className="login-form" lg={5} md={5} xs={12}>
           <h1>Login</h1>
@@ -101,9 +67,9 @@ export const Login: React.FC = () => {
 
           <FacebookLogin
             appId="598976655336817"
-            autoLoad={true}
+            autoLoad={false}
             fields="name,email,picture"
-            callback={responseFacebook}
+            onClick={responseFacebook}
             cssClass="facebook-btn"
             textButton="Facebook"
           />

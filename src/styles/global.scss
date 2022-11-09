@@ -1044,6 +1044,10 @@ body {
     margin-bottom: 30px
   }
 
+  span {
+    opacity: 1 !important;
+  }
+
   .forget-password-text {
     @include custom-text-style($Inter-font, $font-14, $weight-normal, 4.5, left, #353a67);
   }
@@ -1949,4 +1953,8 @@ input[type='radio']:after {
 .load-more-btn {
   @include custom-btn-style(516px, 50px, 23px 0 0 0, 0, 10px, $Inter-font, $font-16, $weight-bold, 1.25, center, #1e2254, border, 1px solid #1e2254);
   background: transparent;
+}
+
+.Toastify__toast-body > div:last-child{
+  font-size: $font-12;
 }

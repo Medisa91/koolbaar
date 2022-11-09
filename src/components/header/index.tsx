@@ -8,8 +8,8 @@ import AvatarImg from "../../assets/images/avatar.png";
 
 export const Header: React.FC = () => {
   const size = UseWindowSize();
-  const [showSidebar, setShowSidebar] = useState(true);
-  const [isLogin, setIsLogin] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleLoginSidebar = () => {
     setShowSidebar(!showSidebar);
