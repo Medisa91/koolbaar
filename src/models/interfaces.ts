@@ -1,15 +1,3 @@
-export interface TodoModel {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
-export interface TodoArrayModel {
-  all_todos: TodoModel[];
-  particular_todo: TodoModel;
-}
-
 export interface IRegister {
   personalPhoto: File;
   aboutMe: string;
@@ -30,4 +18,19 @@ export interface IRegister {
   device_Model: string;
   device_Id: number;
   player_Id: number;
+}
+
+export interface DepartureOptions {
+  from: string;
+  fromDate: string;
+}
+
+export interface ArrivalOptions {
+  to: string;
+  toDate: string;
+}
+
+export interface Option {
+  value: string | number;
+  label: string;
 }

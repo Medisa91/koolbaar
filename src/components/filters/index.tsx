@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { typeOptions, sizeOptions, deliveryTypeOptions } from "helpers/options";
+import { typeOptions, sizeOptions, deliveryTypeOptions } from "models/options";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,

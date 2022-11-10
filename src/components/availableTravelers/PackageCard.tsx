@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import data from "json/travelers.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
-import { Option } from "helpers/interface";
+import { Option } from "models/interfaces";
 import { Cards } from "./Cards";
 
 interface IProps {

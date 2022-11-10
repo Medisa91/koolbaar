@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "redux/store";
 // import { createUser } from "redux/slices/register";
-import { IRegister } from "models/redux-models";
+import { IRegister } from "models/interfaces";
 import {
   osVersion,
   osName,
