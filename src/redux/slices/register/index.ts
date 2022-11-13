@@ -142,4 +142,5 @@ export const registerSlice = createSlice({
 });
 
 export const { addNewUser } = registerSlice.actions;
+export const showRegisterResult = (state) => state.register;
 export default registerSlice.reducer;

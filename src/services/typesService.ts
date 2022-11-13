@@ -1,4 +1,4 @@
-import http from "helpers/httpRequest";
+import { http } from "helpers/httpRequest";
 
 class TypesService {
   getAllPackagesType = () => {

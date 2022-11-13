@@ -1,57 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { Input, GoogleMapAPI, Uploader, Button } from "components";
 import UserAvatar from "./../../assets/images/user-avatar.png";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "redux/store";
-// import { createUser } from "redux/slices/register";
 import { IRegister } from "models/interfaces";
-import {
-  osVersion,
-  osName,
-  browserName,
-  browserVersion,
-} from "react-device-detect";
 import { createUser } from "redux/actions/register";
 import { ToastContainer } from "react-toastify";
+import { showRegisterResult } from "redux/slices/register";
 
-export const Register: React.FC = () => {
+interface IProps {
+  deviceModel: string;
+}
+
+export const Register: React.FC<IProps> = ({ deviceModel }) => {
   const dispatch = useAppDispatch();
   const size = UseWindowSize();
-  const [passportPhoto, setPassportPhoto] = useState(null);
-  const [secondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
+  const data = useAppSelector(showRegisterResult);
+  const [PassportPhoto, setPassportPhoto] = useState(null);
+  const [SecondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
   const [avatar, setAvatar] = useState(UserAvatar);
-  const [personalPhoto, setPersonalPhoto] = useState(null);
+  const [PersonalPhoto, setPersonalPhoto] = useState(null);
   const [changeImageStyle, setChangeImageStyle] = useState(false);
-  const [position_lat, setLat] = useState(null);
-  const [position_long, setLng] = useState(null);
+  const [Position_lat, setLat] = useState(null);
+  const [Position_long, setLng] = useState(null);
   const [checked, setChecked] = useState(false);
-  const [device_Model, setDeviceModel] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const Device_Model = deviceModel;
   const [registerData, setRegisterData] = useState<IRegister>({
-    personalPhoto: null,
-    aboutMe: "",
-    firstName: "",
-    lastName: "",
-    displayName: "",
-    phoneNumber: "",
-    email: "",
-    address: "",
-    position_lat: "",
-    position_long: "",
-    password: "",
-    rePassword: "",
-    passportPhoto: null,
-    secondIdentityPhoto: null,
-    client_Id: "517D58DC-95A5-4732-B182-2188A9853CF5",
-    client_Secret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
-    device_Model: "",
-    device_Id: null,
-    player_Id: null,
+    PersonalPhoto: null,
+    AboutMe: "",
+    FirstName: "",
+    LastName: "",
+    DisplayName: "",
+    PhoneNumber: "",
+    Email: "",
+    Address: "",
+    Position_lat: "",
+    Position_long: "",
+    Password: "",
+    RePassword: "",
+    PassportPhoto: null,
+    SecondIdentityPhoto: null,
+    Client_Id: "517D58DC-95A5-4732-B182-2188A9853CF5",
+    Client_Secret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
+    Device_Model: "",
+    Device_Id: null,
+    Player_Id: null,
   });
-
-  useEffect(() => {
-    setDeviceModel(`${browserName}-${browserVersion}(${osName}${osVersion})`);
-  }, []);
 
   const handleCheckChange = () => {
     setChecked(!checked);
@@ -70,25 +66,24 @@ export const Register: React.FC = () => {
   };
 
   const registerBtn = () => {
+    setIsLoading(true);
     const data = {
       ...registerData,
-      personalPhoto,
-      passportPhoto,
-      secondIdentityPhoto,
-      position_lat,
-      position_long,
-      device_Model,
+      PersonalPhoto,
+      PassportPhoto,
+      SecondIdentityPhoto,
+      Position_lat,
+      Position_long,
+      Device_Model,
     };
-    console.log(data);
 
-    dispatch(createUser(data))
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    dispatch(createUser(data));
   };
+
+  useEffect(() => {
+    setIsLoading(false);
+    // console.log(data);
+  }, [data, isLoading]);
 
   return (
     <>
@@ -125,12 +120,12 @@ export const Register: React.FC = () => {
             <span className="short-label">About Me</span>
             <Input
               size="sm"
-              id="aboutMe-input"
+              id="AboutMe-input"
               placeholder="eg. I am a PHD student that living down town Toronto"
               className="custom-textarea-register"
               type="text"
-              name="aboutMe"
-              value={registerData.aboutMe}
+              name="AboutMe"
+              value={registerData.AboutMe}
               onChange={handleChange}
               textArea={true}
               rows={2}
@@ -141,66 +136,66 @@ export const Register: React.FC = () => {
           <Col xs={6} className="mb-4">
             <Input
               size="sm"
-              id="firstName-input"
+              id="FirstName-input"
               placeholder="First Name"
-              name="firstName"
+              name="FirstName"
               className="half-custom-input-register"
-              value={registerData.firstName}
+              value={registerData.FirstName}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
             <Input
               size="sm"
-              id="lastName-input"
+              id="LastName-input"
               placeholder="Last Name"
-              name="lastName"
+              name="LastName"
               className="half-custom-input-register"
-              value={registerData.lastName}
+              value={registerData.LastName}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4">
             <Input
               size="sm"
-              id="displayName-input"
+              id="DisplayName-input"
               placeholder="Display Name"
-              name="displayName"
+              name="DisplayName"
               className="half-custom-input-register"
-              value={registerData.displayName}
+              value={registerData.DisplayName}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
             <Input
               size="sm"
-              id="phoneNumber-input"
+              id="PhoneNumber-input"
               placeholder="Phone Number"
-              name="phoneNumber"
+              name="PhoneNumber"
               className="half-custom-input-register"
-              value={registerData.phoneNumber}
+              value={registerData.PhoneNumber}
               onChange={handleChange}
             />
           </Col>
           <Col xs={12} className="mb-4">
             <Input
               size="sm"
-              id="email-input"
+              id="Email-input"
               placeholder="Email"
-              name="email"
+              name="Email"
               className="full-custom-input-register"
-              value={registerData.email}
+              value={registerData.Email}
               onChange={handleChange}
             />
           </Col>
           <Col xs={12} className="mb-4">
             <Input
               size="sm"
-              id="address-input"
+              id="Address-input"
               placeholder="Address"
-              name="address"
+              name="Address"
               className="full-custom-input-register"
-              value={registerData.address}
+              value={registerData.Address}
               onChange={handleChange}
             />
           </Col>
@@ -212,24 +207,24 @@ export const Register: React.FC = () => {
           <Col xs={6} className="mb-4">
             <Input
               size="sm"
-              id="passport-input"
+              id="Password-input"
               placeholder="Password"
               className="half-custom-input-register"
-              name="password"
+              name="Password"
               type="password"
-              value={registerData.password}
+              value={registerData.Password}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
             <Input
               size="sm"
-              id="retypePassport-input"
+              id="RePassword-input"
               placeholder="Retype Password"
-              name="rePassword"
+              name="RePassword"
               type="password"
               className="half-custom-input-register"
-              value={registerData.rePassword}
+              value={registerData.RePassword}
               onChange={handleChange}
             />
           </Col>
@@ -241,7 +236,7 @@ export const Register: React.FC = () => {
           >
             <Uploader
               title="Upload Passport front page"
-              photo={passportPhoto}
+              photo={PassportPhoto}
               setPhoto={setPassportPhoto}
             />
           </section>
@@ -253,7 +248,7 @@ export const Register: React.FC = () => {
           >
             <Uploader
               title="Upload ID Driving License/PR Card/ Green Card/National Card)"
-              photo={secondIdentityPhoto}
+              photo={SecondIdentityPhoto}
               setPhoto={setSecondIdentityPhoto}
             />
           </section>
@@ -280,6 +275,11 @@ export const Register: React.FC = () => {
             className="submit-request-btn mt-4"
             onClick={registerBtn}
           >
+            {isLoading && (
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
             Submit Request
           </Button>
         </div>

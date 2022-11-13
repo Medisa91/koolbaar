@@ -1,33 +1,37 @@
-import http from "helpers/httpRequest";
+import { http, loginHttp } from "helpers/httpRequest";
 
 class AuthorizationService {
-//   getAll() {
-//     return http.get("/tutorials");
-//   }
-
-//   get(id) {
-//     return http.get(`/tutorials/${id}`);
-//   }
-
-  create(data) {
+  createUser(data) {
     return http.post("/register", data);
   }
 
-//   update(id, data) {
-//     return http.put(`/tutorials/${id}`, data);
-//   }
+  login(data) {
+    return loginHttp.post("/token", data);
+  }
 
-//   delete(id) {
-//     return http.delete(`/tutorials/${id}`);
-//   }
+  //   getAll() {
+  //     return http.get("/tutorials");
+  //   }
 
-//   deleteAll() {
-//     return http.delete(`/tutorials`);
-//   }
+  //   get(id) {
+  //     return http.get(`/tutorials/${id}`);
+  //   }
 
-//   findByTitle(title) {
-//     return http.get(`/tutorials?title=${title}`);
-//   }
+  //   update(id, data) {
+  //     return http.put(`/tutorials/${id}`, data);
+  //   }
+
+  //   delete(id) {
+  //     return http.delete(`/tutorials/${id}`);
+  //   }
+
+  //   deleteAll() {
+  //     return http.delete(`/tutorials`);
+  //   }
+
+  //   findByTitle(title) {
+  //     return http.get(`/tutorials?title=${title}`);
+  //   }
 }
 
 export default new AuthorizationService();

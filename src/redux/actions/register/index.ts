@@ -4,11 +4,12 @@ import { toast } from "react-toastify";
 
 export const createUser = (data) => async (dispatch) => {
   try {
-    // const body = new FormData();
-    // body.append("file", data);
-    const res = await AuthorizationService.create(data);
+    const body = new FormData();
+    body.append("file", data);
+    const res = await AuthorizationService.createUser(data);
     dispatch(addNewUser(res.data));
-    toast.success("The operation was successful");
+    if (res?.data?.IsSuccess) toast.success(res?.data?.Message);
+    else toast.error(res?.data?.Message);
   } catch (err) {
     toast.error("Error");
     // throw new Error(err);

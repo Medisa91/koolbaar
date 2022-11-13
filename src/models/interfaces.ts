@@ -1,23 +1,34 @@
 export interface IRegister {
-  personalPhoto: File;
-  aboutMe: string;
-  firstName: string;
-  lastName: string;
-  displayName: string;
-  phoneNumber: string;
-  email: string;
-  address: string;
-  position_lat: string;
-  position_long: string;
+  PersonalPhoto: File;
+  AboutMe: string;
+  FirstName: string;
+  LastName: string;
+  DisplayName: string;
+  PhoneNumber: string;
+  Email: string;
+  Address: string;
+  Position_lat: string;
+  Position_long: string;
+  Password: string;
+  RePassword: string;
+  PassportPhoto: File;
+  SecondIdentityPhoto: File;
+  Client_Id: string;
+  Client_Secret: string;
+  Device_Model: string;
+  Device_Id: number;
+  Player_Id: number;
+}
+
+export interface ILogin {
+  grant_type: string;
+  username: string;
   password: string;
-  rePassword: string;
-  passportPhoto: File;
-  secondIdentityPhoto: File;
-  client_Id: string;
-  client_Secret: string;
-  device_Model: string;
-  device_Id: number;
-  player_Id: number;
+  client_id: string;
+  client_secret: string;
+  device_model: string;
+  device_id: string;
+  player_id: string;
 }
 
 export interface DepartureOptions {
