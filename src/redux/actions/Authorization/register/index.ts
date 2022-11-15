@@ -1,5 +1,5 @@
 import AuthorizationService from "services/authorizationService";
-import { addNewUser } from "redux/slices/register";
+import { addNewUser } from "redux/slices/Authorization/register";
 import { toast } from "react-toastify";
 
 export const createUser = (data) => async (dispatch) => {
@@ -8,10 +8,9 @@ export const createUser = (data) => async (dispatch) => {
     body.append("file", data);
     const res = await AuthorizationService.createUser(data);
     dispatch(addNewUser(res.data));
-    if (res?.data?.IsSuccess) toast.success(res?.data?.Message);
-    else toast.error(res?.data?.Message);
+    if (res?.data?.isSuccess) toast.success(res?.data?.message);
+    else toast.error(res?.data?.message);
   } catch (err) {
-    toast.error("Error");
-    // throw new Error(err);
+    toast.error(err?.response?.data?.message);
   }
 };

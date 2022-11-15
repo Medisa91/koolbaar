@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Input, GoogleMapAPI, Uploader, Button } from "components";
 import UserAvatar from "./../../assets/images/user-avatar.png";
 import { Col, Row, Spinner } from "react-bootstrap";
+import { NumericFormat } from "react-number-format";
+import { Oval } from "react-loader-spinner";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { IRegister } from "models/interfaces";
-import { createUser } from "redux/actions/register";
+import { createUser } from "redux/actions/Authorization/register";
 import { ToastContainer } from "react-toastify";
-import { showRegisterResult } from "redux/slices/register";
+import { showRegisterResult } from "redux/slices/Authorization/register";
 
 interface IProps {
   deviceModel: string;
@@ -17,36 +19,37 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
   const dispatch = useAppDispatch();
   const size = UseWindowSize();
   const data = useAppSelector(showRegisterResult);
-  const [PassportPhoto, setPassportPhoto] = useState(null);
-  const [SecondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
+  const [passportPhoto, setPassportPhoto] = useState(null);
+  const [secondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
   const [avatar, setAvatar] = useState(UserAvatar);
-  const [PersonalPhoto, setPersonalPhoto] = useState(null);
+  const [personalPhoto, setPersonalPhoto] = useState(null);
   const [changeImageStyle, setChangeImageStyle] = useState(false);
-  const [Position_lat, setLat] = useState(null);
-  const [Position_long, setLng] = useState(null);
+  const [positionLat, setLat] = useState(null);
+  const [positionLong, setLng] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const Device_Model = deviceModel;
   const [registerData, setRegisterData] = useState<IRegister>({
-    PersonalPhoto: null,
-    AboutMe: "",
-    FirstName: "",
-    LastName: "",
-    DisplayName: "",
-    PhoneNumber: "",
-    Email: "",
-    Address: "",
-    Position_lat: "",
-    Position_long: "",
-    Password: "",
-    RePassword: "",
-    PassportPhoto: null,
-    SecondIdentityPhoto: null,
-    Client_Id: "517D58DC-95A5-4732-B182-2188A9853CF5",
-    Client_Secret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
-    Device_Model: "",
-    Device_Id: null,
-    Player_Id: null,
+    personalPhoto: null,
+    aboutMe: "",
+    firstName: "",
+    lastName: "",
+    displayName: "",
+    phoneNumber: null,
+    email: "",
+    address: "",
+    positionLat: "",
+    positionLong: "",
+    password: "",
+    rePassword: "",
+    passportPhoto: null,
+    secondIdentityPhoto: null,
+    clientId: "517D58DC-95A5-4732-B182-2188A9853CF5",
+    clientSecret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
+    deviceModel: "",
+    deviceId: null,
+    playerId: null,
   });
 
   const handleCheckChange = () => {
@@ -69,12 +72,13 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     setIsLoading(true);
     const data = {
       ...registerData,
-      PersonalPhoto,
-      PassportPhoto,
-      SecondIdentityPhoto,
-      Position_lat,
-      Position_long,
-      Device_Model,
+      personalPhoto,
+      phoneNumber: parseInt(phoneNumber, 10),
+      passportPhoto,
+      secondIdentityPhoto,
+      positionLat,
+      positionLong,
+      deviceModel,
     };
 
     dispatch(createUser(data));
@@ -82,8 +86,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
 
   useEffect(() => {
     setIsLoading(false);
-    // console.log(data);
-  }, [data, isLoading]);
+  }, [data]);
 
   return (
     <>
@@ -120,12 +123,12 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
             <span className="short-label">About Me</span>
             <Input
               size="sm"
-              id="AboutMe-input"
+              id="aboutMe-input"
               placeholder="eg. I am a PHD student that living down town Toronto"
               className="custom-textarea-register"
               type="text"
-              name="AboutMe"
-              value={registerData.AboutMe}
+              name="aboutMe"
+              value={registerData.aboutMe}
               onChange={handleChange}
               textArea={true}
               rows={2}
@@ -136,66 +139,79 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
           <Col xs={6} className="mb-4">
             <Input
               size="sm"
-              id="FirstName-input"
+              id="firstName-input"
               placeholder="First Name"
-              name="FirstName"
+              name="firstName"
               className="half-custom-input-register"
-              value={registerData.FirstName}
+              value={registerData.firstName}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
             <Input
               size="sm"
-              id="LastName-input"
+              id="lastName-input"
               placeholder="Last Name"
-              name="LastName"
+              name="lastName"
               className="half-custom-input-register"
-              value={registerData.LastName}
+              value={registerData.lastName}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4">
             <Input
               size="sm"
-              id="DisplayName-input"
+              id="displayName-input"
               placeholder="Display Name"
-              name="DisplayName"
+              name="displayName"
               className="half-custom-input-register"
-              value={registerData.DisplayName}
+              value={registerData.displayName}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
-            <Input
+            {/* <Input
               size="sm"
-              id="PhoneNumber-input"
+              id="phoneNumber-input"
               placeholder="Phone Number"
-              name="PhoneNumber"
+              name="phoneNumber"
               className="half-custom-input-register"
-              value={registerData.PhoneNumber}
+              value={registerData.phoneNumber}
               onChange={handleChange}
+            /> */}
+            <NumericFormat
+              className="half-custom-input-register"
+              id="phoneNumber"
+              placeholder="Phone Number"
+              name="phoneNumber"
+              value={registerData.phoneNumber}
+              allowLeadingZeros={true}
+              // onValueChange={handleChange}
+              onValueChange={(values) => {
+                const { formattedValue, value } = values;
+                setPhoneNumber(formattedValue);
+              }}
             />
           </Col>
           <Col xs={12} className="mb-4">
             <Input
               size="sm"
-              id="Email-input"
+              id="email-input"
               placeholder="Email"
-              name="Email"
+              name="email"
               className="full-custom-input-register"
-              value={registerData.Email}
+              value={registerData.email}
               onChange={handleChange}
             />
           </Col>
           <Col xs={12} className="mb-4">
             <Input
               size="sm"
-              id="Address-input"
+              id="address-input"
               placeholder="Address"
-              name="Address"
+              name="address"
               className="full-custom-input-register"
-              value={registerData.Address}
+              value={registerData.address}
               onChange={handleChange}
             />
           </Col>
@@ -207,24 +223,24 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
           <Col xs={6} className="mb-4">
             <Input
               size="sm"
-              id="Password-input"
+              id="password-input"
               placeholder="Password"
               className="half-custom-input-register"
-              name="Password"
+              name="password"
               type="password"
-              value={registerData.Password}
+              value={registerData.password}
               onChange={handleChange}
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
             <Input
               size="sm"
-              id="RePassword-input"
+              id="rePassword-input"
               placeholder="Retype Password"
-              name="RePassword"
+              name="rePassword"
               type="password"
               className="half-custom-input-register"
-              value={registerData.RePassword}
+              value={registerData.rePassword}
               onChange={handleChange}
             />
           </Col>
@@ -236,7 +252,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
           >
             <Uploader
               title="Upload Passport front page"
-              photo={PassportPhoto}
+              photo={passportPhoto}
               setPhoto={setPassportPhoto}
             />
           </section>
@@ -248,7 +264,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
           >
             <Uploader
               title="Upload ID Driving License/PR Card/ Green Card/National Card)"
-              photo={SecondIdentityPhoto}
+              photo={secondIdentityPhoto}
               setPhoto={setSecondIdentityPhoto}
             />
           </section>
@@ -270,17 +286,22 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
         </div>
         <div>
           <Button
+            disabled={!checked}
             variant="primary"
             data-test="docs-btn-anchor"
             className="submit-request-btn mt-4"
             onClick={registerBtn}
           >
-            {isLoading && (
-              <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-            )}
             Submit Request
+            {isLoading && (
+              <Oval
+                width="20"
+                height="20"
+                color="#fff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{ display: "inline", marginLeft: "8px" }}
+              />
+            )}
           </Button>
         </div>
       </div>

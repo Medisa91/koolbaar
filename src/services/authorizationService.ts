@@ -1,12 +1,20 @@
-import { http, loginHttp } from "helpers/httpRequest";
+import { http, loginHttp, registerHttp } from "helpers/httpRequest";
 
 class AuthorizationService {
   createUser(data) {
-    return http.post("/register", data);
+    return registerHttp.post("/register", data);
   }
 
   login(data) {
     return loginHttp.post("/token", data);
+  }
+
+  logout(data) {
+    return http.post("/Logout", data);
+  }
+
+  checkToken(data) {
+    return loginHttp.post("/ExternalAuth/CheckToken", data);
   }
 
   //   getAll() {

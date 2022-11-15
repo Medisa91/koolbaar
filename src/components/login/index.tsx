@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button, Register } from "components";
-import { Col, Row, Spinner } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+import { Oval } from "react-loader-spinner";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { loginUser } from "redux/actions/login";
-import { ILogin } from "models/interfaces";
+import { loginUser } from "redux/actions/Authorization/login";
+import { ILogin, IExternalLogin } from "models/interfaces";
 import {
   osVersion,
   osName,
@@ -13,7 +14,7 @@ import {
   browserVersion,
 } from "react-device-detect";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { showLoginResult } from "redux/slices/login";
+import { showLoginResult } from "redux/slices/Authorization/login";
 
 const clientId =
   "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com";
@@ -23,16 +24,25 @@ export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(showLoginResult);
   const [isLoading, setIsLoading] = useState(false);
-  const [Device_Model, setDeviceModel] = useState("");
+  const [deviceModel, setDeviceModel] = useState("");
   const [loginData, setLoginData] = useState<ILogin>({
-    grant_type: "password",
+    grantType: "password",
     username: "",
     password: "",
-    client_id: "517D58DC-95A5-4732-B182-2188A9853CF5",
-    client_secret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
-    device_model: "",
-    device_id: "",
-    player_id: "",
+    clientId: "517D58DC-95A5-4732-B182-2188A9853CF5",
+    clientSecret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
+    deviceModel: "",
+    deviceId: "",
+    playerId: "",
+  });
+
+  const [externalLoginData, setExternalLoginData] = useState<IExternalLogin>({
+    provider: "",
+    accessToken: "",
+    email: "",
+    deviceModel: "",
+    deviceId: "",
+    playerId: "",
   });
 
   useEffect(() => {
@@ -61,15 +71,21 @@ export const Login: React.FC = () => {
     setIsLoading(true);
     const data = {
       ...loginData,
-      Device_Model,
+      deviceModel,
     };
 
     dispatch(loginUser(data));
   };
-  
+
   useEffect(() => {
-    setIsLoading(false);
-  }, [data, isLoading]);
+    if (data?.data?.length !== 0) {
+      window.localStorage.setItem("token", data?.data[0]?.data?.accessToken);
+      window.localStorage.setItem("expire", data?.data[0]?.data?.expiresIn);
+      window.localStorage.setItem("refreshToken", data?.data[0]?.data?.refreshToken);
+      window.localStorage.setItem("tokenType", data?.data[0]?.data?.tokenType);
+      setIsLoading(false);
+    }
+  }, [data]);
 
   return (
     <div className="login-slider-container">
@@ -102,6 +118,15 @@ export const Login: React.FC = () => {
             onClick={loginBtn}
           >
             Login
+            {isLoading && (
+              <Oval
+                width="20"
+                height="20"
+                color="#fff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{ display: "inline", marginLeft: "8px" }}
+              />
+            )}
           </Button>
         </Col>
         {size.width >= 768 && (
@@ -153,7 +178,7 @@ export const Login: React.FC = () => {
         </Col>
       </Row>
       <div className="bottom-line-separate-login"></div>
-      <Register deviceModel={Device_Model} />
+      <Register deviceModel={deviceModel} />
     </div>
   );
 };

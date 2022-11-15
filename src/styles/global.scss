@@ -13,7 +13,7 @@ a:hover {
 
 .btn:focus,
 .btn.focus {
-  box-shadow: none
+  box-shadow: none;
 }
 
 html,
@@ -42,14 +42,29 @@ body {
 }
 
 .custom-input {
-  @include custom-input-styles(252px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
+  @include custom-input-styles(
+    252px,
+    50px,
+    0px,
+    0 0 0 15px,
+    5px,
+    white,
+    $Inter-font,
+    $font-14,
+    1.57,
+    left,
+    rgb(152, 152, 152),
+    border,
+    solid 1px $gray8
+  );
 }
 
 .img-banner-Wrapper {
-  background-image: linear-gradient($primary, rgba(128, 128, 128, 0)), url("../assets/images/banner-img.png");
+  background-image: linear-gradient($primary, rgba(128, 128, 128, 0)),
+    url("../assets/images/banner-img.png");
   height: 600px;
   background-size: 100%;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
 }
 
 .logo-ellipse-rec {
@@ -70,14 +85,32 @@ body {
 }
 
 .logo-name {
-  @include custom-text-style($poppins-font, $font-24, $weight-bold, 1.46, left, $white);
+  @include custom-text-style(
+    $poppins-font,
+    $font-24,
+    $weight-bold,
+    1.46,
+    left,
+    $white
+  );
   margin: 0 0 0.9px 8px;
   vertical-align: top;
 }
 
 .login-header-btn {
-  @include custom-btn-style(190px, 60px, 0 0 0 266.5px, 18px 31px 15px 32px, 5px,
-    $Inter-font, $font-18, $weight-600, 1.17, left, $white );
+  @include custom-btn-style(
+    190px,
+    60px,
+    0 0 0 266.5px,
+    18px 31px 15px 32px,
+    5px,
+    $Inter-font,
+    $font-18,
+    $weight-600,
+    1.17,
+    left,
+    $white
+  );
   display: table-cell;
 }
 
@@ -87,7 +120,6 @@ body {
 }
 
 .dashboard-header-wrapper {
-  background: $primary;
   align-items: center;
   padding: 30px 0;
 }
@@ -110,8 +142,19 @@ body {
   }
 
   .nav-link {
-    @include custom-btn-style(unset, unset, 0 53px 0 0, 0, none,
-      $poppins-font, $font-18, $weight-normal, 1.5, left, $white );
+    @include custom-btn-style(
+      unset,
+      unset,
+      0 53px 0 0,
+      0,
+      none,
+      $poppins-font,
+      $font-18,
+      $weight-normal,
+      1.5,
+      left,
+      $white
+    );
   }
 
   svg {
@@ -120,33 +163,70 @@ body {
     margin-left: 5px;
     vertical-align: middle;
   }
-
 }
 
 .banner-text {
   text-align: center;
 
   .banner-title {
-    @include custom-text-style($Inter-font, $font-72, $weight-bold, 1.04, center, $white);
+    @include custom-text-style(
+      $Inter-font,
+      $font-72,
+      $weight-bold,
+      1.04,
+      center,
+      $white
+    );
     margin: 101px auto 25px auto;
     width: 791px;
   }
 
   .banner-subtitle {
-    @include custom-text-style($poppins-font, $font-24, $weight-normal, 1.67, center, $white);
+    @include custom-text-style(
+      $poppins-font,
+      $font-24,
+      $weight-normal,
+      1.67,
+      center,
+      $white
+    );
   }
 }
 
 .flight-info-wrapper {
-  @include custom-box-style(1197px, 186px, 0px auto 26.8px auto, 0, contain, 0 24px 100px 0 rgba(0, 0, 0, 0.1), transparent);
+  @include custom-box-style(
+    1197px,
+    186px,
+    0px auto 26.8px auto,
+    0,
+    contain,
+    0 24px 100px 0 rgba(0, 0, 0, 0.1),
+    transparent
+  );
 }
 
 .request-info-wrapper {
-  @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
+  @include custom-box-style(
+    1197px,
+    auto,
+    0px auto 26.8px auto,
+    0,
+    contain,
+    none,
+    transparent
+  );
 }
 
 .filter-wrapper {
-  @include custom-box-style(1197px, 128px, 0px auto 26.8px auto, 0, contain, 0 24px 100px 0 rgba(0, 0, 0, 0.1), transparent);
+  @include custom-box-style(
+    1197px,
+    128px,
+    0px auto 26.8px auto,
+    0,
+    contain,
+    0 24px 100px 0 rgba(0, 0, 0, 0.1),
+    transparent
+  );
 }
 
 .tabs-component {
@@ -187,13 +267,20 @@ body {
   border-top: 4px solid $warning;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  @include custom-text-style($Inter-font, $font-18, $weight-600, 1.17, left, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-18,
+    $weight-600,
+    1.17,
+    left,
+    $primary
+  );
 
   img {
     width: 21px;
     height: 21px;
     color: #00043d;
-    margin-right: 7px
+    margin-right: 7px;
   }
 }
 
@@ -236,14 +323,21 @@ body {
 
 .tabs-component [role="tablist"] button {
   background-color: #e8e8e8;
-  @include custom-text-style($Inter-font, $font-18, $weight-normal, 1.17, left, $gray1);
+  @include custom-text-style(
+    $Inter-font,
+    $font-18,
+    $weight-normal,
+    1.17,
+    left,
+    $gray1
+  );
 
   img {
     width: 21px;
     height: 21px;
     object-fit: contain;
     color: $gray1;
-    margin-right: 7px
+    margin-right: 7px;
   }
 }
 
@@ -253,49 +347,137 @@ body {
   border-color: #e9ecef transparent #e9ecef #b41c1c;
 }
 
-.custom-select-flight-type>div {
-  @include custom-select-styles(100px, 8px 0 0 0, 0, 5px,
-    white, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
+.custom-select-flight-type > div {
+  @include custom-select-styles(
+    100px,
+    8px 0 0 0,
+    0,
+    5px,
+    white,
+    $Inter-font,
+    $font-14,
+    $weight-bold,
+    1.21,
+    left,
+    $primary,
+    border,
+    solid 1px $gray8
+  );
 }
 
-.custom-select-from-city>div {
-  @include custom-select-styles(253px, 9px 39px 0 0, 0, 5px,
-    #f3f3f3, $Inter-font, $font-18, $weight-500 , 1.17, left, $black, border, solid 1px #f3f3f3);
+.custom-select-from-city > div {
+  @include custom-select-styles(
+    253px,
+    9px 39px 0 0,
+    0,
+    5px,
+    #f3f3f3,
+    $Inter-font,
+    $font-18,
+    $weight-500,
+    1.17,
+    left,
+    $black,
+    border,
+    solid 1px #f3f3f3
+  );
 }
 
 .flight-type-title,
 .flight-number-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-600,
+    1.21,
+    left,
+    $primary
+  );
 }
 
 .flight-from-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, left, #8f8f8f);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    left,
+    #8f8f8f
+  );
   display: block;
-  margin: 31px 0 0 0
+  margin: 31px 0 0 0;
 }
 
 .flight-date-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, left, #8f8f8f);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    left,
+    #8f8f8f
+  );
   display: block;
-  margin: 15px 0 0 0
+  margin: 15px 0 0 0;
 }
 
-
 .custom-input-login {
-  @include custom-input-styles(252px, 50px, 0, 0 0 0 15px, 5px, $white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8)
+  @include custom-input-styles(
+    252px,
+    50px,
+    0,
+    0 0 0 15px,
+    5px,
+    $white,
+    $Inter-font,
+    $font-14,
+    1.57,
+    left,
+    #989898,
+    border,
+    solid 1px $gray8
+  );
 }
 
 .custom-input-flight-type {
-  @include custom-input-styles(210px, 55px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
+  @include custom-input-styles(
+    210px,
+    55px,
+    8px 0 0 0,
+    0 0 0 15px,
+    5px,
+    #fbfbfb,
+    $Inter-font,
+    $font-14,
+    1.57,
+    left,
+    rgb(152, 152, 152),
+    border,
+    solid 1px $gray8
+  );
 }
 
 .after-custom-input-flight-type {
-  @include custom-input-styles(253px, 55px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
+  @include custom-input-styles(
+    253px,
+    55px,
+    8px 0 0 0,
+    0 0 0 15px,
+    5px,
+    #fbfbfb,
+    $Inter-font,
+    $font-14,
+    1.57,
+    left,
+    rgb(152, 152, 152),
+    border,
+    solid 1px $gray8
+  );
 }
 
 .custom-input-flight-type::placeholder,
 .after-custom-input-flight-type::placeholder {
-  color: #8f8f8f
+  color: #8f8f8f;
 }
 
 .search-box-icon {
@@ -304,15 +486,36 @@ body {
 }
 
 .search-departure-destination {
-  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, left, $gray2);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    left,
+    $gray2
+  );
 }
 
 .search-departure-date {
-  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, left, $gray2);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    left,
+    $gray2
+  );
 }
 
 .search-departure-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, left, $gray3);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-bold,
+    1.21,
+    left,
+    $gray3
+  );
   vertical-align: middle;
 
   img {
@@ -331,53 +534,169 @@ body {
 }
 
 .define-flight-btn {
-  @include custom-btn-style(213px, 77px, auto, 13px 0, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white );
+  @include custom-btn-style(
+    213px,
+    77px,
+    auto,
+    13px 0,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $white
+  );
   background-color: #a4a4a4;
   text-align-last: center;
 
   span {
     display: block;
-    @include custom-text-style($poppins-font, $font-18, $weight-500, 1.5, left, $gray4);
+    @include custom-text-style(
+      $poppins-font,
+      $font-18,
+      $weight-500,
+      1.5,
+      left,
+      $gray4
+    );
   }
 }
 
-
 .search-flight-btn {
-  @include custom-btn-style(213px, 77px, auto, 27px 26px 18px 24px, 5px, $Inter-font, $font-18, $weight-normal, 1.21, center, $white );
+  @include custom-btn-style(
+    213px,
+    77px,
+    auto,
+    27px 26px 18px 24px,
+    5px,
+    $Inter-font,
+    $font-18,
+    $weight-normal,
+    1.21,
+    center,
+    $white
+  );
 }
 
 .filter-info-wrapper {
-  @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
+  @include custom-box-style(
+    1197px,
+    auto,
+    0px auto 26.8px auto,
+    0,
+    contain,
+    none,
+    transparent
+  );
 
-  .custom-select-filter-type>div {
-    @include custom-select-styles(144px, 0 15px 0 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
+  .custom-select-filter-type > div {
+    @include custom-select-styles(
+      144px,
+      0 15px 0 0,
+      0,
+      5px,
+      $gray7,
+      $Inter-font,
+      $font-14,
+      $weight-bold,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
   }
 
-  .custom-select-filter-size>div {
-    @include custom-select-styles(140px, 0 15px 0 0, 0, 5px,
-      $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
+  .custom-select-filter-size > div {
+    @include custom-select-styles(
+      140px,
+      0 15px 0 0,
+      0,
+      5px,
+      $gray7,
+      $Inter-font,
+      $font-14,
+      $weight-bold,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
   }
 
-  .custom-select-filter-delivery>div {
-    @include custom-select-styles(166px, 0, 0, 5px, $gray7, $Inter-font, $font-14, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
+  .custom-select-filter-delivery > div {
+    @include custom-select-styles(
+      166px,
+      0,
+      0,
+      5px,
+      $gray7,
+      $Inter-font,
+      $font-14,
+      $weight-bold,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
   }
-
 }
 
 .add-travel-btn {
-  @include custom-btn-style(170px, 47px, auto, 13px 0, 5px, $Inter-font, $font-16, $weight-600, 1.25, center, $white );
+  @include custom-btn-style(
+    170px,
+    47px,
+    auto,
+    13px 0,
+    5px,
+    $Inter-font,
+    $font-16,
+    $weight-600,
+    1.25,
+    center,
+    $white
+  );
 }
 
 .add-new-travel {
-  @include custom-btn-style(118px, 35px, 0 44px, 8.8px 20px 9.2px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white );
-
+  @include custom-btn-style(
+    118px,
+    35px,
+    0 44px,
+    8.8px 20px 9.2px 20px,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $white
+  );
 }
 
 .requests-info-wrapper {
-  @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
+  @include custom-box-style(
+    1197px,
+    auto,
+    0px auto 26.8px auto,
+    0,
+    contain,
+    none,
+    transparent
+  );
 
   h2 {
-    @include custom-text-style($Inter-font, $font-17, $weight-600, 1.18, left, $gray6);
+    @include custom-text-style(
+      $Inter-font,
+      $font-17,
+      $weight-600,
+      1.18,
+      left,
+      $gray6
+    );
   }
 }
 
@@ -405,7 +724,15 @@ body {
 }
 
 .card-container {
-  @include custom-card-style(279px, 228px, 0, 11.1px 0.2px 12.1px 0.4px, 5px, solid 1px #d8d8d8, #fbfbfb)
+  @include custom-card-style(
+    279px,
+    228px,
+    0,
+    11.1px 0.2px 12.1px 0.4px,
+    5px,
+    solid 1px #d8d8d8,
+    #fbfbfb
+  );
 }
 
 .card-request-header,
@@ -447,16 +774,30 @@ body {
 
 .header-card-titles div:first-child span,
 .header-card-titles div:last-child span {
-  @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, $brown);
+  @include custom-text-style(
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    left,
+    $brown
+  );
 }
 
 .header-card-plane div:first-child span {
-  @include custom-text-style($Inter-font, $font-12, $weight-600, 1.25, left, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-12,
+    $weight-600,
+    1.25,
+    left,
+    $primary
+  );
 }
 
 .rotate-plane-wrapper {
   transform: rotate(90deg);
-  margin: 33px -35px 25px -35px
+  margin: 33px -35px 25px -35px;
 }
 
 .card-request-icon {
@@ -482,7 +823,7 @@ body {
   color: $white;
   text-align: center;
   font-weight: $weight-bold;
-  position: absolute
+  position: absolute;
 }
 
 .header-card-plane p:last-child {
@@ -495,23 +836,45 @@ body {
   text-align: right;
 }
 
-.request-body-info>div,
-.request-body-date>div,
-.receive-body-info>div {
+.request-body-info > div,
+.request-body-date > div,
+.receive-body-info > div {
   line-height: 15px;
 }
 
 .request-body-info span,
 .request-body-date span {
-  @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, $black);
+  @include custom-text-style(
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    left,
+    $black
+  );
 }
 
 .size-received-container {
   span {
-    @include custom-text-style($Inter-font, $font-12, $weight-normal, 0.9, left, $black);
+    @include custom-text-style(
+      $Inter-font,
+      $font-12,
+      $weight-normal,
+      0.9,
+      left,
+      $black
+    );
 
     .receive-expire-date {
-      @include custom-box-style(61px, 15px, 0px auto, 1px 5px 2px 6px, contain, none, none);
+      @include custom-box-style(
+        61px,
+        15px,
+        0px auto,
+        1px 5px 2px 6px,
+        contain,
+        none,
+        none
+      );
       border-radius: 3px;
       color: $white;
       font-size: $font-10;
@@ -537,7 +900,6 @@ body {
   span {
     line-height: 1.67;
   }
-
 }
 
 .request-body-package {
@@ -547,7 +909,14 @@ body {
   }
 
   span {
-    @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, right, $black);
+    @include custom-text-style(
+      $Inter-font,
+      $font-12,
+      $weight-normal,
+      1.25,
+      right,
+      $black
+    );
   }
 }
 
@@ -570,19 +939,61 @@ body {
   }
 
   span {
-    @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, right, $black);
+    @include custom-text-style(
+      $Inter-font,
+      $font-12,
+      $weight-normal,
+      1.25,
+      right,
+      $black
+    );
   }
 }
 
 .offer-btn {
-  @include custom-btn-style(43px, 43px, auto, 5px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, center, $white, border, solid 1px $primary );
+  @include custom-btn-style(
+    43px,
+    43px,
+    auto,
+    5px,
+    5px,
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    center,
+    $white,
+    border,
+    solid 1px $primary
+  );
 }
 
 .rating-btn {
-  @include custom-btn-style(55px, 55px, auto, 5px, 5px, $Inter-font, $font-10, $weight-normal, 1.8, center, $white, border, solid 1px $primary );
+  @include custom-btn-style(
+    55px,
+    55px,
+    auto,
+    5px,
+    5px,
+    $Inter-font,
+    $font-10,
+    $weight-normal,
+    1.8,
+    center,
+    $white,
+    border,
+    solid 1px $primary
+  );
 
   span {
-    @include custom-text-style($Inter-font, $font-20, $weight-normal, 1.25, center, $white);
+    @include custom-text-style(
+      $Inter-font,
+      $font-20,
+      $weight-normal,
+      1.25,
+      center,
+      $white
+    );
   }
 }
 
@@ -612,25 +1023,81 @@ body {
 
 .card-receive-footer {
   @extend .card-request-footer;
-  background: #f6f6f6
+  background: #f6f6f6;
 }
 
 .more-detail-btn {
-  @include custom-btn-style(97px, 31px, 0, 8px 10px 7px 13px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, center, $black, border, solid 1px #dedede);
+  @include custom-btn-style(
+    97px,
+    31px,
+    0,
+    8px 10px 7px 13px,
+    5px,
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    center,
+    $black,
+    border,
+    solid 1px #dedede
+  );
   margin-right: auto;
 }
 
 .receive-more-detail-btn {
-  @include custom-btn-style(165px, 35px, 0, 9px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $primary, border, solid 1px $primary);
+  @include custom-btn-style(
+    165px,
+    35px,
+    0,
+    9px 20px,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $primary,
+    border,
+    solid 1px $primary
+  );
 }
 
 .reject-btn {
-  @include custom-btn-style(165px, 35px, 0, 9px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white, border, solid 1px #ff0c0c);
-  background: $reject
+  @include custom-btn-style(
+    165px,
+    35px,
+    0,
+    9px 20px,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $white,
+    border,
+    solid 1px #ff0c0c
+  );
+  background: $reject;
 }
 
 .accept-btn {
-  @include custom-btn-style(165px, 35px, 0, 9px 20px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $white, border, solid 1px $primary);
+  @include custom-btn-style(
+    165px,
+    35px,
+    0,
+    9px 20px,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $white,
+    border,
+    solid 1px $primary
+  );
 }
 
 .edit-travel-btn {
@@ -655,12 +1122,36 @@ body {
 }
 
 .make-offer-btn {
-  @include custom-btn-style(145px, 31px, 0 0 0 10px, 8px 10px 7px 13px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, right, $white);
+  @include custom-btn-style(
+    145px,
+    31px,
+    0 0 0 10px,
+    8px 10px 7px 13px,
+    5px,
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    right,
+    $white
+  );
   margin-left: auto;
 }
 
 .send-request-btn {
-  @include custom-btn-style(145px, 31px, 0 0 0 10px, 8px 10px 7px 13px, 5px, $Inter-font, $font-12, $weight-normal, 1.25, center, $white);
+  @include custom-btn-style(
+    145px,
+    31px,
+    0 0 0 10px,
+    8px 10px 7px 13px,
+    5px,
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    center,
+    $white
+  );
   margin-left: auto;
 }
 
@@ -671,21 +1162,21 @@ body {
 
 @keyframes fade-in-keyframes {
   from {
-    opacity: 0
+    opacity: 0;
   }
 
   to {
-    opacity: 0.83
+    opacity: 0.83;
   }
 }
 
 @keyframes fade-out-keyframes {
   from {
-    opacity: 0.83
+    opacity: 0.83;
   }
 
   to {
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -704,7 +1195,15 @@ body {
   text-align: right;
 
   .request-card-wrapper {
-    @include custom-card-style(279px, 228px, 0, 0, 5px 0px 5px 5px, none, rgb(0 4 61 / 83%));
+    @include custom-card-style(
+      279px,
+      228px,
+      0,
+      0,
+      5px 0px 5px 5px,
+      none,
+      rgb(0 4 61 / 83%)
+    );
 
     .request-card-border {
       border: 1px solid #fbfbfb29;
@@ -715,7 +1214,7 @@ body {
         font-family: $Inter-font;
         text-align: left;
         font-size: 10px;
-        color: #FFFFFF;
+        color: #ffffff;
         margin-bottom: 0.2rem;
         margin-top: 0.1rem;
 
@@ -732,18 +1231,32 @@ body {
 
     .card-body {
       p {
-        @include custom-text-style($Inter-font, $font-10, $weight-normal, 1.5, left, $white);
+        @include custom-text-style(
+          $Inter-font,
+          $font-10,
+          $weight-normal,
+          1.5,
+          left,
+          $white
+        );
       }
     }
 
     .location-card-info {
-      >p {
+      > p {
         margin-bottom: 0.3rem;
         font-family: $Inter-font;
       }
 
       .location-title {
-        @include custom-text-style($Inter-font, $font-10, $weight-600, 1.2, left, $white);
+        @include custom-text-style(
+          $Inter-font,
+          $font-10,
+          $weight-600,
+          1.2,
+          left,
+          $white
+        );
         margin-bottom: 0.2rem;
       }
 
@@ -754,36 +1267,55 @@ body {
     }
 
     .location-cover-info {
-      >div {
+      > div {
         line-height: 1.2;
 
         .location-description {
           margin-bottom: 0.2rem;
-          @include custom-text-style($Inter-font, $font-10, $weight-normal, 1.2, left, $white);
+          @include custom-text-style(
+            $Inter-font,
+            $font-10,
+            $weight-normal,
+            1.2,
+            left,
+            $white
+          );
         }
 
         .location-title {
-          @include custom-text-style($Inter-font, $font-10, $weight-600, 1.2, left, $white);
+          @include custom-text-style(
+            $Inter-font,
+            $font-10,
+            $weight-600,
+            1.2,
+            left,
+            $white
+          );
           margin-bottom: 0.2rem;
         }
 
         .travelId-title {
           @extend .location-title;
-          display: inline-block
+          display: inline-block;
         }
 
         .travelId-text {
-          @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, right, $white);
+          @include custom-text-style(
+            $Inter-font,
+            $font-12,
+            $weight-normal,
+            1.25,
+            right,
+            $white
+          );
         }
       }
-
     }
   }
 
-
   .travelers-card-wrapper {
     @extend .request-card-wrapper;
-    height: 204px
+    height: 204px;
   }
 
   .offers-card-info-wrapper {
@@ -819,13 +1351,13 @@ body {
 .traveler-card-cover-body {
   height: 174px;
   width: 279px;
-  padding: 0px 9px 5px 15px
+  padding: 0px 9px 5px 15px;
 }
 
 .offer-card-cover-body {
   height: 212px;
   width: 590px;
-  padding: 0px 9px 5px 15px
+  padding: 0px 9px 5px 15px;
 }
 
 .image-card-wrapper {
@@ -854,7 +1386,6 @@ body {
   }
 }
 
-
 .close-card-btn {
   padding: 0px 7px;
   color: $white;
@@ -873,7 +1404,14 @@ body {
 
   .dropdown-item {
     display: block;
-    @include custom-text-style($Inter-font, $font-9, $weight-normal, 1.6, left, $black);
+    @include custom-text-style(
+      $Inter-font,
+      $font-9,
+      $weight-normal,
+      1.6,
+      left,
+      $black
+    );
   }
 
   .dropdown-menu {
@@ -885,7 +1423,7 @@ body {
     z-index: 1;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 100%;
       left: 0;
@@ -898,13 +1436,31 @@ body {
       border-right: solid 7px transparent;
     }
   }
-
 }
 
 .traveler-dropdown {
   .dropdown-menu {
     margin-left: -54% !important;
     margin-top: 11px !important;
+  }
+}
+
+.header-profile-dropdown {
+  .dropdown-menu {
+    margin-left: -27px !important;
+    margin-top: 8px !important;
+    border-radius: 3px;
+    padding: 12px 40px 12px 15px;
+  }
+
+  .dropdown-item {
+    font-size: $font-14;
+    color: $primary
+  }
+
+  svg {
+    color: #acacac;
+    margin-right: 7px;
   }
 }
 
@@ -918,12 +1474,26 @@ body {
 
 .links-footer-wrapper {
   h3 {
-    @include custom-text-style($sansPro-font, $font-18, $weight-500, 1.33, left, $black);
+    @include custom-text-style(
+      $sansPro-font,
+      $font-18,
+      $weight-500,
+      1.33,
+      left,
+      $black
+    );
   }
 
   li {
     display: block;
-    @include custom-text-style($sansPro-font, $font-14, $weight-normal, 2.57, left, #505050);
+    @include custom-text-style(
+      $sansPro-font,
+      $font-14,
+      $weight-normal,
+      2.57,
+      left,
+      #505050
+    );
     opacity: 0.7;
 
     .bullet-icon {
@@ -946,10 +1516,16 @@ body {
   }
 }
 
-
 .main-footer-copyright {
   span {
-    @include custom-text-style($sansPro-font, $font-14, $weight-normal, 2.57, right, $black);
+    @include custom-text-style(
+      $sansPro-font,
+      $font-14,
+      $weight-normal,
+      2.57,
+      right,
+      $black
+    );
     opacity: 0.8;
   }
 }
@@ -993,18 +1569,17 @@ body {
 
 @keyframes slide {
   from {
-    left: 0
+    left: 0;
   }
 
   to {
-    right: 100px
+    right: 100px;
   }
 }
 
 .slide-animation {
   animation: slide 1.5s;
 }
-
 
 .bottom-line-separate-login {
   width: 595px;
@@ -1017,15 +1592,22 @@ body {
 .offer-wrapper,
 .request-wrapper {
   padding: 80px 18px 50px;
-  margin: auto
+  margin: auto;
 }
 
 .register-wrapper {
   padding: 45px 25px 50px;
 
   h1 {
-    @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $gray6);
-    margin-bottom: 30px
+    @include custom-text-style(
+      $Inter-font,
+      $font-24,
+      $weight-600,
+      1.21,
+      left,
+      $gray6
+    );
+    margin-bottom: 30px;
   }
 }
 
@@ -1033,15 +1615,29 @@ body {
 .offer-form,
 .request-form {
   h1 {
-    @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $gray6);
-    margin-bottom: 30px
+    @include custom-text-style(
+      $Inter-font,
+      $font-24,
+      $weight-600,
+      1.21,
+      left,
+      $gray6
+    );
+    margin-bottom: 30px;
   }
 }
 
 .login-via-form {
   h1 {
-    @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $gray6);
-    margin-bottom: 30px
+    @include custom-text-style(
+      $Inter-font,
+      $font-24,
+      $weight-600,
+      1.21,
+      left,
+      $gray6
+    );
+    margin-bottom: 30px;
   }
 
   span {
@@ -1049,7 +1645,14 @@ body {
   }
 
   .forget-password-text {
-    @include custom-text-style($Inter-font, $font-14, $weight-normal, 4.5, left, #353a67);
+    @include custom-text-style(
+      $Inter-font,
+      $font-14,
+      $weight-normal,
+      4.5,
+      left,
+      #353a67
+    );
   }
 }
 
@@ -1073,31 +1676,82 @@ body {
       position: absolute;
       top: 55%;
       left: 35%;
-      @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, center, $primary);
+      @include custom-text-style(
+        $Inter-font,
+        $font-14,
+        $weight-normal,
+        1.21,
+        center,
+        $primary
+      );
     }
   }
 }
 
 .facebook-btn {
-  @include custom-btn-style(240px, 50px, auto, 14.1px 88px 15.9px 76px, 7px, $Inter-font, $font-16, $weight-600, 1.25, center, $white );
-  background-color: $primary
+  @include custom-btn-style(
+    240px,
+    50px,
+    auto,
+    14.1px 88px 15.9px 76px,
+    7px,
+    $Inter-font,
+    $font-16,
+    $weight-600,
+    1.25,
+    center,
+    $white
+  );
+  background-color: $primary;
 }
 
 .google-btn {
-  @include custom-btn-style(240px, 50px, auto, 14.1px 96.2px 15.9px 87.8px, 7px, $Inter-font, $font-16, $weight-600, 1.25, center, $white );
+  @include custom-btn-style(
+    240px,
+    50px,
+    auto,
+    14.1px 96.2px 15.9px 87.8px,
+    7px,
+    $Inter-font,
+    $font-16,
+    $weight-600,
+    1.25,
+    center,
+    $white
+  );
 }
 
 .login-btn {
-  @include custom-btn-style(252px, 50px, auto, 14.1px 105.9px 15.9px 104.1px, 7px, $Inter-font, $font-16, $weight-600, 1.25, center, $white );
+  @include custom-btn-style(
+    252px,
+    50px,
+    auto,
+    14.1px 30px 15.9px 30px,
+    7px,
+    $Inter-font,
+    $font-16,
+    $weight-600,
+    1.25,
+    center,
+    $white
+  );
 }
 
 .user-default-box {
-  @include custom-box-style(94px, 93px, 0 0 18px 1px, 16px, unset, none, #efefef);
+  @include custom-box-style(
+    94px,
+    93px,
+    0 0 18px 1px,
+    16px,
+    unset,
+    none,
+    #efefef
+  );
   border-radius: 5px;
 
   img {
     width: 65px;
-    height: 65px
+    height: 65px;
   }
 }
 
@@ -1113,10 +1767,24 @@ body {
 }
 
 .custom-textarea-register {
-  @include custom-input-styles(491px, 93px, 0 0 18px 15px, 40px 30px 25px 21px, 5px, white, $Inter-font, $font-14, 1.21, left, $black, border, solid 1px $gray8);
+  @include custom-input-styles(
+    491px,
+    93px,
+    0 0 18px 15px,
+    40px 30px 25px 21px,
+    5px,
+    white,
+    $Inter-font,
+    $font-14,
+    1.21,
+    left,
+    $black,
+    border,
+    solid 1px $gray8
+  );
 
   &::placeholder {
-    color: #989898
+    color: #989898;
   }
 }
 
@@ -1130,7 +1798,7 @@ body {
 }
 
 .bm-overlay {
-  top: 0
+  top: 0;
 }
 
 .login-slider-container,
@@ -1145,34 +1813,54 @@ body {
 }
 
 .not-have-ticket-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, left, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    left,
+    $primary
+  );
   object-fit: contain;
   border-left: 1px solid #00043d;
   margin-left: 7px;
   padding-left: 7px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .modal-body {
-  padding: 0
+  padding: 0;
 }
 
 .info-modal-wrapper .modal-dialog .modal-content {
-  @include custom-box-style(623px, 397px, 0 110px 59.8px 15px, 37px 34px, contain, none, $white);
+  @include custom-box-style(
+    623px,
+    397px,
+    0 110px 59.8px 15px,
+    37px 34px,
+    contain,
+    none,
+    $white
+  );
   border-radius: 16px;
   border: solid 1px #707070;
 }
 
 .enter-travel-information {
-  @include custom-text-style($Inter-font, $font-18, $weight-600, 1.17, left, $black);
+  @include custom-text-style(
+    $Inter-font,
+    $font-18,
+    $weight-600,
+    1.17,
+    left,
+    $black
+  );
 }
-
 
 .custom-select-from-city #react-select-11-listbox,
 .custom-select-from-city .css-2613qy-menu {
   margin: 0 !important;
 }
-
 
 .info-modal-wrapper .DatePicker {
   z-index: 0 !important;
@@ -1183,7 +1871,21 @@ body {
   width: 253px;
 
   .custom-datepicker {
-    @include custom-input-styles(253px, 55px, 9px 0 0 0, 0 0 0 15px, 5px, #f3f3f3, $Inter-font, $font-18, 1.21, left, $black, border, solid 1px #f3f3f3);
+    @include custom-input-styles(
+      253px,
+      55px,
+      9px 0 0 0,
+      0 0 0 15px,
+      5px,
+      #f3f3f3,
+      $Inter-font,
+      $font-18,
+      1.21,
+      left,
+      $black,
+      border,
+      solid 1px #f3f3f3
+    );
     z-index: 0;
     display: inline-block;
   }
@@ -1202,7 +1904,19 @@ body {
 }
 
 .confirm-info-btn {
-  @include custom-btn-style(547px, 55px, 37px auto, 0, 5px, $Inter-font, $font-18, $weight-500, 3, left, $white );
+  @include custom-btn-style(
+    547px,
+    55px,
+    37px auto,
+    0,
+    5px,
+    $Inter-font,
+    $font-18,
+    $weight-500,
+    3,
+    left,
+    $white
+  );
   text-align-last: center;
 }
 
@@ -1211,47 +1925,103 @@ body {
 }
 
 .short-label {
-  @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, #6a6a6a);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-600,
+    1.21,
+    left,
+    #6a6a6a
+  );
   left: 36px;
   top: 15px;
   position: absolute;
 }
 
 .half-custom-input-register {
-  @include custom-input-styles(263px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8);
+  @include custom-input-styles(
+    263px,
+    50px,
+    0px,
+    0 0 0 15px,
+    5px,
+    white,
+    $Inter-font,
+    $font-14,
+    1.57,
+    left,
+    #989898,
+    border,
+    solid 1px $gray8
+  );
   font-weight: $weight-600;
 
   &::placeholder {
     color: #989898;
-    font-weight: $weight-normal
+    font-weight: $weight-normal;
   }
 }
 
 .full-custom-input-register {
-  @include custom-input-styles(600px, 50px, 0px, 0 0 0 15px, 5px, white, $Inter-font, $font-14, 1.57, left, #989898, border, solid 1px $gray8);
+  @include custom-input-styles(
+    600px,
+    50px,
+    0px,
+    0 0 0 15px,
+    5px,
+    white,
+    $Inter-font,
+    $font-14,
+    1.57,
+    left,
+    #989898,
+    border,
+    solid 1px $gray8
+  );
   font-weight: $weight-600;
 
   &::placeholder {
     color: #989898;
-    font-weight: $weight-normal
+    font-weight: $weight-normal;
   }
 }
 
 .upload-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, center, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-bold,
+    1.21,
+    center,
+    $primary
+  );
   display: inline-block;
   margin: 22px 0 18px 0;
 }
 
 .thumb-title {
-  @include custom-text-style($Inter-font, $font-14, $weight-500, 1.21, center, #a7a7a7);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-500,
+    1.21,
+    center,
+    #a7a7a7
+  );
   width: 111px;
   height: 56px;
-  margin: auto
+  margin: auto;
 }
 
 .checkbox-container {
-  @include custom-text-style($Inter-font, $font-14, $weight-bold, 2.21, left, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-bold,
+    2.21,
+    left,
+    $primary
+  );
   display: block;
   position: relative;
   cursor: pointer;
@@ -1284,11 +2054,11 @@ body {
   background-color: #eee;
 }
 
-.checkbox-container:hover input~.checkmark {
+.checkbox-container:hover input ~ .checkmark {
   background-color: #eee;
 }
 
-.checkbox-container input:checked~.checkmark {
+.checkbox-container input:checked ~ .checkmark {
   background-color: #eee;
 }
 
@@ -1298,7 +2068,7 @@ body {
   display: none;
 }
 
-.checkbox-container input:checked~.checkmark:after {
+.checkbox-container input:checked ~ .checkmark:after {
   display: block;
 }
 
@@ -1315,8 +2085,19 @@ body {
 }
 
 .submit-request-btn {
-  @include custom-btn-style(197px, 55px, 24px 3.5px 0 393px, 18px 35px 17px, 5px,
-    $Inter-font, $font-16, $weight-600, 1.25, left, $white );
+  @include custom-btn-style(
+    197px,
+    55px,
+    24px 3.5px 0 393px,
+    18px 0,
+    5px,
+    $Inter-font,
+    $font-16,
+    $weight-600,
+    1.25,
+    center,
+    $white
+  );
 }
 
 .offer-sidebar {
@@ -1327,22 +2108,42 @@ body {
 
 .pickup-input-wrapper {
   span {
-    @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, left, $primary);
+    @include custom-text-style(
+      $Inter-font,
+      $font-14,
+      $weight-bold,
+      1.21,
+      left,
+      $primary
+    );
   }
 
   .custom-input-pickup {
-    @include custom-input-styles(111px, 50px, 0 15px 12px 13px, 16px 0 17px 20px, 5px, $white, $Inter-font,
-      $font-14, 1.21, left, $primary, border, solid 1px $gray8);
+    @include custom-input-styles(
+      111px,
+      50px,
+      0 15px 12px 13px,
+      16px 0 17px 20px,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
 
     &::placeholder {
-      color: $primary
+      color: $primary;
     }
   }
 
   .custom-input-from {
     @extend .custom-input-pickup;
     width: 310px;
-    margin: 0 1px 12px 16px
+    margin: 0 1px 12px 16px;
   }
 
   .custom-input-on-from {
@@ -1398,17 +2199,37 @@ body {
 
 .send-input-wrapper {
   .send-pack-title {
-    @include custom-text-style($Inter-font, $font-14, $weight-bold, 1.21, left, $primary);
+    @include custom-text-style(
+      $Inter-font,
+      $font-14,
+      $weight-bold,
+      1.21,
+      left,
+      $primary
+    );
     margin: 13px 0 36px 0;
     width: 121px;
   }
 
   .custom-input-send {
-    @include custom-input-styles(165px, 50px, 0 18px 16px, 16px 16px 17px 15px, 5px, $white, $Inter-font,
-      $font-14, 1.21, left, $primary, border, solid 1px $gray8);
+    @include custom-input-styles(
+      165px,
+      50px,
+      0 18px 16px,
+      16px 16px 17px 15px,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
 
     &::placeholder {
-      color: $primary
+      color: $primary;
     }
   }
 
@@ -1519,7 +2340,6 @@ body {
     margin: 29px 6px 32px 0;
   }
 
-
   .custom-input-between {
     @extend .custom-input-send;
     width: 215px;
@@ -1545,7 +2365,6 @@ body {
     width: 16px;
     margin: 30px 9px 29px 11px;
   }
-
 
   .custom-input-and-offer {
     @extend .custom-input-send;
@@ -1579,12 +2398,26 @@ body {
 
 .search-departure-info,
 .search-arrival-info {
-  @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.5, left, #bdbdbd);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.5,
+    left,
+    #bdbdbd
+  );
 }
 
 .search-departure-more-title,
 .search-arrival-more-title {
-  @include custom-text-style($poppins-font, $font-17, $weight-bold, 1.85, left, $gray6);
+  @include custom-text-style(
+    $poppins-font,
+    $font-17,
+    $weight-bold,
+    1.85,
+    left,
+    $gray6
+  );
 
   img {
     width: 13px;
@@ -1596,7 +2429,14 @@ body {
 
 .search-departure-more,
 .search-arrival-more {
-  @include custom-text-style($poppins-font, $font-14, $weight-normal, 1.5, left, #8f8f8f);
+  @include custom-text-style(
+    $poppins-font,
+    $font-14,
+    $weight-normal,
+    1.5,
+    left,
+    #8f8f8f
+  );
 }
 
 .search-departure-more {
@@ -1610,16 +2450,47 @@ body {
 }
 
 .change-flight-text {
-  @include custom-text-style($poppins-font, $font-14, $weight-normal, 1.5, left, $primary);
+  @include custom-text-style(
+    $poppins-font,
+    $font-14,
+    $weight-normal,
+    1.5,
+    left,
+    $primary
+  );
   margin-top: 5px;
 }
 
 .search-btn {
-  @include custom-btn-style(120px, 77px, 0, 0, 5px, $poppins-font, $font-18, $weight-500, 1.5, center, $white );
+  @include custom-btn-style(
+    120px,
+    77px,
+    0,
+    0,
+    5px,
+    $poppins-font,
+    $font-18,
+    $weight-500,
+    1.5,
+    center,
+    $white
+  );
 }
 
 .before-filter-btn {
-  @include custom-btn-style(46px, 47px, 0, 15px 17px 18px 16px, 5px, unset, unset, unset, 1.22, left, unset);
+  @include custom-btn-style(
+    46px,
+    47px,
+    0,
+    15px 17px 18px 16px,
+    5px,
+    unset,
+    unset,
+    unset,
+    1.22,
+    left,
+    unset
+  );
   border: solid 1px #d6d6d6;
   margin-right: 15px;
 
@@ -1692,28 +2563,78 @@ body {
 }
 
 .title-dashboard {
-  @include custom-box-style(1920px, 126px, 0, 44px 0 43px 360px, contain, none, #f5f5f5);
+  @include custom-box-style(
+    1920px,
+    126px,
+    0,
+    44px 0 43px 360px,
+    contain,
+    none,
+    #f5f5f5
+  );
 
   h2 {
-    @include custom-text-style($Inter-font, $font-32, $weight-500, 1.22, left, $gray6);
+    @include custom-text-style(
+      $Inter-font,
+      $font-32,
+      $weight-500,
+      1.22,
+      left,
+      $gray6
+    );
   }
 }
 
-
 .requests-info-wrapper {
-  @include custom-box-style(1197px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
+  @include custom-box-style(
+    1197px,
+    auto,
+    0px auto 26.8px auto,
+    0,
+    contain,
+    none,
+    transparent
+  );
 
   h2 {
-    @include custom-text-style($Inter-font, $font-17, $weight-600, 1.18, left, $gray6);
+    @include custom-text-style(
+      $Inter-font,
+      $font-17,
+      $weight-600,
+      1.18,
+      left,
+      $gray6
+    );
   }
 }
 
 .received-card-label {
-  @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, $primary);
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-600,
+    1.21,
+    left,
+    $primary
+  );
 }
 
 .offer-status-btn {
-  @include custom-btn-style(93.2px, 110px, 0 4px 0 auto, 0, 5px, $Inter-font, $font-18, $weight-normal, 1.8, center, $white, border, none);
+  @include custom-btn-style(
+    93.2px,
+    110px,
+    0 4px 0 auto,
+    0,
+    5px,
+    $Inter-font,
+    $font-18,
+    $weight-normal,
+    1.8,
+    center,
+    $white,
+    border,
+    none
+  );
   display: block;
 
   .offer-box-btn {
@@ -1725,7 +2646,14 @@ body {
     padding: 17px;
 
     span {
-      @include custom-text-style($Inter-font, $font-20, $weight-normal, 1.25, center, $white);
+      @include custom-text-style(
+        $Inter-font,
+        $font-20,
+        $weight-normal,
+        1.25,
+        center,
+        $white
+      );
     }
   }
 
@@ -1735,7 +2663,14 @@ body {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 10px;
-    @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, center, $white);
+    @include custom-text-style(
+      $Inter-font,
+      $font-14,
+      $weight-normal,
+      1.21,
+      center,
+      $white
+    );
   }
 
   .success-box-btn {
@@ -1752,17 +2687,46 @@ body {
 }
 
 .report-problem-btn {
-  @include custom-btn-style(93px, 60px, 12px 4px 0 auto, 13px 15px, 5px, $Inter-font, $font-14, $weight-normal, 1.21, center, $gray6, border, 2px solid $primary);
+  @include custom-btn-style(
+    93px,
+    60px,
+    12px 4px 0 auto,
+    13px 15px,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $gray6,
+    border,
+    2px solid $primary
+  );
   display: block;
   background: $white;
 }
 
 .delivered-box-info {
-  @include custom-box-style(162px, 193px, -12px 0 0 0, 21.2px 0px 18px 18px, contain, none, $primary);
+  @include custom-box-style(
+    162px,
+    193px,
+    -12px 0 0 0,
+    21.2px 0px 18px 18px,
+    contain,
+    none,
+    $primary
+  );
   border-radius: 5px;
 
   p {
-    @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, $white);
+    @include custom-text-style(
+      $Inter-font,
+      $font-12,
+      $weight-normal,
+      1.25,
+      left,
+      $white
+    );
   }
 }
 
@@ -1781,7 +2745,7 @@ body {
 .offer-deliver-bullet {
   width: 13px;
   height: 13px;
-  margin: 4px 12px -3px -22PX;
+  margin: 4px 12px -3px -22px;
   background-color: #fff;
   display: inline-block;
   border-radius: 50%;
@@ -1805,13 +2769,19 @@ body {
       top: 112px;
     }
   }
-
 }
 
 .offer-deliver-status {
-  @include custom-text-style($Inter-font, $font-12 !important, $weight-600 !important, 1.92 !important, left, $white);
+  @include custom-text-style(
+    $Inter-font,
+    $font-12 !important,
+    $weight-600 !important,
+    1.92 !important,
+    left,
+    $white
+  );
   margin-left: 5px;
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .offer-deliver-status-desc {
@@ -1820,21 +2790,50 @@ body {
 }
 
 .note-offer-detail {
-  @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.5, left, $white);
-  margin-top: 35px
+  @include custom-text-style(
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.5,
+    left,
+    $white
+  );
+  margin-top: 35px;
 }
 
 .account-title {
-  @include custom-text-style($Inter-font, $font-24, $weight-600, 1.21, left, $primary);
-  margin: 35px 0 50px 0
+  @include custom-text-style(
+    $Inter-font,
+    $font-24,
+    $weight-600,
+    1.21,
+    left,
+    $primary
+  );
+  margin: 35px 0 50px 0;
 }
 
 .balance-wrapper {
-  @include custom-box-style(575px, 93px, 0, 23px 35px 20px 41px, contain, none, #f6f6f6);
+  @include custom-box-style(
+    575px,
+    93px,
+    0,
+    23px 35px 20px 41px,
+    contain,
+    none,
+    #f6f6f6
+  );
   border-radius: 10px;
 
   h1 {
-    @include custom-text-style($Inter-font, $font-22, $weight-600, 1.18, left, $primary);
+    @include custom-text-style(
+      $Inter-font,
+      $font-22,
+      $weight-600,
+      1.18,
+      left,
+      $primary
+    );
     display: inline-block;
 
     span {
@@ -1843,47 +2842,96 @@ body {
   }
 
   .withdraw-btn {
-    @include custom-btn-style(128px, 50px, 0 0 0 180px, 16px 31px 17px, 5px, $Inter-font, $font-14, $weight-600, 1.21, center, $white);
+    @include custom-btn-style(
+      128px,
+      50px,
+      0 0 0 180px,
+      16px 31px 17px,
+      5px,
+      $Inter-font,
+      $font-14,
+      $weight-600,
+      1.21,
+      center,
+      $white
+    );
   }
 }
 
 .payment-wrapper {
-  @include custom-box-style(575px, 595px, 17px 0 17px 0, 28px 33px 25px 25px, contain, none, #f6f6f6);
+  @include custom-box-style(
+    575px,
+    595px,
+    17px 0 17px 0,
+    28px 33px 25px 25px,
+    contain,
+    none,
+    #f6f6f6
+  );
   border-radius: 10px;
 
   h2 {
-    @include custom-text-style($Inter-font, $font-20, $weight-600, 1.2, left, $primary);
+    @include custom-text-style(
+      $Inter-font,
+      $font-20,
+      $weight-600,
+      1.2,
+      left,
+      $primary
+    );
   }
 
   .payment-card-info {
-    @include custom-box-style(517px, 205px, 0, 31px 30px 38px 31px, contain, none, $white);
+    @include custom-box-style(
+      517px,
+      205px,
+      0,
+      31px 30px 38px 31px,
+      contain,
+      none,
+      $white
+    );
     border-radius: 5px;
     border: solid 1px #dcdcdc;
   }
 }
 
 .visa-card-img {
-  width: 70px
+  width: 70px;
 }
 
 .paypal-card-img {
-  width: 100px
+  width: 100px;
 }
 
 .visa-card-number {
-  @include custom-text-style($Karla-font, $font-20, $weight-normal, 1.35, left, #a7adb4);
+  @include custom-text-style(
+    $Karla-font,
+    $font-20,
+    $weight-normal,
+    1.35,
+    left,
+    #a7adb4
+  );
   display: block;
   margin-top: 40px;
 }
 
 .paypal-card-account {
   @extend .visa-card-number;
-  font-size: $font-16
+  font-size: $font-16;
 }
 
 .visa-card-expiration,
 .paypal-card-added {
-  @include custom-text-style($Karla-font, $font-12, $weight-normal, 1.33, left, #c8cfd6);
+  @include custom-text-style(
+    $Karla-font,
+    $font-12,
+    $weight-normal,
+    1.33,
+    left,
+    #c8cfd6
+  );
   display: block;
   letter-spacing: 0.12px;
   margin-top: 25px;
@@ -1894,26 +2942,61 @@ body {
   height: 26px;
 }
 
-input[type='radio']:after {
+input[type="radio"]:after {
   border: solid 1px #c3cfe2;
   // background-color: #fff;
 }
 
 .add-new-card-btn {
-  @include custom-btn-style(517px, 50px, 15px 0 0 0, 28px 33px 25px 25px, 10px, $Inter-font, $font-16, $weight-bold, 0, center, $white);
+  @include custom-btn-style(
+    517px,
+    50px,
+    15px 0 0 0,
+    28px 33px 25px 25px,
+    10px,
+    $Inter-font,
+    $font-16,
+    $weight-bold,
+    0,
+    center,
+    $white
+  );
 }
 
 .transaction-wrapper {
-  @include custom-box-style(575px, 578px, 17px 0 17px 0, 28px 33px 25px 25px, contain, none, #f6f6f6);
+  @include custom-box-style(
+    575px,
+    578px,
+    17px 0 17px 0,
+    28px 33px 25px 25px,
+    contain,
+    none,
+    #f6f6f6
+  );
   border-radius: 10px;
 
   h2 {
-    @include custom-text-style($Inter-font, $font-20, $weight-600, 1.2, left, $primary);
+    @include custom-text-style(
+      $Inter-font,
+      $font-20,
+      $weight-600,
+      1.2,
+      left,
+      $primary
+    );
   }
 }
 
 .transaction-box {
-  @include custom-box-style(516px, 66px, 0 0 16px, 12px 26px 14px 14px, contain, none, $white);
+  @include custom-box-style(
+    516px,
+    66px,
+    0 0 16px,
+    12px 26px 14px 14px,
+    contain,
+    none,
+    $white
+  );
   border-radius: 4px;
   // -webkit-filter: blur(10px);
   // filter: blur(10px);
@@ -1921,7 +3004,15 @@ input[type='radio']:after {
 }
 
 .icon-transaction-wrapper {
-  @include custom-box-style(38px, 38px, 2px 0 0 0, 9px 10px, contain, none, #f3f3f4);
+  @include custom-box-style(
+    38px,
+    38px,
+    2px 0 0 0,
+    9px 10px,
+    contain,
+    none,
+    #f3f3f4
+  );
   border-radius: 4px;
 
   img {
@@ -1936,25 +3027,60 @@ input[type='radio']:after {
   text-align: right;
 
   span {
-    @include custom-text-style($Karla-font, $font-20, $weight-500, 1.29, right, #ff2626);
+    @include custom-text-style(
+      $Karla-font,
+      $font-20,
+      $weight-500,
+      1.29,
+      right,
+      #ff2626
+    );
     letter-spacing: 0.94px;
   }
 }
 
 .transaction-name {
-  @include custom-text-style($Karla-font, $font-17, $weight-500, 1.36, left, #27282a);
+  @include custom-text-style(
+    $Karla-font,
+    $font-17,
+    $weight-500,
+    1.36,
+    left,
+    #27282a
+  );
   letter-spacing: 1px;
 }
 
 .transaction-date {
-  @include custom-text-style($Inter-font, $font-12, $weight-normal, 1.25, left, #8a8c93);
+  @include custom-text-style(
+    $Inter-font,
+    $font-12,
+    $weight-normal,
+    1.25,
+    left,
+    #8a8c93
+  );
 }
 
 .load-more-btn {
-  @include custom-btn-style(516px, 50px, 23px 0 0 0, 0, 10px, $Inter-font, $font-16, $weight-bold, 1.25, center, #1e2254, border, 1px solid #1e2254);
+  @include custom-btn-style(
+    516px,
+    50px,
+    23px 0 0 0,
+    0,
+    10px,
+    $Inter-font,
+    $font-16,
+    $weight-bold,
+    1.25,
+    center,
+    #1e2254,
+    border,
+    1px solid #1e2254
+  );
   background: transparent;
 }
 
-.Toastify__toast-body > div:last-child{
+.Toastify__toast-body > div:last-child {
   font-size: $font-12;
 }
