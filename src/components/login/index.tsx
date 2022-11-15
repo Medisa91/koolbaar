@@ -51,6 +51,14 @@ export const Login: React.FC = () => {
 
   const onSuccess = (res) => {
     console.log("[Login Success] currentUser:", res.profileObj);
+    setExternalLoginData({
+      provider: "google",
+      accessToken: "",
+      email: "",
+      deviceModel: "",
+      deviceId: "",
+      playerId: "",
+    });
   };
 
   const onFailure = (res) => {
@@ -81,7 +89,10 @@ export const Login: React.FC = () => {
     if (data?.data?.length !== 0) {
       window.localStorage.setItem("token", data?.data[0]?.data?.accessToken);
       window.localStorage.setItem("expire", data?.data[0]?.data?.expiresIn);
-      window.localStorage.setItem("refreshToken", data?.data[0]?.data?.refreshToken);
+      window.localStorage.setItem(
+        "refreshToken",
+        data?.data[0]?.data?.refreshToken
+      );
       window.localStorage.setItem("tokenType", data?.data[0]?.data?.tokenType);
       setIsLoading(false);
     }

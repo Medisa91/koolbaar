@@ -1,10 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const http = axios.create({
+export const authorizedHttp = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json; charset=utf-8",
     Authorization: `${window.localStorage.getItem(
       "tokenType"
     )} ${window.localStorage.getItem("token")}`,
@@ -21,7 +21,7 @@ export const registerHttp = axios.create({
   },
 });
 
-export const loginHttp = axios.create({
+export const http = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 });
 

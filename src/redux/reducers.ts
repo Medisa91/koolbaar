@@ -6,6 +6,7 @@ import {
   login,
   logout,
   checkToken,
+  weightRange,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,8 @@ const rootReducer = combineReducers({
   packageTypes,
   login,
   logout,
+  checkToken,
+  weightRange,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

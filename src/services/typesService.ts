@@ -4,6 +4,10 @@ class TypesService {
   getAllPackagesType = () => {
     return http.get("Packagetype");
   };
+  
+  getAllWeightRange = () => {
+    return http.get("Weightrange");
+  };
 }
 
 export default new TypesService();

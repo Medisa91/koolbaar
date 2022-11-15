@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { typeOptions, sizeOptions, deliveryTypeOptions } from "models/options";
+import { deliveryTypeOptions } from "models/options";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
@@ -11,8 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "redux/store";
 // import { allPackagesType } from "redux/slices/types";
-import { showTypes } from "redux/slices/types";
-import { getAllPackagesType } from "redux/actions/types";
+import { getAllPackagesType } from "redux/actions/types/packagesType";
+import { getAllWeightRange } from "redux/actions/types/weightRange";
 
 interface IProp {
   onSelectTypeFilter: (key: any) => void;
@@ -30,10 +30,13 @@ export const Filters: React.FC<IProp> = ({
   const dispatch = useAppDispatch();
   const screenSize = UseWindowSize();
 
+  const [typeOptions, setTypeOptions] = useState([]);
+  const [weightOptions, setWeightOptions] = useState([]);
   const [type, setType] = useState({ value: 0, label: "All" });
   const [size, setSize] = useState({ value: 1, label: "All" });
   const [deliveryType, setDeliveryType] = useState({ value: 1, label: "All" });
-  const types = useAppSelector(showTypes);
+  const packagesType = useAppSelector((state) => state.packageTypes);
+  const weightRanges = useAppSelector((state) => state.weightRange);
 
   const customStyle = {
     control: (styles) => ({
@@ -53,11 +56,28 @@ export const Filters: React.FC<IProp> = ({
 
   useEffect(() => {
     dispatch(getAllPackagesType());
+    dispatch(getAllWeightRange());
   }, []);
 
   useEffect(() => {
-    console.log(types);
-  }, [types]);
+    const options = packagesType?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setTypeOptions(options);
+  }, [packagesType]);
+
+  useEffect(() => {
+    const options = weightRanges?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setWeightOptions(options);
+  }, [weightRanges]);
 
   const handleTypeChange = (selected) => {
     setType(selected);
@@ -75,7 +95,7 @@ export const Filters: React.FC<IProp> = ({
   };
 
   return (
-    <>      
+    <>
       {screenSize.width >= 768 && (
         <div className="filter-info-wrapper">
           <Row>
@@ -103,7 +123,7 @@ export const Filters: React.FC<IProp> = ({
                 className="custom-select-filter-size d-inline-block"
                 value={size}
                 onChange={handleSizeChange}
-                options={sizeOptions}
+                options={weightOptions}
                 components={{
                   IndicatorSeparator: () => null,
                 }}
