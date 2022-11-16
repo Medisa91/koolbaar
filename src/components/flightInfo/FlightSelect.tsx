@@ -1,11 +1,15 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
-import { Input } from "components";
 import Select from "react-select";
+import { DebounceInput } from "react-debounce-input";
+import { Oval } from "react-loader-spinner";
+import { Input } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
-import { Link } from "react-router-dom";
 import { DepartureOptions, ArrivalOptions } from "models/interfaces";
+import { useAppDispatch, useAppSelector } from "redux/store";
+import { getFlightInquiry } from "redux/actions/flight";
 
 interface IProps {
   isAfterSearch: boolean;
@@ -19,11 +23,15 @@ export const FlightSelect: FC<IProps> = ({
   travelArrivalInfoData,
 }) => {
   const size = UseWindowSize();
+  const dispatch = useAppDispatch();
+  const flightInquiryData = useAppSelector((state) => state.flightInquiry);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState({
     value: 1,
     label: "Direct",
   });
+  const [flightNumber, setFlightNumber] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [fromData, setFromData] = useState<DepartureOptions>({
     from: "",
@@ -44,6 +52,18 @@ export const FlightSelect: FC<IProps> = ({
       color: "#00043d",
     }),
   };
+
+  const changeFlightNumber = (e) => {
+    setFlightNumber(e.target.value);
+    dispatch(getFlightInquiry({ flightNumber }));
+  };
+
+  useEffect(() => {
+    if (flightInquiryData) {
+      setIsLoading(false);
+      console.log(flightInquiryData);
+    }
+  }, [flightInquiryData]);
 
   const handleChange = (selected) => {
     setSelectedOption(selected);
@@ -91,9 +111,25 @@ export const FlightSelect: FC<IProps> = ({
               I don't have ticket
             </Link>
           )}
-          <Input
+          {/* <Input
             size="sm"
             id="test-id"
+            placeholder={
+              selectedOption?.label === "Direct"
+                ? "eg. WY 824"
+                : "eg. WY 824, WY6181"
+            }
+            className={`${
+              isAfterSearch
+                ? "after-custom-input-flight-type"
+                : "custom-input-flight-type"
+            }`}
+          /> */}
+
+          <DebounceInput
+            minLength={2}
+            debounceTimeout={500}
+            onChange={changeFlightNumber}
             placeholder={
               selectedOption?.label === "Direct"
                 ? "eg. WY 824"

@@ -9,10 +9,11 @@ import {
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "redux/store";
-// import { allPackagesType } from "redux/slices/types";
-import { getAllPackagesType } from "redux/actions/types/packagesType";
-import { getAllWeightRange } from "redux/actions/types/weightRange";
-import { getAllDeliveryType } from "redux/actions/types/deliveryType";
+import {
+  getAllDeliveryType,
+  getAllPackagesType,
+  getAllWeightRange,
+} from "redux/actions/types";
 
 interface IProp {
   onSelectTypeFilter: (key: any) => void;

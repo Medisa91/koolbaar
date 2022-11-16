@@ -4,7 +4,7 @@ import { Logo, Button, Menu, RightSidebar } from "components";
 import { UseWindowSize } from "../../components/windowSize/UseWindowSize";
 import BellIcon from "../../assets/images/bell.png";
 import AvatarImg from "../../assets/images/avatar.png";
-import { logoutUser } from "redux/actions/Authorization/logout";
+import { logoutUser } from "redux/actions/Authorization";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { showLoginResult } from "redux/slices/Authorization/login";
 import { showLogoutResult } from "redux/slices/Authorization/logout";

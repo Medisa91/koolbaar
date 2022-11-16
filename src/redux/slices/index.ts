@@ -6,6 +6,7 @@ import checkToken from "./Authorization/externalLogin";
 import packageTypes from "./types/packagesType";
 import weightRange from "./types/weightRange";
 import deliveryType from "./types/deliveryType";
+import flightInquiry from "./flight";
 
 export {
   counter,
@@ -16,4 +17,5 @@ export {
   checkToken,
   weightRange,
   deliveryType,
+  flightInquiry
 };

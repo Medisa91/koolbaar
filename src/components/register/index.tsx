@@ -7,7 +7,7 @@ import { Oval } from "react-loader-spinner";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { IRegister } from "models/interfaces";
-import { createUser } from "redux/actions/Authorization/register";
+import { createUser } from "redux/actions/Authorization";
 import { ToastContainer } from "react-toastify";
 import { showRegisterResult } from "redux/slices/Authorization/register";
 

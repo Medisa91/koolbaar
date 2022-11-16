@@ -5,7 +5,7 @@ import { Oval } from "react-loader-spinner";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { loginUser } from "redux/actions/Authorization/login";
+import { loginUser } from "redux/actions/Authorization";
 import { ILogin, IExternalLogin } from "models/interfaces";
 import {
   osVersion,
