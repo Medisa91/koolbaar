@@ -8,6 +8,10 @@ class TypesService {
   getAllWeightRange = () => {
     return http.get("Weightrange");
   };
+
+  getAllDeliveryType = () => {
+    return http.get("Deliverytype");
+  };
 }
 
 export default new TypesService();

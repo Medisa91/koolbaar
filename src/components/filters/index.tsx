@@ -3,7 +3,6 @@ import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
 import { Button } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { deliveryTypeOptions } from "models/options";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
@@ -13,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "redux/store";
 // import { allPackagesType } from "redux/slices/types";
 import { getAllPackagesType } from "redux/actions/types/packagesType";
 import { getAllWeightRange } from "redux/actions/types/weightRange";
+import { getAllDeliveryType } from "redux/actions/types/deliveryType";
 
 interface IProp {
   onSelectTypeFilter: (key: any) => void;
@@ -32,11 +32,13 @@ export const Filters: React.FC<IProp> = ({
 
   const [typeOptions, setTypeOptions] = useState([]);
   const [weightOptions, setWeightOptions] = useState([]);
+  const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [type, setType] = useState({ value: 0, label: "All" });
   const [size, setSize] = useState({ value: 1, label: "All" });
   const [deliveryType, setDeliveryType] = useState({ value: 1, label: "All" });
   const packagesType = useAppSelector((state) => state.packageTypes);
   const weightRanges = useAppSelector((state) => state.weightRange);
+  const deliveryTypes = useAppSelector((state) => state.deliveryType);
 
   const customStyle = {
     control: (styles) => ({
@@ -57,6 +59,7 @@ export const Filters: React.FC<IProp> = ({
   useEffect(() => {
     dispatch(getAllPackagesType());
     dispatch(getAllWeightRange());
+    dispatch(getAllDeliveryType());
   }, []);
 
   useEffect(() => {
@@ -78,6 +81,16 @@ export const Filters: React.FC<IProp> = ({
     });
     setWeightOptions(options);
   }, [weightRanges]);
+
+  useEffect(() => {
+    const options = deliveryTypes?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setDeliveryOptions(options);
+  }, [deliveryTypes]);
 
   const handleTypeChange = (selected) => {
     setType(selected);
@@ -133,7 +146,7 @@ export const Filters: React.FC<IProp> = ({
                 className="custom-select-filter-delivery d-inline-block"
                 value={deliveryType}
                 onChange={handleDeliveryTypeChange}
-                options={deliveryTypeOptions}
+                options={deliveryOptions}
                 components={{
                   IndicatorSeparator: () => null,
                 }}
