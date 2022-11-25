@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Register } from "components";
+import { Input, Button } from "layers";
+import { Register } from "components";
 import { Col, Row } from "react-bootstrap";
 import { Oval } from "react-loader-spinner";
 import { GoogleLogin } from "react-google-login";
@@ -88,6 +89,7 @@ export const Login: React.FC = () => {
   useEffect(() => {
     if (data?.data?.length !== 0) {
       window.localStorage.setItem("token", data?.data[0]?.data?.accessToken);
+      window.localStorage.setItem("avatar", data?.data[0]?.data?.personalPhoto);
       window.localStorage.setItem("expire", data?.data[0]?.data?.expiresIn);
       window.localStorage.setItem(
         "refreshToken",

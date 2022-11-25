@@ -85,6 +85,9 @@ body {
 }
 
 .logo-name {
+  &:hover {
+    color: #fff;
+  }
   @include custom-text-style(
     $poppins-font,
     $font-24,
@@ -524,7 +527,7 @@ body {
 }
 
 .departure-info-wrapper {
-  align-self: center;
+  align-self: end;
 }
 
 .search-plane-icon {
@@ -1369,6 +1372,7 @@ body {
     img {
       width: 48px;
       height: 48px;
+      background: #fff;
     }
   }
 }
@@ -1455,7 +1459,7 @@ body {
 
   .dropdown-item {
     font-size: $font-14;
-    color: $primary
+    color: $primary;
   }
 
   svg {
@@ -2556,8 +2560,21 @@ body {
   width: 46px;
   height: 46px;
   margin-left: 16px;
+  border-radius: 50%;
+  background: grey;
+  // padding-top: 12px;
+  @include custom-text-style(
+    $poppins-font,
+    $font-10,
+    $weight-600,
+    1,
+    center,
+    $primary
+  );
 
   img {
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
   }
 }
@@ -3083,4 +3100,73 @@ input[type="radio"]:after {
 
 .Toastify__toast-body > div:last-child {
   font-size: $font-12;
+}
+
+@keyframes fadeIn {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.opacity-change-plane {
+  width: 62.2px;
+  height: 62.2px;
+  animation: fadeIn ease 4s;
+  -webkit-animation: fadeIn ease 4s;
+  -moz-animation: fadeIn ease 4s;
+  -o-animation: fadeIn ease 4s;
+  -ms-animation: fadeIn ease 4s;
+  animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
 }

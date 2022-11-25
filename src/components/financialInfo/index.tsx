@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "components";
+import { Button } from "layers";
 import { PaymentSetting } from "./paymentSetting";
 import { Transactions } from "./transactions";
 

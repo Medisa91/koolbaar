@@ -8,7 +8,10 @@ import {
   checkToken,
   weightRange,
   deliveryType,
-  flightInquiry
+  flightInquiry,
+  homeRequest,
+  homeTraveler,
+  userInfo,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -20,7 +23,10 @@ const rootReducer = combineReducers({
   checkToken,
   weightRange,
   deliveryType,
-  flightInquiry
+  flightInquiry,
+  homeRequest,
+  homeTraveler,
+  userInfo,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

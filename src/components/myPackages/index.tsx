@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "components";
+import { Button } from "layers";
 import { PackageCard } from "./PackageCard";
 
 export const MyPackages: React.FC<{}> = () => {

@@ -7,9 +7,12 @@ export const deliveryTypeSlice = createSlice({
     getDeliveryType: (state, action) => {
       return (state = action.payload.data);
     },
+    deliveryTypeFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { getDeliveryType } = deliveryTypeSlice.actions;
-export const showDeliveryType = (state) => state.deliveryType;
+export const { getDeliveryType, deliveryTypeFailure } =
+  deliveryTypeSlice.actions;
 export default deliveryTypeSlice.reducer;

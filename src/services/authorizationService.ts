@@ -17,9 +17,9 @@ class AuthorizationService {
     return http.post("/ExternalAuth/CheckToken", data);
   }
 
-  //   getAll() {
-  //     return http.get("/tutorials");
-  //   }
+  getUserInfo() {
+    return authorizedHttp.get("/user/UserInfo");
+  }
 
   //   get(id) {
   //     return http.get(`/tutorials/${id}`);

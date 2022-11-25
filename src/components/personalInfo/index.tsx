@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { Input, Uploader, Button } from "components";
+import React, { useState, useEffect } from "react";
+import { Uploader } from "components";
+import { Input } from "layers";
 import UserAvatar from "./../../assets/images/avatar-profile.png";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { IUserInfo } from "models/interfaces";
 
-export const PersonalInfo: React.FC = () => {
+interface IProps {
+  userData: IUserInfo;
+}
+
+export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
   const size = UseWindowSize();
   const [avatar, setAvatar] = useState(UserAvatar);
   const [changeImageStyle, setChangeImageStyle] = useState(false);
@@ -44,6 +50,7 @@ export const PersonalInfo: React.FC = () => {
             type="text"
             textArea={true}
             rows={2}
+            value={userData?.aboutMe}
           />
         </div>
       </div>
@@ -54,6 +61,7 @@ export const PersonalInfo: React.FC = () => {
             id="firstName-input"
             placeholder="First Name"
             className="half-custom-input-register w-100"
+            value={userData?.firstName}
           />
         </Col>
         <Col xs={6} className="mb-4 text-center pr-0">
@@ -62,6 +70,7 @@ export const PersonalInfo: React.FC = () => {
             id="lastName-input"
             placeholder="Last Name"
             className="half-custom-input-register w-100"
+            value={userData?.lastName}
           />
         </Col>
         <Col xs={6} className="mb-4 pr-0">
@@ -70,6 +79,7 @@ export const PersonalInfo: React.FC = () => {
             id="displayName-input"
             placeholder="Display Name"
             className="half-custom-input-register w-100"
+            value={userData?.displayName}
           />
         </Col>
         <Col xs={6} className="mb-4 text-center pr-0">
@@ -78,6 +88,7 @@ export const PersonalInfo: React.FC = () => {
             id="phoneNumber-input"
             placeholder="Phone Number"
             className="half-custom-input-register w-100"
+            value={userData?.phoneNumber}
           />
         </Col>
         <Col xs={12} className="mb-4">
@@ -86,6 +97,7 @@ export const PersonalInfo: React.FC = () => {
             id="email-input"
             placeholder="Email"
             className="full-custom-input-register"
+            value={userData?.email}
           />
         </Col>
         <Col xs={12} className="mb-4">
@@ -94,10 +106,11 @@ export const PersonalInfo: React.FC = () => {
             id="address-input"
             placeholder="Address"
             className="full-custom-input-register"
+            value={userData?.address}
           />
         </Col>
-        <Col xs={6} className="mb-4 pr-0">
-          <Input
+        {/*<Col xs={6} className="mb-4 pr-0">
+           <Input
             size="sm"
             id="passport-input"
             placeholder="Passport"
@@ -111,7 +124,7 @@ export const PersonalInfo: React.FC = () => {
             placeholder="Retype Passport"
             className="half-custom-input-register w-100"
           />
-        </Col>
+        </Col> */}
       </Row>
       <Row>
         <section

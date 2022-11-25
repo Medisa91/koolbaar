@@ -9,9 +9,12 @@ export const checkTokenSlice = createSlice({
     checkToken: (state, action) => {
       state.data.push(action.payload);
     },
+    checkTokenFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { checkToken } = checkTokenSlice.actions;
+export const { checkToken, checkTokenFailure } = checkTokenSlice.actions;
 export const showCheckTokenResult = (state) => state.checkToken;
 export default checkTokenSlice.reducer;

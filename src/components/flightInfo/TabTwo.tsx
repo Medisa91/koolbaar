@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Button } from "components";
+import { Button } from "layers";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import PlaneIcon from "../../assets/images/plane.png";
 import CalendarIcon from "../../assets/images/svg/calendar.svg";

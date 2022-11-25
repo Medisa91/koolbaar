@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Input, GoogleMapAPI, Uploader, Button } from "components";
+import { GoogleMapAPI, Uploader } from "components";
+import { Input, Button } from "layers";
 import UserAvatar from "./../../assets/images/user-avatar.png";
-import { Col, Row, Spinner } from "react-bootstrap";
-import { NumericFormat } from "react-number-format";
-import { Oval } from "react-loader-spinner";
+import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { IRegister } from "models/interfaces";
 import { createUser } from "redux/actions/Authorization";
 import { ToastContainer } from "react-toastify";
 import { showRegisterResult } from "redux/slices/Authorization/register";
+import { Oval } from "react-loader-spinner";
 
 interface IProps {
   deviceModel: string;
@@ -26,7 +26,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
   const [changeImageStyle, setChangeImageStyle] = useState(false);
   const [positionLat, setLat] = useState(null);
   const [positionLong, setLng] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const Device_Model = deviceModel;
@@ -36,7 +36,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     firstName: "",
     lastName: "",
     displayName: "",
-    phoneNumber: null,
+    phoneNumber: "",
     email: "",
     address: "",
     positionLat: "",
@@ -73,7 +73,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     const data = {
       ...registerData,
       personalPhoto,
-      phoneNumber: parseInt(phoneNumber, 10),
+      // phoneNumber: parseInt(phoneNumber, 10),
       passportPhoto,
       secondIdentityPhoto,
       positionLat,
@@ -170,7 +170,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
             />
           </Col>
           <Col xs={6} className="mb-4 text-center">
-            {/* <Input
+            <Input
               size="sm"
               id="phoneNumber-input"
               placeholder="Phone Number"
@@ -178,8 +178,8 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
               className="half-custom-input-register"
               value={registerData.phoneNumber}
               onChange={handleChange}
-            /> */}
-            <NumericFormat
+            />
+            {/* <NumericFormat
               className="half-custom-input-register"
               id="phoneNumber"
               placeholder="Phone Number"
@@ -191,7 +191,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
                 const { formattedValue, value } = values;
                 setPhoneNumber(formattedValue);
               }}
-            />
+            /> */}
           </Col>
           <Col xs={12} className="mb-4">
             <Input

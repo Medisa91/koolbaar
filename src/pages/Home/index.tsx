@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
+import { Banner, Footer } from "layers";
 import {
-  Banner,
-  Footer,
   FlightInfo,
   Filters,
   AvailableRequests,
@@ -28,8 +27,8 @@ export const Home: React.FC = () => {
   };
 
   const handleTab = (tab) => {
-    setTab(tab)
-  }
+    setTab(tab);
+  };
 
   return (
     <div className="d-flex flex-column min-vh-100">

@@ -9,7 +9,7 @@ export const Logo: React.FC = () => {
           <div className="logo-ellipse-second-cir"></div>
         </div>
       </div>
-      <span className="logo-name">Koolbaar</span>
+      <a className="logo-name" href="/">Koolbaar</a>
     </div>
   );
 };

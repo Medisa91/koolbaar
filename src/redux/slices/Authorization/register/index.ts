@@ -9,9 +9,12 @@ export const registerSlice = createSlice({
     addNewUser: (state, action) => {
       state.data.push(action.payload);
     },
+    registerFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { addNewUser } = registerSlice.actions;
+export const { addNewUser, registerFailure } = registerSlice.actions;
 export const showRegisterResult = (state) => state.register;
 export default registerSlice.reducer;

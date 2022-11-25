@@ -7,9 +7,11 @@ export const weightTypesSlice = createSlice({
     getWeightRanges: (state, action) => {
       return (state = action.payload.data);
     },
+    weightRangeFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { getWeightRanges } = weightTypesSlice.actions;
-export const showWeightRanges = (state) => state.weightRanges;
+export const { getWeightRanges, weightRangeFailure } = weightTypesSlice.actions;
 export default weightTypesSlice.reducer;

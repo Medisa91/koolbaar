@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Dropdown } from "react-bootstrap";
-import { Button } from "components";
+import { Row, Col, Card } from "react-bootstrap";
+import { Button } from "layers";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
-import CertificateYellowIcon from "../../assets/images/svg/verified-yellow.svg";
-import CertificateGreenIcon from "../../assets/images/svg/verified-green.svg";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
   data: {

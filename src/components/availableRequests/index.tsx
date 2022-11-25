@@ -1,11 +1,13 @@
-import React from "react";
-import { Button } from "components";
+import React, { useEffect, useState } from "react";
+import { Button } from "layers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { PackageCard } from "./PackageCard";
 import { Option } from "models/interfaces";
+import { useAppDispatch, useAppSelector } from "redux/store";
+import { getAllHomeRequest } from "redux/actions/flight";
 
 interface IProps {
   type: Option;
@@ -19,6 +21,23 @@ export const AvailableRequests: React.FC<IProps> = ({
   deliveryType,
 }) => {
   const windowSize = UseWindowSize();
+  const dispatch = useAppDispatch();
+  const [requestData, setRequestData] = useState([]);
+  const homeRequestData = useAppSelector((state) => state.homeRequest);
+
+  useEffect(() => {
+    const data = {
+      packagetypeId: null,
+      weightrangeId: null,
+      deliverytypeId: null,
+    };
+    dispatch(getAllHomeRequest(data));
+  }, []);
+
+  useEffect(() => {
+    setRequestData(homeRequestData);
+  }, [homeRequestData]);
+
   return (
     <div className="requests-info-wrapper">
       {windowSize?.width >= 768 && (
@@ -47,7 +66,12 @@ export const AvailableRequests: React.FC<IProps> = ({
           </Col>
         </Row>
       )}
-      <PackageCard type={type} size={size} deliveryType={deliveryType} />
+      <PackageCard
+        type={type}
+        size={size}
+        deliveryType={deliveryType}
+        requestData={requestData}
+      />
     </div>
   );
 };

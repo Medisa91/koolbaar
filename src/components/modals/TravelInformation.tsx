@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "components";
+import { Button } from "layers";
 import { MonthNumber } from "helpers/convertMonthNameToNumber";
 import { DepartureOptions, ArrivalOptions } from "models/interfaces";
 

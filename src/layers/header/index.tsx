@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Dropdown } from "react-bootstrap";
-import { Logo, Button, Menu, RightSidebar } from "components";
+import { RightSidebar } from "components";
+import { Logo, Button, Menu } from "layers";
 import { UseWindowSize } from "../../components/windowSize/UseWindowSize";
 import BellIcon from "../../assets/images/bell.png";
-import AvatarImg from "../../assets/images/avatar.png";
+// import AvatarImg from "../../assets/images/avatar.png";
 import { logoutUser } from "redux/actions/Authorization";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { showLoginResult } from "redux/slices/Authorization/login";
@@ -24,6 +25,9 @@ export const Header: React.FC = () => {
   );
   const loginData = useAppSelector(showLoginResult);
   const logoutData = useAppSelector(showLogoutResult);
+  const AvatarImg = window.localStorage.getItem("avatar")
+    ? window.localStorage.getItem("avatar")
+    : null;
 
   const handleLoginSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -120,8 +124,16 @@ export const Header: React.FC = () => {
                     id="dropdown-basic"
                     className="px-0 mx-0"
                   >
-                    <span className="user-profile-avatar d-inline-block">
-                      <img src={AvatarImg} alt="avatar-img" />
+                    <span
+                      className={`${
+                        AvatarImg === "null" && "pt-3"
+                      } user-profile-avatar d-inline-block`}
+                    >
+                      {AvatarImg !== "null" ? (
+                        <img src={AvatarImg} alt="avatar-img" />
+                      ) : (
+                        <span>No Image</span>
+                      )}
                     </span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>

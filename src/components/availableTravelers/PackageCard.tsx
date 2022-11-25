@@ -3,16 +3,22 @@ import { Row, Col } from "react-bootstrap";
 import data from "json/travelers.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
-import { Option } from "models/interfaces";
+import { Option, ITraveler } from "models/interfaces";
 import { Cards } from "./Cards";
 
 interface IProps {
   type: Option;
   size: Option;
   deliveryType: Option;
+  travelerData: ITraveler[];
 }
 
-export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
+export const PackageCard: React.FC<IProps> = ({
+  type,
+  size,
+  deliveryType,
+  travelerData,
+}) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
 
@@ -44,7 +50,7 @@ export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
             ))
           ) : (
             <>
-              {type.label !== "All"
+              {/* {type.label !== "All"
                 ? data?.items
                     ?.filter((filter) => filter.label === type.label)
                     ?.map((item, idx) => <Cards key={idx} data={item} />)
@@ -56,7 +62,10 @@ export const PackageCard: React.FC<IProps> = ({ type, size, deliveryType }) => {
                     ?.map((item, idx) => <Cards key={idx} data={item} />)
                 : data?.items?.map((item, idx) => (
                     <Cards key={idx} data={item} />
-                  ))}
+                  ))} */}
+              {travelerData?.map((data, idx) => (
+                <Cards key={idx} data={data} />
+              ))}
             </>
           )}
         </Row>

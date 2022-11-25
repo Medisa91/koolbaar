@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button } from "components";
+import { Input, Button } from "layers";
 import { Col, Row } from "react-bootstrap";
 
 export const AcceptOffer: React.FC = () => {
@@ -26,36 +26,7 @@ export const AcceptOffer: React.FC = () => {
 
   const handleGovernmentChange = () => { 
     setGovernmentChecked(!governmentChecked); 
-  }; 
-
-  // const handleClick = (): void => {
-  //   if (!offerData.offerType || !offerData.age || !offerData.img) {
-  //     return;
-  //   }
-  //   setPeople([
-  //     ...people,
-  //     {
-  //       name: offerData.name,
-  //       age: parseInt(offerData.age),
-  //       url: offerData.img,
-  //       note: offerData.note,
-  //     },
-  //   ]);
-
-  //   setOfferData({
-  //     offerType: "",
-  //     from: "",
-  //     to: "",
-  //     onFrom: "",
-  //     and: "",
-  //     at: "",
-  //     onTo: "",
-  //     for: "",
-  //     via: "",
-  //     number: "",
-  //     message: "",
-  //   });
-  // };
+  };
 
   return (
     <div className="offer-slider-container">

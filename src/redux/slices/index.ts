@@ -3,10 +3,13 @@ import register from "./Authorization/register";
 import login from "./Authorization/login";
 import logout from "./Authorization/logout";
 import checkToken from "./Authorization/externalLogin";
+import userInfo from "./Authorization/userInfo";
 import packageTypes from "./types/packagesType";
 import weightRange from "./types/weightRange";
 import deliveryType from "./types/deliveryType";
-import flightInquiry from "./flight";
+import flightInquiry from "./flight/flightInquiry";
+import homeRequest from "./flight/homeRequest";
+import homeTraveler from "./flight/homeTraveler";
 
 export {
   counter,
@@ -15,7 +18,10 @@ export {
   logout,
   packageTypes,
   checkToken,
+  userInfo,
   weightRange,
   deliveryType,
-  flightInquiry
+  flightInquiry,
+  homeRequest,
+  homeTraveler
 };

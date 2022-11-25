@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
-import { Button, RightSidebar } from "components";
+import { Button } from "layers";
+import { RightSidebar } from "components";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { IRequest } from "models/interfaces";
 
 interface IProps {
-  data: {
-    name: string;
-    label: string;
-    size: number;
-  };
+  data: IRequest;
 }
 
 export const Cards: React.FC<IProps> = ({ data }) => {
@@ -32,10 +30,9 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     setFade(true);
   };
 
-
   return (
     <Col
-      key={data?.name}
+      key={data?.id}
       lg={3}
       md={4}
       sm={12}
@@ -48,15 +45,15 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={3} className="text-left header-card-titles">
               <div>
-                <span className="text-left">CGK</span>
+                <span className="text-left">{data?.from}</span>
               </div>
               <div>
-                <span className="text-left">15:15</span>
+                <span className="text-left">{data?.departureTime}</span>
               </div>
             </Col>
             <Col xs={6} className="text-center header-card-plane">
               <div>
-                <span className="fw-bold">{data?.label}</span>
+                <span className="fw-bold">{data?.packagetype}</span>
               </div>
               <div>
                 <span className="mb-0">
@@ -72,10 +69,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             </Col>
             <Col xs={3} className="header-card-titles">
               <div className="text-right">
-                <span>DPS</span>
+                <span>{data?.to}</span>
               </div>
               <div className="text-right">
-                <span>17:15</span>
+                <span>{data?.arrivalTime}</span>
               </div>
             </Col>
           </Row>
@@ -84,13 +81,13 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={7} className="request-body-info">
               <div>
-                <span className="card-text">Size: 35*35*36</span>
+                <span className="card-text">Size: {data?.size}</span>
               </div>
               <div>
-                <span className="card-text">Weight: {data?.size}KG</span>
+                <span className="card-text">Weight: {data?.weight}KG</span>
               </div>
               <div>
-                <span className="card-text">Item Value: 250$</span>
+                <span className="card-text">Item Value: {data?.itemValue}</span>
               </div>
             </Col>
             <Col xs={5} className="request-body-package">
@@ -98,7 +95,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span>Package ID</span>
               </div>
               <div>
-                <span>TRV2569857</span>
+                <span>{data?.pkgId}</span>
               </div>
             </Col>
           </Row>
@@ -108,7 +105,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="card-text">Shipping Deadline:</span>
               </div>
               <div>
-                <span className="card-text">05/05/2022</span>
+                <span className="card-text">{data?.shippingDeadline}</span>
               </div>
             </Col>
             <Col xs={5} style={{ textAlign: "right" }}>
@@ -118,7 +115,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 href="/"
                 className="offer-btn"
               >
-                Offer $120
+                Offer {data?.offer}
               </Button>
             </Col>
           </Row>
@@ -146,7 +143,11 @@ export const Cards: React.FC<IProps> = ({ data }) => {
         </Card.Footer>
       </Card>
       {showMoreDetail && (
-        <PackageCover fade={fade} onShowCover={handleShowMoreDetail} />
+        <PackageCover
+          data={data}
+          fade={fade}
+          onShowCover={handleShowMoreDetail}
+        />
       )}
       {showSidebar && (
         <div className="offer-sidebar">

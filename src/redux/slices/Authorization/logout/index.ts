@@ -9,9 +9,12 @@ export const logoutSlice = createSlice({
     logout: (state, action) => {
       state.data.push(action.payload);
     },
+    logoutFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { logout } = logoutSlice.actions;
+export const { logout, logoutFailure } = logoutSlice.actions;
 export const showLogoutResult = (state) => state.logout;
 export default logoutSlice.reducer;

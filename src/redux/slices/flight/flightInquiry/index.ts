@@ -7,8 +7,12 @@ export const flightInquirySlice = createSlice({
     flightInquiry: (state, action) => {
       return (state = action.payload.data);
     },
+    flightInquiryFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { flightInquiry } = flightInquirySlice.actions;
+export const { flightInquiry, flightInquiryFailure } =
+  flightInquirySlice.actions;
 export default flightInquirySlice.reducer;

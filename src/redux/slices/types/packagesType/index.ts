@@ -7,9 +7,12 @@ export const packageTypesSlice = createSlice({
     getPackagesType: (state, action) => {
       return (state = action.payload.data);
     },
+    packagesTypeFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { getPackagesType } = packageTypesSlice.actions;
-export const showPackagesType = (state) => state.packagesType;
+export const { getPackagesType, packagesTypeFailure } =
+  packageTypesSlice.actions;
 export default packageTypesSlice.reducer;

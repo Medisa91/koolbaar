@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
-import { Button } from "components";
+import { Button } from "layers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import AvatarImg from "../../assets/images/avatar.png";

@@ -3,41 +3,48 @@ import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
 import { DebounceInput } from "react-debounce-input";
-import { Oval } from "react-loader-spinner";
-import { Input } from "components";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
 import { DepartureOptions, ArrivalOptions } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { getFlightInquiry } from "redux/actions/flight";
+import { ToastContainer } from "react-toastify";
 
 interface IProps {
   isAfterSearch: boolean;
   travelDepartureInfoData: DepartureOptions;
   travelArrivalInfoData: ArrivalOptions;
+  flightNumber: string;
+  setFlightNumber: Function;
+  setIsLoading: Function;
 }
 
 export const FlightSelect: FC<IProps> = ({
   isAfterSearch,
   travelDepartureInfoData,
   travelArrivalInfoData,
+  flightNumber,
+  setFlightNumber,
+  setIsLoading,
 }) => {
   const size = UseWindowSize();
   const dispatch = useAppDispatch();
-  const flightInquiryData = useAppSelector((state) => state.flightInquiry);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const flightInquiryData: any = useAppSelector((state) => state.flightInquiry);
   const [selectedOption, setSelectedOption] = useState({
     value: 1,
     label: "Direct",
   });
-  const [flightNumber, setFlightNumber] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [fromData, setFromData] = useState<DepartureOptions>({
     from: "",
     fromDate: "",
+    fromTime: "",
   });
-  const [toData, setToData] = useState<ArrivalOptions>({ to: "", toDate: "" });
+  const [toData, setToData] = useState<ArrivalOptions>({
+    to: "",
+    toDate: "",
+    toTime: "",
+  });
 
   const options = [
     { value: 1, label: "Direct" },
@@ -55,15 +62,27 @@ export const FlightSelect: FC<IProps> = ({
 
   const changeFlightNumber = (e) => {
     setFlightNumber(e.target.value);
-    dispatch(getFlightInquiry({ flightNumber }));
+    const data = {
+      flightNumber,
+      departureDate: null,
+    };
+    if (flightNumber) dispatch(getFlightInquiry(data));
   };
 
   useEffect(() => {
-    if (flightInquiryData) {
-      setIsLoading(false);
-      console.log(flightInquiryData);
-    }
+    // if (flightInquiryData && flightInquiryData?.length !== 0) {
+    //   if (flightInquiryData.isSuccess) {
+    //     setIsLoading(false);
+    //   } else {
+    //   }
+    // }
+    if (flightInquiryData) setIsLoading(false);
+    if (flightInquiryData?.length !== 0) setIsLoading(false);
   }, [flightInquiryData]);
+
+  const handleKeyDown = (e) => {
+    setIsLoading(true);
+  };
 
   const handleChange = (selected) => {
     setSelectedOption(selected);
@@ -77,6 +96,17 @@ export const FlightSelect: FC<IProps> = ({
 
   return (
     <Row>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="dark"
+      />
       {isAfterSearch ? null : (
         <Col xs={4}>
           <div>
@@ -118,18 +148,19 @@ export const FlightSelect: FC<IProps> = ({
               selectedOption?.label === "Direct"
                 ? "eg. WY 824"
                 : "eg. WY 824, WY6181"
-            }
-            className={`${
-              isAfterSearch
+              }
+              className={`${
+                isAfterSearch
                 ? "after-custom-input-flight-type"
                 : "custom-input-flight-type"
-            }`}
-          /> */}
+              }`}
+            /> */}
 
           <DebounceInput
             minLength={2}
-            debounceTimeout={500}
+            debounceTimeout={1000}
             onChange={changeFlightNumber}
+            onKeyDown={handleKeyDown}
             placeholder={
               selectedOption?.label === "Direct"
                 ? "eg. WY 824"

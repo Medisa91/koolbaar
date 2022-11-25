@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { Button } from "components";
+import { Button } from "layers";
 import ShoppingBagImg from "../../assets/images/shopping-bag.png";
 import HomeImg from "../../assets/images/home.png";
 import CoinsImg from "../../assets/images/coins.png";

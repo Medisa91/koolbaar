@@ -1,10 +1,3 @@
-export { Header } from "./header";
-export { Logo } from "./logo";
-export { Banner } from "./banner";
-export { Button } from "./button";
-export { Input } from "./input";
-export { Footer } from "./footer";
-export { Menu } from "./menu";
 export { Tabs } from "./tabsContainer";
 export { RightSidebar } from "./sidebar";
 export { SendRequest } from "./sendRequest";
@@ -23,4 +16,5 @@ export { FinancialInfo } from "./financialInfo";
 export { PersonalInfo } from "./personalInfo";
 export { GoogleMapAPI } from "./googleMap";
 export { Uploader } from "./dropZone";
-export { SkeletonGrid } from "./skeleton";
+export { SkeletonGrid } from "./skeletonGrid";
+export { SkeletonText } from "./skeletonText";

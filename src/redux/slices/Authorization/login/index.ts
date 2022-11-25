@@ -9,9 +9,12 @@ export const loginSlice = createSlice({
     login: (state, action) => {
       state.data.push(action.payload);
     },
+    loginFailure: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { login } = loginSlice.actions;
+export const { login, loginFailure } = loginSlice.actions;
 export const showLoginResult = (state) => state.login;
 export default loginSlice.reducer;
