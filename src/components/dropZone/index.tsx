@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 const baseStyle = {
@@ -60,20 +60,26 @@ const img = {
 interface IProp {
   title: string;
   photo?: File;
+  image?: string;
   setPhoto?: React.Dispatch<React.SetStateAction<File>>;
 }
 
-export const Uploader: React.FC<IProp> = ({ title, photo, setPhoto }) => {
+export const Uploader: React.FC<IProp> = ({
+  title,
+  image,
+  photo,
+  setPhoto,
+}) => {
   const { isFocused, isDragAccept, isDragReject } = useDropzone({
     accept: { "image/*": [] },
   });
 
+  const [defaultImage, setDefaultImage] = useState(null);
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
     },
-
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
@@ -96,19 +102,33 @@ export const Uploader: React.FC<IProp> = ({ title, photo, setPhoto }) => {
     [isFocused, isDragAccept, isDragReject]
   ) as React.CSSProperties;
 
+  useEffect(() => {
+    setDefaultImage(image);
+  }, [image]);
+
+  const removeFile = () => {
+    setFiles([]);
+    setDefaultImage(null);
+  };
+
   const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
-        <img
-          src={file.preview}
-          style={img}
-          alt="preview"
-          onLoad={() => {
-            URL.revokeObjectURL(file.preview);
-          }}
-        />
+    <>
+      <div style={thumb} key={file.name}>
+        <div style={thumbInner}>
+          <img
+            src={file.preview}
+            style={img}
+            alt="preview"
+            onLoad={() => {
+              URL.revokeObjectURL(file.preview);
+            }}
+          />
+        </div>
       </div>
-    </div>
+      <a className="remove-img-link" onClick={removeFile}>
+        Remove File
+      </a>
+    </>
   ));
 
   return (
@@ -119,7 +139,16 @@ export const Uploader: React.FC<IProp> = ({ title, photo, setPhoto }) => {
           <input {...getInputProps()} />
           <p className="thumb-title">Drop images here or click to upload</p>
         </div>
-        <aside style={thumbsContainer}>{thumbs}</aside>
+        <aside style={thumbsContainer}>
+          {defaultImage && files.length === 0 && (
+            <div style={thumb}>
+              <div style={thumbInner}>
+                <img src={defaultImage} style={img} alt="previewImg" />
+              </div>
+            </div>
+          )}
+          {thumbs}
+        </aside>
       </>
     </>
   );

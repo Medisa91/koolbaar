@@ -16,5 +16,5 @@ export { FinancialInfo } from "./financialInfo";
 export { PersonalInfo } from "./personalInfo";
 export { GoogleMapAPI } from "./googleMap";
 export { Uploader } from "./dropZone";
-export { SkeletonGrid } from "./skeletonGrid";
-export { SkeletonText } from "./skeletonText";
+export { SkeletonGrid } from "./Skeleton/skeletonGrid";
+export { SkeletonText } from "./Skeleton/skeletonText";

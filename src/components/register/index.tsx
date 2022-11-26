@@ -5,10 +5,9 @@ import UserAvatar from "./../../assets/images/user-avatar.png";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { IRegister } from "models/interfaces";
+import { IRegister, ILogin } from "models/interfaces";
+import { loginUser } from "redux/actions/Authorization";
 import { createUser } from "redux/actions/Authorization";
-import { ToastContainer } from "react-toastify";
-import { showRegisterResult } from "redux/slices/Authorization/register";
 import { Oval } from "react-loader-spinner";
 
 interface IProps {
@@ -18,7 +17,7 @@ interface IProps {
 export const Register: React.FC<IProps> = ({ deviceModel }) => {
   const dispatch = useAppDispatch();
   const size = UseWindowSize();
-  const data = useAppSelector(showRegisterResult);
+  const createUserData: any = useAppSelector((state) => state.register);
   const [passportPhoto, setPassportPhoto] = useState(null);
   const [secondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
   const [avatar, setAvatar] = useState(UserAvatar);
@@ -86,21 +85,27 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
 
   useEffect(() => {
     setIsLoading(false);
-  }, [data]);
+    if (
+      createUserData?.data?.length !== 0 &&
+      createUserData?.data[0]?.isSuccess
+    ) {
+      const data = {
+        grantType: "password",
+        username: registerData?.email,
+        password: registerData?.password,
+        clientId: "517D58DC-95A5-4732-B182-2188A9853CF5",
+        clientSecret:
+          "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
+        deviceModel,
+        deviceId: "",
+        playerId: "",
+      };
+      dispatch(loginUser(data));
+    }
+  }, [createUserData]);
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-        theme="dark"
-      />
       <div className="register-wrapper">
         <h1>Register</h1>
         <div className="d-flex">

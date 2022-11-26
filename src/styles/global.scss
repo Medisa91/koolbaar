@@ -2862,7 +2862,7 @@ body {
     @include custom-btn-style(
       128px,
       50px,
-      0 0 0 180px,
+      0 0 0 170px,
       16px 31px 17px,
       5px,
       $Inter-font,
@@ -2911,6 +2911,11 @@ body {
     border-radius: 5px;
     border: solid 1px #dcdcdc;
   }
+}
+
+.no-payment-wrapper {
+  @extend .payment-wrapper;
+  height: 175px;
 }
 
 .visa-card-img {
@@ -3169,4 +3174,12 @@ input[type="radio"]:after {
   -moz-animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
   -o-animation-iteration-count: infinite;
+}
+
+.remove-img-link {
+  align-self: center;
+  margin: 10px;
+  color: #00043d;
+  font-weight: 600;
+  cursor: pointer;
 }

@@ -3,10 +3,11 @@ import { Input, Button } from "layers";
 import { Register } from "components";
 import { Col, Row } from "react-bootstrap";
 import { Oval } from "react-loader-spinner";
+import { toast } from "react-toastify";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { loginUser } from "redux/actions/Authorization";
+import { loginUser, externalLoginUser } from "redux/actions/Authorization";
 import { ILogin, IExternalLogin } from "models/interfaces";
 import {
   osVersion,
@@ -26,6 +27,7 @@ export const Login: React.FC = () => {
   const data = useAppSelector(showLoginResult);
   const [isLoading, setIsLoading] = useState(false);
   const [deviceModel, setDeviceModel] = useState("");
+  const checkTokenData = useAppSelector((state) => state.checkToken);
   const [loginData, setLoginData] = useState<ILogin>({
     grantType: "password",
     username: "",
@@ -36,30 +38,20 @@ export const Login: React.FC = () => {
     deviceId: "",
     playerId: "",
   });
-
-  const [externalLoginData, setExternalLoginData] = useState<IExternalLogin>({
-    provider: "",
-    accessToken: "",
-    email: "",
-    deviceModel: "",
-    deviceId: "",
-    playerId: "",
-  });
-
   useEffect(() => {
     setDeviceModel(`${browserName}-${browserVersion}(${osName}${osVersion})`);
   }, []);
 
   const onSuccess = (res) => {
     console.log("[Login Success] currentUser:", res.profileObj);
-    setExternalLoginData({
+    const data: IExternalLogin = {
       provider: "google",
       accessToken: "",
       email: "",
-      deviceModel: "",
+      deviceModel,
       deviceId: "",
       playerId: "",
-    });
+    };
   };
 
   const onFailure = (res) => {
@@ -67,7 +59,15 @@ export const Login: React.FC = () => {
   };
 
   const responseFacebook = (response) => {
-    console.log(response);
+    const data: IExternalLogin = {
+      provider: response?.graphDomain,
+      accessToken: response?.accessToken,
+      email: response?.email,
+      deviceModel,
+      deviceId: "",
+      playerId: "",
+    };
+    dispatch(externalLoginUser(data));
   };
 
   const handleChange = (
@@ -99,6 +99,38 @@ export const Login: React.FC = () => {
       setIsLoading(false);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (checkTokenData?.data?.length !== 0) {
+      if (
+        checkTokenData?.data[0]?.data?.isRegistered === false &&
+        checkTokenData?.data[0]?.data?.isValid === false
+      ) {
+        toast.error("The entered information is incorrect");
+      }
+      //   window.localStorage.setItem(
+      //     "token",
+      //     checkTokenData?.data[0]?.data?.accessToken
+      //   );
+      // window.localStorage.setItem(
+      //   "avatar",
+      //   checkTokenData?.data[0]?.data?.personalPhoto
+      // );
+      // window.localStorage.setItem(
+      //   "expire",
+      //   checkTokenData?.data[0]?.data?.expiresIn
+      // );
+      // window.localStorage.setItem(
+      //   "refreshToken",
+      //   checkTokenData?.data[0]?.data?.refreshToken
+      // );
+      // window.localStorage.setItem(
+      //   "tokenType",
+      //   checkTokenData?.data[0]?.data?.tokenType
+      // );
+      setIsLoading(false);
+    }
+  }, [checkTokenData]);
 
   return (
     <div className="login-slider-container">
@@ -158,12 +190,11 @@ export const Login: React.FC = () => {
           xs={12}
         >
           <h1>Login Via</h1>
-
           <FacebookLogin
             appId="598976655336817"
             autoLoad={false}
             fields="name,email,picture"
-            onClick={responseFacebook}
+            callback={responseFacebook}
             cssClass="facebook-btn"
             textButton="Facebook"
           />

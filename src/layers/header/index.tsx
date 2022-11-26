@@ -9,7 +9,6 @@ import { logoutUser } from "redux/actions/Authorization";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { showLoginResult } from "redux/slices/Authorization/login";
 import { showLogoutResult } from "redux/slices/Authorization/logout";
-import { ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faDashboard, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -55,12 +54,14 @@ export const Header: React.FC = () => {
       window.localStorage.removeItem("refreshToken");
       window.localStorage.removeItem("tokenType");
       setIsLogin(false);
+      const win: Window = window;
+      win.location = "/";
     }
   }, [logoutData]);
 
   return (
     <>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -70,7 +71,7 @@ export const Header: React.FC = () => {
         pauseOnFocusLoss
         pauseOnHover
         theme="dark"
-      />
+      /> */}
       {size?.width < 768 ? (
         <Row
           style={

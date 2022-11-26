@@ -43,9 +43,23 @@ export const logoutUser = (data) => async (dispatch) => {
 export const externalLoginUser = (data) => async (dispatch) => {
   try {
     const res = await AuthorizationService.checkToken(data);
-    dispatch(checkToken(res.data));
-    if (res?.data?.isSuccess) toast.success(res?.data?.message);
-    else toast.error(res?.data?.message);
+    if (
+      res?.data?.data?.isRegistered === false &&
+      res?.data?.data?.isValid === false
+    ) {
+      toast.error("The entered information is incorrect");
+    } else if (
+      res?.data?.data?.isRegistered === false &&
+      res?.data?.data?.isValid === true
+    ) {
+      dispatch(checkToken(res.data));
+    } else if (
+      res?.data?.data?.isRegistered === true &&
+      res?.data?.data?.isValid === true
+    ) {
+      dispatch(checkToken(res.data));
+      toast.success(res?.data?.message);
+    } else toast.error(res?.data?.message);
   } catch (err) {
     dispatch(checkTokenFailure(err?.response));
     toast.error(err?.response?.data?.message);

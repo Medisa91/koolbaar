@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
             <PersonalInfo userData={userData} />
           </Col>
           <Col lg={6} md={6} sm={12} className="pl-5">
-            <FinancialInfo />
+            <FinancialInfo userData={userData} />
           </Col>
         </Row>
       </div>

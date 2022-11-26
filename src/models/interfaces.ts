@@ -41,7 +41,7 @@ export interface IExternalLogin {
 }
 
 export interface IUserInfo {
-  personalPhoto: File;
+  personalPhoto: string;
   aboutMe: string;
   firstName: string;
   lastName: string;
@@ -51,11 +51,23 @@ export interface IUserInfo {
   address: string;
   positionLat: string;
   positionLong: string;
-  passportPhoto: File;
-  secondIdentityPhoto: File;
+  passportPhoto: string;
+  secondIdentityPhoto: string;
   balance: string;
-  gateways: object[];
-  transactions: object[];
+  gateways: IGateway[];
+  transactions: ITransaction[];
+}
+
+export interface IGateway {
+  id: string;
+  text: string;
+  date: string;
+  isActive: boolean;
+  imageUrl: string;
+}
+
+export interface ITransaction {
+  id: string;
 }
 
 export interface IRequest {
