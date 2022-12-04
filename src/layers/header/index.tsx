@@ -4,7 +4,6 @@ import { RightSidebar } from "components";
 import { Logo, Button, Menu } from "layers";
 import { UseWindowSize } from "../../components/windowSize/UseWindowSize";
 import BellIcon from "../../assets/images/bell.png";
-// import AvatarImg from "../../assets/images/avatar.png";
 import { logoutUser } from "redux/actions/Authorization";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { showLoginResult } from "redux/slices/Authorization/login";
@@ -146,6 +145,7 @@ export const Header: React.FC = () => {
                       <FontAwesomeIcon icon={faDashboard} />
                       Dashboard
                     </Dropdown.Item>
+
                     <Dropdown.Item className="mt-2" onClick={logoutBtn}>
                       <FontAwesomeIcon icon={faLock} />
                       Logout

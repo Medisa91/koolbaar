@@ -13,10 +13,10 @@ export const authorizedHttp = axios.create({
 export const registerHttp = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: `${window.localStorage.getItem(
-      "tokenType"
-    )} ${window.localStorage.getItem("token")}`,
+    "Content-Type": "multipart/form-data",
+    // Authorization: `${window.localStorage.getItem(
+    //   "tokenType"
+    // )} ${window.localStorage.getItem("token")}`,
   },
 });
 

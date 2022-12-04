@@ -7,8 +7,8 @@ export interface IRegister {
   phoneNumber: string;
   email: string;
   address: string;
-  positionLat: string;
-  positionLong: string;
+  positionLat: number;
+  positionLong: number;
   password: string;
   rePassword: string;
   passportPhoto: File;
@@ -16,8 +16,8 @@ export interface IRegister {
   clientId: string;
   clientSecret: string;
   deviceModel: string;
-  deviceId: number;
-  playerId: number;
+  deviceId: string;
+  playerId: string;
 }
 
 export interface ILogin {

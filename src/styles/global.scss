@@ -359,7 +359,7 @@ body {
     white,
     $Inter-font,
     $font-14,
-    $weight-bold,
+    $weight-normal,
     1.21,
     left,
     $primary,
@@ -391,10 +391,10 @@ body {
   @include custom-text-style(
     $Inter-font,
     $font-14,
-    $weight-600,
+    $weight-normal,
     1.21,
     left,
-    $primary
+    $gray9
   );
 }
 
@@ -462,20 +462,25 @@ body {
 
 .after-custom-input-flight-type {
   @include custom-input-styles(
-    253px,
+    157px,
     55px,
-    8px 0 0 0,
+    8px 12px 0 0,
     0 0 0 15px,
     5px,
-    #fbfbfb,
+    #f3f3f3,
     $Inter-font,
     $font-14,
     1.57,
     left,
-    rgb(152, 152, 152),
+    #8f8f8f,
     border,
     solid 1px $gray8
   );
+}
+.custom-input-flight-number {
+  @extend .after-custom-input-flight-type;
+  width: 165px;
+  margin: 0;
 }
 
 .custom-input-flight-type::placeholder,
@@ -662,6 +667,39 @@ body {
     center,
     $white
   );
+}
+
+.download-contract-btn {
+  @include custom-btn-style(
+    132px,
+    40px,
+    0 14px 41px 150px,
+    8px 19px,
+    5px,
+    $Inter-font,
+    $font-20,
+    $weight-normal,
+    1.25,
+    center,
+    $white
+  );
+}
+
+.edit-contract-btn {
+  @include custom-btn-style(
+    87px,
+    40px,
+    0 1px 41px 0,
+    8px 25px 8px 26px,
+    5px,
+    $Inter-font,
+    $font-20,
+    $weight-normal,
+    1.25,
+    center,
+    $primary
+  );
+  background-color: $white;
 }
 
 .add-new-travel {
@@ -1836,26 +1874,87 @@ body {
   padding: 0;
 }
 
-.info-modal-wrapper .modal-dialog .modal-content {
-  @include custom-box-style(
-    623px,
-    397px,
-    0 110px 59.8px 15px,
-    37px 34px,
-    contain,
-    none,
-    $white
-  );
-  border-radius: 16px;
-  border: solid 1px #707070;
+.info-modal-wrapper {
+  .modal-dialog {
+    .modal-content {
+      @include custom-box-style(
+        623px,
+        397px,
+        0 110px 59.8px 15px,
+        37px 34px,
+        contain,
+        none,
+        $white
+      );
+      border-radius: 16px;
+      border: solid 1px #707070;
+    }
+  }
+  .enter-travel-information {
+    @include custom-text-style(
+      $Inter-font,
+      $font-18,
+      $weight-600,
+      1.17,
+      left,
+      $black
+    );
+  }
+}
+.direct-modal-wrapper .modal-dialog .modal-content {
+  @extend .info-modal-wrapper;
+  width: 585px;
+  height: 461px;
+  .enter-travel-information {
+    display: block;
+    margin: 35px 0 17px 35px;
+    @include custom-text-style(
+      $Inter-font,
+      $font-18,
+      $weight-600,
+      1.17,
+      left,
+      $black
+    );
+  }
 }
 
-.enter-travel-information {
+.contract-modal-wrapper {
+  .modal-dialog {
+    max-width: 1223px !important;
+  }
+  .modal-content {
+    @include custom-box-style(
+      1223px,
+      1624px,
+      auto,
+      65px 55px 64px 55.5px,
+      contain,
+      none,
+      $white
+    );
+    border-radius: 16px;
+    border: solid 1px #707070;
+  }
+}
+
+.agreement-title-contract {
   @include custom-text-style(
     $Inter-font,
-    $font-18,
+    $font-24,
+    $weight-normal,
+    1.04,
+    left,
+    $black
+  );
+}
+
+.contract-title {
+  @include custom-text-style(
+    $Inter-font,
+    $font-22,
     $weight-600,
-    1.17,
+    1.04,
     left,
     $black
   );
@@ -1923,6 +2022,28 @@ body {
   );
   text-align-last: center;
 }
+.confirm-direct-btn {
+  @extend .confirm-info-btn;
+  width: 513px;
+  margin: auto;
+}
+
+.add-more-flight-btn {
+  @include custom-btn-style(
+    162px,
+    54px,
+    auto,
+    0,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    3,
+    left,
+    $white
+  );
+  text-align-last: center;
+}
 
 .profile-box-container {
   position: relative;
@@ -1963,6 +2084,19 @@ body {
   &::placeholder {
     color: #989898;
     font-weight: $weight-normal;
+  }
+}
+.half-custom-phone-register {
+  @extend .half-custom-input-register;
+  width: 145px;
+}
+
+.empty-input-style {
+  border: 1px solid #c28f8d !important;
+  background-color: #fbe3e4 !important;
+  color: #c28f8d !important;
+  &::placeholder {
+    color: #c28f8d !important;
   }
 }
 
@@ -2552,8 +2686,19 @@ body {
   font-size: 1.3em;
 }
 
+.bm-cross-button {
+  button {
+    left: unset !important;
+    right: 20px !important;
+  }
+  span {
+    right: 20px !important;
+  }
+}
+
 .bm-cross {
   background-color: $primary;
+  opacity: 0.7;
 }
 
 .user-profile-avatar {
@@ -2959,6 +3104,12 @@ body {
   margin-top: 25px;
 }
 
+.direct-radio-btn {
+  width: 18px;
+  height: 18px;
+  margin-right: 15px;
+}
+
 .card-radio-btn {
   width: 26px;
   height: 26px;
@@ -2966,7 +3117,6 @@ body {
 
 input[type="radio"]:after {
   border: solid 1px #c3cfe2;
-  // background-color: #fff;
 }
 
 .add-new-card-btn {
@@ -2983,6 +3133,12 @@ input[type="radio"]:after {
     center,
     $white
   );
+}
+.update-info-btn {
+  @extend .add-new-card-btn;
+  width: 100%;
+  margin: 0;
+  padding: 15px;
 }
 
 .transaction-wrapper {
@@ -3182,4 +3338,172 @@ input[type="radio"]:after {
   color: #00043d;
   font-weight: 600;
   cursor: pointer;
+}
+
+.contract-content {
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.7,
+    left,
+    $black
+  );
+  margin-bottom: 0;
+  display: block;
+  width: 100%;
+}
+.contract-content-radio {
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.7,
+    left,
+    $black
+  );
+  margin-bottom: 0;
+  margin-right: 12px;
+}
+
+.contract-modal-wrapper.modal {
+  overflow: auto !important;
+}
+
+.contract-radio-btn {
+  width: 15px;
+  height: 15px;
+}
+
+.contract-content-wrapper {
+  input {
+    align-self: center;
+    margin-left: 5px;
+  }
+}
+
+.err-validation {
+  color: #c28f8d;
+  font-size: $font-12;
+}
+
+.PhoneInputCountryIcon--border {
+  box-shadow: none !important;
+}
+
+.PhoneInputCountrySelect {
+  width: 108px !important;
+}
+
+.PhoneInputCountrySelectArrow {
+  display: none !important;
+}
+
+.PhoneInput {
+  width: 110px;
+  height: 50px;
+  margin: 0 10px 0 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 1px #d6d6d6;
+  background-color: #fff;
+  display: inline-flex !important;
+}
+
+.PhoneInputInput {
+  flex: 1 !important;
+  border: none !important;
+  font-size: 14px;
+  line-height: 1.57;
+  color: #989898;
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: none !important;
+}
+
+.phone-wrapper .input-group {
+  display: inline-flex !important;
+  vertical-align: top;
+}
+
+.PhoneInputCountryArrow {
+  display: block;
+  content: "";
+  width: var(--PhoneInputCountrySelectArrow-width);
+  height: var(--PhoneInputCountrySelectArrow-width);
+  margin-left: var(--PhoneInputCountrySelectArrow-marginLeft);
+  border-style: solid;
+  border-color: var(--PhoneInputCountrySelectArrow-color);
+  border-top-width: 0;
+  border-bottom-width: var(--PhoneInputCountrySelectArrow-borderWidth);
+  border-left-width: 0;
+  border-right-width: var(--PhoneInputCountrySelectArrow-borderWidth);
+  transform: var(--PhoneInputCountrySelectArrow-transform);
+  opacity: var(--PhoneInputCountrySelectArrow-opacity);
+  position: absolute;
+  left: 105px;
+  top: 21px;
+}
+
+.css-tlfecz-indicatorContainer {
+  padding: 8px 8px 8px 0 !important;
+}
+
+.airline-direct-title {
+  @include custom-text-style(
+    $Inter-font,
+    $font-14,
+    $weight-600,
+    1.21,
+    left,
+    $black
+  );
+  vertical-align: text-top;
+}
+
+.direct-time-title,
+.direct-location-title {
+  align-self: center;
+  span {
+    @include custom-text-style(
+      $Inter-font,
+      $font-12,
+      $weight-normal,
+      1.25,
+      left,
+      $black
+    );
+    display: block;
+  }
+}
+
+.flight-direct-info-table {
+  @include custom-box-style(
+    512px,
+    156px,
+    15px auto,
+    5px 20.5px 13px 10.6px,
+    contain,
+    0 24px 99px 0 rgba(0, 0, 0, 0.16),
+    #f3f3f3
+  );
+  border-radius: 10px;
+  border: solid 1px #e1e1e1;
+  .row {
+    align-content: space-around;
+    width: 510px;
+    height: 47px;
+    margin: auto -11px;
+  }
+  .row:first-child,
+  .row:nth-child(2) {
+    border-bottom: 1px solid rgb(112 112 112 / 13%);
+  }
+}
+
+.flight-information-wrapper {
+  width: 512px;
+  margin: auto;
 }

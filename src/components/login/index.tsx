@@ -6,6 +6,7 @@ import { Oval } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import { gapi } from "gapi-script";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { loginUser, externalLoginUser } from "redux/actions/Authorization";
 import { ILogin, IExternalLogin } from "models/interfaces";
@@ -42,16 +43,25 @@ export const Login: React.FC = () => {
     setDeviceModel(`${browserName}-${browserVersion}(${osName}${osVersion})`);
   }, []);
 
+  gapi.load("client:auth2", () => {
+    gapi.client.init({
+      clientId:
+        "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com",
+      plugin_name: "chat",
+    });
+  });
+
   const onSuccess = (res) => {
     console.log("[Login Success] currentUser:", res.profileObj);
     const data: IExternalLogin = {
       provider: "google",
-      accessToken: "",
-      email: "",
+      accessToken: res.profileObj.googleId,
+      email: res.profileObj.email,
       deviceModel,
       deviceId: "",
       playerId: "",
     };
+    dispatch(externalLoginUser(data));
   };
 
   const onFailure = (res) => {
@@ -203,10 +213,9 @@ export const Login: React.FC = () => {
             render={(renderProps) => (
               <Button
                 onClick={renderProps.onClick}
-                // disabled={renderProps.disabled}
+                disabled={renderProps.disabled}
                 variant="danger"
                 className="google-btn mt-4"
-                // href="https://localhost/signin-google"
               >
                 Google
               </Button>

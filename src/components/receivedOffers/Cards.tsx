@@ -5,6 +5,7 @@ import { Button } from "layers";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { Contract } from "components/modals/Contract";
 
 interface IProps {
   data: {
@@ -19,6 +20,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMoreDetail, setShowMoreDetail] = useState(false);
   const [fade, setFade] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const windowSize = UseWindowSize();
 
@@ -31,6 +33,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     setFade(true);
   };
 
+  const openContractModal = () => {
+    setIsOpenModal(!isOpenModal);
+  };
+
   return (
     <Col
       key={data?.name}
@@ -41,7 +47,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
       style={windowSize.width < 768 ? { width: "318px" } : null}
       data-testid="container"
     >
-      <Card className="receive-offer-card-wrapper">
+      <Card className="receive-offer-card-wrapper contract-modal-wrapper">
         <Card.Body className="card-received-body">
           <Row>
             <Col xs={2} className="card-receive-side-info">
@@ -172,6 +178,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               variant="primary"
               data-test="docs-btn-anchor"
               className="accept-btn mx-4"
+              onClick={openContractModal}
             >
               View Contract
             </Button>
@@ -196,6 +203,9 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             sidebarType="request"
           />
         </div>
+      )}
+      {isOpenModal && (
+        <Contract isOpen={isOpenModal} setIsOpen={setIsOpenModal} />
       )}
     </Col>
   );

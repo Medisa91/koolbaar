@@ -22,10 +22,10 @@ export const TravelInformation: React.FC<IProps> = ({
   fromData,
   toData,
 }) => {
-  const separatedFromDate = fromData.fromDate.split(" ");
-  const separatedFromHour = separatedFromDate[3].split(":");
-  const separatedToDate = toData.toDate.split(" ");
-  const separatedToHour = separatedToDate[3].split(":");
+  const separatedFromDate = fromData?.fromDate?.split(" ");
+  const separatedFromHour = fromData?.fromTime?.split(":");
+  const separatedToDate = toData?.toDate?.split(" ");
+  const separatedToHour = toData?.toTime?.split(":");
   const defaultFromDate = new Date(
     parseInt(separatedFromDate[2]),
     MonthNumber(separatedFromDate[1]),

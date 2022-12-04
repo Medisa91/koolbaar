@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { GoogleMapAPI, Uploader } from "components";
 import { Input, Button } from "layers";
 import UserAvatar from "./../../assets/images/user-avatar.png";
@@ -9,6 +10,18 @@ import { IRegister, ILogin } from "models/interfaces";
 import { loginUser } from "redux/actions/Authorization";
 import { createUser } from "redux/actions/Authorization";
 import { Oval } from "react-loader-spinner";
+import PhoneInput from "react-phone-number-input";
+import {
+  isValidFirstName,
+  isValidLastName,
+  isValidDisplayName,
+  isValidPhoneNumber,
+  isValidEmail,
+  isValidPassword,
+  isValidRePassword,
+  isMatchPasswords,
+  isValidFormatEmail,
+} from "helpers/checkRegisterValidation";
 
 interface IProps {
   deviceModel: string;
@@ -22,13 +35,19 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
   const [secondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
   const [avatar, setAvatar] = useState(UserAvatar);
   const [personalPhoto, setPersonalPhoto] = useState(null);
+  const [code, setCode] = useState("+1");
   const [changeImageStyle, setChangeImageStyle] = useState(false);
   const [positionLat, setLat] = useState(null);
   const [positionLong, setLng] = useState(null);
-  // const [phoneNumber, setPhoneNumber] = useState("");
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const Device_Model = deviceModel;
+  const [isRequired, setIsRequired] = useState(false);
+  const [registerClicked, setRegisterClicked] = useState(false);
+  const clientId = "517D58DC-95A5-4732-B182-2188A9853CF5";
+  const clientSecret =
+    "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==";
+  const deviceId = "";
+  const playerId = "";
   const [registerData, setRegisterData] = useState<IRegister>({
     personalPhoto: null,
     aboutMe: "",
@@ -38,8 +57,8 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     phoneNumber: "",
     email: "",
     address: "",
-    positionLat: "",
-    positionLong: "",
+    positionLat: 0,
+    positionLong: 0,
     password: "",
     rePassword: "",
     passportPhoto: null,
@@ -47,8 +66,8 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     clientId: "517D58DC-95A5-4732-B182-2188A9853CF5",
     clientSecret: "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
     deviceModel: "",
-    deviceId: null,
-    playerId: null,
+    deviceId: "",
+    playerId: "",
   });
 
   const handleCheckChange = () => {
@@ -68,27 +87,56 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
   };
 
   const registerBtn = () => {
-    setIsLoading(true);
-    const data = {
-      ...registerData,
-      personalPhoto,
-      // phoneNumber: parseInt(phoneNumber, 10),
-      passportPhoto,
-      secondIdentityPhoto,
-      positionLat,
-      positionLong,
-      deviceModel,
-    };
+    setRegisterClicked(true);
+    const phone = `${code}${registerData.phoneNumber}`
+    if (
+      !checked ||
+      !isValidFirstName(registerData.firstName) ||
+      !isValidLastName(registerData.lastName) ||
+      !isValidDisplayName(registerData.displayName) ||
+      !isValidPhoneNumber(registerData.phoneNumber) ||
+      !isValidEmail(registerData.email) ||
+      !isValidFormatEmail(registerData.email) ||
+      !isValidPassword(registerData.password) ||
+      !isValidRePassword(registerData.rePassword) ||
+      !isMatchPasswords(registerData.rePassword, registerData.password)
+    ) {
+      // setIsRequired(true);
+      toast.error("Enter the parameters correctly!");
+    } else {
+      // setIsRequired(false);
+      const body = new FormData();
+      body.append("personalPhoto", personalPhoto);
+      body.append("passportPhoto", passportPhoto);
+      body.append("secondIdentityPhoto", secondIdentityPhoto);
+      body.append("aboutMe", registerData.aboutMe);
+      body.append("firstName", registerData.firstName);
+      body.append("lastName", registerData.lastName);
+      body.append("displayName", registerData.displayName);
+      body.append("phoneNumber", phone);
+      body.append("email", registerData.email);
+      body.append("address", registerData.address);
+      body.append("positionLat", positionLat);
+      body.append("positionLong", positionLong);
+      body.append("password", registerData.password);
+      body.append("rePassword", registerData.rePassword);
+      body.append("clientId", clientId);
+      body.append("clientSecret", clientSecret);
+      body.append("deviceModel", deviceModel);
+      body.append("deviceId", deviceId);
+      body.append("playerId", playerId);
 
-    dispatch(createUser(data));
+      dispatch(createUser(body));
+      setIsLoading(true);
+    }
   };
 
   useEffect(() => {
-    setIsLoading(false);
     if (
       createUserData?.data?.length !== 0 &&
-      createUserData?.data[0]?.isSuccess
+      createUserData?.data[0]?.isSuccess === true
     ) {
+      setIsLoading(false);
       const data = {
         grantType: "password",
         username: registerData?.email,
@@ -101,6 +149,8 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
         playerId: "",
       };
       dispatch(loginUser(data));
+    } else if (createUserData?.data[0]?.isSuccess === false) {
+      setIsLoading(false);
     }
   }, [createUserData]);
 
@@ -147,21 +197,35 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
               id="firstName-input"
               placeholder="First Name"
               name="firstName"
-              className="half-custom-input-register"
+              className={`half-custom-input-register ${
+                registerClicked &&
+                !isValidFirstName(registerData.firstName) &&
+                "empty-input-style"
+              }`}
               value={registerData.firstName}
               onChange={handleChange}
             />
+            {registerClicked && !isValidFirstName(registerData.firstName) && (
+              <span className="err-validation">Required!</span>
+            )}
           </Col>
-          <Col xs={6} className="mb-4 text-center">
+          <Col xs={6} className="mb-4 text-left">
             <Input
               size="sm"
               id="lastName-input"
               placeholder="Last Name"
               name="lastName"
-              className="half-custom-input-register"
+              className={`half-custom-input-register ${
+                registerClicked &&
+                !isValidLastName(registerData.lastName) &&
+                "empty-input-style"
+              }`}
               value={registerData.lastName}
               onChange={handleChange}
             />
+            {registerClicked && !isValidLastName(registerData.lastName) && (
+              <span className="err-validation">Required!</span>
+            )}
           </Col>
           <Col xs={6} className="mb-4">
             <Input
@@ -169,21 +233,44 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
               id="displayName-input"
               placeholder="Display Name"
               name="displayName"
-              className="half-custom-input-register"
+              className={`half-custom-input-register ${
+                registerClicked &&
+                !isValidDisplayName(registerData.displayName) &&
+                "empty-input-style"
+              }`}
               value={registerData.displayName}
               onChange={handleChange}
             />
+            {registerClicked &&
+              !isValidDisplayName(registerData.displayName) && (
+                <span className="err-validation">Required!</span>
+              )}
           </Col>
-          <Col xs={6} className="mb-4 text-center">
+          <Col xs={6} className="mb-4 text-left phone-wrapper">
+            <PhoneInput
+              international
+              defaultCountry="US"
+              value={code}
+              onChange={setCode}
+            ></PhoneInput>
+            <span className="PhoneInputCountryArrow"></span>
             <Input
               size="sm"
               id="phoneNumber-input"
               placeholder="Phone Number"
               name="phoneNumber"
-              className="half-custom-input-register"
+              className={`half-custom-phone-register d-inline-flex ${
+                registerClicked &&
+                !isValidPhoneNumber(registerData.phoneNumber) &&
+                "empty-input-style"
+              }`}
               value={registerData.phoneNumber}
               onChange={handleChange}
             />
+            {registerClicked &&
+              !isValidPhoneNumber(registerData.phoneNumber) && (
+                <span className="err-validation">Required!</span>
+              )}
             {/* <NumericFormat
               className="half-custom-input-register"
               id="phoneNumber"
@@ -204,10 +291,23 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
               id="email-input"
               placeholder="Email"
               name="email"
-              className="full-custom-input-register"
+              className={`full-custom-input-register ${
+                registerClicked &&
+                (!isValidEmail(registerData.email) ||
+                  !isValidFormatEmail(registerData.email)) &&
+                "empty-input-style"
+              }`}
               value={registerData.email}
               onChange={handleChange}
             />
+            {registerClicked && !isValidEmail(registerData.email) && (
+              <span className="err-validation">Required!</span>
+            )}
+            {registerClicked && !isValidFormatEmail(registerData.email) && (
+              <span className="err-validation">
+                Email format isn't correct!
+              </span>
+            )}
           </Col>
           <Col xs={12} className="mb-4">
             <Input
@@ -230,24 +330,51 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
               size="sm"
               id="password-input"
               placeholder="Password"
-              className="half-custom-input-register"
+              className={`half-custom-input-register ${
+                registerClicked &&
+                !isValidPassword(registerData.password) &&
+                "empty-input-style"
+              }`}
               name="password"
               type="password"
               value={registerData.password}
               onChange={handleChange}
             />
+            {registerClicked && !isValidPassword(registerData.password) && (
+              <span className="err-validation">Required!</span>
+            )}
           </Col>
-          <Col xs={6} className="mb-4 text-center">
+          <Col xs={6} className="mb-4 text-left">
             <Input
               size="sm"
               id="rePassword-input"
               placeholder="Retype Password"
               name="rePassword"
               type="password"
-              className="half-custom-input-register"
+              className={`half-custom-input-register ${
+                registerClicked &&
+                (!isValidRePassword(registerData.rePassword) ||
+                  !isMatchPasswords(
+                    registerData.rePassword,
+                    registerData.password
+                  )) &&
+                "empty-input-style"
+              }`}
               value={registerData.rePassword}
               onChange={handleChange}
             />
+            {registerClicked && !isValidRePassword(registerData.rePassword) && (
+              <span className="err-validation">Required!</span>
+            )}
+            {registerClicked &&
+              !isMatchPasswords(
+                registerData.rePassword,
+                registerData.password
+              ) && (
+                <span className="err-validation">
+                  The passwords don't match!
+                </span>
+              )}
           </Col>
         </Row>
         <Row>

@@ -16,14 +16,16 @@ const responsiveContainerStyle = {
   width: "360px",
   height: "213px",
 };
-export const GoogleMapAPI: React.FC<IProp> = ({setLat, setLng }) => {
+export const GoogleMapAPI: React.FC<IProp> = ({ setLat, setLng }) => {
   const size = UseWindowSize();
   const [location, setLocation] = useState({
-    lat: 49,
-    lng: -123,
+    lat: 49.246251500646025,
+    lng: -123.06729125976562,
   });
 
   useEffect(() => {
+    setLat(49.246251500646025);
+    setLng(-123.06729125976562);
     navigator.geolocation.getCurrentPosition(function (position) {
       setLocation({
         lat: position.coords.latitude,

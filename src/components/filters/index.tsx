@@ -34,9 +34,9 @@ export const Filters: React.FC<IProp> = ({
   const [typeOptions, setTypeOptions] = useState([]);
   const [weightOptions, setWeightOptions] = useState([]);
   const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [type, setType] = useState({ value: 0, label: "All" });
-  const [size, setSize] = useState({ value: 1, label: "All" });
-  const [deliveryType, setDeliveryType] = useState({ value: 1, label: "All" });
+  const [type, setType] = useState({ value: 0, label: "Type" });
+  const [size, setSize] = useState({ value: 0, label: "Size" });
+  const [deliveryType, setDeliveryType] = useState({ value: 0, label: "Delivery Type" });
   const packagesType = useAppSelector((state) => state.packageTypes);
   const weightRanges = useAppSelector((state) => state.weightRange);
   const deliveryTypes = useAppSelector((state) => state.deliveryType);
@@ -124,6 +124,7 @@ export const Filters: React.FC<IProp> = ({
                 </Button>
               )}
               <Select
+                placeholder={"Type"}
                 className="custom-select-filter-type d-inline-block"
                 value={type}
                 onChange={handleTypeChange}
@@ -131,6 +132,7 @@ export const Filters: React.FC<IProp> = ({
                 components={{
                   IndicatorSeparator: () => null,
                 }}
+
                 styles={customStyle}
               />
               <Select

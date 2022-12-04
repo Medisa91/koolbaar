@@ -41,7 +41,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
       style={windowSize.width < 768 ? { width: "318px" } : null}
       data-testid="container"
     >
-      <Card className="receive-offer-card-wrapper">
+      <Card className="receive-offer-card-wrapper contract-modal-wrapper">
         <Card.Body className="card-received-body">
           <Row>
             <Col xs={2} className="card-receive-side-info">

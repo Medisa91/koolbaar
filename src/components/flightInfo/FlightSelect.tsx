@@ -5,6 +5,7 @@ import Select from "react-select";
 import { DebounceInput } from "react-debounce-input";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
+import { DirectInformation } from "components/modals/DirectInformation";
 import { DepartureOptions, ArrivalOptions } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { getFlightInquiry } from "redux/actions/flight";
@@ -32,9 +33,10 @@ export const FlightSelect: FC<IProps> = ({
   const flightInquiryData: any = useAppSelector((state) => state.flightInquiry);
   const [selectedOption, setSelectedOption] = useState({
     value: 1,
-    label: "Direct",
+    label: "Indirect",
   });
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isTravelOpenModal, setIsTravelOpenModal] = useState(false);
+  const [isDirectOpenModal, setIsDirectOpenModal] = useState(false);
   const [fromData, setFromData] = useState<DepartureOptions>({
     from: "",
     fromDate: "",
@@ -47,8 +49,8 @@ export const FlightSelect: FC<IProps> = ({
   });
 
   const options = [
-    { value: 1, label: "Direct" },
-    { value: 2, label: "Indirect" },
+    { value: 1, label: "Indirect" },
+    { value: 2, label: "Direct" },
   ];
 
   const customStyle = {
@@ -86,10 +88,13 @@ export const FlightSelect: FC<IProps> = ({
 
   const handleChange = (selected) => {
     setSelectedOption(selected);
+    if (selected.label === "Direct") {
+      setIsDirectOpenModal(true);
+    }
   };
 
   const openTravelInfoModal = () => {
-    setIsOpenModal(!isOpenModal);
+    setIsTravelOpenModal(!isTravelOpenModal);
     setFromData(travelDepartureInfoData);
     setToData(travelArrivalInfoData);
   };
@@ -107,8 +112,8 @@ export const FlightSelect: FC<IProps> = ({
         pauseOnHover
         theme="dark"
       />
-      {isAfterSearch ? null : (
-        <Col xs={4}>
+      {/* {isAfterSearch ? null : ( */}
+      {/* <Col xs={4}>
           <div>
             <span className="flight-type-title">Flight Type</span>
             <Select
@@ -122,30 +127,26 @@ export const FlightSelect: FC<IProps> = ({
               styles={customStyle}
             />
           </div>
-        </Col>
-      )}
+        </Col> */}
+      {/* )} */}
 
-      <Col xs={isAfterSearch ? 12 : 8}>
+      <Col xs={12}>
         <div>
-          <span className="flight-number-title">
-            {selectedOption?.label === "Direct"
-              ? "Flight Number"
-              : "First and Last Flight Number"}
-          </span>
-          {isAfterSearch && (
-            <Link
-              to="/"
-              onClick={openTravelInfoModal}
-              className="not-have-ticket-title"
-            >
-              I don't have ticket
-            </Link>
-          )}
+          <span className="flight-number-title">Flight Number</span>
+          {/* {isAfterSearch && ( */}
+          <Link
+            to="/"
+            onClick={openTravelInfoModal}
+            className="not-have-ticket-title"
+          >
+            I don't have ticket
+          </Link>
+          {/* )} */}
           {/* <Input
             size="sm"
             id="test-id"
             placeholder={
-              selectedOption?.label === "Direct"
+              selectedOption?.label === "Indirect"
                 ? "eg. WY 824"
                 : "eg. WY 824, WY6181"
               }
@@ -155,31 +156,49 @@ export const FlightSelect: FC<IProps> = ({
                 : "custom-input-flight-type"
               }`}
             /> */}
-
-          <DebounceInput
-            minLength={2}
-            debounceTimeout={1000}
-            onChange={changeFlightNumber}
-            onKeyDown={handleKeyDown}
-            placeholder={
-              selectedOption?.label === "Direct"
-                ? "eg. WY 824"
-                : "eg. WY 824, WY6181"
-            }
-            className={`${
-              isAfterSearch
-                ? "after-custom-input-flight-type"
-                : "custom-input-flight-type"
-            }`}
-          />
+          <div>
+            <DebounceInput
+              minLength={2}
+              debounceTimeout={1000}
+              onChange={changeFlightNumber}
+              onKeyDown={handleKeyDown}
+              placeholder={
+                selectedOption?.label === "Indirect"
+                  ? "N790AN, UA789"
+                  : "eg. WY 824, WY6181"
+              }
+              className="after-custom-input-flight-type d-inline-block"
+              // className={`${
+              //   isAfterSearch
+              //     ? "after-custom-input-flight-type"
+              //     : "custom-input-flight-type"
+              // }`}
+            />
+            <Select
+              className="custom-select-flight-type d-inline-block "
+              value={selectedOption}
+              onChange={handleChange}
+              options={options}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+              styles={customStyle}
+            />
+          </div>
         </div>
       </Col>
-      {isOpenModal && (
+      {isTravelOpenModal && (
         <TravelInformation
           fromData={fromData}
           toData={toData}
-          isOpen={isOpenModal}
-          setIsOpen={setIsOpenModal}
+          isOpen={isTravelOpenModal}
+          setIsOpen={setIsTravelOpenModal}
+        />
+      )}
+      {isDirectOpenModal && (
+        <DirectInformation
+          isOpen={isDirectOpenModal}
+          setIsOpen={setIsDirectOpenModal}
         />
       )}
     </Row>

@@ -44,7 +44,7 @@ export const Menu: React.FC = () => {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="2" as={Link} to="/Contant">
+                <Nav.Link eventKey="2" as={Link} to="/Contact">
                   Contact
                 </Nav.Link>
               </Nav.Item>

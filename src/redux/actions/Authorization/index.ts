@@ -68,8 +68,6 @@ export const externalLoginUser = (data) => async (dispatch) => {
 
 export const createUser = (data) => async (dispatch) => {
   try {
-    const body = new FormData();
-    body.append("file", data);
     const res = await AuthorizationService.createUser(data);
     dispatch(addNewUser(res.data));
     if (res?.data?.isSuccess) toast.success(res?.data?.message);

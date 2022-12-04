@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Uploader } from "components";
-import { Input } from "layers";
+import { Button, Input } from "layers";
 import UserAvatar from "./../../assets/images/user-avatar.png";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
@@ -158,6 +158,9 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
               />
             </section>
           </Row>
+          <Button variant="primary" className="update-info-btn">
+            Update Information
+          </Button>
         </>
       ) : (
         <SkeletonForm />
