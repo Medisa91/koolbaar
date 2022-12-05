@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 export const TranslateExample: React.FC = () => {
-  // https://react.i18next.com/guides/quick-start#translate-your-content
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lang) => i18n.changeLanguage(lang);

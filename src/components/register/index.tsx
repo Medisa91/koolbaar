@@ -21,7 +21,8 @@ import {
   isValidRePassword,
   isMatchPasswords,
   isValidFormatEmail,
-} from "helpers/checkRegisterValidation";
+  isValid,
+} from "helpers/registerValidation";
 
 interface IProps {
   deviceModel: string;
@@ -86,49 +87,40 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
   };
 
-  const registerBtn = () => {
-    setRegisterClicked(true);
-    const phone = `${code}${registerData.phoneNumber}`
-    if (
-      !checked ||
-      !isValidFirstName(registerData.firstName) ||
-      !isValidLastName(registerData.lastName) ||
-      !isValidDisplayName(registerData.displayName) ||
-      !isValidPhoneNumber(registerData.phoneNumber) ||
-      !isValidEmail(registerData.email) ||
-      !isValidFormatEmail(registerData.email) ||
-      !isValidPassword(registerData.password) ||
-      !isValidRePassword(registerData.rePassword) ||
-      !isMatchPasswords(registerData.rePassword, registerData.password)
-    ) {
-      // setIsRequired(true);
-      toast.error("Enter the parameters correctly!");
-    } else {
-      // setIsRequired(false);
-      const body = new FormData();
-      body.append("personalPhoto", personalPhoto);
-      body.append("passportPhoto", passportPhoto);
-      body.append("secondIdentityPhoto", secondIdentityPhoto);
-      body.append("aboutMe", registerData.aboutMe);
-      body.append("firstName", registerData.firstName);
-      body.append("lastName", registerData.lastName);
-      body.append("displayName", registerData.displayName);
-      body.append("phoneNumber", phone);
-      body.append("email", registerData.email);
-      body.append("address", registerData.address);
-      body.append("positionLat", positionLat);
-      body.append("positionLong", positionLong);
-      body.append("password", registerData.password);
-      body.append("rePassword", registerData.rePassword);
-      body.append("clientId", clientId);
-      body.append("clientSecret", clientSecret);
-      body.append("deviceModel", deviceModel);
-      body.append("deviceId", deviceId);
-      body.append("playerId", playerId);
+  const callRegisterApi = () => {
+    const phone = `${code}${registerData.phoneNumber}`;
+    const body = new FormData();
+    body.append("personalPhoto", personalPhoto);
+    body.append("passportPhoto", passportPhoto);
+    body.append("secondIdentityPhoto", secondIdentityPhoto);
+    body.append("aboutMe", registerData.aboutMe);
+    body.append("firstName", registerData.firstName);
+    body.append("lastName", registerData.lastName);
+    body.append("displayName", registerData.displayName);
+    body.append("phoneNumber", phone);
+    body.append("email", registerData.email);
+    body.append("address", registerData.address);
+    body.append("positionLat", positionLat);
+    body.append("positionLong", positionLong);
+    body.append("password", registerData.password);
+    body.append("rePassword", registerData.rePassword);
+    body.append("clientId", clientId);
+    body.append("clientSecret", clientSecret);
+    body.append("deviceModel", deviceModel);
+    body.append("deviceId", deviceId);
+    body.append("playerId", playerId);
 
-      dispatch(createUser(body));
-      setIsLoading(true);
+    dispatch(createUser(body));
+    setIsLoading(true);
+  };
+
+  const register = () => {
+    setRegisterClicked(true);
+    if (isValid(registerData, checked)) {
+      toast.error("Enter the parameters correctly!");
+      return;
     }
+    callRegisterApi();
   };
 
   useEffect(() => {
@@ -422,7 +414,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
             variant="primary"
             data-test="docs-btn-anchor"
             className="submit-request-btn mt-4"
-            onClick={registerBtn}
+            onClick={register}
           >
             Submit Request
             {isLoading && (

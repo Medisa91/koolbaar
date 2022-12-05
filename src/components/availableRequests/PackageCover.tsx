@@ -5,10 +5,10 @@ import { Button } from "layers";
 import { Gallery } from "react-photoswipe-gallery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faCheck } from "@fortawesome/free-solid-svg-icons";
-import CertificateYellowIcon from "../../assets/images/svg/verified-yellow.svg";
-import CertificateGreenIcon from "../../assets/images/svg/verified-green.svg";
 import { LightBoxItem } from "./LightBoxItem";
 import { IRequest } from "models/interfaces";
+import { LevelMarker } from "components/common/levelMarker";
+import { getUserLevelColor } from "helpers/getUserLevel";
 
 interface IProp {
   onShowCover: (key: any) => void;
@@ -16,8 +16,6 @@ interface IProp {
   data: IRequest;
 }
 export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
-  // const node = useRef<HTMLDivElement>(null);
-
   const [showCover, setShowCover] = useState(false);
   const [openProfileBox, setOpenProfileBox] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
@@ -54,44 +52,56 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
                 id="dropdown-basic"
                 className="px-0 mx-0"
               >
-                {openProfileBox ? (
-                  <img
-                    className="card-cover-certificate"
-                    src={CertificateGreenIcon}
-                    alt="profile-img"
-                  />
-                ) : (
-                  <img
-                    className="card-cover-certificate"
-                    src={CertificateYellowIcon}
-                    alt="profile-img"
-                  />
-                )}
+              <LevelMarker color={getUserLevelColor(data.userLevel)} />
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
                 <Dropdown.Item href="#/action-1">
-                  <FontAwesomeIcon className="mr-2" icon={faCheck} /> Profile
-                  Picture
+                  {data.isProfilePicture ? (
+                    <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  ) : (
+                    <FontAwesomeIcon className="mr-2" icon={faClose} />
+                  )}
+                  Profile Picture
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-2">
-                  <FontAwesomeIcon className="mr-2" icon={faCheck} /> Valid
-                  Passport
+                  {data.isValidPassport ? (
+                    <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  ) : (
+                    <FontAwesomeIcon className="mr-2" icon={faClose} />
+                  )}
+                  Valid Passport
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
-                  <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  {data.isIdValidation ? (
+                    <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  ) : (
+                    <FontAwesomeIcon className="mr-2" icon={faClose} />
+                  )}
                   ID Validation (Passport)
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
-                  <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  {data.isProofOfAddress ? (
+                    <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  ) : (
+                    <FontAwesomeIcon className="mr-2" icon={faClose} />
+                  )}
                   Proof of address
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
-                  <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  {data.isSuccessfulTransaction ? (
+                    <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  ) : (
+                    <FontAwesomeIcon className="mr-2" icon={faClose} />
+                  )}
                   Successful Transaction (10+)
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
-                  <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  {data.isRating ? (
+                    <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                  ) : (
+                    <FontAwesomeIcon className="mr-2" icon={faClose} />
+                  )}
                   Rating ( 4.5/5 )
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -102,9 +112,6 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
           </div>
         </Card.Header>
         <Card.Body className="request-card-border location-card-info request-card-cover-body">
-          {/* <p>
-            {data?.description}
-          </p> */}
           <div className="text-left">
             <span className="location-title">Location:</span>
           </div>

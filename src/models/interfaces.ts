@@ -67,7 +67,10 @@ export interface IGateway {
 }
 
 export interface ITransaction {
-  id: string;
+  amount: string;
+  imageUrl: string;
+  insertTime: string;
+  number: string;
 }
 
 export interface IRequest {
@@ -88,7 +91,15 @@ export interface IRequest {
   description: string;
   location: string;
   images: string[];
+  isIdValidation: boolean;
+  isProfilePicture: boolean;
+  isProofOfAddress: boolean;
+  isRating: boolean;
+  isSuccessfulTransaction: boolean;
+  isValidPassport: boolean;
+  userLevel: string;
 }
+
 export interface ITraveler {
   fullName: string;
   rating: string;
@@ -106,6 +117,13 @@ export interface ITraveler {
   deliveryTypes: string;
   location: string;
   images: string[];
+  isIdValidation: boolean;
+  isProfilePicture: boolean;
+  isProofOfAddress: boolean;
+  isRating: boolean;
+  isSuccessfulTransaction: boolean;
+  isValidPassport: boolean;
+  userLevel: string;
 }
 
 export interface DepartureOptions {

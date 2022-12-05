@@ -7,9 +7,9 @@ import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faCheck } from "@fortawesome/free-solid-svg-icons";
-import CertificateYellowIcon from "../../assets/images/svg/verified-yellow.svg";
-import CertificateGreenIcon from "../../assets/images/svg/verified-green.svg";
 import { ITraveler } from "models/interfaces";
+import { getUserLevelColor } from "helpers/getUserLevel";
+import { LevelMarker } from "components/common/levelMarker";
 
 interface IProps {
   data: ITraveler;
@@ -81,36 +81,56 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                       id="dropdown-basic"
                       className="px-0 mx-0"
                     >
-                      {openProfileBox ? (
-                        <img src={CertificateGreenIcon} alt="profile-img" />
-                      ) : (
-                        <img src={CertificateYellowIcon} alt="profile-img" />
-                      )}
+                      <LevelMarker color={getUserLevelColor(data.userLevel)} />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
                       <Dropdown.Item href="#/action-1">
-                        <FontAwesomeIcon className="mr-2" icon={faCheck} />{" "}
+                        {data.isProfilePicture ? (
+                          <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon className="mr-2" icon={faClose} />
+                        )}
                         Profile Picture
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-2">
-                        <FontAwesomeIcon className="mr-2" icon={faCheck} />{" "}
+                        {data.isValidPassport ? (
+                          <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon className="mr-2" icon={faClose} />
+                        )}
                         Valid Passport
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-3">
-                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        {data.isIdValidation ? (
+                          <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon className="mr-2" icon={faClose} />
+                        )}
                         ID Validation (Passport)
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-3">
-                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        {data.isProofOfAddress ? (
+                          <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon className="mr-2" icon={faClose} />
+                        )}
                         Proof of address
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-3">
-                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        {data.isSuccessfulTransaction ? (
+                          <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon className="mr-2" icon={faClose} />
+                        )}
                         Successful Transaction (10+)
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-3">
-                        <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        {data.isRating ? (
+                          <FontAwesomeIcon className="mr-2" icon={faCheck} />
+                        ) : (
+                          <FontAwesomeIcon className="mr-2" icon={faClose} />
+                        )}
                         Rating ( 4.5/5 )
                       </Dropdown.Item>
                     </Dropdown.Menu>

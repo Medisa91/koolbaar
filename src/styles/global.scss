@@ -1904,7 +1904,8 @@ body {
 .direct-modal-wrapper .modal-dialog .modal-content {
   @extend .info-modal-wrapper;
   width: 585px;
-  height: 461px;
+  height: auto;
+  padding-bottom: 35px;
   .enter-travel-information {
     display: block;
     margin: 35px 0 17px 35px;
@@ -3500,6 +3501,13 @@ input[type="radio"]:after {
   .row:first-child,
   .row:nth-child(2) {
     border-bottom: 1px solid rgb(112 112 112 / 13%);
+  }
+}
+.flight-direct-info-dropdown {
+  @extend .flight-direct-info-table;
+  width: 397px;
+  .row {
+    width: 397px;
   }
 }
 

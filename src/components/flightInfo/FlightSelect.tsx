@@ -2,12 +2,14 @@ import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
+import { Input } from "layers";
 import { DebounceInput } from "react-debounce-input";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
 import { DirectInformation } from "components/modals/DirectInformation";
 import { DepartureOptions, ArrivalOptions } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
+import { FlightInfoDropdown } from "./FlightInfoDropdown";
 import { getFlightInquiry } from "redux/actions/flight";
 import { ToastContainer } from "react-toastify";
 
@@ -33,8 +35,9 @@ export const FlightSelect: FC<IProps> = ({
   const flightInquiryData: any = useAppSelector((state) => state.flightInquiry);
   const [selectedOption, setSelectedOption] = useState({
     value: 1,
-    label: "Indirect",
+    label: "Direct",
   });
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isTravelOpenModal, setIsTravelOpenModal] = useState(false);
   const [isDirectOpenModal, setIsDirectOpenModal] = useState(false);
   const [fromData, setFromData] = useState<DepartureOptions>({
@@ -49,8 +52,8 @@ export const FlightSelect: FC<IProps> = ({
   });
 
   const options = [
-    { value: 1, label: "Indirect" },
-    { value: 2, label: "Direct" },
+    { value: 1, label: "Direct" },
+    { value: 2, label: "Indirect" },
   ];
 
   const customStyle = {
@@ -88,7 +91,7 @@ export const FlightSelect: FC<IProps> = ({
 
   const handleChange = (selected) => {
     setSelectedOption(selected);
-    if (selected.label === "Direct") {
+    if (selected.label === "Indirect") {
       setIsDirectOpenModal(true);
     }
   };
@@ -112,28 +115,9 @@ export const FlightSelect: FC<IProps> = ({
         pauseOnHover
         theme="dark"
       />
-      {/* {isAfterSearch ? null : ( */}
-      {/* <Col xs={4}>
-          <div>
-            <span className="flight-type-title">Flight Type</span>
-            <Select
-              className="custom-select-flight-type"
-              value={selectedOption}
-              onChange={handleChange}
-              options={options}
-              components={{
-                IndicatorSeparator: () => null,
-              }}
-              styles={customStyle}
-            />
-          </div>
-        </Col> */}
-      {/* )} */}
-
       <Col xs={12}>
         <div>
           <span className="flight-number-title">Flight Number</span>
-          {/* {isAfterSearch && ( */}
           <Link
             to="/"
             onClick={openTravelInfoModal}
@@ -141,21 +125,6 @@ export const FlightSelect: FC<IProps> = ({
           >
             I don't have ticket
           </Link>
-          {/* )} */}
-          {/* <Input
-            size="sm"
-            id="test-id"
-            placeholder={
-              selectedOption?.label === "Indirect"
-                ? "eg. WY 824"
-                : "eg. WY 824, WY6181"
-              }
-              className={`${
-                isAfterSearch
-                ? "after-custom-input-flight-type"
-                : "custom-input-flight-type"
-              }`}
-            /> */}
           <div>
             <DebounceInput
               minLength={2}
@@ -163,17 +132,33 @@ export const FlightSelect: FC<IProps> = ({
               onChange={changeFlightNumber}
               onKeyDown={handleKeyDown}
               placeholder={
-                selectedOption?.label === "Indirect"
-                  ? "N790AN, UA789"
-                  : "eg. WY 824, WY6181"
+                selectedOption?.label === "Direct" ? "N790AN" : "N790AN, UA789"
               }
               className="after-custom-input-flight-type d-inline-block"
-              // className={`${
-              //   isAfterSearch
-              //     ? "after-custom-input-flight-type"
-              //     : "custom-input-flight-type"
-              // }`}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
+
+            {/* <Input
+              size="sm"
+              id="flightNumber"
+              placeholder={
+                selectedOption?.label === "Direct" ? "N790AN" : "N790AN, UA789"
+              }
+              className="after-custom-input-flight-type d-inline-block"
+              onChange={changeFlightNumber}
+              onKeyDown={handleKeyDown}
+              onClick={handleKeyDown}
+            /> */}
+
+            {isDropdownOpen && (
+              <div
+                className="flight-direct-info-dropdown"
+                style={{ position: "absolute", zIndex: 1 }}
+              >
+                <FlightInfoDropdown />
+              </div>
+            )}
+
             <Select
               className="custom-select-flight-type d-inline-block "
               value={selectedOption}
