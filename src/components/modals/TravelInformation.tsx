@@ -7,25 +7,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "layers";
 import { MonthNumber } from "helpers/convertMonthNameToNumber";
-import { DepartureOptions, ArrivalOptions } from "models/interfaces";
+import { IFlightOptions } from "models/interfaces";
 
 interface IProps {
   isOpen: boolean;
   setIsOpen: (key: any) => void;
-  fromData: DepartureOptions;
-  toData: ArrivalOptions;
+  travelData: IFlightOptions;
 }
 
 export const TravelInformation: React.FC<IProps> = ({
   isOpen,
   setIsOpen,
-  fromData,
-  toData,
+  travelData,
 }) => {
-  const separatedFromDate = fromData?.fromDate?.split(" ");
-  const separatedFromHour = fromData?.fromTime?.split(":");
-  const separatedToDate = toData?.toDate?.split(" ");
-  const separatedToHour = toData?.toTime?.split(":");
+  const separatedFromDate = travelData?.fromDate?.split(" ");
+  const separatedFromHour = travelData?.fromTime?.split(":");
+  const separatedToDate = travelData?.toDate?.split(" ");
+  const separatedToHour = travelData?.toTime?.split(":");
   const defaultFromDate = new Date(
     parseInt(separatedFromDate[2]),
     MonthNumber(separatedFromDate[1]),
@@ -47,10 +45,13 @@ export const TravelInformation: React.FC<IProps> = ({
 
   const screenSize = UseWindowSize();
   const [from, setFrom] = useState({
-    value: fromData.from,
-    label: fromData.from,
+    value: travelData.fromLocation,
+    label: travelData.fromLocation,
   });
-  const [to, setTo] = useState({ value: toData.to, label: toData.to });
+  const [to, setTo] = useState({
+    value: travelData.toLocation,
+    label: travelData.toLocation,
+  });
   const [fromDate, setFromDate] = useState(defaultFromDate);
   const [toDate, setToDate] = useState(defaultToDate);
   const [departureData, setDepartureData] = useState([]);
@@ -87,9 +88,13 @@ export const TravelInformation: React.FC<IProps> = ({
   };
 
   useEffect(() => {
-    setDepartureData([{ value: fromData.from, label: fromData.from }]);
-    setArrivalData([{ value: toData.to, label: toData.to }]);
-  }, [fromData, toData]);
+    setDepartureData([
+      { value: travelData.fromLocation, label: travelData.fromLocation },
+    ]);
+    setArrivalData([
+      { value: travelData.toLocation, label: travelData.toLocation },
+    ]);
+  }, [travelData]);
 
   const customStyle = {
     control: (styles) => ({

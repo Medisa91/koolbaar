@@ -1,32 +1,22 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC} from "react";
 import LocationIcon from "../../assets/images/svg/location.svg";
-import { ArrivalOptions } from "models/interfaces";
+import { IFlightOptions } from "models/interfaces";
 import { SkeletonText } from "components";
 
 interface IProps {
-  onSelectArrivalInfo: Function;
-  travelArrivalInfoData: ArrivalOptions;
+  travelArrivalInfoData: IFlightOptions;
   isLoading: boolean;
 }
 
 export const ArrivalInfo: FC<IProps> = ({
-  onSelectArrivalInfo,
   travelArrivalInfoData,
   isLoading,
 }) => {
-  const [arrivalData, setArrivalData] = useState({
-    to: "Canada, Toronto",
+  const arrivalData = {
+    toLocation: "Canada, Toronto",
     toDate: "25 AUG 2021",
     toTime: "20:15",
-  });
-
-  useEffect(() => {
-    setArrivalData(travelArrivalInfoData);
-  }, [travelArrivalInfoData]);
-
-  useEffect(() => {
-    onSelectArrivalInfo(arrivalData);
-  }, []);
+  };
 
   return (
     <>
@@ -46,13 +36,21 @@ export const ArrivalInfo: FC<IProps> = ({
           </div>
           <div className="text-align-last-left">
             <span className="search-departure-destination">
-              {arrivalData.to}
+              {travelArrivalInfoData.toLocation
+                ? travelArrivalInfoData.toLocation
+                : arrivalData?.toLocation}
             </span>
           </div>
           <div className="text-align-last-left">
-            <span className="search-departure-date">{arrivalData?.toDate}</span>
+            <span className="search-departure-date">
+              {travelArrivalInfoData.toDate
+                ? travelArrivalInfoData.toDate
+                : arrivalData?.toDate}
+            </span>
             <span className="search-departure-date ml-4">
-              {arrivalData?.toTime}
+              {travelArrivalInfoData.toTime
+                ? travelArrivalInfoData.toTime
+                : arrivalData?.toTime}
             </span>
           </div>
         </div>

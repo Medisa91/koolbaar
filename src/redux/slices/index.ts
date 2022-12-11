@@ -10,6 +10,7 @@ import deliveryType from "./types/deliveryType";
 import flightInquiry from "./flight/flightInquiry";
 import homeRequest from "./flight/homeRequest";
 import homeTraveler from "./flight/homeTraveler";
+import travelRequestHomeRequest from "./flight/homeRequestTravelInfo";
 
 export {
   counter,
@@ -23,5 +24,6 @@ export {
   deliveryType,
   flightInquiry,
   homeRequest,
-  homeTraveler
+  homeTraveler,
+  travelRequestHomeRequest
 };

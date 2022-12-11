@@ -1,5 +1,5 @@
 export interface IRegister {
-  personalPhoto: File;
+  personalPhoto: any;
   aboutMe: string;
   firstName: string;
   lastName: string;
@@ -29,6 +29,15 @@ export interface ILogin {
   deviceModel: string;
   deviceId: string;
   playerId: string;
+}
+
+export interface IFlightInquiry {
+  fromLocation: string;
+  fromDate: string;
+  fromTime: string;
+  toLocation: string;
+  toDate: string;
+  toTime: string;
 }
 
 export interface IExternalLogin {
@@ -126,14 +135,30 @@ export interface ITraveler {
   userLevel: string;
 }
 
+export interface TravelInformation {
+  fromCityCountry: string;
+  departureDate: string;
+  toCityCountry: string;
+  arrivalDate: string;
+}
+
+export interface IFlightOptions {
+  fromLocation: string;
+  fromDate: string;
+  fromTime: string;
+  toLocation: string;
+  toDate: string;
+  toTime: string;
+}
+
 export interface DepartureOptions {
-  from: string;
+  fromLocation: string;
   fromDate: string;
   fromTime: string;
 }
 
 export interface ArrivalOptions {
-  to: string;
+  toLocation: string;
   toDate: string;
   toTime: string;
 }

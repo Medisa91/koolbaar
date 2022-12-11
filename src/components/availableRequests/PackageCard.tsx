@@ -63,9 +63,10 @@ export const PackageCard: React.FC<IProps> = ({
                 : data?.items?.map((item, idx) => (
                     <Cards key={idx} data={item} />
                   ))} */}
-              {requestData?.map((data, idx) => (
-                <Cards key={idx} data={data} />
-              ))}
+              {requestData?.length !== 0 &&
+                requestData?.map((data, idx) => (
+                  <Cards key={idx} data={data} />
+                ))}
             </>
           )}
         </Row>

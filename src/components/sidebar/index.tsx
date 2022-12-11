@@ -1,16 +1,21 @@
 import React from "react";
 import { Login, AcceptOffer, SendRequest } from "components";
-import { slide as Menu } from 'react-burger-menu'
+import { slide as Menu } from "react-burger-menu";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
 interface IProps {
-    isOpen: boolean;
-    setIsOpen:(key: any) => void;
-    sidebarType: string;
+  isOpen: boolean;
+  setIsOpen: (key: any) => void;
+  setIsLogin?: Function;
+  sidebarType: string;
 }
 
-
-export const RightSidebar: React.FC<IProps> = ({ isOpen, setIsOpen, sidebarType }) => {
+export const RightSidebar: React.FC<IProps> = ({
+  isOpen,
+  setIsOpen,
+  sidebarType,
+  setIsLogin,
+}) => {
   const size = UseWindowSize();
   return (
     <Menu
@@ -21,7 +26,7 @@ export const RightSidebar: React.FC<IProps> = ({ isOpen, setIsOpen, sidebarType 
       sidebarType="login"
     >
       {sidebarType === "login" ? (
-        <Login />
+        <Login setIsOpen={setIsOpen} setIsLogin={setIsLogin} />
       ) : sidebarType === "offer" ? (
         <AcceptOffer />
       ) : sidebarType === "request" ? (

@@ -3,14 +3,9 @@ import {
   flightInquiry,
   flightInquiryFailure,
 } from "redux/slices/flight/flightInquiry";
-import {
-  homeRequest,
-  homeRequestFailure,
-} from "redux/slices/flight/homeRequest";
-import {
-  homeTraveler,
-  homeTravelerFailure,
-} from "redux/slices/flight/homeTraveler";
+import { homeRequest } from "redux/slices/flight/homeRequest";
+import { homeTraveler } from "redux/slices/flight/homeTraveler";
+import { travelRequestHomeRequest } from "redux/slices/flight/homeRequestTravelInfo";
 import { toast } from "react-toastify";
 
 export const getFlightInquiry = (data) => async (dispatch) => {
@@ -27,10 +22,13 @@ export const getFlightInquiry = (data) => async (dispatch) => {
 export const getAllHomeRequest = (data) => async (dispatch) => {
   try {
     const res = await FlightsService.getHomeRequest(data);
-    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
-    dispatch(homeRequest(res.data));
+    if (res?.data?.isSuccess) {
+      dispatch(homeRequest(res.data));
+      return;
+    }
+    toast.error(res?.data?.message);
   } catch (err) {
-    dispatch(homeRequestFailure(err?.response));
+    // dispatch(homeRequestFailure(err?.response));
     toast.error(err?.response?.data?.message);
   }
 };
@@ -41,7 +39,18 @@ export const getAllHomeTraveler = (data) => async (dispatch) => {
     if (!res?.data?.isSuccess) toast.error(res?.data?.message);
     dispatch(homeTraveler(res.data));
   } catch (err) {
-    dispatch(homeTravelerFailure(err?.response));
+    // dispatch(homeTravelerFailure(err?.response));
+    toast.error(err?.response?.data?.message);
+  }
+};
+
+export const getAllTravelInfoHomeRequests = (data) => async (dispatch) => {
+  try {
+    const res = await FlightsService.getHomeRequestByTravelInfo(data);
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+    dispatch(travelRequestHomeRequest(res.data));
+  } catch (err) {
+    // dispatch(homeTravelerFailure(err?.response));
     toast.error(err?.response?.data?.message);
   }
 };

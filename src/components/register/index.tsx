@@ -22,13 +22,29 @@ import {
   isMatchPasswords,
   isValidFormatEmail,
   isValid,
+  isValidPhoneNumberLength,
 } from "helpers/registerValidation";
+
+interface IGoogleResponse {
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  email: string;
+}
 
 interface IProps {
   deviceModel: string;
+  googleResponse: IGoogleResponse;
+  setIsOpen: Function;
+  setIsLogin: Function;
 }
 
-export const Register: React.FC<IProps> = ({ deviceModel }) => {
+export const Register: React.FC<IProps> = ({
+  deviceModel,
+  googleResponse,
+  setIsOpen,
+  setIsLogin,
+}) => {
   const dispatch = useAppDispatch();
   const size = UseWindowSize();
   const createUserData: any = useAppSelector((state) => state.register);
@@ -70,6 +86,28 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
     deviceId: "",
     playerId: "",
   });
+
+  useEffect(() => {
+    if (googleResponse.avatar) {
+      setAvatar(googleResponse.avatar)
+      const image = googleResponse.avatar;
+      const urlToObject = async () => {
+        const response = await fetch(image);
+        const blob = await response.blob();
+        const file = new File([blob], "image.jpg", { type: blob.type });
+        console.log(file);
+        setPersonalPhoto(file);
+        return file;
+      };
+      setRegisterData({
+        ...registerData,
+        personalPhoto: urlToObject(),
+        firstName: googleResponse.firstName,
+        lastName: googleResponse.lastName,
+        email: googleResponse.email,
+      });
+    }
+  }, [googleResponse]);
 
   const handleCheckChange = () => {
     setChecked(!checked);
@@ -124,26 +162,18 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
   };
 
   useEffect(() => {
-    if (
-      createUserData?.data?.length !== 0 &&
-      createUserData?.data[0]?.isSuccess === true
-    ) {
+    if (createUserData?.accessToken) {
+      window.localStorage.setItem("token", createUserData?.accessToken);
+      window.localStorage.setItem("avatar", createUserData?.personalPhoto);
+      window.localStorage.setItem("expire", createUserData?.expiresIn);
+      window.localStorage.setItem("refreshToken", createUserData?.refreshToken);
+      window.localStorage.setItem("tokenType", createUserData?.tokenType);
+      setIsOpen(false);
       setIsLoading(false);
-      const data = {
-        grantType: "password",
-        username: registerData?.email,
-        password: registerData?.password,
-        clientId: "517D58DC-95A5-4732-B182-2188A9853CF5",
-        clientSecret:
-          "QVWglh6wamKIEyI8kdSlWsD/gNTUpYKdC4GjTw/zFibEcBWH5Djoyw==",
-        deviceModel,
-        deviceId: "",
-        playerId: "",
-      };
-      dispatch(loginUser(data));
-    } else if (createUserData?.data[0]?.isSuccess === false) {
-      setIsLoading(false);
+      setIsLogin(true);
+      return;
     }
+    setIsLoading(false);
   }, [createUserData]);
 
   return (
@@ -157,13 +187,20 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
             }`}
           >
             <Input
-              label={<img src={avatar} alt="user-avatar" />}
+              label={
+                <img
+                  src={googleResponse?.avatar ? googleResponse?.avatar : avatar}
+                  alt="user-avatar"
+                  className="avatar-main-img"
+                />
+              }
               size="sm"
               id="avatar-input"
               name="avatar"
               type="file"
               className="avatar-control-file"
               onChange={updateAvatars}
+              disabled={googleResponse?.avatar !== ""}
             />
           </div>
           <div className="profile-box-container">
@@ -195,6 +232,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
                 "empty-input-style"
               }`}
               value={registerData.firstName}
+              disabled={googleResponse?.firstName !== ""}
               onChange={handleChange}
             />
             {registerClicked && !isValidFirstName(registerData.firstName) && (
@@ -213,6 +251,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
                 "empty-input-style"
               }`}
               value={registerData.lastName}
+              disabled={googleResponse?.lastName !== ""}
               onChange={handleChange}
             />
             {registerClicked && !isValidLastName(registerData.lastName) && (
@@ -263,6 +302,12 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
               !isValidPhoneNumber(registerData.phoneNumber) && (
                 <span className="err-validation">Required!</span>
               )}
+            {registerClicked &&
+              !isValidPhoneNumberLength(registerData.phoneNumber) && (
+                <span className="err-validation">
+                  Phone number should be 10 digits
+                </span>
+              )}
             {/* <NumericFormat
               className="half-custom-input-register"
               id="phoneNumber"
@@ -289,6 +334,7 @@ export const Register: React.FC<IProps> = ({ deviceModel }) => {
                   !isValidFormatEmail(registerData.email)) &&
                 "empty-input-style"
               }`}
+              disabled={googleResponse?.email !== ""}
               value={registerData.email}
               onChange={handleChange}
             />

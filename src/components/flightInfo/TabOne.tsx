@@ -6,25 +6,26 @@ import { ArrivalInfo } from "./ArrivalInfo";
 import PlaneIcon from "../../assets/images/plane.png";
 import { Button } from "layers";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { DepartureOptions, ArrivalOptions } from "models/interfaces";
-import { useAppDispatch, useAppSelector } from "redux/store";
-import { getFlightInquiry } from "redux/actions/flight";
+import { IFlightOptions } from "models/interfaces";
+import { useAppDispatch } from "redux/store";
+import { getAllTravelInfoHomeRequests } from "redux/actions/flight";
+import { TravelInformation, IRequest } from "models/interfaces";
 
 export const TabOne: FC<{}> = () => {
   const size = UseWindowSize();
   const [flightNumber, setFlightNumber] = useState("");
+  const [flightInquiry, setFlightInquiry] = useState<IFlightOptions>({
+    fromLocation: "",
+    fromDate: "",
+    fromTime: "",
+    toLocation: "",
+    toDate: "",
+    toTime: "",
+  });
   const [isAfterSearch, setIsAfterSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [travelDepartureInfoData, setTravelDepartureInfoData] =
-    useState<DepartureOptions>({ from: "", fromDate: "", fromTime: "" });
-  const [travelArrivalInfoData, setTravelArrivalInfoData] =
-    useState<ArrivalOptions>({
-      to: "",
-      toDate: "",
-      toTime: "",
-    });
   const dispatch = useAppDispatch();
-  const flightInquiryData = useAppSelector((state) => state.flightInquiry);
+  
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,35 +33,16 @@ export const TabOne: FC<{}> = () => {
     }, 3000);
   }, []);
 
-  // useEffect(() => {
-  //   const data = {
-  //     flightNumber,
-  //     departureDate: null,
-  //   };
-  //   dispatch(getFlightInquiry(data));
-  // }, [flightNumber]);
-
-  useEffect(() => {
-    if (flightInquiryData !== null && flightInquiryData?.length !== 0) {
-      setTravelDepartureInfoData({
-        from: flightInquiryData[0]?.fromLocation,
-        fromDate: flightInquiryData[0]?.fromDate,
-        fromTime: flightInquiryData[0]?.fromTime,
-      });
-      setTravelArrivalInfoData({
-        to: flightInquiryData[0]?.toLocation,
-        toDate: flightInquiryData[0]?.toDate,
-        toTime: flightInquiryData[0]?.toTime,
-      });
+  const searchFlight = () => {
+    {
+      const data: TravelInformation = {
+        fromCityCountry: flightInquiry.fromLocation,
+        departureDate: flightInquiry.fromTime,
+        toCityCountry: flightInquiry.toLocation,
+        arrivalDate: flightInquiry.toDate,
+      };
+      dispatch(getAllTravelInfoHomeRequests(data));
     }
-  }, [flightInquiryData]);
-
-  const handleDepartureInfo = (data) => {
-    setTravelDepartureInfoData(data);
-  };
-
-  const handleArrivalInfo = (data) => {
-    setTravelArrivalInfoData(data);
   };
 
   return (
@@ -69,9 +51,9 @@ export const TabOne: FC<{}> = () => {
         <Row>
           <Col lg={7} md={7} sm={12}>
             <FlightSelect
+              setFlightInquiry={setFlightInquiry}
               isAfterSearch={isAfterSearch}
-              travelDepartureInfoData={travelDepartureInfoData}
-              travelArrivalInfoData={travelArrivalInfoData}
+              travelInfoData={flightInquiry}
               flightNumber={flightNumber}
               setFlightNumber={setFlightNumber}
               setIsLoading={setIsLoading}
@@ -80,8 +62,7 @@ export const TabOne: FC<{}> = () => {
           <Col lg={5} md={5} sm={12} className="departure-info-wrapper">
             <DepartureInfo
               isLoading={isLoading}
-              onSelectDepartureInfo={handleDepartureInfo}
-              travelDepartureInfoData={travelDepartureInfoData}
+              travelDepartureInfoData={flightInquiry}
             />
           </Col>
         </Row>
@@ -113,8 +94,7 @@ export const TabOne: FC<{}> = () => {
           <Col>
             <ArrivalInfo
               isLoading={isLoading}
-              onSelectArrivalInfo={handleArrivalInfo}
-              travelArrivalInfoData={travelArrivalInfoData}
+              travelArrivalInfoData={flightInquiry}
             />
           </Col>
           <Col>
@@ -122,8 +102,8 @@ export const TabOne: FC<{}> = () => {
               <Button
                 variant="warning"
                 data-test="docs-btn-anchor"
-                href="/"
                 className="search-flight-btn mt-2"
+                onClick={searchFlight}
               >
                 Search this flight
               </Button>

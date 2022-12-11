@@ -5,7 +5,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { PackageCard } from "./PackageCard";
-import { Option } from "models/interfaces";
+import { Option, IRequest } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { getAllHomeRequest } from "redux/actions/flight";
 
@@ -23,8 +23,13 @@ export const AvailableRequests: React.FC<IProps> = ({
   const windowSize = UseWindowSize();
   const dispatch = useAppDispatch();
   const [requestData, setRequestData] = useState([]);
-  const homeRequestData = useAppSelector((state) => state.homeRequest);
+  const [homeRequestByTravelInfo, setHomeRequestByTravelInfo] =
+    useState<IRequest[]>();
 
+  const homeRequestData = useAppSelector((state) => state.homeRequest);
+  const homeRequestByTravelData = useAppSelector(
+    (state) => state.travelRequestHomeRequest
+  );
   useEffect(() => {
     const data = {
       packagetypeId: null,
@@ -35,8 +40,13 @@ export const AvailableRequests: React.FC<IProps> = ({
   }, []);
 
   useEffect(() => {
-    setRequestData(homeRequestData);
+    if (homeRequestData?.length !== 0) setRequestData(homeRequestData);
   }, [homeRequestData]);
+
+  useEffect(() => {
+    if (homeRequestByTravelData?.length !== 0)
+      setHomeRequestByTravelInfo(homeRequestByTravelData);
+  }, [homeRequestByTravelData]);
 
   return (
     <div className="requests-info-wrapper">

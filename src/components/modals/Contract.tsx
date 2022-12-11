@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Modal } from "react-bootstrap";
 import { Button } from "layers";
-import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { DepartureOptions, ArrivalOptions } from "models/interfaces";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 interface IProps {
   isOpen: boolean;
@@ -12,9 +12,31 @@ interface IProps {
 export const Contract: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
   const handleClose = () => setIsOpen(false);
 
+  const downloadContract = () => {
+    const input = document.getElementById("pdfdiv");
+
+    html2canvas(input).then((canvas) => {
+      var imgWidth = 200;
+      var imgHeight = 285;
+      const imgData = canvas.toDataURL("image/png");
+      var doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      var position = 5;
+      doc.addImage(imgData, "JPEG", 5, position, imgWidth, imgHeight);
+      setTimeout(() => {
+        doc.save("contract.pdf");
+      }, 200);
+    });
+  };
+
   return (
     <>
       <Modal
+        id="pdfdiv"
         className="contract-modal-wrapper"
         show={isOpen}
         onHide={handleClose}
@@ -27,7 +49,11 @@ export const Contract: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
               </span>
             </Col>
             <Col xs={6} className="text-right">
-              <Button variant="primary" className="download-contract-btn">
+              <Button
+                variant="primary"
+                className="download-contract-btn"
+                onClick={downloadContract}
+              >
                 Download
               </Button>
               <Button className="edit-contract-btn">Edit</Button>
@@ -212,19 +238,82 @@ export const Contract: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
               Value X QTY) Weight of the Object: KG Attach the picture: Optional
               Link: Optional
             </p>
-            {/* <p className="contract-content"></p>
-            <p className="contract-content"></p> */}
             <p className="contract-content">
-              *Adding new lines needs to be possible. Total Value: Sum of all
-              Values Total Weight: Sum of all Weights kg ⃝ The package is picked
-              up directly at the airport by the recipient. ⃝ The package is
-              delivered by the traveler himself, at the address of the
-              recipient. ⃝ The package is posted by the traveler to the address
-              of the recipient. ⃝ The package is picked up at the
-              traveler&apos;s home by the sender, or a recipient sent by the
-              sender (e.g. a family member). ⃝ Other. Empty Field: Please
-              specify the delivery method here.
+              *Adding new lines needs to be possible.
             </p>
+            <p className="contract-content">
+              Total Value: Sum of all Values Total Weight: Sum of all Weights kg
+            </p>
+            <div className="d-block w-100">
+              <input
+                className="ml-0 mr-1 contract-radio-btn"
+                type="radio"
+                name="site_name"
+              />
+              <span className="contract-content-radio">
+                The package is picked up directly at the airport by the
+                recipient.
+              </span>
+            </div>
+            <div className="d-block w-100">
+              <input
+                className="ml-0 mr-1 contract-radio-btn"
+                type="radio"
+                name="site_name"
+              />
+              <span className="contract-content-radio">
+                The package is delivered by the traveler himself, at the address
+                of the recipient.
+              </span>
+            </div>
+            <div className="d-block w-100">
+              <input
+                className="ml-0 mr-1 contract-radio-btn"
+                type="radio"
+                name="site_name"
+              />
+              <span className="contract-content-radio">
+                The package is posted by the traveler to the address of the
+                recipient.
+              </span>
+            </div>
+            <div className="d-block w-100">
+              <input
+                className="ml-0 mr-1 contract-radio-btn"
+                type="radio"
+                name="site_name"
+              />
+              <span className="contract-content-radio">
+                The package is picked up at the traveler&apos;s home by the
+                sender, or a recipient sent by the sender (e.g. a family
+                member).
+              </span>
+            </div>
+            <div className="d-block w-100">
+              <input
+                className="ml-0 mr-1 contract-radio-btn"
+                type="radio"
+                name="site_name"
+              />
+              <span className="contract-content-radio">Other.</span>
+            </div>
+            <p className="contract-content">
+              Empty Field: Please specify the delivery method here.
+            </p>
+          </Row>
+          <Row>
+            <Col xs={4} className="signature-wrapper">
+              <span>Traveler Signature</span>
+              <div></div>
+            </Col>
+            <Col xs={4} className="signature-wrapper">
+              <span>Witness Signature (Optional)</span>
+              <div></div>
+            </Col>
+            <Col xs={4} className="signature-wrapper">
+              <span>Sender Signature</span>
+              <div></div>
+            </Col>
           </Row>
         </Modal.Body>
       </Modal>

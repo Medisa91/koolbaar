@@ -3,11 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 export const checkTokenSlice = createSlice({
   name: "checkToken",
   initialState: {
-    data: [],
+    data: {
+      isValid: false,
+      isRegistered: false,
+      accessToken: "",
+      personalPhoto: "",
+      expiresIn: "",
+      refreshToken: "",
+      tokenType: "",
+    },
   },
   reducers: {
     checkToken: (state, action) => {
-      state.data.push(action.payload);
+      return action.payload;
     },
     checkTokenFailure: (state, action) => {
       return action.payload;

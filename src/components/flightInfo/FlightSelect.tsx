@@ -2,12 +2,11 @@ import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import Select from "react-select";
-import { Input } from "layers";
 import { DebounceInput } from "react-debounce-input";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { TravelInformation } from "components/modals/TravelInformation";
 import { DirectInformation } from "components/modals/DirectInformation";
-import { DepartureOptions, ArrivalOptions } from "models/interfaces";
+import { IFlightOptions } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { FlightInfoDropdown } from "./FlightInfoDropdown";
 import { getFlightInquiry } from "redux/actions/flight";
@@ -15,20 +14,20 @@ import { ToastContainer } from "react-toastify";
 
 interface IProps {
   isAfterSearch: boolean;
-  travelDepartureInfoData: DepartureOptions;
-  travelArrivalInfoData: ArrivalOptions;
+  travelInfoData: IFlightOptions;
   flightNumber: string;
   setFlightNumber: Function;
   setIsLoading: Function;
+  setFlightInquiry?: Function;
 }
 
 export const FlightSelect: FC<IProps> = ({
   isAfterSearch,
-  travelDepartureInfoData,
-  travelArrivalInfoData,
+  travelInfoData,
   flightNumber,
   setFlightNumber,
   setIsLoading,
+  setFlightInquiry,
 }) => {
   const size = UseWindowSize();
   const dispatch = useAppDispatch();
@@ -40,16 +39,7 @@ export const FlightSelect: FC<IProps> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isTravelOpenModal, setIsTravelOpenModal] = useState(false);
   const [isDirectOpenModal, setIsDirectOpenModal] = useState(false);
-  const [fromData, setFromData] = useState<DepartureOptions>({
-    from: "",
-    fromDate: "",
-    fromTime: "",
-  });
-  const [toData, setToData] = useState<ArrivalOptions>({
-    to: "",
-    toDate: "",
-    toTime: "",
-  });
+  const [isClosedItems, setIsClosedItems] = useState(true);
 
   const options = [
     { value: 1, label: "Direct" },
@@ -65,13 +55,26 @@ export const FlightSelect: FC<IProps> = ({
     }),
   };
 
+  const isFlightNumberIsSixDigit = (flightNumber: string) => {
+    return flightNumber.length >= 6;
+  };
+
   const changeFlightNumber = (e) => {
+    setIsClosedItems(true)
     setFlightNumber(e.target.value);
     const data = {
       flightNumber,
       departureDate: null,
     };
-    if (flightNumber) dispatch(getFlightInquiry(data));
+    if (
+      isFlightNumberIsSixDigit(e.target.value) &&
+      selectedOption.label === "Direct"
+    ) {
+      setIsDropdownOpen(true);
+      dispatch(getFlightInquiry(data));
+      return;
+    }
+    setIsDropdownOpen(false);
   };
 
   useEffect(() => {
@@ -85,10 +88,6 @@ export const FlightSelect: FC<IProps> = ({
     if (flightInquiryData?.length !== 0) setIsLoading(false);
   }, [flightInquiryData]);
 
-  const handleKeyDown = (e) => {
-    setIsLoading(true);
-  };
-
   const handleChange = (selected) => {
     setSelectedOption(selected);
     if (selected.label === "Indirect") {
@@ -98,8 +97,6 @@ export const FlightSelect: FC<IProps> = ({
 
   const openTravelInfoModal = () => {
     setIsTravelOpenModal(!isTravelOpenModal);
-    setFromData(travelDepartureInfoData);
-    setToData(travelArrivalInfoData);
   };
 
   return (
@@ -127,15 +124,16 @@ export const FlightSelect: FC<IProps> = ({
           </Link>
           <div>
             <DebounceInput
-              minLength={2}
-              debounceTimeout={1000}
+              minLength={1}
+              debounceTimeout={100}
               onChange={changeFlightNumber}
-              onKeyDown={handleKeyDown}
+              // onKeyDown={handleFlightKeyDown}
               placeholder={
                 selectedOption?.label === "Direct" ? "N790AN" : "N790AN, UA789"
               }
+              value={flightNumber}
               className="after-custom-input-flight-type d-inline-block"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              // onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
 
             {/* <Input
@@ -150,12 +148,17 @@ export const FlightSelect: FC<IProps> = ({
               onClick={handleKeyDown}
             /> */}
 
-            {isDropdownOpen && (
+            {isDropdownOpen && isClosedItems && (
               <div
                 className="flight-direct-info-dropdown"
                 style={{ position: "absolute", zIndex: 1 }}
               >
-                <FlightInfoDropdown />
+                <FlightInfoDropdown
+                  setFlightInquiry={setFlightInquiry}
+                  flightInquiryData={flightInquiryData}
+                  setIsClosedItems={setIsClosedItems}
+                  setFlightNumber={setFlightNumber}
+                />
               </div>
             )}
 
@@ -174,8 +177,7 @@ export const FlightSelect: FC<IProps> = ({
       </Col>
       {isTravelOpenModal && (
         <TravelInformation
-          fromData={fromData}
-          toData={toData}
+          travelData={travelInfoData}
           isOpen={isTravelOpenModal}
           setIsOpen={setIsTravelOpenModal}
         />

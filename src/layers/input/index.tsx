@@ -4,16 +4,19 @@ import {
   InputGroup as BaseInput,
   InputGroupProps,
   FormControl,
-  Form
+  Form,
 } from "react-bootstrap";
 
-export interface InputProps extends InputGroupProps, React.HTMLAttributes<HTMLElement> {
+export interface InputProps
+  extends InputGroupProps,
+    React.HTMLAttributes<HTMLElement> {
   type?: string;
   value?: any;
-  textArea?: boolean,
-  rows?: number,
-  label?: any,
-  name?: string,
+  textArea?: boolean;
+  rows?: number;
+  label?: any;
+  name?: string;
+  disabled?: boolean;
   // ref?: React.RefObject<HTMLInputElement>
 }
 
@@ -31,6 +34,7 @@ export const Input: React.FC<IInput> = ({
   value,
   rows,
   label,
+  disabled,
   onChange,
   ...rest
 }) => {
@@ -52,6 +56,7 @@ export const Input: React.FC<IInput> = ({
           value={value}
           onChange={onChange}
           name={name}
+          disabled={disabled}
           // ref={ref}
         />
       </BaseInput>

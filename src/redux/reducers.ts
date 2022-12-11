@@ -12,6 +12,7 @@ import {
   homeRequest,
   homeTraveler,
   userInfo,
+  travelRequestHomeRequest
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   homeRequest,
   homeTraveler,
   userInfo,
+  travelRequestHomeRequest
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

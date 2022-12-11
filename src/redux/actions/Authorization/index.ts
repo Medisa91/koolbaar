@@ -53,13 +53,9 @@ export const externalLoginUser = (data) => async (dispatch) => {
       res?.data?.data?.isValid === true
     ) {
       dispatch(checkToken(res.data));
-    } else if (
-      res?.data?.data?.isRegistered === true &&
-      res?.data?.data?.isValid === true
-    ) {
-      dispatch(checkToken(res.data));
-      toast.success(res?.data?.message);
-    } else toast.error(res?.data?.message);
+    } else{
+      dispatch(checkToken(res?.data))
+    }
   } catch (err) {
     dispatch(checkTokenFailure(err?.response));
     toast.error(err?.response?.data?.message);
@@ -69,9 +65,11 @@ export const externalLoginUser = (data) => async (dispatch) => {
 export const createUser = (data) => async (dispatch) => {
   try {
     const res = await AuthorizationService.createUser(data);
+    if (!res?.data?.isSuccess) {
+      toast.error(res?.data?.message);
+      return;
+    }
     dispatch(addNewUser(res.data));
-    if (res?.data?.isSuccess) toast.success(res?.data?.message);
-    else toast.error(res?.data?.message);
   } catch (err) {
     dispatch(registerFailure(err?.response));
     toast.error(err?.response?.data?.message);

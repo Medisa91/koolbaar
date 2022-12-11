@@ -171,6 +171,7 @@ export const Header: React.FC = () => {
         <RightSidebar
           isOpen={showSidebar}
           setIsOpen={setShowSidebar}
+          setIsLogin={setIsLogin}
           sidebarType="login"
         />
       )}

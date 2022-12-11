@@ -16,6 +16,11 @@ a:hover {
   box-shadow: none;
 }
 
+a.btn.disabled,
+fieldset:disabled a.btn {
+  color: #fff !important;
+}
+
 html,
 body,
 .App {
@@ -1901,22 +1906,25 @@ body {
     );
   }
 }
-.direct-modal-wrapper .modal-dialog .modal-content {
-  @extend .info-modal-wrapper;
-  width: 585px;
-  height: auto;
-  padding-bottom: 35px;
-  .enter-travel-information {
-    display: block;
-    margin: 35px 0 17px 35px;
-    @include custom-text-style(
-      $Inter-font,
-      $font-18,
-      $weight-600,
-      1.17,
-      left,
-      $black
-    );
+.direct-modal-wrapper {
+  overflow-y: auto !important;
+  .modal-dialog .modal-content {
+    @extend .info-modal-wrapper;
+    width: 585px;
+    height: auto;
+    padding-bottom: 35px;
+    .enter-travel-information {
+      display: block;
+      margin: 35px 0 17px 35px;
+      @include custom-text-style(
+        $Inter-font,
+        $font-18,
+        $weight-600,
+        1.17,
+        left,
+        $black
+      );
+    }
   }
 }
 
@@ -2023,7 +2031,8 @@ body {
   );
   text-align-last: center;
 }
-.confirm-direct-btn {
+
+.confirm-indirect-btn {
   @extend .confirm-info-btn;
   width: 513px;
   margin: auto;
@@ -2044,6 +2053,17 @@ body {
     $white
   );
   text-align-last: center;
+}
+
+.remove-more-flight-btn {
+  @extend .add-more-flight-btn;
+  background-color: $white;
+  border: 1px solid #d91e00;
+  color: #d91e00;
+  &:hover {
+    background-color: #ca5c4b;
+    border: 1px solid #ca5c4b;
+  }
 }
 
 .profile-box-container {
@@ -3483,7 +3503,7 @@ input[type="radio"]:after {
 .flight-direct-info-table {
   @include custom-box-style(
     512px,
-    156px,
+    auto,
     15px auto,
     5px 20.5px 13px 10.6px,
     contain,
@@ -3498,9 +3518,11 @@ input[type="radio"]:after {
     height: 47px;
     margin: auto -11px;
   }
-  .row:first-child,
-  .row:nth-child(2) {
+  .row {
     border-bottom: 1px solid rgb(112 112 112 / 13%);
+  }
+  .row:last-child {
+    border-bottom: none;
   }
 }
 .flight-direct-info-dropdown {
@@ -3514,4 +3536,45 @@ input[type="radio"]:after {
 .flight-information-wrapper {
   width: 512px;
   margin: auto;
+}
+
+.flight-loading {
+  place-content: center;
+  padding: 35px;
+}
+
+.avatar-main-img {
+  width: 100%;
+  height: 100%;
+}
+
+input:disabled {
+  background: #efefef;
+}
+
+.signature-wrapper {
+  margin-top: 70px;
+  span {
+    @include custom-text-style(
+      $Inter-font,
+      $font-20,
+      $weight-normal,
+      1.25,
+      left,
+      $black
+    );
+  }
+  div {
+    @include custom-box-style(
+      340px,
+      208px,
+      25px 45px 0 3.5px,
+      67.3px 72px 11.3px 14.8px,
+      contain,
+      none,
+      $gray7
+    );
+    border: solid 1px #d5d5d5;
+    border-radius: 10px;
+  }
 }
