@@ -16,6 +16,7 @@ interface IProps {
   isAfterSearch: boolean;
   travelInfoData: IFlightOptions;
   flightNumber: string;
+  isLoading: boolean;
   setFlightNumber: Function;
   setIsLoading: Function;
   setFlightInquiry?: Function;
@@ -24,6 +25,7 @@ interface IProps {
 export const FlightSelect: FC<IProps> = ({
   isAfterSearch,
   travelInfoData,
+  isLoading,
   flightNumber,
   setFlightNumber,
   setIsLoading,
@@ -60,7 +62,7 @@ export const FlightSelect: FC<IProps> = ({
   };
 
   const changeFlightNumber = (e) => {
-    setIsClosedItems(true)
+    setIsClosedItems(true);
     setFlightNumber(e.target.value);
     const data = {
       flightNumber,
@@ -78,14 +80,11 @@ export const FlightSelect: FC<IProps> = ({
   };
 
   useEffect(() => {
-    // if (flightInquiryData && flightInquiryData?.length !== 0) {
-    //   if (flightInquiryData.isSuccess) {
-    //     setIsLoading(false);
-    //   } else {
-    //   }
-    // }
-    if (flightInquiryData) setIsLoading(false);
-    if (flightInquiryData?.length !== 0) setIsLoading(false);
+    if (flightInquiryData?.data === null || !flightInquiryData?.isSuccess) {
+      setIsLoading(false);
+      setIsDropdownOpen(false);
+    }
+    if (flightInquiryData?.data?.length !== 0) setIsLoading(false);
   }, [flightInquiryData]);
 
   const handleChange = (selected) => {
@@ -155,9 +154,10 @@ export const FlightSelect: FC<IProps> = ({
               >
                 <FlightInfoDropdown
                   setFlightInquiry={setFlightInquiry}
-                  flightInquiryData={flightInquiryData}
+                  flightInquiryData={flightInquiryData?.data}
                   setIsClosedItems={setIsClosedItems}
                   setFlightNumber={setFlightNumber}
+                  isLoading={isLoading}
                 />
               </div>
             )}
@@ -184,6 +184,8 @@ export const FlightSelect: FC<IProps> = ({
       )}
       {isDirectOpenModal && (
         <DirectInformation
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
           isOpen={isDirectOpenModal}
           setIsOpen={setIsDirectOpenModal}
         />

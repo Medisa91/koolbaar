@@ -34,14 +34,14 @@ interface IGoogleResponse {
 
 interface IProps {
   deviceModel: string;
-  googleResponse: IGoogleResponse;
+  thirdPartyResponse: IGoogleResponse;
   setIsOpen: Function;
   setIsLogin: Function;
 }
 
 export const Register: React.FC<IProps> = ({
   deviceModel,
-  googleResponse,
+  thirdPartyResponse,
   setIsOpen,
   setIsLogin,
 }) => {
@@ -88,9 +88,9 @@ export const Register: React.FC<IProps> = ({
   });
 
   useEffect(() => {
-    if (googleResponse.avatar) {
-      setAvatar(googleResponse.avatar)
-      const image = googleResponse.avatar;
+    if (thirdPartyResponse.avatar) {
+      setAvatar(thirdPartyResponse.avatar)
+      const image = thirdPartyResponse.avatar;
       const urlToObject = async () => {
         const response = await fetch(image);
         const blob = await response.blob();
@@ -102,12 +102,12 @@ export const Register: React.FC<IProps> = ({
       setRegisterData({
         ...registerData,
         personalPhoto: urlToObject(),
-        firstName: googleResponse.firstName,
-        lastName: googleResponse.lastName,
-        email: googleResponse.email,
+        firstName: thirdPartyResponse.firstName,
+        lastName: thirdPartyResponse.lastName,
+        email: thirdPartyResponse.email,
       });
     }
-  }, [googleResponse]);
+  }, [thirdPartyResponse]);
 
   const handleCheckChange = () => {
     setChecked(!checked);
@@ -189,7 +189,7 @@ export const Register: React.FC<IProps> = ({
             <Input
               label={
                 <img
-                  src={googleResponse?.avatar ? googleResponse?.avatar : avatar}
+                  src={thirdPartyResponse?.avatar ? thirdPartyResponse?.avatar : avatar}
                   alt="user-avatar"
                   className="avatar-main-img"
                 />
@@ -200,7 +200,7 @@ export const Register: React.FC<IProps> = ({
               type="file"
               className="avatar-control-file"
               onChange={updateAvatars}
-              disabled={googleResponse?.avatar !== ""}
+              disabled={thirdPartyResponse?.avatar !== ""}
             />
           </div>
           <div className="profile-box-container">
@@ -232,7 +232,7 @@ export const Register: React.FC<IProps> = ({
                 "empty-input-style"
               }`}
               value={registerData.firstName}
-              disabled={googleResponse?.firstName !== ""}
+              disabled={thirdPartyResponse?.firstName !== ""}
               onChange={handleChange}
             />
             {registerClicked && !isValidFirstName(registerData.firstName) && (
@@ -251,7 +251,7 @@ export const Register: React.FC<IProps> = ({
                 "empty-input-style"
               }`}
               value={registerData.lastName}
-              disabled={googleResponse?.lastName !== ""}
+              disabled={thirdPartyResponse?.lastName !== ""}
               onChange={handleChange}
             />
             {registerClicked && !isValidLastName(registerData.lastName) && (
@@ -334,7 +334,7 @@ export const Register: React.FC<IProps> = ({
                   !isValidFormatEmail(registerData.email)) &&
                 "empty-input-style"
               }`}
-              disabled={googleResponse?.email !== ""}
+              disabled={thirdPartyResponse?.email !== ""}
               value={registerData.email}
               onChange={handleChange}
             />

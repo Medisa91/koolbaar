@@ -14,12 +14,16 @@ interface IProps {
   isOpen: boolean;
   setIsOpen: (key: any) => void;
   setFlightInquiry?: Function;
+  setIsLoading?: Function;
+  isLoading: boolean;
 }
 
 export const DirectInformation: React.FC<IProps> = ({
   isOpen,
   setIsOpen,
   setFlightInquiry,
+  setIsLoading,
+  isLoading,
 }) => {
   const dispatch = useAppDispatch();
   const handleClose = () => setIsOpen(false);
@@ -47,30 +51,6 @@ export const DirectInformation: React.FC<IProps> = ({
     return flightNumber.length >= 6;
   };
 
-  // const changeFlightNumber = (e) => {
-  //   // e.preventDefault();
-  //   setIsClosedItems(true);
-  //   setFlightNumber(e.target.value);
-  //   setDisableFlightNumber(e.target.value);
-  //   const data = {
-  //     flightNumber,
-  //     departureDate: null,
-  //   };
-  //   if (isFlightNumberIsSixDigit(e.target.value)) {
-  //     setIsDropdownOpen(true);
-  //     dispatch(getFlightInquiry(data));
-  //     return;
-  //   }
-  //   setIsDropdownOpen(false);
-
-  //   const index = e.target.id;
-  //   setFlights((s) => {
-  //     const newFlights = s.slice();
-  //     newFlights[index]?.value = e.target.value;
-  //     return newFlights;
-  //   });
-  // };
-
   const changeDisableFlightNumber = (e) => {
     setDisableFlightNumber(e.target.value);
   };
@@ -90,12 +70,12 @@ export const DirectInformation: React.FC<IProps> = ({
     }
     setIsDropdownOpen(false);
 
-    const index = e.target.id;
-    setFlights((s) => {
-      const newFlights = s.slice();
-      newFlights[index].value = e.target.value;
-      return newFlights;
-    });
+    // const index = e.target.id;
+    // setFlights((s) => {
+    //   const newFlights = s.slice();
+    //   newFlights[index].value = e.target.value;
+    //   return newFlights;
+    // });
   };
 
   const inputs = [];
@@ -133,6 +113,14 @@ export const DirectInformation: React.FC<IProps> = ({
     dispatch(getAllTravelInfoHomeRequests(data));
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (flightInquiryData?.data === null || !flightInquiryData?.isSuccess) {
+      setIsLoading(false);
+      setIsDropdownOpen(false);
+    }
+    if (flightInquiryData?.data?.length !== 0) setIsLoading(false);
+  }, [flightInquiryData]);
 
   return (
     <>
@@ -227,8 +215,9 @@ export const DirectInformation: React.FC<IProps> = ({
                 setFlightNumber={setFlightNumber}
                 setFlightInquiryIndirect={setFlightInquiryIndirect}
                 setFlightInquiry={setFlightInquiry}
-                flightInquiryData={flightInquiryData}
+                flightInquiryData={flightInquiryData?.data}
                 setIsClosedItems={setIsClosedItems}
+                isLoading={isLoading}
               />
             </div>
           )}

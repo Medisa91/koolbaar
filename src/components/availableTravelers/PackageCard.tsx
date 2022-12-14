@@ -7,18 +7,10 @@ import { Option, ITraveler } from "models/interfaces";
 import { Cards } from "./Cards";
 
 interface IProps {
-  type: Option;
-  size: Option;
-  deliveryType: Option;
   travelerData: ITraveler[];
 }
 
-export const PackageCard: React.FC<IProps> = ({
-  type,
-  size,
-  deliveryType,
-  travelerData,
-}) => {
+export const PackageCard: React.FC<IProps> = ({ travelerData }) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
 
@@ -27,12 +19,6 @@ export const PackageCard: React.FC<IProps> = ({
       setLoading(false);
     }, 3000);
   }, []);
-
-  const getSizeRange = (size) => {
-    if (size < 5) return "0KG - 5KG";
-    else if (size >= 5 && size < 10) return "5KG - 10KG";
-    else return "10KG - 20KG";
-  };
 
   return (
     <>

@@ -11,8 +11,8 @@ import { toast } from "react-toastify";
 export const getFlightInquiry = (data) => async (dispatch) => {
   try {
     const res = await FlightsService.flightInquiry(data);
-    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
     dispatch(flightInquiry(res.data));
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
   } catch (err) {
     dispatch(flightInquiryFailure(err?.response));
     toast.error(err?.response?.data?.message);
@@ -22,13 +22,9 @@ export const getFlightInquiry = (data) => async (dispatch) => {
 export const getAllHomeRequest = (data) => async (dispatch) => {
   try {
     const res = await FlightsService.getHomeRequest(data);
-    if (res?.data?.isSuccess) {
-      dispatch(homeRequest(res.data));
-      return;
-    }
-    toast.error(res?.data?.message);
+    dispatch(homeRequest(res.data));
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
   } catch (err) {
-    // dispatch(homeRequestFailure(err?.response));
     toast.error(err?.response?.data?.message);
   }
 };
@@ -39,7 +35,6 @@ export const getAllHomeTraveler = (data) => async (dispatch) => {
     if (!res?.data?.isSuccess) toast.error(res?.data?.message);
     dispatch(homeTraveler(res.data));
   } catch (err) {
-    // dispatch(homeTravelerFailure(err?.response));
     toast.error(err?.response?.data?.message);
   }
 };

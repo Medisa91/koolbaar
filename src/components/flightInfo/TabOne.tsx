@@ -15,12 +15,12 @@ export const TabOne: FC<{}> = () => {
   const size = UseWindowSize();
   const [flightNumber, setFlightNumber] = useState("");
   const [flightInquiry, setFlightInquiry] = useState<IFlightOptions>({
-    fromLocation: "",
-    fromDate: "",
-    fromTime: "",
-    toLocation: "",
-    toDate: "",
-    toTime: "",
+    fromLocation: "Malaysia, Kuala Lumpur",
+    fromDate: "25 JUL 2021",
+    fromTime: "20:15",
+    toLocation: "Canada, Toronto",
+    toDate: "25 AUG 2021",
+    toTime: "20:15",
   });
   const [isAfterSearch, setIsAfterSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +57,7 @@ export const TabOne: FC<{}> = () => {
               flightNumber={flightNumber}
               setFlightNumber={setFlightNumber}
               setIsLoading={setIsLoading}
+              isLoading={isLoading}
             />
           </Col>
           <Col lg={5} md={5} sm={12} className="departure-info-wrapper">

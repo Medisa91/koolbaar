@@ -10,9 +10,12 @@ import {
 
 export const Home: React.FC = () => {
   const [tab, setTab] = useState(null);
-  const [type, setType] = useState({ value: 0, label: "All" });
-  const [size, setSize] = useState({ value: 0, label: "All" });
-  const [deliveryType, setDeliveryType] = useState({ value: 0, label: "All" });
+  const [type, setType] = useState({ value: null, label: "All" });
+  const [size, setSize] = useState({ value: null, label: "All" });
+  const [deliveryType, setDeliveryType] = useState({
+    value: null,
+    label: "All",
+  });
 
   const handleTypeFilter = (selected) => {
     setType(selected);

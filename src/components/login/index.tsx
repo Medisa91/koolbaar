@@ -44,7 +44,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
   const [googleAccessToken, setGoogleAccessToken] = useState("");
   const [facebookAccessToken, setFacebookAccessToken] = useState("");
   const [deviceModel, setDeviceModel] = useState("");
-  const [googleResponse, setGoogleResponse] = useState({
+  const [thirdPartyResponse, setThirdPartyResponse] = useState({
     firstName: "",
     lastName: "",
     avatar: "",
@@ -71,17 +71,28 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
         if (res.authResponse) {
           setFacebookAccessToken(res.authResponse.accessToken);
 
-          window.FB.api("/me", { fields: "name, email" }, function (response) {
-            const data: IExternalLogin = {
-              provider: res?.authResponse?.graphDomain,
-              accessToken: res.authResponse.accessToken,
-              email: response?.email,
-              deviceModel,
-              deviceId: "",
-              playerId: "",
-            };
-            dispatch(externalLoginUser(data));
-          });
+          window.FB.api(
+            "/me",
+            { fields: "name, email, picture" },
+            function (response) {
+              const name = response.name.split(" ")
+              setThirdPartyResponse({
+                email: response.email,
+                firstName: name[0],
+                lastName: name[1],
+                avatar: response.picture.data.url,
+              });
+              const data: IExternalLogin = {
+                provider: res?.authResponse?.graphDomain,
+                accessToken: res.authResponse.accessToken,
+                email: response?.email,
+                deviceModel,
+                deviceId: "",
+                playerId: "",
+              };
+              dispatch(externalLoginUser(data));
+            }
+          );
         }
       },
       { scope: "email" }
@@ -120,7 +131,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
   });
 
   const onSuccess = (res) => {
-    setGoogleResponse({
+    setThirdPartyResponse({
       firstName: res.profileObj.givenName,
       lastName: res.profileObj.familyName,
       avatar: res.profileObj.imageUrl,
@@ -302,7 +313,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
       <div className="bottom-line-separate-login"></div>
       <Register
         deviceModel={deviceModel}
-        googleResponse={googleResponse}
+        thirdPartyResponse={thirdPartyResponse}
         setIsOpen={setIsOpen}
         setIsLogin={setIsLogin}
       />

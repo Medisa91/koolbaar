@@ -7,32 +7,21 @@ import { Option, IRequest } from "models/interfaces";
 import { Cards } from "./Cards";
 
 interface IProps {
-  type: Option;
-  size: Option;
-  deliveryType: Option;
+  isEmpty: boolean;
   requestData: IRequest[];
 }
 
-export const PackageCard: React.FC<IProps> = ({
-  type,
-  size,
-  deliveryType,
-  requestData,
-}) => {
+export const PackageCard: React.FC<IProps> = ({ requestData, isEmpty }) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
 
   useEffect(() => {
-    setTimeout(() => {
+    if (requestData?.length !== 0) {
       setLoading(false);
-    }, 3000);
-  }, []);
-
-  const getSizeRange = (size) => {
-    if (size < 5) return "0KG - 5KG";
-    else if (size >= 5 && size < 10) return "5KG - 10KG";
-    else return "10KG - 20KG";
-  };
+      return;
+    }
+    setLoading(true);
+  }, [requestData]);
 
   return (
     <>
@@ -50,23 +39,13 @@ export const PackageCard: React.FC<IProps> = ({
             ))
           ) : (
             <>
-              {/* {type.label !== "All"
-                ? data?.items
-                    ?.filter((filter) => filter.label === type.label)
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : size.label !== "All"
-                ? data?.items
-                    ?.filter(
-                      (filter) => getSizeRange(filter.size) === size.label
-                    )
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : data?.items?.map((item, idx) => (
-                    <Cards key={idx} data={item} />
-                  ))} */}
-              {requestData?.length !== 0 &&
-                requestData?.map((data, idx) => (
-                  <Cards key={idx} data={data} />
-                ))}
+              {!isEmpty ? (
+                requestData?.map((data, idx) => <Cards key={idx} data={data} />)
+              ) : (
+                <span style={{ margin: "auto", fontSize: 20, fontWeight: 600 }}>
+                  No Data
+                </span>
+              )}
             </>
           )}
         </Row>

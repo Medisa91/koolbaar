@@ -8,6 +8,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "layers";
 import { MonthNumber } from "helpers/convertMonthNameToNumber";
 import { IFlightOptions } from "models/interfaces";
+import axios from "axios";
 
 interface IProps {
   isOpen: boolean;
@@ -78,6 +79,32 @@ export const TravelInformation: React.FC<IProps> = ({
   // useEffect(() => {
   //   getCountriesName();
   // }, []);
+
+  // useEffect(() => {
+  //   fetch(
+  //     "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=amoeba&types=establishment&location=49.246251500646025C-123.06729125976562&radius=500&key=AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho"
+  //   ).then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((e) => console.log(e));
+  // }, []);
+
+  useEffect(() => {
+    var config = {
+      method: "get",
+      url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=amoeba&types=establishment&location=49.246251500646025C-123.06729125976562&radius=500&key=AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho",
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const handleFromChange = (selected) => {
     setFrom(selected);

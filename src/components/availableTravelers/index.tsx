@@ -66,12 +66,7 @@ export const AvailableTravelers: React.FC<IProps> = ({
           </Col>
         </Row>
       )}
-      <PackageCard
-        type={type}
-        size={size}
-        deliveryType={deliveryType}
-        travelerData={travelerData}
-      />
+      <PackageCard travelerData={travelerData} />
     </div>
   );
 };

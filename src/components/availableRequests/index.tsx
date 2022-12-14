@@ -23,6 +23,7 @@ export const AvailableRequests: React.FC<IProps> = ({
   const windowSize = UseWindowSize();
   const dispatch = useAppDispatch();
   const [requestData, setRequestData] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [homeRequestByTravelInfo, setHomeRequestByTravelInfo] =
     useState<IRequest[]>();
 
@@ -32,15 +33,21 @@ export const AvailableRequests: React.FC<IProps> = ({
   );
   useEffect(() => {
     const data = {
-      packagetypeId: null,
-      weightrangeId: null,
-      deliverytypeId: null,
+      packagetypeId: type.value ? type.value : null,
+      weightrangeId: size?.value ? size?.value : null,
+      deliverytypeId: deliveryType?.value ? deliveryType?.value : null,
     };
     dispatch(getAllHomeRequest(data));
-  }, []);
+  }, [type, size, deliveryType]);
 
   useEffect(() => {
-    if (homeRequestData?.length !== 0) setRequestData(homeRequestData);
+    if (homeRequestData?.length !== 0) {
+      setRequestData(homeRequestData);
+      setIsEmpty(false);
+      return;
+    }
+    setRequestData([]);
+    setIsEmpty(true);
   }, [homeRequestData]);
 
   useEffect(() => {
@@ -77,10 +84,8 @@ export const AvailableRequests: React.FC<IProps> = ({
         </Row>
       )}
       <PackageCard
-        type={type}
-        size={size}
-        deliveryType={deliveryType}
         requestData={requestData}
+        isEmpty={isEmpty}
       />
     </div>
   );

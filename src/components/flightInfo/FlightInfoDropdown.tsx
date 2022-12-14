@@ -9,6 +9,7 @@ interface IFlightData {
   setIsClosedItems?: Function;
   setFlightInquiryIndirect?: Function;
   setFlightNumber?: Function;
+  isLoading?: boolean;
 }
 
 export const FlightInfoDropdown: FC<IFlightData> = ({
@@ -17,6 +18,7 @@ export const FlightInfoDropdown: FC<IFlightData> = ({
   setFlightInquiry,
   setFlightInquiryIndirect,
   setFlightNumber,
+  isLoading,
 }) => {
   const [checked, setChecked] = useState(false);
 
@@ -37,7 +39,7 @@ export const FlightInfoDropdown: FC<IFlightData> = ({
 
   return (
     <>
-      {flightInquiryData?.length !== 0 ? (
+      {flightInquiryData?.length !== 0 && isLoading ? (
         flightInquiryData?.map((item, index) => {
           return (
             <Row style={{ cursor: "pointer" }}>
