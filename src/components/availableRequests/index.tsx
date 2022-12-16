@@ -24,6 +24,7 @@ export const AvailableRequests: React.FC<IProps> = ({
   const dispatch = useAppDispatch();
   const [requestData, setRequestData] = useState([]);
   const [isEmpty, setIsEmpty] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [homeRequestByTravelInfo, setHomeRequestByTravelInfo] =
     useState<IRequest[]>();
 
@@ -32,6 +33,7 @@ export const AvailableRequests: React.FC<IProps> = ({
     (state) => state.travelRequestHomeRequest
   );
   useEffect(() => {
+    setIsLoading(true)
     const data = {
       packagetypeId: type.value ? type.value : null,
       weightrangeId: size?.value ? size?.value : null,
@@ -43,6 +45,7 @@ export const AvailableRequests: React.FC<IProps> = ({
   useEffect(() => {
     if (homeRequestData?.length !== 0) {
       setRequestData(homeRequestData);
+      setIsLoading(false);
       setIsEmpty(false);
       return;
     }
@@ -84,6 +87,7 @@ export const AvailableRequests: React.FC<IProps> = ({
         </Row>
       )}
       <PackageCard
+        isLoading={isLoading}
         requestData={requestData}
         isEmpty={isEmpty}
       />

@@ -60,17 +60,6 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-        theme="dark"
-      /> */}
       {size?.width < 768 ? (
         <Row
           style={
@@ -81,10 +70,14 @@ export const Header: React.FC = () => {
           }
           className={`${
             isLogin ? "dashboard-header-wrapper" : "header-wrapper"
-          } `}
+          }`}
         >
-          <Logo />
-          <Menu />
+          <Col xs={5}>
+            <Logo />
+          </Col>
+          <Col xs={7}>
+            <Menu />
+          </Col>
         </Row>
       ) : (
         <Row

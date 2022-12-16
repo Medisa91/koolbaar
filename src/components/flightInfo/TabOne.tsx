@@ -9,7 +9,7 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IFlightOptions } from "models/interfaces";
 import { useAppDispatch } from "redux/store";
 import { getAllTravelInfoHomeRequests } from "redux/actions/flight";
-import { TravelInformation, IRequest } from "models/interfaces";
+import { ITravelInformation } from "models/interfaces";
 
 export const TabOne: FC<{}> = () => {
   const size = UseWindowSize();
@@ -35,7 +35,7 @@ export const TabOne: FC<{}> = () => {
 
   const searchFlight = () => {
     {
-      const data: TravelInformation = {
+      const data: ITravelInformation = {
         fromCityCountry: flightInquiry.fromLocation,
         departureDate: flightInquiry.fromTime,
         toCityCountry: flightInquiry.toLocation,

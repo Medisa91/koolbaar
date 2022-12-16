@@ -8,7 +8,7 @@ import {
   getFlightInquiry,
   getAllTravelInfoHomeRequests,
 } from "redux/actions/flight";
-import { IFlightOptions, TravelInformation } from "models/interfaces";
+import { IFlightOptions, ITravelInformation } from "models/interfaces";
 
 interface IProps {
   isOpen: boolean;

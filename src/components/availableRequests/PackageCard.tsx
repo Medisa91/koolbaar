@@ -8,20 +8,16 @@ import { Cards } from "./Cards";
 
 interface IProps {
   isEmpty: boolean;
+  isLoading: boolean;
   requestData: IRequest[];
 }
 
-export const PackageCard: React.FC<IProps> = ({ requestData, isEmpty }) => {
-  const [loading, setLoading] = useState(true);
+export const PackageCard: React.FC<IProps> = ({
+  requestData,
+  isEmpty,
+  isLoading,
+}) => {
   const windowSize = UseWindowSize();
-
-  useEffect(() => {
-    if (requestData?.length !== 0) {
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-  }, [requestData]);
 
   return (
     <>
@@ -31,7 +27,7 @@ export const PackageCard: React.FC<IProps> = ({ requestData, isEmpty }) => {
             windowSize.width < 768 ? { width: "318px", margin: "auto" } : null
           }
         >
-          {loading ? (
+          {isLoading ? (
             (data?.items ?? []).map((item) => (
               <Col key={item.name} lg={3} md={4} sm={12}>
                 <SkeletonGrid />

@@ -89,7 +89,7 @@ export const Register: React.FC<IProps> = ({
 
   useEffect(() => {
     if (thirdPartyResponse.avatar) {
-      setAvatar(thirdPartyResponse.avatar)
+      setAvatar(thirdPartyResponse.avatar);
       const image = thirdPartyResponse.avatar;
       const urlToObject = async () => {
         const response = await fetch(image);
@@ -189,7 +189,11 @@ export const Register: React.FC<IProps> = ({
             <Input
               label={
                 <img
-                  src={thirdPartyResponse?.avatar ? thirdPartyResponse?.avatar : avatar}
+                  src={
+                    thirdPartyResponse?.avatar
+                      ? thirdPartyResponse?.avatar
+                      : avatar
+                  }
                   alt="user-avatar"
                   className="avatar-main-img"
                 />
@@ -258,7 +262,7 @@ export const Register: React.FC<IProps> = ({
               <span className="err-validation">Required!</span>
             )}
           </Col>
-          <Col xs={6} className="mb-4">
+          <Col xs={size.width < 768 ? 12 : 6} className="mb-4">
             <Input
               size="sm"
               id="displayName-input"
@@ -277,7 +281,10 @@ export const Register: React.FC<IProps> = ({
                 <span className="err-validation">Required!</span>
               )}
           </Col>
-          <Col xs={6} className="mb-4 text-left phone-wrapper">
+          <Col
+            xs={size.width < 768 ? 12 : 6}
+            className="mb-4 text-left phone-wrapper"
+          >
             <PhoneInput
               international
               defaultCountry="US"
@@ -290,7 +297,11 @@ export const Register: React.FC<IProps> = ({
               id="phoneNumber-input"
               placeholder="Phone Number"
               name="phoneNumber"
-              className={`half-custom-phone-register d-inline-flex ${
+              className={`${
+                size.width < 768
+                  ? "responsive-half-custom-phone-register"
+                  : "half-custom-phone-register"
+              }  d-inline-flex ${
                 registerClicked &&
                 !isValidPhoneNumber(registerData.phoneNumber) &&
                 "empty-input-style"

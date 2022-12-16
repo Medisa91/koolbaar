@@ -4,9 +4,11 @@ import { Header, Footer } from "layers";
 import { PersonalInfo, FinancialInfo } from "components";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { getUserInfo } from "redux/actions/Authorization";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
 export const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
+  const size = UseWindowSize();
   const userData = useAppSelector(
     (state) => state?.userInfo?.data && state?.userInfo?.data[0]?.data
   );

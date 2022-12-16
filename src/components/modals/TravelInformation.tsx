@@ -8,7 +8,10 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "layers";
 import { MonthNumber } from "helpers/convertMonthNameToNumber";
 import { IFlightOptions } from "models/interfaces";
-import axios from "axios";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { ITravelInformation } from "models/interfaces";
+import { useAppDispatch } from "redux/store";
+import { getAllTravelInfoHomeRequests } from "redux/actions/flight";
 
 interface IProps {
   isOpen: boolean;
@@ -21,6 +24,7 @@ export const TravelInformation: React.FC<IProps> = ({
   setIsOpen,
   travelData,
 }) => {
+  const dispatch = useAppDispatch();
   const separatedFromDate = travelData?.fromDate?.split(" ");
   const separatedFromHour = travelData?.fromTime?.split(":");
   const separatedToDate = travelData?.toDate?.split(" ");
@@ -55,8 +59,6 @@ export const TravelInformation: React.FC<IProps> = ({
   });
   const [fromDate, setFromDate] = useState(defaultFromDate);
   const [toDate, setToDate] = useState(defaultToDate);
-  const [departureData, setDepartureData] = useState([]);
-  const [arrivalData, setArrivalData] = useState([]);
   const handleClose = () => setIsOpen(false);
 
   // const getCountriesName = () => {
@@ -75,53 +77,6 @@ export const TravelInformation: React.FC<IProps> = ({
   //     })
   //     .catch((e) => console.log(e));
   // };
-
-  // useEffect(() => {
-  //   getCountriesName();
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch(
-  //     "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=amoeba&types=establishment&location=49.246251500646025C-123.06729125976562&radius=500&key=AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho"
-  //   ).then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((e) => console.log(e));
-  // }, []);
-
-  useEffect(() => {
-    var config = {
-      method: "get",
-      url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=amoeba&types=establishment&location=49.246251500646025C-123.06729125976562&radius=500&key=AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho",
-      headers: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
-  const handleFromChange = (selected) => {
-    setFrom(selected);
-  };
-
-  const handleToChange = (selected) => {
-    setTo(selected);
-  };
-
-  useEffect(() => {
-    setDepartureData([
-      { value: travelData.fromLocation, label: travelData.fromLocation },
-    ]);
-    setArrivalData([
-      { value: travelData.toLocation, label: travelData.toLocation },
-    ]);
-  }, [travelData]);
 
   const customStyle = {
     control: (styles) => ({
@@ -154,6 +109,36 @@ export const TravelInformation: React.FC<IProps> = ({
     );
   };
 
+  const getDateCharacter = (date) => {
+    var month = date.getUTCMonth() + 1; //months from 1-12
+    var day = date.getUTCDate();
+    var year = date.getUTCFullYear();
+    var hour = date.getUTCHours();
+    var minutes = date.getUTCMinutes();
+    var ampm = hour >= 12 ? "PM" : "AM";
+    return (
+      year + "/" + month + "/" + day + " " + hour + ":" + minutes + " " + ampm
+    );
+  };
+
+  const searchFlight = () => {
+    const data: ITravelInformation = {
+      fromCityCountry: from.label,
+      departureDate: getDateCharacter(fromDate),
+      toCityCountry: to.label,
+      arrivalDate: getDateCharacter(toDate),
+    };
+    dispatch(getAllTravelInfoHomeRequests(data));
+  };
+
+  const changeFromPlace = (e) => {
+    setFrom(e);
+  };
+
+  const changeToPlace = (e) => {
+    setTo(e);
+  };
+
   return (
     <>
       <Modal className="info-modal-wrapper" show={isOpen} onHide={handleClose}>
@@ -165,33 +150,40 @@ export const TravelInformation: React.FC<IProps> = ({
             <Col xs={6}>
               <div>
                 <span className="flight-from-title">From City/Country</span>
-                <Select
-                  placeholder={"eg. Delhi, India"}
-                  className="custom-select-from-city d-inline-block"
-                  value={from}
-                  onChange={handleFromChange}
-                  options={departureData}
-                  components={{
-                    IndicatorSeparator: () => null,
-                    MenuList: SelectMenuButton,
+                <GooglePlacesAutocomplete
+                  selectProps={{
+                    className: "custom-select-from-city d-inline-block",
+                    value: from,
+                    placeholder: "City or Country",
+                    onChange: (e) => changeFromPlace(e),
+                    noOptionsMessage: () => null,
+                    components: {
+                      IndicatorSeparator: () => null,
+                      MenuList: SelectMenuButton,
+                    },
+                    styles: customStyle,
                   }}
-                  styles={customStyle}
+                  apiKey="AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho"
                 />
               </div>
             </Col>
             <Col xs={6}>
               <div>
                 <span className="flight-from-title">To City/Country</span>
-                <Select
-                  placeholder={"eg. Delhi, India"}
-                  className="custom-select-from-city d-inline-block"
-                  value={to}
-                  onChange={handleToChange}
-                  options={arrivalData}
-                  components={{
-                    IndicatorSeparator: () => null,
+                <GooglePlacesAutocomplete
+                  selectProps={{
+                    className: "custom-select-from-city d-inline-block",
+                    value: to,
+                    placeholder: "City or Country",
+                    onChange: (e) => changeToPlace(e),
+                    noOptionsMessage: () => null,
+                    components: {
+                      IndicatorSeparator: () => null,
+                      MenuList: SelectMenuButton,
+                    },
+                    styles: customStyle,
                   }}
-                  styles={customStyle}
+                  apiKey="AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho"
                 />
               </div>
             </Col>
@@ -249,7 +241,7 @@ export const TravelInformation: React.FC<IProps> = ({
           <Button
             variant="warning"
             data-test="docs-btn-anchor"
-            href="/"
+            onClick={searchFlight}
             className="confirm-info-btn"
           >
             Confirm

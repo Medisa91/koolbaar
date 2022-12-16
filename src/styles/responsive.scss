@@ -1,438 +1,747 @@
 @import "./variables";
 @import "./mixins";
 
-
 @media (max-width: 767px) {
-    .header-wrapper-responsive {
-        margin-top: 35px
+  .header-wrapper-responsive {
+    margin-top: 35px;
+  }
+
+  .img-banner-Wrapper {
+    background-image: linear-gradient($primary, rgba(128, 128, 128, 0)),
+      url("../assets/images/mobile-banner-aimg.png");
+    width: 100%;
+    height: 696px;
+    align-self: center;
+  }
+
+  .logo-name {
+    @include custom-text-style(
+      $poppins-font,
+      $font-18,
+      $weight-bold,
+      1.5,
+      left,
+      $white
+    );
+    margin: 0 0 0.9px 8px;
+    vertical-align: top;
+  }
+
+  .header-wrapper-responsive {
+    .navbar-light .navbar-toggler {
+      border-color: transparent;
+    }
+  }
+
+  .bell-request-icon {
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+  }
+
+  .notification-count {
+    width: 15px;
+    height: 15px;
+    display: block;
+    margin-top: -26px;
+    margin-left: 22px;
+    font-size: $font-10;
+  }
+  .user-profile-avatar {
+    width: 35px;
+    height: 35px;
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .navbar {
+    place-content: end;
+    text-align: right;
+    text-align: -webkit-right;
+    margin-right: 20px;
+  }
+
+  .logo-ellipse-rec {
+    @include custom-logo-ellipse(26.5px, 26.5px, 6px 7px 8px 8px, $primary);
+    margin: 0 8px 0 25px;
+
+    .logo-ellipse-first-cir {
+      @include custom-logo-ellipse(13px, 14px, 3px 3px 3px 3px, $white);
+
+      .logo-ellipse-second-cir {
+        @include custom-logo-ellipse(8px, 8px, 3px 3px 3px 3px, $primary);
+      }
+    }
+  }
+
+  .responsive-half-custom-phone-register {
+    @include custom-input-styles(
+      230px !important,
+      50px,
+      0px,
+      0 0 0 15px,
+      5px,
+      white,
+      $Inter-font,
+      $font-14,
+      1.57,
+      left,
+      #989898,
+      border,
+      solid 1px $gray8
+    );
+    font-weight: $weight-600;
+
+    &::placeholder {
+      color: #989898;
+      font-weight: $weight-normal;
+    }
+  }
+
+  .submit-request-btn {
+    margin: 0;
+  }
+
+  .toggle-btn {
+    svg {
+      width: 16px;
+      height: 18px;
+      margin-right: 10px;
+      color: $white;
+      margin-left: 15px;
+    }
+  }
+
+  .user-btn {
+    svg {
+      width: 16px;
+      height: 18px;
+      margin-right: 16px;
+      color: $white;
+    }
+  }
+
+  .banner-text {
+    .banner-title {
+      @include custom-text-style(
+        $Inter-font,
+        $font-32,
+        $weight-800,
+        1.22,
+        center,
+        $white
+      );
+      margin: 145px auto 60px auto;
+      width: 353px;
     }
 
-    .img-banner-Wrapper {
-        background-image: linear-gradient($primary, rgba(128, 128, 128, 0)), url("../assets/images/mobile-banner-aimg.png");
-        width: 100%;
-        height: 696px;
-        align-self: center;
+    .banner-subtitle {
+      @include custom-text-style(
+        $poppins-font,
+        $font-20,
+        $weight-normal,
+        1.5,
+        center,
+        $white
+      );
+      width: 342px;
+      display: block;
+      margin: auto;
+    }
+  }
 
+  .flight-info-wrapper {
+    @include custom-box-style(
+      360px,
+      auto,
+      0px auto 26.8px auto,
+      0,
+      contain,
+      0 24px 100px 0 rgba(0, 0, 0, 0.1),
+      transparent
+    );
+  }
+
+  .request-info-wrapper {
+    @include custom-box-style(318px, auto, auto, 0, contain, none, transparent);
+  }
+
+  .filter-wrapper {
+    @include custom-box-style(
+      360px,
+      128px,
+      0px auto 26.8px auto,
+      0,
+      contain,
+      0 24px 100px 0 rgba(0, 0, 0, 0.1),
+      transparent
+    );
+  }
+
+  .tabs-component {
+    width: 360px;
+    margin-top: -100px;
+  }
+
+  .tabs-component [role="tablist"] button:first-child {
+    width: 137px;
+    height: 41px;
+  }
+
+  .tabs-component [role="tablist"] button:last-child {
+    width: 209px;
+    height: 41px;
+  }
+
+  .tabs-component [role="tablist"] button.active {
+    @include custom-text-style(
+      $Inter-font,
+      $font-14,
+      $weight-600,
+      1.21,
+      left,
+      $primary
+    );
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .tabs-component [role="tablist"] button {
+    padding: 5px;
+    @include custom-text-style(
+      $Inter-font,
+      $font-14,
+      $weight-normal,
+      1.21,
+      left,
+      $gray1
+    );
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .custom-input-flight-type {
+    @include custom-input-styles(
+      210px,
+      41px,
+      8px 0 0 0,
+      0 0 0 15px,
+      5px,
+      #fbfbfb,
+      $Inter-font,
+      $font-14,
+      1.57,
+      left,
+      rgb(152, 152, 152),
+      border,
+      solid 1px $gray8
+    );
+  }
+
+  .after-custom-input-flight-type {
+    @include custom-input-styles(
+      210px,
+      41px,
+      8px 0 0 0,
+      0 0 0 15px,
+      5px,
+      #fbfbfb,
+      $Inter-font,
+      $font-14,
+      1.57,
+      left,
+      rgb(152, 152, 152),
+      border,
+      solid 1px $gray8
+    );
+  }
+
+  .flight-type-title,
+  .flight-number-title {
+    @include custom-text-style(
+      $Inter-font,
+      $font-12,
+      $weight-600,
+      1.21,
+      left,
+      $primary
+    );
+  }
+
+  .custom-select-flight-type > div {
+    @include custom-select-styles(
+      100px,
+      8px 0 0 0,
+      0,
+      5px,
+      white,
+      $Inter-font,
+      $font-12,
+      $weight-bold,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
+
+  .tabs-component [role="tabpanel"] {
+    height: auto;
+  }
+
+  .departure-info-wrapper {
+    margin-top: 10px;
+  }
+
+  .search-plane-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .filter-responsive-btn {
+    @include custom-btn-style(
+      34px,
+      34px,
+      5px,
+      7px 9px,
+      5px,
+      $Inter-font,
+      $font-14,
+      $weight-600,
+      1.17,
+      left,
+      $white,
+      border,
+      1px solid $primary
+    );
+    display: inline-block;
+    float: right;
+    margin-right: 7px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      text-align: left;
+      font-size: 14px;
+      color: #00043d;
+      vertical-align: sub;
+    }
+  }
+
+  .filter-info-wrapper {
+    @include custom-box-style(
+      360px,
+      auto,
+      0px auto 26.8px auto,
+      0,
+      contain,
+      none,
+      transparent
+    );
+  }
+
+  .add-travel-btn {
+    @include custom-btn-style(
+      107px,
+      35px,
+      5px,
+      5px 0,
+      5px,
+      $Inter-font,
+      $font-12,
+      $weight-600,
+      1.9,
+      center,
+      $white
+    );
+  }
+
+  .requests-info-wrapper {
+    @include custom-box-style(
+      360px,
+      auto,
+      0px auto 26.8px auto,
+      0,
+      contain,
+      none,
+      transparent
+    );
+
+    h2 {
+      @include custom-text-style(
+        $Inter-font,
+        $font-14,
+        $weight-600,
+        1.21,
+        left,
+        $gray6
+      );
+    }
+  }
+
+  .request-package-card-wrapper {
+    width: 318px;
+    height: 228px;
+  }
+
+  .traveler-package-card-wrapper {
+    width: 318px;
+    height: 228px;
+  }
+
+  .receive-offer-card-wrapper {
+    width: 318px;
+    height: 228px;
+  }
+
+  .more-detail-wrapper {
+    width: 318px;
+
+    .request-card-wrapper {
+      @include custom-card-style(
+        318px,
+        228px,
+        0,
+        0,
+        5px 0px 5px 5px,
+        none,
+        rgb(0 4 61 / 83%)
+      );
+    }
+  }
+
+  .more-detail-wrapper {
+    width: 318px;
+
+    .travelers-card-wrapper {
+      @include custom-card-style(
+        318px,
+        228px,
+        0,
+        0,
+        5px 0px 5px 5px,
+        none,
+        rgb(0 4 61 / 83%)
+      );
+    }
+  }
+
+  .card-cover-body {
+    height: 174px;
+    width: 318px;
+    padding: 8px 16px 5px 16px;
+  }
+
+  .main-footer {
+    @include custom-box-style(400px, 661px, 0, 0, contain, none, #f6f6f6);
+  }
+
+  .links-footer-wrapper {
+    margin-left: 32.5px;
+    margin-bottom: 60px;
+  }
+
+  .main-footer-copyright {
+    @include custom-box-style(
+      400px,
+      81px,
+      15px 0 0 32.5px,
+      0,
+      contain,
+      none,
+      transparent
+    );
+  }
+
+  .responsive-header-profile-dropdown {
+    .dropdown-menu {
+      top: 45px !important;
+      border-radius: 3px;
+      padding: 12px 10px 12px 15px;
+      position: absolute;
+      right: 40px;
     }
 
-    .logo-name {
-        @include custom-text-style($poppins-font, $font-18, $weight-bold, 1.5, left, $white);
-        margin: 0 0 0.9px 8px;
-        vertical-align: top;
+    .dropdown-item {
+      font-size: $font-12;
+      color: $primary;
     }
 
-    .header-wrapper-responsive {
-        .navbar-light .navbar-toggler {
-            border-color: transparent
-        }
+    svg {
+      color: #acacac;
+      margin-right: 7px;
+    }
+  }
+
+  .login-header-btn {
+    width: 130px;
+    height: 36px;
+    padding: 15px 10px;
+    text-align-last: center;
+    font-size: $font-14;
+    margin: 0;
+    display: inline;
+  }
+
+  .header-nav-wrapper {
+    display: block;
+    width: 40%;
+    background: $white;
+    position: absolute;
+    right: 35px;
+    top: 45px;
+    border-radius: 5px;
+    padding: 5px;
+
+    .nav-item {
+      display: block;
+      text-align: left;
+      margin-left: 10px;
     }
 
-    .navbar {
-        place-content: end;
+    .title-dashboard {
+      
     }
 
-    .logo-ellipse-rec {
-        @include custom-logo-ellipse(26.5px, 26.5px, 6px 7px 8px 8px, $primary);
-        margin: 0 8px 0 25px;
+    .nav-link {
+      @include custom-btn-style(
+        unset,
+        unset,
+        0,
+        0,
+        none,
+        $poppins-font,
+        $font-12,
+        $weight-normal,
+        2.2,
+        left,
+        $gray6
+      );
+    }
+  }
 
-        .logo-ellipse-first-cir {
-            @include custom-logo-ellipse(13px, 14px, 3px 3px 3px 3px, $white);
+  .search-departure-info {
+    margin-bottom: 0.4rem;
+  }
 
-            .logo-ellipse-second-cir {
-                @include custom-logo-ellipse(8px, 8px, 3px 3px 3px 3px, $primary);
-            }
-        }
+  .search-arrival-info,
+  .search-departure-info {
+    @include custom-text-style(
+      $poppins-font,
+      $font-14,
+      $weight-normal,
+      1.5,
+      left,
+      #bdbdbd
+    );
+  }
+
+  .search-arrival-more-title,
+  .search-departure-more-title {
+    @include custom-text-style(
+      $poppins-font,
+      $font-12,
+      $weight-bold,
+      1.5,
+      left,
+      $gray6
+    );
+    display: inline-block;
+    width: 100px;
+
+    img {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  .search-departure-more,
+  .search-arrival-more {
+    margin-left: 15px;
+  }
+
+  .responsive-change-flight-btn {
+    @include custom-btn-style(
+      146px,
+      48px,
+      21px 15px 0 0,
+      0,
+      5px,
+      $poppins-font,
+      $font-14,
+      $weight-500,
+      1.5,
+      center,
+      $primary,
+      border,
+      1px solid $primary
+    );
+  }
+
+  .responsive-search-btn {
+    @include custom-btn-style(
+      163px,
+      48px,
+      21px 0 0 0,
+      0,
+      5px,
+      $poppins-font,
+      $font-14,
+      $weight-500,
+      1.5,
+      center,
+      $white
+    );
+  }
+
+  .traveler-card-cover-body {
+    width: 318px;
+  }
+
+  .login-slider-container,
+  .offer-slider-container,
+  .request-slider-container {
+    width: 400px;
+    margin: auto;
+
+    input,
+    button,
+    a {
+      width: 100%;
+    }
+  }
+
+  .custom-textarea-register {
+    width: 238px !important;
+    padding: 36px 13px 25px 19px;
+  }
+
+  .short-label {
+    font-size: $font-12;
+    top: 12px;
+  }
+
+  .request-card-cover-body {
+    width: 318px;
+  }
+
+  .pickup-input-wrapper {
+    .custom-input-pickup {
+      width: 270px;
     }
 
-    .toggle-btn {
-        svg {
-            width: 16px;
-            height: 18px;
-            margin-right: 30px;
-            color: $white;
-        }
+    .custom-input-from {
+      width: 218px;
     }
 
-    .user-btn {
-        svg {
-            width: 16px;
-            height: 18px;
-            margin-right: 16px;
-            color: $white;
-        }
+    .custom-input-on-from {
+      width: 280px;
     }
 
-    .banner-text {
-        .banner-title {
-            @include custom-text-style($Inter-font, $font-32, $weight-800, 1.22, center, $white);
-            margin: 145px auto 60px auto;
-            width: 353px;
-        }
-
-        .banner-subtitle {
-            @include custom-text-style($poppins-font, $font-20, $weight-normal, 1.5, center, $white);
-            width: 342px;
-            display: block;
-            margin: auto;
-        }
+    .custom-input-and {
+      width: 267px;
     }
 
-
-    .flight-info-wrapper {
-        @include custom-box-style(360px, auto, 0px auto 26.8px auto, 0, contain, 0 24px 100px 0 rgba(0, 0, 0, 0.1), transparent);
+    .custom-input-at {
+      width: 282px;
     }
 
-    .request-info-wrapper {
-        @include custom-box-style(318px, auto, auto, 0, contain, none, transparent);
+    .custom-input-on-to {
+      width: 282px;
     }
 
-    .filter-wrapper {
-        @include custom-box-style(360px, 128px, 0px auto 26.8px auto, 0, contain, 0 24px 100px 0 rgba(0, 0, 0, 0.1), transparent);
+    .custom-input-for {
+      width: 275px;
     }
 
-    .tabs-component {
-        width: 360px;
-        margin-top: -100px;
+    .custom-input-via {
+      width: 263px;
     }
 
-    .tabs-component [role="tablist"] button:first-child {
-        width: 137px;
-        height: 41px;
+    .custom-input-number {
+      width: 280px;
     }
 
-    .tabs-component [role="tablist"] button:last-child {
-        width: 209px;
-        height: 41px;
+    .custom-input-message {
+      width: 345px;
+    }
+  }
+
+  .send-input-wrapper {
+    .custom-input-send {
+      width: 178px;
     }
 
-
-    .tabs-component [role="tablist"] button.active {
-        @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, $primary);
-
-        img {
-            width: 18px;
-            height: 18px;
-        }
+    .custom-input-weight {
+      width: 240px;
     }
 
-    .tabs-component [role="tablist"] button {
-        padding: 5px;
-        @include custom-text-style($Inter-font, $font-14, $weight-normal, 1.21, left, $gray1);
-
-        img {
-            width: 18px;
-            height: 18px
-        }
+    .custom-input-value {
+      margin: 0px 0 19px 20px;
+      width: 209px;
     }
 
-    .custom-input-flight-type {
-        @include custom-input-styles(210px, 41px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
+    .from-title {
+      margin: 0 16px 47px 0;
     }
 
-    .after-custom-input-flight-type {
-        @include custom-input-styles(210px, 41px, 8px 0 0 0, 0 0 0 15px, 5px, #fbfbfb, $Inter-font, $font-14, 1.57, left, rgb(152, 152, 152), border, solid 1px $gray8)
+    .and-title {
+      margin: 0px 25px 48px 0;
     }
 
-    .flight-type-title,
-    .flight-number-title {
-        @include custom-text-style($Inter-font, $font-12, $weight-600, 1.21, left, $primary);
+    .custom-input-from {
+      width: 266px;
     }
 
-    .custom-select-flight-type>div {
-        @include custom-select-styles(100px, 8px 0 0 0, 0, 5px,
-            white, $Inter-font, $font-12, $weight-bold , 1.21, left, $primary, border, solid 1px $gray8);
+    .custom-input-post-kind {
+      width: 365px;
     }
 
-    .tabs-component [role="tabpanel"] {
-        height: auto;
+    .custom-input-at-request {
+      width: 295px;
     }
 
-    .departure-info-wrapper {
-        margin-top: 10px;
+    .custom-input-between {
+      width: 233px;
     }
 
-
-    .search-plane-icon {
-        width: 27px;
-        height: 27px;
+    .custom-input-to-request {
+      width: 286px;
     }
 
-    .filter-responsive-btn {
-        @include custom-btn-style(34px, 34px, 5px, 7px 9PX, 5px, $Inter-font, $font-14, $weight-600, 1.17, left, $white, border, 1px solid $primary );
-        display: inline-block;
-        float: right;
-        margin-right: 7px;
-
-        svg {
-            width: 14px;
-            height: 14px;
-            text-align: left;
-            font-size: 14px;
-            color: #00043D;
-            vertical-align: sub;
-        }
+    .custom-input-and-offer {
+      width: 233px;
+      margin: 0 0px 34px 4px;
     }
 
-    .filter-info-wrapper {
-        @include custom-box-style(360px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
-
+    .custom-input-message {
+      width: 345px;
     }
 
-    .add-travel-btn {
-        @include custom-btn-style(107px, 35px, 5px, 5px 0, 5px, $Inter-font, $font-12, $weight-600, 1.9, center, $white );
+    .send-pack-title,
+    .message-title,
+    .and-offer-title,
+    .to-title,
+    .between-title,
+    .at-title,
+    .and-title,
+    .from-title,
+    .size-title,
+    .value-title,
+    .weight-title {
+      margin-left: 0;
     }
-
-    .requests-info-wrapper {
-        @include custom-box-style(360px, auto, 0px auto 26.8px auto, 0, contain, none, transparent);
-
-        h2 {
-            @include custom-text-style($Inter-font, $font-14, $weight-600, 1.21, left, $gray6);
-        }
-    }
-
-    .request-package-card-wrapper {
-        width: 318px;
-        height: 228px;
-    }
-
-    .traveler-package-card-wrapper {
-        width: 318px;
-        height: 228px;
-    }
-
-    .receive-offer-card-wrapper {
-        width: 318px;
-        height: 228px;
-    }
-
-    .more-detail-wrapper {
-        width: 318px;
-
-        .request-card-wrapper {
-            @include custom-card-style(318px, 228px, 0, 0, 5px 0px 5px 5px, none, rgb(0 4 61 / 83%));
-        }
-    }
-
-    .more-detail-wrapper {
-        width: 318px;
-
-        .travelers-card-wrapper {
-            @include custom-card-style(318px, 228px, 0, 0, 5px 0px 5px 5px, none, rgb(0 4 61 / 83%));
-        }
-    }
-
-    .card-cover-body {
-        height: 174px;
-        width: 318px;
-        padding: 8px 16px 5px 16px;
-    }
-
-    .main-footer {
-        @include custom-box-style(400px, 661px, 0, 0, contain, none, #f6f6f6);
-    }
-
-    .links-footer-wrapper {
-        margin-left: 32.5px;
-        margin-bottom: 60px;
-    }
-
-    .main-footer-copyright {
-        @include custom-box-style(400px, 81px, 15px 0 0 32.5px, 0, contain, none, transparent);
-    }
-
-    .header-nav-wrapper {
-        display: block;
-        width: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        position: absolute;
-        right: 15px;
-        top: 70px;
-        border-radius: 5px;
-        padding: 5px;
-
-        .nav-item {
-            display: block;
-        }
-
-        .nav-link {
-            @include custom-btn-style(unset, unset, 0, 0, none,
-                $poppins-font, $font-16, $weight-normal, 2.2, left, $white );
-        }
-    }
-
-    .search-departure-info {
-        margin-bottom: 0.4rem;
-    }
-
-    .search-arrival-info,
-    .search-departure-info {
-        @include custom-text-style($poppins-font, $font-14, $weight-normal, 1.5, left, #bdbdbd);
-    }
-
-    .search-arrival-more-title,
-    .search-departure-more-title {
-        @include custom-text-style($poppins-font, $font-12, $weight-bold, 1.5, left, $gray6);
-        display: inline-block;
-        width: 100px;
-
-        img {
-            width: 10px;
-            height: 10px;
-        }
-    }
-
-    .search-departure-more,
-    .search-arrival-more {
-        margin-left: 15px;
-    }
-
-    .responsive-change-flight-btn {
-        @include custom-btn-style(146px, 48px, 21px 15px 0 0, 0, 5px, $poppins-font, $font-14, $weight-500, 1.5, center, $primary , border, 1px solid $primary);
-    }
-
-    .responsive-search-btn {
-        @include custom-btn-style(163px, 48px, 21px 0 0 0, 0, 5px, $poppins-font, $font-14, $weight-500, 1.5, center, $white );
-    }
-
-    .traveler-card-cover-body {
-        width: 318px;
-    }
-
-    .login-slider-container,
-    .offer-slider-container,
-    .request-slider-container {
-        width: 400px;
-        margin: auto;
-
-        input,
-        button,
-        a {
-            width: 100%;
-        }
-    }
-
-    .custom-textarea-register {
-        width: 238px !important;
-        padding: 36px 13px 25px 19px;
-    }
-
-    .short-label {
-        font-size: $font-12;
-        top: 12px;
-    }
-
-    .request-card-cover-body {
-        width: 318px;
-    }
-
-    .pickup-input-wrapper {
-        .custom-input-pickup {
-            width: 270px
-        }
-
-        .custom-input-from {
-            width: 218px
-        }
-
-        .custom-input-on-from {
-            width: 280px
-        }
-
-        .custom-input-and {
-            width: 267px
-        }
-
-        .custom-input-at {
-            width: 282px;
-        }
-
-        .custom-input-on-to {
-            width: 282px;
-        }
-
-        .custom-input-for {
-            width: 275px;
-        }
-
-        .custom-input-via {
-            width: 263px;
-        }
-
-        .custom-input-number {
-            width: 280px;
-        }
-
-        .custom-input-message {
-            width: 345px;
-        }
-    }
-
-    .send-input-wrapper {
-        .custom-input-send {
-            width: 178px;
-        }
-
-
-        .custom-input-weight {
-            width: 240px;
-        }
-
-        .custom-input-value {
-            margin: 0px 0 19px 20px;
-            width: 209px;
-        }
-
-        .from-title {
-            margin: 0 16px 47px 0;
-        }
-
-        .and-title {
-            margin: 0px 25px 48px 0;
-        }
-
-        .custom-input-from {
-            width: 266px;
-        }
-
-        .custom-input-post-kind {
-            width: 365px;
-        }
-
-        .custom-input-at-request {
-            width: 295px;
-        }
-
-        .custom-input-between {
-            width: 233px;
-        }
-
-        .custom-input-to-request {
-            width: 286px;
-        }
-
-        .custom-input-and-offer {
-            width: 233px;
-            margin: 0 0px 34px 4px;
-        }
-
-        .custom-input-message {
-            width: 345px;
-        }
-
-        .send-pack-title,
-        .message-title,
-        .and-offer-title,
-        .to-title,
-        .between-title,
-        .at-title,
-        .and-title,
-        .from-title,
-        .size-title,
-        .value-title,
-        .weight-title {
-            margin-left: 0;
-        }
-    }
+  }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {}
+@media (min-width: 768px) and (max-width: 991px) {
+}

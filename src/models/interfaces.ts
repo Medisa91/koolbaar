@@ -135,7 +135,7 @@ export interface ITraveler {
   userLevel: string;
 }
 
-export interface TravelInformation {
+export interface ITravelInformation {
   fromCityCountry: string;
   departureDate: string;
   toCityCountry: string;
