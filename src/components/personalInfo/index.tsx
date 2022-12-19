@@ -15,7 +15,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
   const size = UseWindowSize();
   const [avatar, setAvatar] = useState(UserAvatar);
   const [changeImageStyle, setChangeImageStyle] = useState(false);
-
+  const isMobile = size.width < 768;
   const updateAvatars = (e) => {
     setAvatar(URL.createObjectURL(e.target.files[0]));
     setChangeImageStyle(true);
@@ -23,7 +23,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
 
   return (
     <div>
-      <h1 className="account-title">Personal information</h1>
+      {!isMobile && <h1 className="account-title">Personal information</h1>}
       {userData ? (
         <>
           <div className="d-flex">
@@ -65,7 +65,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
             </div>
           </div>
           <Row>
-            <Col xs={6} className="mb-4 pr-0">
+            <Col xs={isMobile ? 12 : 6} className="mb-4 pr-0">
               <Input
                 size="sm"
                 id="firstName-input"
@@ -74,7 +74,10 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
                 value={userData?.firstName}
               />
             </Col>
-            <Col xs={6} className="mb-4 text-center pr-0">
+            <Col
+              xs={isMobile ? 12 : 6}
+              className={`mb-4 ${!isMobile && "text-center"} pr-0`}
+            >
               <Input
                 size="sm"
                 id="lastName-input"
@@ -83,7 +86,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
                 value={userData?.lastName}
               />
             </Col>
-            <Col xs={6} className="mb-4 pr-0">
+            <Col xs={isMobile ? 12 : 6} className="mb-4 pr-0">
               <Input
                 size="sm"
                 id="displayName-input"
@@ -92,7 +95,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
                 value={userData?.displayName}
               />
             </Col>
-            <Col xs={6} className="mb-4 text-center pr-0">
+            <Col xs={isMobile ? 12 : 6} className={`mb-4 ${!isMobile && "text-center"} pr-0`}>
               <Input
                 size="sm"
                 id="phoneNumber-input"
@@ -139,7 +142,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
           <Row>
             <section
               className="container"
-              style={size.width < 768 ? { width: "400px" } : { width: "601px" }}
+              style={isMobile ? { width: "400px" } : { width: "601px" }}
             >
               <Uploader
                 image={userData?.passportPhoto}
@@ -150,7 +153,7 @@ export const PersonalInfo: React.FC<IProps> = ({ userData }) => {
           <Row>
             <section
               className="container"
-              style={size.width < 768 ? { width: "400px" } : { width: "601px" }}
+              style={isMobile ? { width: "400px" } : { width: "601px" }}
             >
               <Uploader
                 image={userData?.secondIdentityPhoto}

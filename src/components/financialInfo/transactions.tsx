@@ -2,12 +2,16 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { Button } from "layers";
 import { ITransaction } from "models/interfaces";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
 interface IProps {
   transactions: ITransaction[];
 }
 
 export const Transactions: React.FC<IProps> = ({ transactions }) => {
+  const size = UseWindowSize();
+  const isMobile = size.width < 768;
+
   return (
     <>
       {transactions && (
@@ -17,14 +21,14 @@ export const Transactions: React.FC<IProps> = ({ transactions }) => {
             return (
               <div key={index} className="transaction-box">
                 <Row>
-                  <Col xs={2} className="pr-0">
+                  <Col xs={isMobile ? 3 : 2} className="pr-0">
                     <div className="icon-transaction-wrapper">
                       <img src={item?.imageUrl} alt="shopping-bag-img" />
                     </div>
                   </Col>
-                  <Col xs={10} className="pl-0">
+                  <Col xs={isMobile ? 9 : 10} className="pl-0">
                     <Row>
-                      <Col xs={6} className="pl-0">
+                      <Col xs={isMobile ? 7 : 6} className="pl-0">
                         <span className="transaction-name d-block">
                           {item?.number}
                         </span>
@@ -32,7 +36,10 @@ export const Transactions: React.FC<IProps> = ({ transactions }) => {
                           {item?.insertTime}
                         </span>
                       </Col>
-                      <Col xs={6} className="transaction-amount-wrapper">
+                      <Col
+                        xs={isMobile ? 5 : 6}
+                        className="transaction-amount-wrapper"
+                      >
                         <span>-${item?.amount}</span>
                       </Col>
                     </Row>

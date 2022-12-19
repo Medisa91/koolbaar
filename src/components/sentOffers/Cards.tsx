@@ -19,8 +19,8 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMoreDetail, setShowMoreDetail] = useState(false);
   const [fade, setFade] = useState(false);
-
   const windowSize = UseWindowSize();
+  const isMobile = windowSize.width < 768;
 
   const handleShowMoreDetail = (key) => {
     setShowMoreDetail(key);
@@ -43,7 +43,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     >
       <Card className="receive-offer-card-wrapper contract-modal-wrapper">
         <Card.Body className="card-received-body">
-          <Row>
+          <Row className={`${isMobile ? "pr-2":""}`}>
             <Col xs={2} className="card-receive-side-info">
               <div className="header-card-titles">
                 <div>
@@ -160,14 +160,17 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             {data?.status === "Pending" ? "More Details" : "Timeline"}
           </Button>
           {data?.status === "Pending" ? (
-            <Button data-test="docs-btn-anchor" className="reject-btn mx-4">
+            <Button
+              data-test="docs-btn-anchor"
+              className={`reject-btn ${isMobile ? "mx-2" : "mx-4"}`}
+            >
               Reject
             </Button>
           ) : (
             <Button
               variant="primary"
               data-test="docs-btn-anchor"
-              className="accept-btn mx-4"
+              className={`accept-btn ${isMobile ? "mx-2" : "mx-4"}`}
             >
               View Contract
             </Button>

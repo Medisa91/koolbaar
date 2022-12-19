@@ -66,68 +66,70 @@ export const Menu: React.FC = () => {
       {size?.width < 768 ? (
         <>
           <Navbar collapseOnSelect expand="lg" className="ml-auto">
-            {isLogin ? (
-              <div>
-                <span className="d-inline-block">
-                  <img
-                    src={BellIcon}
-                    className="bell-request-icon"
-                    alt="bell-img"
-                  />
-                  <span className="notification-count">1</span>
-                </span>
-                <Dropdown
-                  className="profile-dropdown d-inline ml-1 responsive-header-profile-dropdown"
-                  // onToggle={handleSelect}
-                >
-                  <Dropdown.Toggle
-                    variant="transparent"
-                    id="dropdown-basic"
-                    className="px-0 mx-0"
+            <div>
+              {isLogin ? (
+                <>
+                  <span className="d-inline-block">
+                    <img
+                      src={BellIcon}
+                      className="bell-request-icon"
+                      alt="bell-img"
+                    />
+                    <span className="notification-count">1</span>
+                  </span>
+                  <Dropdown
+                    className="profile-dropdown d-inline ml-1 responsive-header-profile-dropdown"
+                    // onToggle={handleSelect}
                   >
-                    <span
-                      className={`${
-                        AvatarImg === "null" && "pt-3"
-                      } user-profile-avatar d-inline-block`}
+                    <Dropdown.Toggle
+                      variant="transparent"
+                      id="dropdown-basic"
+                      className="px-0 mx-0"
                     >
-                      {AvatarImg !== "null" ? (
-                        <img src={AvatarImg} alt="avatar-img" />
-                      ) : (
+                      <span
+                        className={`${
+                          AvatarImg === "null" && "pt-3"
+                        } user-profile-avatar d-inline-block`}
+                      >
+                        {AvatarImg !== "null" ? (
+                          <img src={AvatarImg} alt="avatar-img" />
+                        ) : (
+                          <FontAwesomeIcon icon={faUser} />
+                        )}
+                      </span>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="/profile">
                         <FontAwesomeIcon icon={faUser} />
-                      )}
-                    </span>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/profile">
-                      <FontAwesomeIcon icon={faUser} />
-                      Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item className="mt-2" href="/dashboard">
-                      <FontAwesomeIcon icon={faDashboard} />
-                      Dashboard
-                    </Dropdown.Item>
+                        Profile
+                      </Dropdown.Item>
+                      <Dropdown.Item className="mt-2" href="/dashboard">
+                        <FontAwesomeIcon icon={faDashboard} />
+                        Dashboard
+                      </Dropdown.Item>
 
-                    <Dropdown.Item className="mt-2" onClick={logoutBtn}>
-                      <FontAwesomeIcon icon={faLock} />
-                      Logout
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-            ) : (
-              <Button
-                variant="warning"
-                data-test="docs-btn-anchor"
-                href="#"
-                className="login-header-btn"
-                onClick={handleLoginSidebar}
-              >
-                Login/Sign Up
-              </Button>
-            )}
-            <a onClick={handleToggle} className="toggle-btn">
-              <FontAwesomeIcon icon={faBars} />
-            </a>
+                      <Dropdown.Item className="mt-2" onClick={logoutBtn}>
+                        <FontAwesomeIcon icon={faLock} />
+                        Logout
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </>
+              ) : (
+                <Button
+                  variant="warning"
+                  data-test="docs-btn-anchor"
+                  href="#"
+                  className="login-header-btn"
+                  onClick={handleLoginSidebar}
+                >
+                  Login/Sign Up
+                </Button>
+              )}
+              <a onClick={handleToggle} className="toggle-btn">
+                <FontAwesomeIcon icon={faBars} />
+              </a>
+            </div>
           </Navbar>
           {isToggle ? (
             <Nav className="header-nav-wrapper" defaultActiveKey="/" as="ul">

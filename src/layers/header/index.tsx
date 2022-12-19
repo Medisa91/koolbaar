@@ -10,8 +10,10 @@ import { showLoginResult } from "redux/slices/Authorization/login";
 import { showLogoutResult } from "redux/slices/Authorization/logout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faDashboard, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 export const Header: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const size = UseWindowSize();
   const dispatch = useAppDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -26,6 +28,13 @@ export const Header: React.FC = () => {
   const AvatarImg = window.localStorage.getItem("avatar")
     ? window.localStorage.getItem("avatar")
     : null;
+
+  const changeLanguage = (lang) => {
+    localStorage.setItem("language", lang);
+    i18n.changeLanguage(lang);
+    console.log(i18n.dir(lang));
+    window.location.reload();
+  };
 
   const handleLoginSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -60,6 +69,12 @@ export const Header: React.FC = () => {
 
   return (
     <>
+      {/* <h2>{t("hello")}</h2>
+      <div>
+        <button onClick={() => changeLanguage("fa")}>fa Persian</button>
+        <button onClick={() => changeLanguage("en")}>🇺🇸 English</button>
+      </div> */}
+
       {size?.width < 768 ? (
         <Row
           style={

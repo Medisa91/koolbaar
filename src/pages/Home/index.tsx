@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 import { Banner, Footer } from "layers";
 import {
   FlightInfo,
@@ -9,6 +9,7 @@ import {
 } from "components";
 
 export const Home: React.FC = () => {
+  const { t } = useTranslation();
   const [tab, setTab] = useState(null);
   const [type, setType] = useState({ value: null, label: "All" });
   const [size, setSize] = useState({ value: null, label: "All" });
@@ -35,6 +36,7 @@ export const Home: React.FC = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
+      <p>{t("greet", { name: "World" })}</p>
       <Banner />
       <FlightInfo onSelectTab={handleTab} />
       <Filters

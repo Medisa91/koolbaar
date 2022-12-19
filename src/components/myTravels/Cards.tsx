@@ -29,8 +29,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
       lg={3}
       md={4}
       sm={12}
-      className={`${windowSize.width < 768 && "p-0"} mb-5`}
-      style={windowSize.width < 768 ? { width: "318px" } : null}
+      className={`${windowSize.width < 768 ? "p-0 mb-1" : "mb-5"} `}
+      style={
+        windowSize.width < 768 ? { width: "318px", marginRight: "13px" } : null
+      }
       data-testid="container"
     >
       <Card className="traveler-package-card-wrapper">

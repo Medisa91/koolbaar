@@ -399,8 +399,8 @@
   }
 
   .receive-offer-card-wrapper {
-    width: 318px;
-    height: 228px;
+    width: 337px;
+    height: 266px;
   }
 
   .more-detail-wrapper {
@@ -506,10 +506,6 @@
       display: block;
       text-align: left;
       margin-left: 10px;
-    }
-
-    .title-dashboard {
-      
     }
 
     .nav-link {
@@ -740,6 +736,219 @@
     .weight-title {
       margin-left: 0;
     }
+  }
+
+  .title-dashboard {
+    @include custom-box-style(
+      100%,
+      53px,
+      0,
+      15px 0 18px 38px,
+      contain,
+      none,
+      #f5f5f5
+    );
+
+    h2 {
+      font-size: $font-16;
+    }
+  }
+
+  .active-profile-btn {
+    @include custom-btn-style(
+      107px,
+      44px,
+      18px 0 36px 0,
+      12px 19px 12px 20px,
+      5px,
+      $Inter-font,
+      $font-16,
+      $weight-600,
+      1.25,
+      center,
+      $primary,
+      border,
+      none
+    );
+    background-color: #f8f8f8;
+  }
+  .inactive-profile-btn {
+    @include custom-btn-style(
+      107px,
+      44px,
+      18px 0 36px 0,
+      12px 19px 12px 20px,
+      5px,
+      $Inter-font,
+      $font-16,
+      $weight-normal,
+      1.25,
+      center,
+      $primary,
+      border,
+      none
+    );
+    background-color: transparent;
+  }
+
+  .active-profile-btn:active:focus:hover,
+  .active-profile-btn:not(:disabled):not(.disabled) {
+    color: $primary !important;
+    background-color: #f8f8f8 !important;
+    border-color: #f8f8f8 !important;
+  }
+  .inactive-profile-btn:active:focus:hover,
+  .inactive-profile-btn:not(:disabled):not(.disabled) {
+    color: $primary !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .half-custom-input-register,
+  .full-custom-input-register {
+    width: 348px !important;
+  }
+
+  .balance-wrapper {
+    @include custom-box-style(
+      350px,
+      93px,
+      0,
+      23px 15px 20px 25px,
+      contain,
+      none,
+      #f6f6f6
+    );
+    h1 {
+      @include custom-text-style(
+        $Inter-font,
+        $font-16,
+        $weight-600,
+        1.18,
+        left,
+        $primary
+      );
+    }
+
+    .withdraw-btn {
+      @include custom-btn-style(
+        115px,
+        50px,
+        0 0 0 50px,
+        16px 23px 17px,
+        5px,
+        $Inter-font,
+        $font-14,
+        $weight-600,
+        1.18,
+        center,
+        $white
+      );
+    }
+  }
+
+  .payment-wrapper {
+    width: 350px;
+    h2 {
+      font-size: $font-16;
+    }
+    .payment-card-info {
+      width: 300px;
+    }
+    .add-new-card-btn {
+      width: 300px;
+    }
+  }
+
+  .transaction-wrapper {
+    width: 350px;
+    h2 {
+      font-size: $font-16;
+    }
+    .transaction-box {
+      width: 300px;
+    }
+    .load-more-btn {
+      width: 300px;
+    }
+  }
+
+  .responsive-dashboard-title-width {
+    width: 318px;
+    margin: 37px 0 56px 0;
+    margin: auto;
+  }
+
+  .dashboard-travels-info-wrapper,
+  .receive-offer-wrapper,
+  .send-offer-wrapper {
+    width: 400px;
+    margin: 0;
+    h2 {
+      font-size: $font-14;
+    }
+  }
+
+  .add-new-travel {
+    margin: 0 0 0px 85px;
+  }
+
+  .container-horizontal {
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+    margin-left: 25px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .traveler-card-horizontal {
+    flex-shrink: 0;
+    width: 318px;
+    height: auto;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    &:last-child {
+      margin-right: 25px;
+    }
+  }
+
+  .packages-card-horizontal {
+    @extend .traveler-card-horizontal;
+    width: 280px;
+  }
+
+  .offer-card-horizontal {
+    @extend .traveler-card-horizontal;
+    width: 337px;
+  }
+
+  .container-horizontal::-webkit-scrollbar {
+    display: none;
+  }
+
+  .receive-more-detail-btn {
+    width: 105px;
+    padding: 9px 5px;
+    font-size: $font-12;
+  }
+
+  .accept-btn,
+  .reject-btn {
+    width: 100px;
+    padding: 9px 0;
+    font-size: $font-12;
+  }
+
+  .delivered-box-info {
+    width: 95px;
+  }
+
+  .card-receive-footer {
+    padding: 5px;
   }
 }
 

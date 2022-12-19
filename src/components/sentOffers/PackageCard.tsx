@@ -13,6 +13,7 @@ interface IProps {
 export const PackageCard: React.FC<IProps> = ({ display }) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
+  const isMobile = windowSize.width < 768;
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,31 +23,33 @@ export const PackageCard: React.FC<IProps> = ({ display }) => {
 
   return (
     <>
-      <div className="flex-grow-1 request-info-wrapper mb-3">
-        <Row
-          style={
-            windowSize.width < 768 ? { width: "318px", margin: "auto" } : null
-          }
-        >
-          {loading ? (
-            (data?.items ?? []).map((item) => (
-              <Col key={item.name} lg={3} md={4} sm={12}>
-                <SkeletonGrid />
-              </Col>
-            ))
-          ) : (
-            <>
-              {display.label !== "All"
-                ? data?.items
-                    ?.filter((filter) => filter.label === display.label)
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : data?.items?.map((item, idx) => (
-                    <Cards key={idx} data={item} />
-                  ))}
-            </>
-          )}
-        </Row>
-      </div>
+      {isMobile ? (
+        <div className="container-horizontal">
+          {data?.items.map((item, idx) => (
+            <div className="offer-card-horizontal">
+              <Cards key={idx} data={item} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex-grow-1 request-info-wrapper mb-3">
+          <Row>
+            {loading ? (
+              (data?.items ?? []).map((item) => (
+                <Col key={item.name} lg={3} md={4} sm={12}>
+                  <SkeletonGrid />
+                </Col>
+              ))
+            ) : (
+              <>
+                {data?.items?.map((item, idx) => (
+                  <Cards key={idx} data={item} />
+                ))}
+              </>
+            )}
+          </Row>
+        </div>
+      )}
     </>
   );
 };
