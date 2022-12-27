@@ -7,18 +7,17 @@ import { Option, ITraveler } from "models/interfaces";
 import { Cards } from "./Cards";
 
 interface IProps {
+  isEmpty: boolean;
+  isLoading: boolean;
   travelerData: ITraveler[];
 }
 
-export const PackageCard: React.FC<IProps> = ({ travelerData }) => {
-  const [loading, setLoading] = useState(true);
+export const PackageCard: React.FC<IProps> = ({
+  travelerData,
+  isEmpty,
+  isLoading,
+}) => {
   const windowSize = UseWindowSize();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
 
   return (
     <>
@@ -28,7 +27,7 @@ export const PackageCard: React.FC<IProps> = ({ travelerData }) => {
             windowSize.width < 768 ? { width: "318px", margin: "auto" } : null
           }
         >
-          {loading ? (
+          {isLoading ? (
             (data?.items ?? []).map((item) => (
               <Col key={item.name} lg={3} md={4} sm={12}>
                 <SkeletonGrid />
@@ -36,22 +35,13 @@ export const PackageCard: React.FC<IProps> = ({ travelerData }) => {
             ))
           ) : (
             <>
-              {/* {type.label !== "All"
-                ? data?.items
-                    ?.filter((filter) => filter.label === type.label)
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : size.label !== "All"
-                ? data?.items
-                    ?.filter(
-                      (filter) => getSizeRange(filter.size) === size.label
-                    )
-                    ?.map((item, idx) => <Cards key={idx} data={item} />)
-                : data?.items?.map((item, idx) => (
-                    <Cards key={idx} data={item} />
-                  ))} */}
-              {travelerData?.map((data, idx) => (
-                <Cards key={idx} data={data} />
-              ))}
+              {!isEmpty ? (
+                travelerData?.map((data, idx) => <Cards key={idx} data={data} />)
+              ) : (
+                <span style={{ margin: "auto", fontSize: 20, fontWeight: 600 }}>
+                  No Data
+                </span>
+              )}
             </>
           )}
         </Row>

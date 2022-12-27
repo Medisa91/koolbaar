@@ -7,36 +7,57 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { PackageCard } from "./PackageCard";
 import { Option } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { getAllHomeTraveler } from "redux/actions/flight";
+import { getAllHomeTravelFilter } from "redux/actions/flight";
 
 interface IProps {
   type: Option;
   size: Option;
-  deliveryType: Option;
+  weight: Option;
+  services: Option;
+  tab: number;
 }
 
 export const AvailableTravelers: React.FC<IProps> = ({
   type,
   size,
-  deliveryType,
+  weight,
+  services,
+  tab,
 }) => {
   const windowSize = UseWindowSize();
   const dispatch = useAppDispatch();
   const [travelerData, setTravelerData] = useState([]);
-  const homeTravelerData = useAppSelector((state) => state.homeTraveler);
+  const homeTravelerData = useAppSelector((state) => state.homeTravelFilter);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const data = {
-      packagetypeId: null,
-      weightrangeId: null,
-      deliverytypeId: null,
+      type: "traveler",
+      packagetypeIds: type.value ? type.value : null,
+      weightrangeIds: weight?.value ? weight?.value : null,
+      deliverytypeIds: services?.value ? services?.value : null,
+      sizerangeIds: size?.value ? size?.value : null,
     };
-    dispatch(getAllHomeTraveler(data));
-  }, []);
+    if (tab === 2) dispatch(getAllHomeTravelFilter(data));
+    setTravelerData([]);
+  }, [type, size, weight, services]);
 
   useEffect(() => {
-    setTravelerData(homeTravelerData);
+    if (homeTravelerData?.length !== 0) {
+      setTravelerData(homeTravelerData);
+      setIsLoading(false);
+      setIsEmpty(false);
+      return;
+    }
+
+    setIsEmpty(true);
   }, [homeTravelerData]);
+
+  // useEffect(() => {
+  //   setTravelerData(homeTravelerData);
+  // }, [homeTravelerData]);
 
   return (
     <div className="requests-info-wrapper">
@@ -66,7 +87,11 @@ export const AvailableTravelers: React.FC<IProps> = ({
           </Col>
         </Row>
       )}
-      <PackageCard travelerData={travelerData} />
+      <PackageCard
+        travelerData={travelerData}
+        isLoading={isLoading}
+        isEmpty={isEmpty}
+      />
     </div>
   );
 };

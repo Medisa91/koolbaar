@@ -100,7 +100,8 @@
     }
   }
 
-  .submit-request-btn {
+  .submit-request-btn,
+  .deposit-request-btn {
     margin: 0;
   }
 
@@ -246,7 +247,8 @@
     );
   }
 
-  .after-custom-input-flight-type {
+  .after-custom-input-flight-type,
+  .custom-input-traveler-flight-number {
     @include custom-input-styles(
       210px,
       41px,
@@ -605,6 +607,7 @@
 
   .login-slider-container,
   .offer-slider-container,
+  .payment-slider-container,
   .request-slider-container {
     width: 400px;
     margin: auto;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Dropdown } from "react-bootstrap";
-import { RightSidebar } from "components";
+import { RightSidebar } from "layers";
 import { Logo, Button, Menu } from "layers";
 import { UseWindowSize } from "../../components/windowSize/UseWindowSize";
 import BellIcon from "../../assets/images/bell.png";
@@ -17,6 +17,12 @@ export const Header: React.FC = () => {
   const size = UseWindowSize();
   const dispatch = useAppDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isActiveFaLang, setIsFaActiveLang] = useState(
+    localStorage.getItem("language") === "fa"
+  );
+  const [isActiveEnLang, setIsEnActiveLang] = useState(
+    localStorage.getItem("language") === "en"
+  );
   const [isLogin, setIsLogin] = useState(
     window.localStorage.getItem("token") === "undefined" ||
       window.localStorage.getItem("token") === null
@@ -33,7 +39,15 @@ export const Header: React.FC = () => {
     localStorage.setItem("language", lang);
     i18n.changeLanguage(lang);
     console.log(i18n.dir(lang));
-    window.location.reload();
+    if (lang === "fa") {
+      setIsFaActiveLang(true);
+      setIsEnActiveLang(false);
+      return;
+    }
+    setIsFaActiveLang(false);
+    setIsEnActiveLang(true);
+
+    // window.location.reload();
   };
 
   const handleLoginSidebar = () => {
@@ -69,8 +83,8 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* <h2>{t("hello")}</h2>
-      <div>
+      {/* <h2>{t("hello")}</h2>*/}
+      {/* <div>
         <button onClick={() => changeLanguage("fa")}>fa Persian</button>
         <button onClick={() => changeLanguage("en")}>🇺🇸 English</button>
       </div> */}
@@ -109,7 +123,27 @@ export const Header: React.FC = () => {
           <Col className="text-right">
             <Logo />
           </Col>
-          <Col xs={6}>
+          <Col xs={1}>
+            <div className="lang-wrapper">
+              <a
+                className={`en-change-btn lang-btn ${
+                  isActiveFaLang ? "deActive-lang" : "active-lang"
+                }`}
+                onClick={() => changeLanguage("en")}
+              >
+                EN
+              </a>
+              <a
+                className={`fa-change-btn lang-btn ${
+                  isActiveFaLang ? "active-lang" : "deActive-lang"
+                }`}
+                onClick={() => changeLanguage("fa")}
+              >
+                FA
+              </a>
+            </div>
+          </Col>
+          <Col xs={5}>
             <Menu />
           </Col>
           <Col className="text-left">

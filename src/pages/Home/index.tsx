@@ -13,10 +13,8 @@ export const Home: React.FC = () => {
   const [tab, setTab] = useState(null);
   const [type, setType] = useState({ value: null, label: "All" });
   const [size, setSize] = useState({ value: null, label: "All" });
-  const [deliveryType, setDeliveryType] = useState({
-    value: null,
-    label: "All",
-  });
+  const [weight, setWeight] = useState({ value: null, label: "All" });
+  const [services, setServices] = useState({ value: null, label: "All" });
 
   const handleTypeFilter = (selected) => {
     setType(selected);
@@ -26,8 +24,12 @@ export const Home: React.FC = () => {
     setSize(selected);
   };
 
-  const handleDeliveryTypeFilter = (selected) => {
-    setDeliveryType(selected);
+  const handleWeightFilter = (selected) => {
+    setWeight(selected);
+  };
+
+  const handleServicesFilter = (selected) => {
+    setServices(selected);
   };
 
   const handleTab = (tab) => {
@@ -36,26 +38,31 @@ export const Home: React.FC = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <p>{t("greet", { name: "World" })}</p>
+      {/* <p>{t("greet", { name: "World" })}</p> */}
       <Banner />
       <FlightInfo onSelectTab={handleTab} />
       <Filters
         tab={tab}
         onSelectTypeFilter={handleTypeFilter}
         onSelectSizeFilter={handleSizeFilter}
-        onSelectDeliveryTypeFilter={handleDeliveryTypeFilter}
+        onSelectWeightFilter={handleWeightFilter}
+        onSelectServicesFilter={handleServicesFilter}
       />
       {tab === 1 ? (
         <AvailableRequests
           type={type}
           size={size}
-          deliveryType={deliveryType}
+          weight={weight}
+          services={services}
+          tab={tab}
         />
       ) : (
         <AvailableTravelers
           type={type}
           size={size}
-          deliveryType={deliveryType}
+          weight={weight}
+          services={services}
+          tab={tab}
         />
       )}
 

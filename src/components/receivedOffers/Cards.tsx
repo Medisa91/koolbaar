@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
-import { RightSidebar } from "components";
+import { RightSidebar } from "layers";
 import { Button } from "layers";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
@@ -82,7 +82,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               </div>
             </Col>
             <Col xs={6} className="receive-body-info">
-              <h3 className="received-card-label">Medicine</h3>
+              <h3 className="received-card-label">Supplement</h3>
               <div className="size-received-container">
                 <span className="card-text">Size: 35*35*36</span>
                 <span className="card-text ml-3">Weight: {data?.size}KG</span>

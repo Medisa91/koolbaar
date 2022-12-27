@@ -9,6 +9,8 @@ import {
   getAllTravelInfoHomeRequests,
 } from "redux/actions/flight";
 import { IFlightOptions, ITravelInformation } from "models/interfaces";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
   isOpen: boolean;
@@ -26,7 +28,9 @@ export const DirectInformation: React.FC<IProps> = ({
   isLoading,
 }) => {
   const dispatch = useAppDispatch();
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   const flightInquiryData: any = useAppSelector((state) => state.flightInquiry);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [flightNumber, setFlightNumber] = useState("");
@@ -128,8 +132,14 @@ export const DirectInformation: React.FC<IProps> = ({
         className="direct-modal-wrapper"
         show={isOpen}
         onHide={handleClose}
+        backdrop="static"
       >
         <Modal.Body>
+          <div className="close-modal-btn-wrapper">
+            <a onClick={handleClose}>
+              <FontAwesomeIcon icon={faClose} />
+            </a>
+          </div>
           <span className="enter-travel-information">Enter Flight Numbers</span>
           {flightInquiriesIndirect?.length !== 0 &&
             flightInquiriesIndirect?.map((item) => {
@@ -215,7 +225,7 @@ export const DirectInformation: React.FC<IProps> = ({
                 setFlightNumber={setFlightNumber}
                 setFlightInquiryIndirect={setFlightInquiryIndirect}
                 setFlightInquiry={setFlightInquiry}
-                flightInquiryData={flightInquiryData?.data}
+                flightInquiryData={flightInquiryData?.data?.data}
                 setIsClosedItems={setIsClosedItems}
                 isLoading={isLoading}
               />

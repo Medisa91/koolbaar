@@ -7,18 +7,22 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { PackageCard } from "./PackageCard";
 import { Option, IRequest } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { getAllHomeRequest } from "redux/actions/flight";
+import { getAllHomeRequestFilter } from "redux/actions/flight";
 
 interface IProps {
   type: Option;
   size: Option;
-  deliveryType: Option;
+  weight: Option;
+  services: Option;
+  tab: number;
 }
 
 export const AvailableRequests: React.FC<IProps> = ({
   type,
   size,
-  deliveryType,
+  weight,
+  services,
+  tab,
 }) => {
   const windowSize = UseWindowSize();
   const dispatch = useAppDispatch();
@@ -28,19 +32,22 @@ export const AvailableRequests: React.FC<IProps> = ({
   const [homeRequestByTravelInfo, setHomeRequestByTravelInfo] =
     useState<IRequest[]>();
 
-  const homeRequestData = useAppSelector((state) => state.homeRequest);
+  const homeRequestData = useAppSelector((state) => state.homeRequestFilter);
   const homeRequestByTravelData = useAppSelector(
     (state) => state.travelRequestHomeRequest
   );
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const data = {
-      packagetypeId: type.value ? type.value : null,
-      weightrangeId: size?.value ? size?.value : null,
-      deliverytypeId: deliveryType?.value ? deliveryType?.value : null,
+      type: "request",
+      packagetypeIds: type.value ? type.value : null,
+      weightrangeIds: weight?.value ? weight?.value : null,
+      deliverytypeIds: services?.value ? services?.value : null,
+      sizerangeIds: size?.value ? size?.value : null,
     };
-    dispatch(getAllHomeRequest(data));
-  }, [type, size, deliveryType]);
+    if (tab === 1) dispatch(getAllHomeRequestFilter(data));
+    setRequestData([]);
+  }, [type, size, weight, services]);
 
   useEffect(() => {
     if (homeRequestData?.length !== 0) {
@@ -49,7 +56,7 @@ export const AvailableRequests: React.FC<IProps> = ({
       setIsEmpty(false);
       return;
     }
-    setRequestData([]);
+    // setRequestData([]);
     setIsEmpty(true);
   }, [homeRequestData]);
 

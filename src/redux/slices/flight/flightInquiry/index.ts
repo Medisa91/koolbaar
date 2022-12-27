@@ -5,7 +5,7 @@ export const flightInquirySlice = createSlice({
   initialState: [],
   reducers: {
     flightInquiry: (state, action) => {
-      return (state = action.payload.data);
+      return (state = action.payload);
     },
     flightInquiryFailure: (state, action) => {
       return action.payload;

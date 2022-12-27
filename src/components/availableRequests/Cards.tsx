@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { Button } from "layers";
-import { RightSidebar } from "components";
+import { RightSidebar } from "layers";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
@@ -15,10 +15,12 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMoreDetail, setShowMoreDetail] = useState(false);
   const [fade, setFade] = useState(false);
+  const [acceptOfferData, setAcceptOfferData] = useState();
   const windowSize = UseWindowSize();
 
-  const handleOfferSidebar = () => {
+  const handleOfferSidebar = (data) => {
     setShowSidebar(!showSidebar);
+    setAcceptOfferData(data);
   };
 
   const handleShowMoreDetail = (key) => {
@@ -136,7 +138,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             variant="warning"
             data-test="docs-btn-anchor"
             className="make-offer-btn"
-            onClick={handleOfferSidebar}
+            onClick={() => handleOfferSidebar(data)}
           >
             Accept / Make Offer
           </Button>
@@ -153,6 +155,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
         <div className="offer-sidebar">
           <RightSidebar
             isOpen={showSidebar}
+            data={acceptOfferData}
             setIsOpen={setShowSidebar}
             sidebarType="offer"
             // sidebarType="request"

@@ -4,7 +4,7 @@ import Select, { components } from "react-select";
 import DatePicker from "react-datepicker";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faClose } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "layers";
 import { MonthNumber } from "helpers/convertMonthNameToNumber";
 import { IFlightOptions } from "models/interfaces";
@@ -60,23 +60,6 @@ export const TravelInformation: React.FC<IProps> = ({
   const [fromDate, setFromDate] = useState(defaultFromDate);
   const [toDate, setToDate] = useState(defaultToDate);
   const handleClose = () => setIsOpen(false);
-
-  // const getCountriesName = () => {
-  //   fetch("https://countriesnow.space/api/v0.1/countries")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const countriesData = data?.data?.map((item) => {
-  //         return item?.cities?.map((city) => {
-  //           return {
-  //             value: city,
-  //             label: `${item?.country} , ${city}`,
-  //           };
-  //         });
-  //       });
-  //       setOptions(countriesData);
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
 
   const customStyle = {
     control: (styles) => ({
@@ -141,8 +124,18 @@ export const TravelInformation: React.FC<IProps> = ({
 
   return (
     <>
-      <Modal className="info-modal-wrapper" show={isOpen} onHide={handleClose}>
+      <Modal
+        className="info-modal-wrapper"
+        show={isOpen}
+        backdrop="static"
+        onHide={handleClose}
+      >
         <Modal.Body>
+          <div className="close-modal-btn-wrapper">
+            <a onClick={handleClose}>
+              <FontAwesomeIcon icon={faClose} />
+            </a>
+          </div>
           <span className="enter-travel-information">
             Enter travel information
           </span>
@@ -192,14 +185,6 @@ export const TravelInformation: React.FC<IProps> = ({
             <Col xs={6} className="select-date-wrapper pr-0">
               <div>
                 <span className="flight-date-title">Departure date</span>
-                {/* <DatePicker
-                  value={selectedDepartureDay}
-                  inputClassName="custom-datepicker"
-                  onChange={setSelectedDepartureDay}
-                  // inputPlaceholder={<FontAwesomeIcon icon={faCalendar} />}
-                  shouldHighlightWeekends
-                  calendarPopperPosition="bottom"
-                /> */}
                 <DatePicker
                   className="custom-datepicker"
                   selected={fromDate}
@@ -216,14 +201,6 @@ export const TravelInformation: React.FC<IProps> = ({
             <Col xs={6} className="select-date-wrapper pr-0">
               <div>
                 <span className="flight-date-title">Arrival date</span>
-                {/* <DatePicker
-                  value={selectedArrivalDay}
-                  inputClassName="custom-datepicker"
-                  onChange={setSelectedArrivalDay}
-                  // inputPlaceholder={<FontAwesomeIcon icon={faCalendar} />}
-                  shouldHighlightWeekends
-                  calendarPopperPosition="bottom"
-                /> */}
                 <DatePicker
                   className="custom-datepicker"
                   selected={toDate}

@@ -5,12 +5,8 @@ class FlightsService {
     return http.post("/Flight/Inquiry", data);
   }
 
-  getHomeRequest(data) {
-    return http.post("/HomeRequest", data);
-  }
-
-  getHomeTraveler(data) {
-    return http.post("/HomeTraveler", data);
+  getHomeFilter(data) {
+    return http.post("/HomeFilter", data);
   }
 
   getHomeTravelerByTravelId(data) {

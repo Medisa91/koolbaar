@@ -11,7 +11,7 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { UseWindowSize } from "../../components/windowSize/UseWindowSize";
-import { RightSidebar } from "components";
+import { RightSidebar } from "layers";
 import BellIcon from "../../assets/images/bell.png";
 import { Dropdown } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "redux/store";

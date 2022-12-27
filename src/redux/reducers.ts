@@ -7,10 +7,11 @@ import {
   logout,
   checkToken,
   weightRange,
+  sizeRange,
   deliveryType,
   flightInquiry,
-  homeRequest,
-  homeTraveler,
+  homeRequestFilter,
+  homeTravelFilter,
   userInfo,
   travelRequestHomeRequest
 } from "redux/slices";
@@ -23,10 +24,11 @@ const rootReducer = combineReducers({
   logout,
   checkToken,
   weightRange,
+  sizeRange,
   deliveryType,
   flightInquiry,
-  homeRequest,
-  homeTraveler,
+  homeRequestFilter,
+  homeTravelFilter,
   userInfo,
   travelRequestHomeRequest
 });

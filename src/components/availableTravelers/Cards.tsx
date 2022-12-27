@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Card, Dropdown } from "react-bootstrap";
 import { Button } from "layers";
-import { RightSidebar } from "components";
+import { RightSidebar } from "layers";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";

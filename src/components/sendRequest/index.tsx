@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { Input, Button, } from "layers";
+import React, { useState, useEffect } from "react";
+import { Input, Button } from "layers";
 import { Uploader } from "components";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { useAppSelector } from "redux/store";
+import Select from "react-select";
+import DatePicker from "react-datepicker";
 
 export const SendRequest: React.FC = () => {
   const size = UseWindowSize();
@@ -22,6 +25,15 @@ export const SendRequest: React.FC = () => {
   });
   const [termsChecked, setTermsChecked] = useState(false);
   const [governmentChecked, setGovernmentChecked] = useState(false);
+  const [typeOptions, setTypeOptions] = useState([]);
+  const [type, setType] = useState({ value: 0, label: "Type" });
+  const [service, setService] = useState({ value: 0, label: "Services" });
+  const [servicesOptions, setServicesOptions] = useState([]);
+  const services = useAppSelector((state) => state.deliveryType);
+  const packagesType = useAppSelector((state) => state.packageTypes);
+  const screenSize = UseWindowSize();
+  const [betweenDate, setBetweenDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
 
   const handleTermsCheckedChange = () => {
     setTermsChecked(!termsChecked);
@@ -29,6 +41,53 @@ export const SendRequest: React.FC = () => {
 
   const handleGovernmentChange = () => {
     setGovernmentChecked(!governmentChecked);
+  };
+
+  useEffect(() => {
+    const options = packagesType?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setType({ value: packagesType[0].id, label: packagesType[0].name });
+    setTypeOptions(options);
+  }, [packagesType]);
+
+  const handleTypeChange = (selected) => {
+    setType(selected);
+  };
+
+  useEffect(() => {
+    const options = services?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setService({ value: services[0].id, label: services[0].name });
+    setServicesOptions(options);
+  }, [services]);
+
+  const handleServicesChange = (selected) => {
+    setService(selected);
+  };
+
+  const customStyle = {
+    control: (styles) => ({
+      ...styles,
+      height: screenSize?.width < 768 ? 34 : 50,
+    }),
+    option: (styles) => ({
+      ...styles,
+      color: "#00043d",
+      backgroundColor: "#fff",
+      flexWrap: "nowrap",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color: "#00043d",
+    }),
   };
 
   return (
@@ -39,12 +98,22 @@ export const SendRequest: React.FC = () => {
           <div className="send-input-wrapper">
             <span className="send-pack-title">I want to send my</span>
             <div className="d-inline-block">
-              <Input
+              {/* <Input
                 size="sm"
                 id="send-pack"
                 placeholder="Gadget"
                 className="custom-input-send"
                 value={offerData.offerType}
+              /> */}
+              <Select
+                className="custom-select-send d-inline-block"
+                value={type}
+                onChange={handleTypeChange}
+                options={typeOptions}
+                components={{
+                  IndicatorSeparator: () => null,
+                }}
+                styles={customStyle}
               />
             </div>
             <span className="weight-title">At weight</span>
@@ -119,12 +188,22 @@ export const SendRequest: React.FC = () => {
           <div className="send-input-wrapper">
             <span className="and-title">And</span>
             <div className="d-inline-block">
-              <Input
+              {/* <Input
                 size="sm"
                 id="and"
                 placeholder="Drop off or Post"
                 className="custom-input-post-kind"
                 value={offerData.at}
+              /> */}
+              <Select
+                className="custom-select-post-kind d-inline-block"
+                value={service}
+                onChange={handleServicesChange}
+                options={servicesOptions}
+                components={{
+                  IndicatorSeparator: () => null,
+                }}
+                styles={customStyle}
               />
             </div>
             <span className="at-title">At</span>
@@ -143,22 +222,22 @@ export const SendRequest: React.FC = () => {
           <div className="send-input-wrapper">
             <span className="between-title">Between</span>
             <div className="d-inline-block">
-              <Input
-                size="sm"
-                id="between"
-                placeholder="Monday, 05/05/2022"
+              <DatePicker
                 className="custom-input-between"
-                value={offerData.at}
+                selected={betweenDate}
+                onChange={(date) => setBetweenDate(date)}
+                dateFormat="MM/dd/yyyy"
+                showTimeInput
               />
             </div>
             <span className="to-title">To</span>
             <div className="d-inline-block">
-              <Input
-                size="sm"
-                id="to"
-                placeholder="Monday, 05/05/2022"
+              <DatePicker
                 className="custom-input-to-request"
-                value={offerData.at}
+                selected={toDate}
+                onChange={(date) => setToDate(date)}
+                dateFormat="MM/dd/yyyy"
+                showTimeInput
               />
             </div>
           </div>

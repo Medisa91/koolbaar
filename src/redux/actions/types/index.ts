@@ -11,6 +11,10 @@ import {
   getDeliveryType,
   deliveryTypeFailure,
 } from "redux/slices/types/deliveryType";
+import {
+  getSizeRanges,
+  sizeRangeFailure,
+} from "redux/slices/types/sizeRange";
 // import { toast } from "react-toastify";
 
 export const getAllDeliveryType = () => async (dispatch) => {
@@ -39,6 +43,16 @@ export const getAllWeightRange = () => async (dispatch) => {
     dispatch(getWeightRanges(res.data));
   } catch (err) {
     dispatch(weightRangeFailure(err?.response));
+    // toast.error(err?.response?.data?.message);
+  }
+};
+
+export const getAllSizeRange = () => async (dispatch) => {
+  try {
+    const res = await TypesService.getAllSizeRange();
+    dispatch(getSizeRanges(res.data));
+  } catch (err) {
+    dispatch(sizeRangeFailure(err?.response));
     // toast.error(err?.response?.data?.message);
   }
 };

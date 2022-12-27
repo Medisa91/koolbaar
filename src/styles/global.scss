@@ -141,6 +141,10 @@ body {
   align-self: center;
 }
 
+.travelers-tabs .col-lg-2 {
+  align-self: start;
+}
+
 .header-nav-wrapper {
   margin-bottom: 0;
   text-align: center;
@@ -299,7 +303,7 @@ body {
   padding: 1rem;
   background-color: $white;
   box-shadow: 1px 1px 2px rgb(204 204 204 / 75%);
-  padding-top: 20px;
+  padding-top: 15px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -389,6 +393,32 @@ body {
     border,
     solid 1px #f3f3f3
   );
+}
+
+.custom-select-traveler-city > div {
+  @include custom-select-styles(
+    150px,
+    0,
+    0,
+    5px,
+    #fff,
+    $poppins-font,
+    $font-14,
+    $weight-bold,
+    1.17,
+    left,
+    $black,
+    border,
+    none
+  );
+  &:hover {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  align-items: flex-start;
+  .css-1wy0on6 {
+    display: none;
+  }
 }
 
 .flight-type-title,
@@ -488,7 +518,16 @@ body {
   margin: 0;
 }
 
+.custom-input-traveler-flight-number {
+  @extend .after-custom-input-flight-type;
+  width: 211px;
+  padding: 16px 43px 19px 17px;
+  background-color: #f3f3f3;
+  border: 1px solid #f3f3f3;
+}
+
 .custom-input-flight-type::placeholder,
+.custom-input-traveler-flight-number::placeholder,
 .after-custom-input-flight-type::placeholder {
   color: #8f8f8f;
 }
@@ -605,7 +644,7 @@ body {
 
   .custom-select-filter-type > div {
     @include custom-select-styles(
-      144px,
+      unset,
       0 15px 0 0,
       0,
       5px,
@@ -619,11 +658,12 @@ body {
       border,
       solid 1px $gray8
     );
+    min-width: 144px;
   }
 
   .custom-select-filter-size > div {
     @include custom-select-styles(
-      140px,
+      unset,
       0 15px 0 0,
       0,
       5px,
@@ -637,11 +677,12 @@ body {
       border,
       solid 1px $gray8
     );
+    min-width: 140px;
   }
 
   .custom-select-filter-delivery > div {
     @include custom-select-styles(
-      166px,
+      unset,
       0,
       0,
       5px,
@@ -655,6 +696,7 @@ body {
       border,
       solid 1px $gray8
     );
+    min-width: 166px;
   }
 }
 
@@ -672,6 +714,23 @@ body {
     center,
     $white
   );
+}
+
+.add-travel-wrapper {
+  align-self: self-end;
+}
+
+.filters-select-title {
+  @include custom-text-style(
+    $poppins-font,
+    $font-14,
+    $weight-300,
+    1.5,
+    left,
+    $primary
+  );
+  display: block;
+  margin-bottom: 10px;
 }
 
 .download-contract-btn {
@@ -1638,6 +1697,7 @@ body {
 
 .login-wrapper,
 .offer-wrapper,
+.stripe-payment-wrapper,
 .request-wrapper {
   padding: 80px 18px 50px;
   margin: auto;
@@ -1672,6 +1732,19 @@ body {
       $gray6
     );
     margin-bottom: 30px;
+  }
+}
+.payment-form {
+  h1 {
+    @include custom-text-style(
+      $Inter-font,
+      $font-24,
+      $weight-600,
+      1.21,
+      left,
+      $gray6
+    );
+    margin-bottom: 45px;
   }
 }
 
@@ -1851,6 +1924,7 @@ body {
 
 .login-slider-container,
 .offer-slider-container,
+.payment-slider-container,
 .request-slider-container {
   width: 657px;
   margin: auto;
@@ -1887,7 +1961,7 @@ body {
         623px,
         397px,
         0 110px 59.8px 15px,
-        37px 34px,
+        5px 10px 0 34px,
         contain,
         none,
         $white
@@ -1916,7 +1990,7 @@ body {
     padding-bottom: 35px;
     .enter-travel-information {
       display: block;
-      margin: 35px 0 17px 35px;
+      margin: 7px 0 17px 35px;
       @include custom-text-style(
         $Inter-font,
         $font-18,
@@ -1926,6 +2000,14 @@ body {
         $black
       );
     }
+  }
+}
+
+.close-modal-btn-wrapper {
+  text-align: right;
+  padding: 10px 15px 0;
+  a {
+    cursor: pointer;
   }
 }
 
@@ -2260,6 +2342,13 @@ body {
   );
 }
 
+.deposit-request-btn {
+  @extend .submit-request-btn;
+  width: 163px;
+  padding: 18px;
+  margin: 0 0 0 50px;
+}
+
 .offer-sidebar {
   .bm-overlay {
     left: 0;
@@ -2276,6 +2365,30 @@ body {
       left,
       $primary
     );
+  }
+
+  .custom-select-pickup > div {
+    @include custom-select-styles(
+      111,
+      0 15px 12px 13px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
+
+  .custom-select-and {
+    @extend .custom-select-pickup;
+    width: 220px;
+    margin: 0 19px 13px 14px;
   }
 
   .custom-input-pickup {
@@ -2303,19 +2416,13 @@ body {
   .custom-input-from {
     @extend .custom-input-pickup;
     width: 310px;
-    margin: 0 1px 12px 16px;
+    margin: 12px 1px 13px 20px;
   }
 
   .custom-input-on-from {
     @extend .custom-input-pickup;
     width: 261px;
-    margin: 12px 19px 13px 14px;
-  }
-
-  .custom-input-and {
-    @extend .custom-input-pickup;
-    width: 220px;
-    margin: 12px 1px 13px 20px;
+    margin: 12px 19px 13px 9px;
   }
 
   .custom-input-at {
@@ -2369,6 +2476,24 @@ body {
     );
     margin: 13px 0 36px 0;
     width: 121px;
+  }
+
+  .custom-select-send > div {
+    @include custom-select-styles(
+      165px,
+      0 18px 16px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
   }
 
   .custom-input-send {
@@ -2474,11 +2599,29 @@ body {
     margin: 0 50px 47px 0;
   }
 
-  .custom-input-post-kind {
-    @extend .custom-input-send;
-    width: 132px;
-    margin: 0px 13px 14px 2px;
-    padding: 16px 12px 17px 9px;
+  // .custom-input-post-kind {
+  //   @extend .send-pack-title;
+  //   width: 132px;
+  //   margin: 0px 13px 14px 2px;
+  //   padding: 16px 12px 17px 9px;
+  // }
+
+  .custom-select-post-kind > div {
+    @include custom-select-styles(
+      132px,
+      0 3px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
   }
 
   .and-title {
@@ -2572,7 +2715,7 @@ body {
 .search-arrival-more-title {
   @include custom-text-style(
     $poppins-font,
-    $font-17,
+    $font-14,
     $weight-bold,
     1.85,
     left,
@@ -2623,9 +2766,9 @@ body {
 
 .search-btn {
   @include custom-btn-style(
-    120px,
+    161px,
     77px,
-    0,
+    10px 0 0 0px,
     0,
     5px,
     $poppins-font,
@@ -3577,5 +3720,65 @@ input:disabled {
     );
     border: solid 1px #d5d5d5;
     border-radius: 10px;
+  }
+}
+
+.amount-deposit-wrapper {
+  width: 538px;
+  height: 140px;
+  .amount-deposit-title {
+    @include custom-text-style(
+      $poppins-font,
+      $font-18,
+      $weight-500,
+      1.53,
+      left,
+      $gray6
+    );
+    display: block;
+  }
+  .amount-deposit-value {
+    @extend .amount-deposit-title;
+    font-size: 36px;
+  }
+  .amount-deposit-description {
+    @extend .amount-deposit-title;
+  }
+}
+
+.lang-wrapper {
+  @include custom-box-style(
+    78px,
+    30px,
+    0,
+    6px 8px 5px 10px,
+    contain,
+    none,
+    rgba(0, 0, 0, 0.34)
+  );
+  text-align-last: center;
+  display: block;
+  line-height: 15px;
+  .lang-btn {
+    font-size: $font-15;
+    cursor: pointer;
+    &:active,
+    &:visited {
+      color: $warning;
+    }
+  }
+
+  .en-change-btn {
+    border-right: 1px solid #fff;
+    padding-right: 8px;
+  }
+  .fa-change-btn {
+    padding-left: 8px;
+  }
+  .active-lang {
+    color: $warning;
+  }
+  .deActive-lang {
+    color: $white;
   }
 }

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "layers";
-import VisaImg from "../../assets/images/visa.png";
-import PaypalImg from "../../assets/images/paypal.png";
 import { IGateway } from "models/interfaces";
 
 interface IProps {

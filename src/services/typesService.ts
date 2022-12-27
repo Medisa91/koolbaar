@@ -12,6 +12,10 @@ class TypesService {
   getAllDeliveryType = () => {
     return http.get("Deliverytype");
   };
+
+  getAllSizeRange = () => {
+    return http.get("Sizerange");
+  };
 }
 
 export default new TypesService();

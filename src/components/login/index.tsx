@@ -3,14 +3,13 @@ import { Input, Button } from "layers";
 import { Register } from "components";
 import { Col, Row } from "react-bootstrap";
 import { Oval } from "react-loader-spinner";
-import { toast } from "react-toastify";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { gapi } from "gapi-script";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { loginUser, externalLoginUser } from "redux/actions/Authorization";
 import { ILogin, IExternalLogin } from "models/interfaces";
-// import useFacebook from "helpers/useFacebook";
+import { useTranslation } from "react-i18next";
 import {
   osVersion,
   osName,
@@ -38,6 +37,7 @@ declare global {
 export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
   const size = UseWindowSize();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const data = useAppSelector(showLoginResult);
   const [isLoading, setIsLoading] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(true);
@@ -75,7 +75,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
             "/me",
             { fields: "name, email, picture" },
             function (response) {
-              const name = response.name.split(" ")
+              const name = response.name.split(" ");
               setThirdPartyResponse({
                 email: response.email,
                 firstName: name[0],
@@ -222,11 +222,11 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
       {showLoginForm && (
         <Row className="login-wrapper">
           <Col className="login-form" lg={5} md={5} xs={12}>
-            <h1>Login</h1>
+            <h1>{t("login")}</h1>
             <Input
               size="sm"
               id="email-input"
-              placeholder="Email Address"
+              placeholder={t("emailAddress")}
               className="custom-input-login"
               name="username"
               value={loginData.username}
@@ -235,7 +235,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
             <Input
               size="sm"
               id="password-input"
-              placeholder="Password"
+              placeholder={t("password")}
               className="custom-input-login mt-4"
               name="password"
               type="password"
@@ -248,7 +248,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
               className="login-btn mt-4"
               onClick={login}
             >
-              Login
+              {t("login")}
               {isLoading && (
                 <Oval
                   width="20"
@@ -263,7 +263,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
           {size.width >= 768 && (
             <Col xs={2} className="right-line-wrapper pr-1">
               <div className="right-line-separate-login">
-                <span>OR</span>
+                <span>{t("or")}</span>
               </div>
             </Col>
           )}
@@ -275,7 +275,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
             md={5}
             xs={12}
           >
-            <h1>Login Via</h1>
+            <h1>{t("SigninWith")}</h1>
             <FacebookLogin
               appId="598976655336817"
               autoLoad={false}
@@ -295,7 +295,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
                   variant="danger"
                   className="google-btn mt-4"
                 >
-                  Google
+                  {t("google")}
                 </Button>
               )}
               buttonText="Login"
@@ -304,7 +304,7 @@ export const Login: React.FC<IProp> = ({ setIsOpen, setIsLogin }) => {
               cookiePolicy={"single_host_origin"}
             />
             <span className="mt-4 d-block forget-password-text">
-              Forgot password? Click <a href="/">Here</a>
+              {t("forgotPassword")} {t("click")} <a href="/">{t("here")}</a>
             </span>
           </Col>
         </Row>

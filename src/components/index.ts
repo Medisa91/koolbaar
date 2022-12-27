@@ -1,7 +1,7 @@
 export { Tabs } from "./tabsContainer";
-export { RightSidebar } from "./sidebar";
 export { SendRequest } from "./sendRequest";
 export { AcceptOffer } from "./acceptOffer";
+export { StripePayment } from "./stripePayment";
 export { Login } from "./login";
 export { Register } from "./register";
 export { FlightInfo } from "./flightInfo";

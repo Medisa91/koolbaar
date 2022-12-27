@@ -11,6 +11,7 @@ import { loginUser } from "redux/actions/Authorization";
 import { createUser } from "redux/actions/Authorization";
 import { Oval } from "react-loader-spinner";
 import PhoneInput from "react-phone-number-input";
+import { useTranslation } from "react-i18next";
 import {
   isValidFirstName,
   isValidLastName,
@@ -47,6 +48,7 @@ export const Register: React.FC<IProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const size = UseWindowSize();
+  const { t } = useTranslation();
   const createUserData: any = useAppSelector((state) => state.register);
   const [passportPhoto, setPassportPhoto] = useState(null);
   const [secondIdentityPhoto, setSecondIdentityPhoto] = useState(null);
@@ -179,7 +181,7 @@ export const Register: React.FC<IProps> = ({
   return (
     <>
       <div className="register-wrapper">
-        <h1>Register</h1>
+        <h1>{t("register")}</h1>
         <div className="d-flex">
           <div
             className={`${
@@ -208,11 +210,11 @@ export const Register: React.FC<IProps> = ({
             />
           </div>
           <div className="profile-box-container">
-            <span className="short-label">About Me</span>
+            <span className="short-label">{t("aboutMe")}</span>
             <Input
               size="sm"
               id="aboutMe-input"
-              placeholder="eg. I am a PHD student that living down town Toronto"
+              placeholder={t("aboutUsExample")}
               className="custom-textarea-register"
               type="text"
               name="aboutMe"
@@ -228,7 +230,7 @@ export const Register: React.FC<IProps> = ({
             <Input
               size="sm"
               id="firstName-input"
-              placeholder="First Name"
+              placeholder={t("firstName")}
               name="firstName"
               className={`half-custom-input-register ${
                 registerClicked &&
@@ -247,7 +249,7 @@ export const Register: React.FC<IProps> = ({
             <Input
               size="sm"
               id="lastName-input"
-              placeholder="Last Name"
+              placeholder={t("lastName")}
               name="lastName"
               className={`half-custom-input-register ${
                 registerClicked &&

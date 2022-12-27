@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, Button } from "layers";
 import { Col, Row } from "react-bootstrap";
+import { RightSidebar } from "layers";
+import { useAppSelector } from "redux/store";
+import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import Select from "react-select";
+import DatePicker from "react-datepicker";
+import { IRequest } from "models/interfaces";
+import {
+  getNumberOfMonth,
+  MonthNumber,
+} from "helpers/convertMonthNameToNumber";
 
-export const AcceptOffer: React.FC = () => {
+interface IProps {
+  data: IRequest;
+}
+
+export const AcceptOffer: React.FC<IProps> = ({ data }) => {
   const [offerData, setOfferData] = useState({
     offerType: "",
     from: "",
@@ -17,15 +31,82 @@ export const AcceptOffer: React.FC = () => {
     message:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod massa augue, non venenatis eros sollicitudin eget. Curabitur velit risus, consequat non dolor in, consectetur commodo urna.",
   });
-  const [termsChecked, setTermsChecked] = useState(false)
-  const [governmentChecked, setGovernmentChecked] = useState(false)
+  const [termsChecked, setTermsChecked] = useState(false);
+  const [governmentChecked, setGovernmentChecked] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [service, setService] = useState({ value: 0, label: "Services" });
+  const [servicesOptions, setServicesOptions] = useState([]);
+  const services = useAppSelector((state) => state.deliveryType);
+  const screenSize = UseWindowSize();
 
-  const handleTermsCheckedChange = () => { 
-    setTermsChecked(!termsChecked); 
-  }; 
+  const separatedFromDate = data?.shippingDeadline?.split("-");
+  const separatedFromHour = data?.departureTime?.split(":");
+  const separatedToDate = data?.shippingDeadline?.split("-");
+  const separatedToHour = data?.arrivalTime?.split(":");
+  const monthFrom = getNumberOfMonth(parseInt(separatedFromDate[1]));
+  const monthTo = getNumberOfMonth(parseInt(separatedFromDate[1]));
+  const defaultFromDate = new Date(
+    parseInt(separatedFromDate[0]),
+    MonthNumber(monthFrom),
+    parseInt(separatedFromDate[2]),
+    parseInt(separatedFromHour[0]),
+    parseInt(separatedFromHour[1]),
+    0,
+    0
+  );
+  const defaultToDate = new Date(
+    parseInt(separatedToDate[0]),
+    MonthNumber(monthTo),
+    parseInt(separatedToDate[2]),
+    parseInt(separatedToHour[0]),
+    parseInt(separatedToHour[1]),
+    0,
+    0
+  );
+  const [onFromDate, setOnFromDate] = useState(defaultFromDate);
+  const [onToDate, setOnToDate] = useState(defaultToDate);
 
-  const handleGovernmentChange = () => { 
-    setGovernmentChecked(!governmentChecked); 
+  const customStyle = {
+    control: (styles) => ({
+      ...styles,
+      height: screenSize?.width < 768 ? 34 : 50,
+    }),
+    option: (styles) => ({
+      ...styles,
+      color: "#00043d",
+      backgroundColor: "#fff",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color: "#00043d",
+    }),
+  };
+
+  const handleTermsCheckedChange = () => {
+    setTermsChecked(!termsChecked);
+  };
+
+  const handleGovernmentChange = () => {
+    setGovernmentChecked(!governmentChecked);
+  };
+
+  const handleStripeSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
+  useEffect(() => {
+    const options = services?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setService({ value: services[0].id, label: services[0].name });
+    setServicesOptions(options);
+  }, [services]);
+
+  const handleServicesChange = (selected) => {
+    setService(selected);
   };
 
   return (
@@ -35,15 +116,16 @@ export const AcceptOffer: React.FC = () => {
           <h1>Accept/Offer</h1>
           <div className="pickup-input-wrapper">
             <span>I can</span>
-            <div className="d-inline-block">
-              <Input
-                size="sm"
-                id="pick-up"
-                placeholder="Pick up"
-                className="custom-input-pickup"
-                value={offerData.offerType}
-              />
-            </div>
+            <Select
+              className="custom-select-pickup d-inline-block"
+              value={service}
+              onChange={handleServicesChange}
+              options={servicesOptions}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+              styles={customStyle}
+            />
             <span>your Item at</span>
             <div className="d-inline-block">
               <Input
@@ -51,7 +133,7 @@ export const AcceptOffer: React.FC = () => {
                 id="from"
                 placeholder="Times Square, Ontario, Canada"
                 className="custom-input-from"
-                value={offerData.from}
+                value={data.location}
               />
             </div>
           </div>
@@ -60,24 +142,32 @@ export const AcceptOffer: React.FC = () => {
           <div className="pickup-input-wrapper">
             <span>On</span>
             <div className="d-inline-block">
-              <Input
+              {/* <Input
                 size="sm"
                 id="on-from"
                 placeholder="Pick up"
-                className="custom-input-on-from"
                 value={offerData.onFrom}
+                /> */}
+              <DatePicker
+                className="custom-input-on-from"
+                selected={onFromDate}
+                onChange={(date) => setOnFromDate(date)}
+                timeInputLabel="Time:"
+                dateFormat="MM/dd/yyyy h:mm aa"
+                showTimeInput
               />
             </div>
             <span>And</span>
-            <div className="d-inline-block">
-              <Input
-                size="sm"
-                id="drop-off"
-                placeholder="Drop off"
-                className="custom-input-and"
-                value={offerData.and}
-              />
-            </div>
+            <Select
+              className="custom-select-and d-inline-block"
+              value={service}
+              onChange={handleServicesChange}
+              options={servicesOptions}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+              styles={customStyle}
+            />
           </div>
         </Col>
         <Col xs={12} className="offer-form">
@@ -98,12 +188,19 @@ export const AcceptOffer: React.FC = () => {
           <div className="pickup-input-wrapper">
             <span>On</span>
             <div className="d-inline-block">
-              <Input
+              {/* <Input
                 size="sm"
                 id="on-to"
                 placeholder="Monday 3PM to 5PM 05/05/2022"
-                className="custom-input-on-to"
                 value={offerData.onTo}
+                /> */}
+              <DatePicker
+                className="custom-input-on-to"
+                selected={onToDate}
+                onChange={(date) => setOnToDate(date)}
+                timeInputLabel="Time:"
+                dateFormat="MM/dd/yyyy h:mm aa"
+                showTimeInput
               />
             </div>
           </div>
@@ -195,11 +292,20 @@ export const AcceptOffer: React.FC = () => {
             variant="primary"
             data-test="docs-btn-anchor"
             className="submit-request-btn mt-4"
+            onClick={handleStripeSidebar}
           >
             Submit Request
           </Button>
         </div>
-        {/* </Col> */}
+        {showSidebar && (
+          <div className="offer-sidebar">
+            <RightSidebar
+              isOpen={showSidebar}
+              setIsOpen={setShowSidebar}
+              sidebarType="stripe"
+            />
+          </div>
+        )}
       </Row>
     </div>
   );

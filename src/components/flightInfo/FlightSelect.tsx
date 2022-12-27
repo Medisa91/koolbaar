@@ -61,6 +61,10 @@ export const FlightSelect: FC<IProps> = ({
     return flightNumber.length >= 6;
   };
 
+  useEffect(() => {
+    if (!isDirectOpenModal) setSelectedOption({ value: 1, label: "Direct" });
+  }, [isDirectOpenModal]);
+
   const changeFlightNumber = (e) => {
     setIsClosedItems(true);
     setFlightNumber(e.target.value);
@@ -80,9 +84,11 @@ export const FlightSelect: FC<IProps> = ({
   };
 
   useEffect(() => {
-    if (flightInquiryData?.data === null || !flightInquiryData?.isSuccess) {
+    if (flightInquiryData?.data === null && flightInquiryData?.isSuccess === false) {
       setIsLoading(false);
       setIsDropdownOpen(false);
+      setIsTravelOpenModal(true);
+      setFlightNumber("");
     }
     if (flightInquiryData?.data?.length !== 0) setIsLoading(false);
   }, [flightInquiryData]);
