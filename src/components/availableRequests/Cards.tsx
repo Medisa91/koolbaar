@@ -53,7 +53,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="text-left">{data?.departureTime}</span>
               </div>
             </Col>
-            <Col xs={6} className="text-center header-card-plane">
+            <Col xs={6} className="text-center header-card-plane p-0">
               <div>
                 <span className="fw-bold">{data?.packagetype}</span>
               </div>
@@ -92,7 +92,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="card-text">Item Value: {data?.itemValue}</span>
               </div>
             </Col>
-            <Col xs={5} className="request-body-package">
+            <Col xs={5} className="request-body-package pl-0">
               <div>
                 <span>Package ID</span>
               </div>
@@ -117,7 +117,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 href="/"
                 className="offer-btn"
               >
-                Offer {data?.offer}
+                Offer {data?.offerPrice}
               </Button>
             </Col>
           </Row>

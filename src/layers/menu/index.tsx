@@ -19,10 +19,13 @@ import { logoutUser } from "redux/actions/Authorization";
 import { Button } from "layers";
 import { showLoginResult } from "redux/slices/Authorization/login";
 import { showLogoutResult } from "redux/slices/Authorization/logout";
+import { useTranslation } from "react-i18next";
+import { elastic as Menu } from "react-burger-menu";
 
-export const Menu: React.FC = () => {
+export const MenuHeader: React.FC = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const size = UseWindowSize();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const loginData = useAppSelector(showLoginResult);
   const logoutData = useAppSelector(showLogoutResult);
@@ -123,7 +126,7 @@ export const Menu: React.FC = () => {
                   className="login-header-btn"
                   onClick={handleLoginSidebar}
                 >
-                  Login/Sign Up
+                  {t("loginSignup")}
                 </Button>
               )}
               <a onClick={handleToggle} className="toggle-btn">
@@ -131,42 +134,55 @@ export const Menu: React.FC = () => {
               </a>
             </div>
           </Navbar>
-          {isToggle ? (
+          <Menu>
+            <a id="home" className="menu-item" href="/">
+              {t("home")}
+            </a>
+            <a id="about" className="menu-item" href="/about">
+              {t("contact")}
+            </a>
+            <a id="contact" className="menu-item" href="/contact">
+              {t("more")}
+              <FontAwesomeIcon icon={faChevronDown} />
+            </a>
+          </Menu>
+          {/* {isToggle ? (
             <Nav className="header-nav-wrapper" defaultActiveKey="/" as="ul">
               <Nav.Item as="li">
                 <Nav.Link eventKey="1" as={Link} to="/Home">
-                  Home
+                  {t("home")}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
                 <Nav.Link eventKey="2" as={Link} to="/Contact">
-                  Contact
+                  {t("contact")}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
                 <Nav.Link eventKey="3" as={Link} to="/More">
-                  More <FontAwesomeIcon icon={faChevronDown} />
+                  {t("more")}
+                  <FontAwesomeIcon icon={faChevronDown} />
                 </Nav.Link>
               </Nav.Item>
             </Nav>
-          ) : null}
+          ) : null} */}
         </>
       ) : (
         <Navbar collapseOnSelect expand="lg">
           <Nav className="header-nav-wrapper" defaultActiveKey="/" as="ul">
             <Nav.Item as="li">
               <Nav.Link eventKey="1" as={Link} to="/Home">
-                Home
+                {t("home")}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
               <Nav.Link eventKey="2" as={Link} to="/Contant">
-                Contact
+                {t("contact")}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
               <Nav.Link eventKey="3" as={Link} to="/More">
-                More <FontAwesomeIcon icon={faChevronDown} />
+                {t("more")} <FontAwesomeIcon icon={faChevronDown} />
               </Nav.Link>
             </Nav.Item>
           </Nav>

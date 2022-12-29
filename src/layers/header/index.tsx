@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { RightSidebar } from "layers";
-import { Logo, Button, Menu } from "layers";
+import { Logo, Button, MenuHeader } from "layers";
 import { UseWindowSize } from "../../components/windowSize/UseWindowSize";
 import BellIcon from "../../assets/images/bell.png";
 import { logoutUser } from "redux/actions/Authorization";
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
     setIsFaActiveLang(false);
     setIsEnActiveLang(true);
 
-    // window.location.reload();
+    window.location.reload();
   };
 
   const handleLoginSidebar = () => {
@@ -105,7 +105,7 @@ export const Header: React.FC = () => {
             <Logo />
           </Col>
           <Col xs={7}>
-            <Menu />
+            <MenuHeader />
           </Col>
         </Row>
       ) : (
@@ -144,7 +144,7 @@ export const Header: React.FC = () => {
             </div>
           </Col>
           <Col xs={5}>
-            <Menu />
+            <MenuHeader />
           </Col>
           <Col className="text-left">
             {isLogin ? (
@@ -203,7 +203,7 @@ export const Header: React.FC = () => {
                 className="login-header-btn"
                 onClick={handleLoginSidebar}
               >
-                Login/Sign Up
+                {t("loginSignup")}
               </Button>
             )}
           </Col>

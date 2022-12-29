@@ -1,5 +1,5 @@
 export { Footer } from "./footer";
-export { Menu } from "./menu";
+export { MenuHeader } from "./menu";
 export { Header } from "./header";
 export { RightSidebar } from "./sidebar";
 export { Logo } from "./logo";

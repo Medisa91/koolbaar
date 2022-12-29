@@ -18,6 +18,7 @@ interface IProps {
   setFlightInquiry?: Function;
   setIsLoading?: Function;
   isLoading: boolean;
+  type: string;
 }
 
 export const DirectInformation: React.FC<IProps> = ({
@@ -26,6 +27,7 @@ export const DirectInformation: React.FC<IProps> = ({
   setFlightInquiry,
   setIsLoading,
   isLoading,
+  type
 }) => {
   const dispatch = useAppDispatch();
   const handleClose = () => {
@@ -52,7 +54,7 @@ export const DirectInformation: React.FC<IProps> = ({
   ]);
 
   const isFlightNumberIsSixDigit = (flightNumber: string) => {
-    return flightNumber.length >= 6;
+    return flightNumber.length >= 5;
   };
 
   const changeDisableFlightNumber = (e) => {
@@ -65,7 +67,8 @@ export const DirectInformation: React.FC<IProps> = ({
     setFlightNumber(e.target.value);
     const data = {
       flightNumber,
-      departureDate: null,
+      type,
+      flightDate: "",
     };
     if (isFlightNumberIsSixDigit(e.target.value)) {
       setIsDropdownOpen(true);

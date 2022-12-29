@@ -20,6 +20,7 @@ interface IProps {
   setFlightNumber: Function;
   setIsLoading: Function;
   setFlightInquiry?: Function;
+  type: string;
 }
 
 export const FlightSelect: FC<IProps> = ({
@@ -30,6 +31,7 @@ export const FlightSelect: FC<IProps> = ({
   setFlightNumber,
   setIsLoading,
   setFlightInquiry,
+  type,
 }) => {
   const size = UseWindowSize();
   const dispatch = useAppDispatch();
@@ -58,7 +60,7 @@ export const FlightSelect: FC<IProps> = ({
   };
 
   const isFlightNumberIsSixDigit = (flightNumber: string) => {
-    return flightNumber.length >= 6;
+    return flightNumber.length > 5;
   };
 
   useEffect(() => {
@@ -70,7 +72,8 @@ export const FlightSelect: FC<IProps> = ({
     setFlightNumber(e.target.value);
     const data = {
       flightNumber,
-      departureDate: null,
+      type,
+      flightDate: "",
     };
     if (
       isFlightNumberIsSixDigit(e.target.value) &&
@@ -84,7 +87,10 @@ export const FlightSelect: FC<IProps> = ({
   };
 
   useEffect(() => {
-    if (flightInquiryData?.data === null && flightInquiryData?.isSuccess === false) {
+    if (
+      flightInquiryData?.data === null &&
+      flightInquiryData?.isSuccess === false
+    ) {
       setIsLoading(false);
       setIsDropdownOpen(false);
       setIsTravelOpenModal(true);
@@ -194,6 +200,7 @@ export const FlightSelect: FC<IProps> = ({
           setIsLoading={setIsLoading}
           isOpen={isDirectOpenModal}
           setIsOpen={setIsDirectOpenModal}
+          type={type}
         />
       )}
     </Row>

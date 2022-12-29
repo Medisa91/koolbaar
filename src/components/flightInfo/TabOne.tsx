@@ -25,7 +25,6 @@ export const TabOne: FC<{}> = () => {
   const [isAfterSearch, setIsAfterSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  
 
   useEffect(() => {
     setTimeout(() => {
@@ -58,6 +57,7 @@ export const TabOne: FC<{}> = () => {
               setFlightNumber={setFlightNumber}
               setIsLoading={setIsLoading}
               isLoading={isLoading}
+              type="request"
             />
           </Col>
           <Col lg={5} md={5} sm={12} className="departure-info-wrapper">

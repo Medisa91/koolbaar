@@ -84,7 +84,7 @@ export interface ITransaction {
 
 export interface IRequest {
   owner: string;
-  offer: string;
+  offerPrice: string;
   id: string;
   pkgId: string;
   packagetype: string;
