@@ -1,4 +1,4 @@
-import FlightsService from "services/flights";
+import FlightsService from "services/flightsService";
 import {
   flightInquiry,
   flightInquiryFailure,

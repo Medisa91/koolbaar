@@ -135,6 +135,126 @@ export interface ITraveler {
   userLevel: string;
 }
 
+export interface IMyTraveler {
+  arrivalDate: string;
+  arrivalTime: string;
+  deliveryTypes: string;
+  departureDate: string;
+  departureTime: string;
+  description: string;
+  fromCity: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  images: string[];
+  isIdValidation: boolean;
+  isProfilePicture: boolean;
+  isProofOfAddress: boolean;
+  isSuccessfulTransaction: boolean;
+  isValidPassport: boolean;
+  itemValue: string;
+  location: string;
+  offerPrice: string;
+  owner: string;
+  packagetype: string;
+  rating: number;
+  requests: number;
+  shippingDeadline: string;
+  size: string;
+  toCity: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  trvId: string;
+  userLevel: string;
+  weight: string;
+}
+
+export interface IMyPackages {
+  arrivalDate: string;
+  arrivalTime: string;
+  deliveryTypes: string;
+  departureDate: string;
+  departureTime: string;
+  description: string;
+  fromCity: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  images: string[];
+  isIdValidation: boolean;
+  isProfilePicture: boolean;
+  isProofOfAddress: boolean;
+  isSuccessfulTransaction: boolean;
+  isValidPassport: boolean;
+  itemValue: string;
+  location: string;
+  offerPrice: string;
+  offers: number;
+  owner: string;
+  packagetype: string;
+  pkgId: string;
+  rating: number;
+  shippingDeadline: string;
+  size: string;
+  toCity: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  userLevel: string;
+  weight: string;
+}
+
+export interface IOfferSent {
+  arrivalDate: string;
+  arrivalTime: string;
+  daysLeft: string;
+  daysLeftHex: string;
+  departureDate: string;
+  departureTime: string;
+  fromCity: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  id: string;
+  itemValue: string;
+  message: string;
+  offId: string;
+  offerPrice: string;
+  owner: string;
+  packagetype: string;
+  shippingDeadline: string;
+  size: string;
+  status: string;
+  statusHex: string;
+  toCity: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  weight: string;
+}
+
+export interface IOfferReceived {
+  arrivalDate: string;
+  arrivalTime: string;
+  daysLeft: string;
+  daysLeftHex: string;
+  departureDate: string;
+  departureTime: string;
+  fromCity: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  id: string;
+  itemValue: string;
+  message: string;
+  offerPrice: string;
+  owner: string;
+  packagetype: string;
+  reqId: string;
+  shippingDeadline: number;
+  size: string;
+  status: string;
+  statusHex: string;
+  toCity: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  weight: string;
+}
+
 export interface ITravelInformation {
   fromCityCountry: string;
   departureDate: string;

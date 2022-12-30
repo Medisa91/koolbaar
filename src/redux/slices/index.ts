@@ -1,9 +1,10 @@
 import counter from "./counter";
-import register from "./Authorization/register";
-import login from "./Authorization/login";
-import logout from "./Authorization/logout";
-import checkToken from "./Authorization/externalLogin";
-import userInfo from "./Authorization/userInfo";
+import register from "./authorization/register";
+import login from "./authorization/login";
+import logout from "./authorization/logout";
+import checkToken from "./authorization/externalLogin";
+import userInfo from "./authorization/userInfo";
+import editUserInfo from "./authorization/editUserInfo";
 import packageTypes from "./types/packagesType";
 import weightRange from "./types/weightRange";
 import sizeRange from "./types/sizeRange";
@@ -12,6 +13,11 @@ import flightInquiry from "./flight/flightInquiry";
 import homeRequestFilter from "./flight/homeRequestFilter";
 import homeTravelFilter from "./flight/homeTravelFilter";
 import travelRequestHomeRequest from "./flight/homeRequestTravelInfo";
+import userDashboard from "./dashboard/userDashboard";
+import changeOfferStatus from "./dashboard/changeOfferStatus";
+import changeRequestStatus from "./dashboard/changeRequestStatus";
+import getChangedStatus from "./dashboard/getChangedStatus";
+import sendAgreement from "./dashboard/sendAgreement";
 
 export {
   counter,
@@ -28,4 +34,10 @@ export {
   homeRequestFilter,
   homeTravelFilter,
   travelRequestHomeRequest,
+  userDashboard,
+  editUserInfo,
+  changeOfferStatus,
+  changeRequestStatus,
+  getChangedStatus,
+  sendAgreement,
 };

@@ -5,13 +5,10 @@ import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { IMyPackages } from "models/interfaces";
 
 interface IProps {
-  data: {
-    name: string;
-    label: string;
-    size: number;
-  };
+  data: IMyPackages;
 }
 
 export const Cards: React.FC<IProps> = ({ data }) => {
@@ -19,7 +16,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
 
   return (
     <Col
-      key={data?.name}
+      key={data?.owner}
       lg={3}
       md={4}
       sm={12}
@@ -32,15 +29,15 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={3} className="text-left header-card-titles">
               <div>
-                <span className="text-left">CGK</span>
+                <span className="text-left">{data?.fromCountryAbbr}</span>
               </div>
               <div>
-                <span className="text-left">15:15</span>
+                <span className="text-left">{data?.departureTime}</span>
               </div>
             </Col>
             <Col xs={6} className="text-center header-card-plane px-1">
               <div>
-                <span>{data?.label}</span>
+                <span>{data?.packagetype}</span>
               </div>
               <div>
                 <span className="mb-0">
@@ -56,10 +53,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             </Col>
             <Col xs={3} className="header-card-titles">
               <div className="text-right">
-                <span>DPS</span>
+                <span>{data?.toCountryAbbr}</span>
               </div>
               <div className="text-right">
-                <span>17:15</span>
+                <span>{data?.arrivalTime}</span>
               </div>
             </Col>
           </Row>
@@ -68,11 +65,11 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={12} className="request-body-info">
               <div className="size-received-container">
-                <span className="card-text">Size: 35*35*36</span>
-                <span className="card-text ml-3">Weight: {data?.size}KG</span>
+                <span className="card-text">Size: {data?.size}</span>
+                <span className="card-text ml-3">Weight: {data?.weight}</span>
               </div>
               <div>
-                <span className="card-text">Item Value: 250$</span>
+                <span className="card-text">Item Value: {data?.itemValue}</span>
               </div>
             </Col>
           </Row>
@@ -82,7 +79,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="card-text">Shipping Deadline:</span>
               </div>
               <div>
-                <span className="card-text">05/05/2022</span>
+                <span className="card-text">{data?.shippingDeadline}</span>
               </div>
             </Col>
             <Col xs={4} className="myPackages-body-card text-right">
@@ -92,7 +89,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 href="/"
                 className="offer-my-package-btn"
               >
-                Offers 10
+                Offers {data?.offers}
               </Button>
             </Col>
           </Row>

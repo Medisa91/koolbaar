@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "layers";
 import { TravelCard } from "./TravelCard";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { IMyTraveler } from "models/interfaces";
 
-export const MyTravels: React.FC<{}> = () => {
+interface IProps {
+  travelerData: IMyTraveler[];
+}
+export const MyTravels: React.FC<IProps> = ({ travelerData }) => {
   const size = UseWindowSize();
   const isMobile = size.width < 768;
+
+  useEffect(() => {
+    console.log(travelerData);
+  }, [travelerData]);
 
   return (
     <div className="dashboard-travels-info-wrapper">
@@ -20,7 +28,7 @@ export const MyTravels: React.FC<{}> = () => {
           Add New
         </Button>
       </div>
-      <TravelCard />
+      <TravelCard travelerData={travelerData} />
     </div>
   );
 };

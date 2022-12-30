@@ -7,7 +7,7 @@ import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { gapi } from "gapi-script";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { loginUser, externalLoginUser } from "redux/actions/Authorization";
+import { loginUser, externalLoginUser } from "redux/actions/authorization";
 import { ILogin, IExternalLogin } from "models/interfaces";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,7 +17,7 @@ import {
   browserVersion,
 } from "react-device-detect";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { showLoginResult } from "redux/slices/Authorization/login";
+import { showLoginResult } from "redux/slices/authorization/login";
 
 const clientId =
   "165924336796-1o4rjbggsh4ph9qu8m5qnauvsn5ge2rn.apps.googleusercontent.com";

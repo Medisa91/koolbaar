@@ -4,29 +4,26 @@ import data from "json/myTravels.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
 import { Cards } from "./Cards";
+import { IMyTraveler } from "models/interfaces";
 
-export const TravelCard: React.FC = () => {
+interface IProps {
+  travelerData: IMyTraveler[];
+}
+
+export const TravelCard: React.FC<IProps> = ({ travelerData }) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
   const isMobile = windowSize.width < 768;
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
-
-  const getSizeRange = (size) => {
-    if (size < 5) return "0KG - 5KG";
-    else if (size >= 5 && size < 10) return "5KG - 10KG";
-    else return "10KG - 20KG";
-  };
+    if (travelerData) setLoading(false);
+  }, [travelerData]);
 
   return (
     <>
       {isMobile ? (
         <div className="container-horizontal">
-          {data?.items.map((item, idx) => (
+          {travelerData.map((item, idx) => (
             <div className="traveler-card-horizontal">
               <Cards key={idx} data={item} />
             </div>
@@ -43,7 +40,7 @@ export const TravelCard: React.FC = () => {
               ))
             ) : (
               <>
-                {data?.items?.map((item, idx) => (
+                {travelerData?.map((item, idx) => (
                   <Cards key={idx} data={item} />
                 ))}
               </>

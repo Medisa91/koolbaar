@@ -3,29 +3,31 @@ import { Row, Col } from "react-bootstrap";
 import data from "json/receives.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
-import { Option } from "models/interfaces";
+import { IOfferReceived, Option } from "models/interfaces";
 import { Cards } from "./Cards";
 
 interface IProps {
   display: Option;
+  offerReceivedData: IOfferReceived[];
 }
 
-export const PackageCard: React.FC<IProps> = ({ display }) => {
+export const PackageCard: React.FC<IProps> = ({
+  display,
+  offerReceivedData,
+}) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
   const isMobile = windowSize.width < 768;
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+    if (offerReceivedData) setLoading(false);
+  }, [offerReceivedData]);
 
   return (
     <>
       {isMobile ? (
         <div className="container-horizontal">
-          {data?.items.map((item, idx) => (
+          {offerReceivedData.map((item, idx) => (
             <div className="offer-card-horizontal">
               <Cards key={idx} data={item} />
             </div>
@@ -42,7 +44,7 @@ export const PackageCard: React.FC<IProps> = ({ display }) => {
               ))
             ) : (
               <>
-                {data?.items?.map((item, idx) => (
+                {offerReceivedData?.map((item, idx) => (
                   <Cards key={idx} data={item} />
                 ))}
               </>

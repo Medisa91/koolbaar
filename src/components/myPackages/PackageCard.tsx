@@ -4,23 +4,26 @@ import data from "json/myPackges.json";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { SkeletonGrid } from "components";
 import { Cards } from "./Cards";
+import { IMyPackages } from "models/interfaces";
 
-export const PackageCard: React.FC = () => {
+interface IProps {
+  packagesData: IMyPackages[];
+}
+
+export const PackageCard: React.FC<IProps> = ({packagesData}) => {
   const [loading, setLoading] = useState(true);
   const windowSize = UseWindowSize();
   const isMobile = windowSize.width < 768;
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+    if (packagesData) setLoading(false);
+  }, [packagesData]);
 
   return (
     <>
       {isMobile ? (
         <div className="container-horizontal">
-          {data?.items.map((item, idx) => (
+          {packagesData.map((item, idx) => (
             <div className="packages-card-horizontal">
               <Cards key={idx} data={item} />
             </div>
@@ -37,7 +40,7 @@ export const PackageCard: React.FC = () => {
               ))
             ) : (
               <>
-                {data?.items?.map((item, idx) => (
+                {packagesData?.map((item, idx) => (
                   <Cards key={idx} data={item} />
                 ))}
               </>

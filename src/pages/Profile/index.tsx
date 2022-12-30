@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { Header, Footer, Button } from "layers";
 import { PersonalInfo, FinancialInfo } from "components";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { getUserInfo } from "redux/actions/Authorization";
+import { getUserInfo } from "redux/actions/authorization";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 
 export const Profile: React.FC = () => {

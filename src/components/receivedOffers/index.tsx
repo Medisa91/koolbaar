@@ -5,14 +5,18 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { PackageCard } from "./PackageCard";
-import { Option } from "models/interfaces";
+import { IOfferReceived, Option } from "models/interfaces";
 import Select from "react-select";
 
 interface IProps {
   display: Option;
+  offerReceivedData: IOfferReceived[];
 }
 
-export const ReceivedOffer: React.FC<IProps> = ({ display }) => {
+export const ReceivedOffer: React.FC<IProps> = ({
+  display,
+  offerReceivedData,
+}) => {
   const windowSize = UseWindowSize();
   const [filter, setFilter] = useState({ value: 0, label: "Display All" });
   const options = [];
@@ -77,7 +81,7 @@ export const ReceivedOffer: React.FC<IProps> = ({ display }) => {
           </Col>
         </Row>
       )}
-      <PackageCard display={display} />
+      <PackageCard display={display} offerReceivedData={offerReceivedData} />
     </div>
   );
 };

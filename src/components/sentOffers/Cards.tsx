@@ -5,14 +5,10 @@ import { Button } from "layers";
 import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { IOfferSent } from "models/interfaces";
 
 interface IProps {
-  data: {
-    name: string;
-    label: string;
-    size: number;
-    status: string;
-  };
+  data: IOfferSent;
 }
 
 export const Cards: React.FC<IProps> = ({ data }) => {
@@ -33,7 +29,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
 
   return (
     <Col
-      key={data?.name}
+      key={data?.owner}
       lg={6}
       md={12}
       sm={12}
@@ -43,14 +39,14 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     >
       <Card className="receive-offer-card-wrapper contract-modal-wrapper">
         <Card.Body className="card-received-body">
-          <Row className={`${isMobile ? "pr-2":""}`}>
+          <Row className={`${isMobile ? "pr-2" : ""}`}>
             <Col xs={2} className="card-receive-side-info">
               <div className="header-card-titles">
                 <div>
-                  <span>CGK</span>
+                  <span>{data.fromCountryAbbr}</span>
                 </div>
                 <div>
-                  <span>15:15</span>
+                  <span>{data.departureTime}</span>
                 </div>
               </div>
               <div className="header-card-plane rotate-plane-wrapper">
@@ -68,43 +64,38 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               </div>
               <div className="header-card-titles">
                 <div>
-                  <span>DPS</span>
+                  <span>{data.toCountryAbbr}</span>
                 </div>
                 <div>
-                  <span>17:15</span>
+                  <span>{data.arrivalTime}</span>
                 </div>
               </div>
             </Col>
             <Col xs={6} className="receive-body-info">
-              <h3 className="received-card-label">Supplement</h3>
+              <h3 className="received-card-label">{data.packagetype}</h3>
               <div className="size-received-container">
-                <span className="card-text">Size: 35*35*36</span>
-                <span className="card-text ml-3">Weight: {data?.size}KG</span>
+                <span className="card-text">Size: {data.size}</span>
+                <span className="card-text ml-3">Weight: {data?.weight}</span>
               </div>
               <div className="size-received-container">
-                <span className="card-text">Item Value: 250$</span>
+                <span className="card-text">Item Value: {data.itemValue}</span>
               </div>
               <div className="mt-4 shipping-received-container">
                 <span className="card-text">Shipping Deadline: </span>
               </div>
               <div className="shipping-received-container">
                 <span className="card-text">
-                  05/05/2022{" "}
+                  {data.shippingDeadline}{" "}
                   <span
-                    className={`${
-                      data?.status === "Accepted"
-                        ? "warning-receive-expire-date"
-                        : data?.status === "Delivered"
-                        ? "success-receive-expire-date"
-                        : "danger-receive-expire-date"
-                    } receive-expire-date`}
+                    style={{ background: data?.daysLeftHex }}
+                    className="receive-expire-date"
                   >
-                    2 days left
+                    {data?.daysLeft} days left
                   </span>
                 </span>
               </div>
               <div className="size-received-container mt-3">
-                <span className="card-text">To: Jacob Arlington</span>
+                <span className="card-text">To: {data.owner}</span>
               </div>
             </Col>
             <Col xs={4} className="receive-body-offer text-right">
@@ -122,16 +113,11 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                     className="offer-status-btn"
                   >
                     <div className="offer-box-btn">
-                      Offer <span>$120</span>
+                      Offer <span>{data.offerPrice}</span>
                     </div>
                     <div
-                      className={`${
-                        data?.status === "Accepted"
-                          ? "warning-box-btn"
-                          : data?.status === "Delivered"
-                          ? "success-box-btn"
-                          : "danger-box-btn"
-                      } status-box-btn`}
+                      style={{ background: data.statusHex }}
+                      className="status-box-btn"
                     >
                       {data?.status}
                     </div>

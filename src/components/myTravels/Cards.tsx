@@ -5,27 +5,18 @@ import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { IMyTraveler } from "models/interfaces";
 
 interface IProps {
-  data: {
-    name: string;
-    label: string;
-    size: number;
-  };
+  data: IMyTraveler;
 }
 
 export const Cards: React.FC<IProps> = ({ data }) => {
-  const [openProfileBox, setOpenProfileBox] = useState(false);
-
-  const handleSelect = (show) => {
-    setOpenProfileBox(show);
-  };
-
   const windowSize = UseWindowSize();
 
   return (
     <Col
-      key={data?.name}
+      key={data?.owner}
       lg={3}
       md={4}
       sm={12}
@@ -40,15 +31,15 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={3} className="text-left header-card-titles">
               <div>
-                <span className="text-left">CGK</span>
+                <span className="text-left">{data?.fromCountryAbbr}</span>
               </div>
               <div>
-                <span className="text-left">15:15</span>
+                <span className="text-left">{data?.departureTime}</span>
               </div>
             </Col>
             <Col xs={6} className="text-center header-card-plane px-1">
               <div>
-                <span>05/05/2022</span>
+                <span>{data?.departureDate}</span>
               </div>
               <div>
                 <span className="mb-0">
@@ -64,10 +55,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             </Col>
             <Col xs={3} className="header-card-titles">
               <div className="text-right">
-                <span>DPS</span>
+                <span>{data?.toCountryAbbr}</span>
               </div>
               <div className="text-right">
-                <span>17:15</span>
+                <span>{data?.arrivalTime}</span>
               </div>
             </Col>
           </Row>
@@ -76,23 +67,24 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={7} className="request-body-info">
               <div>
-                <span className="card-text">Max Size: 35*35*36</span>
+                <span className="card-text">Max Size: {data?.size}</span>
               </div>
               <div>
-                <span className="card-text">Max Item Value: 250$</span>
+                <span className="card-text">
+                  Max Item Value: {data?.itemValue}
+                </span>
               </div>
               <div>
-                <span className="card-text">Max Weight: {data?.size}KG</span>
+                <span className="card-text">Max Weight: {data?.weight}</span>
               </div>
             </Col>
             <Col xs={5} className="request-body-package text-right">
               <Button
                 variant="primary"
                 data-test="docs-btn-anchor"
-                href="/"
                 className="request-amount"
               >
-                Requests <span>10</span>
+                Requests <span>{data?.requests}</span>
               </Button>
             </Col>
           </Row>

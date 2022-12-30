@@ -985,18 +985,6 @@ body {
       color: $white;
       font-size: $font-10;
     }
-
-    .warning-receive-expire-date {
-      background: $warning;
-    }
-
-    .success-receive-expire-date {
-      background: #269200;
-    }
-
-    .danger-receive-expire-date {
-      background: #ff0c0c;
-    }
   }
 }
 
@@ -2986,10 +2974,10 @@ body {
 
   .status-box-btn {
     text-align: center;
-    height: 40px;
+    height: auto;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 10px;
+    padding: 7px;
     @include custom-text-style(
       $Inter-font,
       $font-14,
@@ -2998,18 +2986,6 @@ body {
       center,
       $white
     );
-  }
-
-  .success-box-btn {
-    background: #269200;
-  }
-
-  .danger-box-btn {
-    background: #ff0c0c;
-  }
-
-  .warning-box-btn {
-    background: $warning;
   }
 }
 

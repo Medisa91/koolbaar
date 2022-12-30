@@ -13,7 +13,13 @@ import {
   homeRequestFilter,
   homeTravelFilter,
   userInfo,
-  travelRequestHomeRequest
+  editUserInfo,
+  travelRequestHomeRequest,
+  userDashboard,
+  changeOfferStatus,
+  changeRequestStatus,
+  getChangedStatus,
+  sendAgreement,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -30,7 +36,13 @@ const rootReducer = combineReducers({
   homeRequestFilter,
   homeTravelFilter,
   userInfo,
-  travelRequestHomeRequest
+  editUserInfo,
+  travelRequestHomeRequest,
+  userDashboard,
+  changeOfferStatus,
+  changeRequestStatus,
+  getChangedStatus,
+  sendAgreement,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

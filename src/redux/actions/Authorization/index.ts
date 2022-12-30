@@ -1,18 +1,19 @@
 import AuthorizationService from "services/authorizationService";
-import { login, loginFailure } from "redux/slices/Authorization/login";
-import { logout, logoutFailure } from "redux/slices/Authorization/logout";
+import { login, loginFailure } from "redux/slices/authorization/login";
+import { logout } from "redux/slices/authorization/logout";
+import { editUserInfo, editUserInfoFailure } from "redux/slices/authorization/editUserInfo";
 import {
   checkToken,
   checkTokenFailure,
-} from "redux/slices/Authorization/externalLogin";
+} from "redux/slices/authorization/externalLogin";
 import {
   addNewUser,
   registerFailure,
-} from "redux/slices/Authorization/register";
+} from "redux/slices/authorization/register";
 import {
   getUserProfile,
   profileFailure,
-} from "redux/slices/Authorization/userInfo";
+} from "redux/slices/authorization/userInfo";
 import { toast } from "react-toastify";
 
 export const loginUser = (data) => async (dispatch) => {
@@ -82,6 +83,16 @@ export const getUserInfo = () => async (dispatch) => {
     dispatch(getUserProfile(res.data));
   } catch (err) {
     dispatch(profileFailure(err?.response));
+    toast.error(err?.response?.data?.message);
+  }
+};
+
+export const modifyUserInfo = (data) => async (dispatch) => {
+  try {
+    const res = await AuthorizationService.editUserInfo(data);
+    dispatch(editUserInfo(res.data));
+  } catch (err) {
+    dispatch(editUserInfoFailure(err?.response));
     toast.error(err?.response?.data?.message);
   }
 };

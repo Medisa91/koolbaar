@@ -15,10 +15,10 @@ import { RightSidebar } from "layers";
 import BellIcon from "../../assets/images/bell.png";
 import { Dropdown } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "redux/store";
-import { logoutUser } from "redux/actions/Authorization";
+import { logoutUser } from "redux/actions/authorization";
 import { Button } from "layers";
-import { showLoginResult } from "redux/slices/Authorization/login";
-import { showLogoutResult } from "redux/slices/Authorization/logout";
+import { showLoginResult } from "redux/slices/authorization/login";
+import { showLogoutResult } from "redux/slices/authorization/logout";
 import { useTranslation } from "react-i18next";
 import { elastic as Menu } from "react-burger-menu";
 
