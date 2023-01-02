@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { MyTravels, MyPackages, ReceivedOffer, SentOffer } from "components";
 import { Header, Footer } from "layers";
-import { getAllDashboardData } from "redux/actions/dashboard";
+import {
+  getAllDashboardData,
+  getAllStatusChanges,
+} from "redux/actions/dashboard";
 import { useAppDispatch, useAppSelector } from "redux/store";
 
 export const Dashboard: React.FC = () => {
@@ -11,6 +14,7 @@ export const Dashboard: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAllDashboardData());
+    dispatch(getAllStatusChanges());
   }, []);
 
   const handleDisplayFilter = (selected) => {
@@ -29,7 +33,10 @@ export const Dashboard: React.FC = () => {
         offerReceivedData={dashboardData?.data?.offerReceived}
         display={display}
       />
-      <SentOffer offerSentData={dashboardData?.data?.offerSent} display={display} />
+      <SentOffer
+        offerSentData={dashboardData?.data?.offerSent}
+        display={display}
+      />
       <Footer />
     </div>
   );

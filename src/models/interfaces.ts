@@ -254,6 +254,49 @@ export interface IOfferReceived {
   toCountryAbbr: string;
   weight: string;
 }
+export interface IAddTravel {
+  packagetypeId: string;
+  packageType: string;
+  weight: string;
+  value: string;
+  sizeWidth: string;
+  sizeHeight: string;
+  sizeLength: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  fromCity: string;
+  deliverytypeIds: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  toCity: string;
+  fromDate: string;
+  toDate: string;
+  offerPrice: string;
+  message: string;
+  images: string;
+}
+
+export interface IAddPackage {
+  packagetypeId: string;
+  packageType: string;
+  weight: string;
+  value: string;
+  sizeWidth: string;
+  sizeHeight: string;
+  sizeLength: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  fromCity: string;
+  deliverytypeIds: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  toCity: string;
+  fromDate: string;
+  toDate: string;
+  offerPrice: string;
+  message: string;
+  images: string;
+}
 
 export interface ITravelInformation {
   fromCityCountry: string;

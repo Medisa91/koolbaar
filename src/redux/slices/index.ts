@@ -18,6 +18,7 @@ import changeOfferStatus from "./dashboard/changeOfferStatus";
 import changeRequestStatus from "./dashboard/changeRequestStatus";
 import getChangedStatus from "./dashboard/getChangedStatus";
 import sendAgreement from "./dashboard/sendAgreement";
+import addTravel from "./dashboard/addTravel";
 
 export {
   counter,
@@ -40,4 +41,5 @@ export {
   changeRequestStatus,
   getChangedStatus,
   sendAgreement,
+  addTravel,
 };

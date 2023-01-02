@@ -1,5 +1,12 @@
 import React from "react";
-import { Login, AcceptOffer, SendRequest, StripePayment } from "components";
+import {
+  Login,
+  AcceptOffer,
+  SendRequest,
+  AddPackage,
+  AddTravel,
+  StripePayment,
+} from "components";
 import { slide as Menu } from "react-burger-menu";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IRequest } from "models/interfaces";
@@ -17,7 +24,7 @@ export const RightSidebar: React.FC<IProps> = ({
   setIsOpen,
   sidebarType,
   setIsLogin,
-  data
+  data,
 }) => {
   const size = UseWindowSize();
   return (
@@ -34,6 +41,10 @@ export const RightSidebar: React.FC<IProps> = ({
         <AcceptOffer data={data} />
       ) : sidebarType === "request" ? (
         <SendRequest />
+      ) : sidebarType === "travel" ? (
+        <AddTravel />
+      ) : sidebarType === "package" ? (
+        <AddPackage />
       ) : sidebarType === "stripe" ? (
         <StripePayment />
       ) : null}

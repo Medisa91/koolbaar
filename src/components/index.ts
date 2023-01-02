@@ -1,5 +1,7 @@
 export { Tabs } from "./tabsContainer";
 export { SendRequest } from "./sendRequest";
+export { AddTravel } from "./addTravel";
+export { AddPackage } from "./addPackage";
 export { AcceptOffer } from "./acceptOffer";
 export { StripePayment } from "./stripePayment";
 export { Login } from "./login";

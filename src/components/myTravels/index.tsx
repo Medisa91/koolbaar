@@ -1,19 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "layers";
 import { TravelCard } from "./TravelCard";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IMyTraveler } from "models/interfaces";
+import { RightSidebar } from "layers";
 
 interface IProps {
   travelerData: IMyTraveler[];
 }
+
 export const MyTravels: React.FC<IProps> = ({ travelerData }) => {
   const size = UseWindowSize();
   const isMobile = size.width < 768;
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  useEffect(() => {
-    console.log(travelerData);
-  }, [travelerData]);
+  const openAddTravel = () =>{
+    setShowSidebar(!showSidebar);
+  }
 
   return (
     <div className="dashboard-travels-info-wrapper">
@@ -22,13 +25,22 @@ export const MyTravels: React.FC<IProps> = ({ travelerData }) => {
         <Button
           variant="primary"
           data-test="docs-btn-anchor"
-          href="/"
+          onClick={openAddTravel}
           className="add-new-travel"
         >
           Add New
         </Button>
       </div>
       <TravelCard travelerData={travelerData} />
+      {showSidebar && (
+        <div className="offer-sidebar">
+          <RightSidebar
+            isOpen={showSidebar}
+            setIsOpen={setShowSidebar}
+            sidebarType="travel"
+          />
+        </div>
+      )}
     </div>
   );
 };

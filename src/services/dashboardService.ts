@@ -20,6 +20,10 @@ class DashboardService {
   sendUserAgreement(data) {
     return authorizedHttp.post("/user/Agreement", data);
   }
+
+  addNewTravel(data) {
+    return authorizedHttp.post("/user/Travel/New", data);
+  }
 }
 
 export default new DashboardService();

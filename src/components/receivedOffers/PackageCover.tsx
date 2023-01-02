@@ -4,13 +4,14 @@ import { Row, Col, Card } from "react-bootstrap";
 import { Button } from "layers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import AvatarImg from "../../assets/images/avatar.png";
+import { IOfferReceived } from "models/interfaces";
 
 interface IProp {
   onShowCover: (key: any) => void;
   fade: boolean;
+  data: IOfferReceived;
 }
-export const PackageCover: React.FC<IProp> = ({ onShowCover, fade }) => {
+export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
   const [showCover, setShowCover] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
@@ -55,11 +56,7 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade }) => {
             </Col>
             <Col xs={6} className="note-offer-detail">
               <span className="d-block">Note:</span>
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in
-                lectus tortor. Praesent nisi lectus, molestie a lacinia non,
-                fringilla ut velit.
-              </span>
+              <span>{data.message}</span>
             </Col>
           </Row>
         </Card.Body>

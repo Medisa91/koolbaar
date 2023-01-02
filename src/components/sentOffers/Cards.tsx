@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { RightSidebar } from "layers";
 import { Button } from "layers";
@@ -6,17 +6,25 @@ import { PackageCover } from "./PackageCover";
 import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IOfferSent } from "models/interfaces";
+import { useAppDispatch, useAppSelector } from "redux/store";
+import { alterOfferStatus, getAllDashboardData } from "redux/actions/dashboard";
+import { Oval } from "react-loader-spinner";
 
 interface IProps {
   data: IOfferSent;
 }
 
 export const Cards: React.FC<IProps> = ({ data }) => {
+  const dispatch = useAppDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMoreDetail, setShowMoreDetail] = useState(false);
+  const [showStatusBox, setShowStatusBox] = useState(false);
   const [fade, setFade] = useState(false);
+  const [isStatusLoading, setIsStatusLoading] = useState(false);
   const windowSize = UseWindowSize();
   const isMobile = windowSize.width < 768;
+  const allStatus = useAppSelector((state) => state?.getChangedStatus);
+  const changeStatusData = useAppSelector((state) => state?.changeOfferStatus);
 
   const handleShowMoreDetail = (key) => {
     setShowMoreDetail(key);
@@ -26,6 +34,24 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     setShowMoreDetail(true);
     setFade(true);
   };
+
+  const showUpdateStatus = () => {
+    setShowStatusBox(!showStatusBox);
+  };
+
+  const changeStatus = (offId, changestatusId) => {
+    setIsStatusLoading(true);
+    const data = { offId, changestatusId };
+    dispatch(alterOfferStatus(data));
+    dispatch(getAllDashboardData());
+  };
+
+  useEffect(() => {
+    if (changeStatusData) {
+      setIsStatusLoading(false);
+      setShowStatusBox(false);
+    }
+  }, [changeStatusData]);
 
   return (
     <Col
@@ -99,11 +125,19 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               </div>
             </Col>
             <Col xs={4} className="receive-body-offer text-right">
-              {data?.status === "Delivered" ? (
+              {showStatusBox ? (
                 <div className="delivered-box-info">
-                  <p>Package given</p>
-                  <p>Delivered</p>
-                  <p>Request for cancel</p>
+                  {allStatus?.map((status) => {
+                    return (
+                      <a
+                        onClick={() => {
+                          changeStatus(data.offId, status.id);
+                        }}
+                      >
+                        {status.name}
+                      </a>
+                    );
+                  })}
                 </div>
               ) : (
                 <>
@@ -161,17 +195,41 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               View Contract
             </Button>
           )}
-          <Button
-            variant="primary"
-            data-test="docs-btn-anchor"
-            className="accept-btn"
-          >
-            {data?.status === "Pending" ? "Accept" : "Update Status"}
-          </Button>
+          {data?.status === "Pending" ? (
+            <Button
+              variant="primary"
+              data-test="docs-btn-anchor"
+              className="accept-btn"
+            >
+              Accept
+            </Button>
+          ) : (
+            <Button
+              variant="primary"
+              data-test="docs-btn-anchor"
+              className="update-status-btn"
+              onClick={showUpdateStatus}
+            >
+              Update Status{" "}
+              {isStatusLoading && (
+                <Oval
+                  width="15"
+                  height="15"
+                  color="#fff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{ display: "inline", marginLeft: "5px" }}
+                />
+              )}
+            </Button>
+          )}
         </Card.Footer>
       </Card>
       {showMoreDetail && (
-        <PackageCover fade={fade} onShowCover={handleShowMoreDetail} />
+        <PackageCover
+          data={data}
+          fade={fade}
+          onShowCover={handleShowMoreDetail}
+        />
       )}
       {showSidebar && (
         <div className="offer-sidebar">

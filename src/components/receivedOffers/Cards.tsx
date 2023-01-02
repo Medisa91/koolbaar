@@ -7,6 +7,12 @@ import PlaneIcon from "../../assets/images/plane.png";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { Contract } from "components/modals/Contract";
 import { IOfferReceived } from "models/interfaces";
+import { useAppDispatch, useAppSelector } from "redux/store";
+import {
+  alterRequestStatus,
+  getAllDashboardData,
+} from "redux/actions/dashboard";
+import { Oval } from "react-loader-spinner";
 
 interface IProps {
   data: IOfferReceived;
@@ -17,8 +23,15 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const [showMoreDetail, setShowMoreDetail] = useState(false);
   const [fade, setFade] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [showStatusBox, setShowStatusBox] = useState(false);
+  const [isStatusLoading, setIsStatusLoading] = useState(false);
   const windowSize = UseWindowSize();
   const isMobile = windowSize.width < 768;
+  const allStatus = useAppSelector((state) => state?.getChangedStatus);
+  const changeStatusData = useAppSelector(
+    (state) => state?.changeRequestStatus
+  );
+  const dispatch = useAppDispatch();
 
   const handleShowMoreDetail = (key) => {
     setShowMoreDetail(key);
@@ -32,6 +45,24 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const openContractModal = () => {
     setIsOpenModal(!isOpenModal);
   };
+
+  const showUpdateStatus = () => {
+    setShowStatusBox(!showStatusBox);
+  };
+
+  const changeStatus = (reqId, changestatusId) => {
+    setIsStatusLoading(true);
+    const data = { reqId, changestatusId };
+    dispatch(alterRequestStatus(data));
+    dispatch(getAllDashboardData());
+  };
+
+  useEffect(() => {
+    if (changeStatusData) {
+      setIsStatusLoading(false);
+      setShowStatusBox(false);
+    }
+  }, [changeStatusData]);
 
   return (
     <Col
@@ -109,11 +140,19 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               </div>
             </Col>
             <Col xs={4} className="receive-body-offer text-right">
-              {data?.status === "Delivered" ? (
+              {showStatusBox ? (
                 <div className="delivered-box-info">
-                  <p>Package received</p>
-                  <p>Delivered</p>
-                  <p>Request for cancel</p>
+                  {allStatus?.map((status) => {
+                    return (
+                      <a
+                        onClick={() => {
+                          changeStatus(data.reqId, status.id);
+                        }}
+                      >
+                        {status.name}
+                      </a>
+                    );
+                  })}
                 </div>
               ) : (
                 <>
@@ -126,7 +165,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                       Offer <span>{data.offerPrice}</span>
                     </div>
                     <div
-                    style={{background: data.statusHex}}
+                      style={{ background: data.statusHex }}
                       className="status-box-btn"
                     >
                       {data?.status}
@@ -172,17 +211,37 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               View Contract
             </Button>
           )}
-          <Button
-            variant="primary"
-            data-test="docs-btn-anchor"
-            className="accept-btn"
-          >
-            {data?.status === "Pending" ? "Accept" : "Update Status"}
-          </Button>
+          {data?.status === "Pending" ? (
+            <Button
+              variant="primary"
+              data-test="docs-btn-anchor"
+              className="accept-btn"
+            >
+              Accept
+            </Button>
+          ) : (
+            <Button
+              variant="primary"
+              data-test="docs-btn-anchor"
+              className="update-status-btn"
+              onClick={showUpdateStatus}
+            >
+              Update Status{" "}
+              {isStatusLoading && (
+                <Oval
+                  width="15"
+                  height="15"
+                  color="#fff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{ display: "inline", marginLeft: "5px" }}
+                />
+              )}
+            </Button>
+          )}
         </Card.Footer>
       </Card>
       {showMoreDetail && (
-        <PackageCover fade={fade} onShowCover={handleShowMoreDetail} />
+        <PackageCover data={data} fade={fade} onShowCover={handleShowMoreDetail} />
       )}
       {showSidebar && (
         <div className="offer-sidebar">

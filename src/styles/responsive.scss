@@ -689,11 +689,19 @@
       width: 209px;
     }
 
+    .custom-input-package {
+      margin: 0px 0 19px 20px;
+      width: 209px;
+    }
+
     .from-title {
       margin: 0 16px 47px 0;
     }
 
     .and-title {
+      margin: 0px 25px 48px 0;
+    }
+    .and-carry-title {
       margin: 0px 25px 48px 0;
     }
 
@@ -736,6 +744,7 @@
     .from-title,
     .size-title,
     .value-title,
+    .package-title,
     .weight-title {
       margin-left: 0;
     }
@@ -940,7 +949,8 @@
   }
 
   .accept-btn,
-  .reject-btn {
+  .reject-btn,
+  .update-status-btn {
     width: 100px;
     padding: 9px 0;
     font-size: $font-12;

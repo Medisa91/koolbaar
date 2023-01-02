@@ -1193,6 +1193,23 @@ body {
     solid 1px $primary
   );
 }
+.update-status-btn {
+  @include custom-btn-style(
+    165px,
+    35px,
+    0,
+    0px,
+    5px,
+    $Inter-font,
+    $font-14,
+    $weight-normal,
+    1.21,
+    center,
+    $white,
+    border,
+    solid 1px $primary
+  );
+}
 
 .edit-travel-btn {
   @extend .more-detail-btn;
@@ -2466,6 +2483,41 @@ body {
     width: 121px;
   }
 
+  .custom-place-from > div {
+    @include custom-select-styles(
+      195px,
+      0 11px 15px 15px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
+
+  .custom-package-place-from > div {
+    @include custom-select-styles(
+      490px,
+      0 11px 15px 15px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
   .custom-select-send > div {
     @include custom-select-styles(
       165px,
@@ -2506,6 +2558,11 @@ body {
     }
   }
 
+  .travel-to-title {
+    @extend .send-pack-title;
+    width: 63px;
+    margin: 13px 5px 36px 16px;
+  }
   .weight-title {
     @extend .send-pack-title;
     width: 63px;
@@ -2524,11 +2581,23 @@ body {
     width: 83px;
     margin: 33px 3px 35px;
   }
+  .package-title {
+    @extend .send-pack-title;
+    width: 83px;
+    margin: 33px 0 35px 20px;
+  }
 
   .custom-input-value {
     @extend .custom-input-send;
     width: 96px;
     margin: 0px 0 19px 46px;
+    padding: 16px 15px 17px;
+  }
+
+  .custom-input-package {
+    @extend .custom-input-send;
+    width: 140px;
+    margin: 0px 0 19px 16px;
     padding: 16px 15px 17px;
   }
 
@@ -2587,6 +2656,12 @@ body {
     margin: 0 50px 47px 0;
   }
 
+  .package-from-title {
+    @extend .send-pack-title;
+    width: 34px;
+    margin: 0 38px 47px 0;
+  }
+
   // .custom-input-post-kind {
   //   @extend .send-pack-title;
   //   width: 132px;
@@ -2611,8 +2686,83 @@ body {
       solid 1px $gray8
     );
   }
+  .custom-select-package-service > div {
+    @include custom-select-styles(
+      132px,
+      0 13px 0 3px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
+
+  .custom-select-size > div {
+    @include custom-select-styles(
+      110px,
+      0 3px 15px 3px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
+  .custom-select-post-service > div {
+    @include custom-select-styles(
+      148px,
+      0 3px 15px 3px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
 
   .and-title {
+    @extend .send-pack-title;
+    width: 26px;
+    margin: 0px 40px 48px 0;
+  }
+
+  .package-and-title {
+    @extend .send-pack-title;
+    width: 26px;
+    margin: 0px 56px 48px 0;
+  }
+  .carry-title {
+    @extend .send-pack-title;
+    width: 26px;
+    margin: 0px 40px 48px 0;
+  }
+
+  .and-destination-title {
+    @extend .send-pack-title;
+    width: 26px;
+    margin: 0px 58px 48px 0;
+  }
+
+  .and-carry-title {
     @extend .send-pack-title;
     width: 26px;
     margin: 0px 57px 48px 0;
@@ -2634,7 +2784,7 @@ body {
   .custom-input-between {
     @extend .custom-input-send;
     width: 215px;
-    margin: 0 8px 12px 3px;
+    margin: 0 8px 15px 3px;
     padding: 16px 15px 17px 15px;
   }
 
@@ -3021,15 +3171,18 @@ body {
   );
   border-radius: 5px;
 
-  p {
+  a {
     @include custom-text-style(
       $Inter-font,
       $font-12,
       $weight-normal,
       1.25,
       left,
-      $white
+      $white !important
     );
+    margin-bottom: 0.6rem;
+    display: block;
+    cursor: pointer;
   }
 }
 

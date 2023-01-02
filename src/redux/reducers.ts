@@ -20,6 +20,7 @@ import {
   changeRequestStatus,
   getChangedStatus,
   sendAgreement,
+  addTravel,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   changeRequestStatus,
   getChangedStatus,
   sendAgreement,
+  addTravel,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

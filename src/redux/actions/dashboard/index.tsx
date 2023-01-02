@@ -19,6 +19,10 @@ import {
   sendAgreement,
   sendAgreementFailure,
 } from "redux/slices/dashboard/sendAgreement";
+import {
+  addTravel,
+  addTravelFailure,
+} from "redux/slices/dashboard/addTravel";
 import { toast } from "react-toastify";
 
 export const getAllDashboardData = () => async (dispatch) => {
@@ -47,7 +51,8 @@ export const alterOfferStatus = (data) => async (dispatch) => {
   try {
     const res = await DashboardService.changeOfferStatus(data);
     dispatch(changeOfferStatus(res.data));
-    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+    if (!res?.data?.isSuccess) return toast.error(res?.data?.message);
+    toast.success(res?.data?.message);
   } catch (err) {
     toast.error(err?.response?.data?.message);
     dispatch(changeOfferStatusFailure(err?.response));
@@ -58,7 +63,8 @@ export const alterRequestStatus = (data) => async (dispatch) => {
   try {
     const res = await DashboardService.changeRequestStatus(data);
     dispatch(changeRequestStatus(res.data));
-    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+    if (!res?.data?.isSuccess) return toast.error(res?.data?.message);
+    toast.success(res?.data?.message);
   } catch (err) {
     toast.error(err?.response?.data?.message);
     dispatch(changeRequestStatusFailure(err?.response));
@@ -73,5 +79,16 @@ export const sendUserAgreement = (data) => async (dispatch) => {
   } catch (err) {
     toast.error(err?.response?.data?.message);
     dispatch(sendAgreementFailure(err?.response));
+  }
+};
+
+export const addNewTravel = (data) => async (dispatch) => {
+  try {
+    const res = await DashboardService.addNewTravel(data);
+    dispatch(addTravel(res.data));
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+  } catch (err) {
+    toast.error(err?.response?.data?.message);
+    dispatch(addTravelFailure(err?.response));
   }
 };

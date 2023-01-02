@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "layers";
 import { PackageCard } from "./PackageCard";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IMyPackages } from "models/interfaces";
+import { RightSidebar } from "layers";
 
 interface IProps {
   packagesData: IMyPackages[];
 }
 
-export const MyPackages: React.FC<IProps> = ({packagesData}) => {
+export const MyPackages: React.FC<IProps> = ({ packagesData }) => {
   const size = UseWindowSize();
   const isMobile = size.width < 768;
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const openAddPackage = () => {
+    setShowSidebar(!showSidebar);
+  };
 
   return (
     <div className="dashboard-travels-info-wrapper">
@@ -19,13 +25,22 @@ export const MyPackages: React.FC<IProps> = ({packagesData}) => {
         <Button
           variant="primary"
           data-test="docs-btn-anchor"
-          href="/"
+          onClick={openAddPackage}
           className="add-new-travel"
         >
           Add New
         </Button>
       </div>
       <PackageCard packagesData={packagesData} />
+      {showSidebar && (
+        <div className="offer-sidebar">
+          <RightSidebar
+            isOpen={showSidebar}
+            setIsOpen={setShowSidebar}
+            sidebarType="package"
+          />
+        </div>
+      )}
     </div>
   );
 };
