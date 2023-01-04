@@ -86,7 +86,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="card-text">Size: {data?.size}</span>
               </div>
               <div>
-                <span className="card-text">Weight: {data?.weight}KG</span>
+                <span className="card-text">Weight: {data?.weight}</span>
               </div>
               <div>
                 <span className="card-text">Item Value: {data?.itemValue}</span>

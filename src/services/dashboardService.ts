@@ -1,14 +1,18 @@
-import { authorizedHttp } from "helpers/httpRequest";
+import { authorizedHttp, authorizedFormDataHttp } from "helpers/httpRequest";
 
 class DashboardService {
   getDashboard() {
     return authorizedHttp.get("/user/Dashboard");
-  }
   
+  }
+  getTravelById(id) {
+    return authorizedHttp.get(`/user/Travel/GetByTrvId/${id}`);
+  }
+
   getAllChangedStatus() {
     return authorizedHttp.get("/user/Changestatus/All");
   }
-  
+
   changeOfferStatus(data) {
     return authorizedHttp.post("/user/Offer/ChangeStatus", data);
   }
@@ -22,7 +26,11 @@ class DashboardService {
   }
 
   addNewTravel(data) {
-    return authorizedHttp.post("/user/Travel/New", data);
+    return authorizedFormDataHttp.post("/user/Travel/New", data);
+  }
+
+  editNewTravel(data) {
+    return authorizedFormDataHttp.put("/user/Travel/Edit", data);
   }
 }
 

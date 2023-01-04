@@ -9,7 +9,7 @@ import {
 } from "components";
 import { slide as Menu } from "react-burger-menu";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
-import { IRequest } from "models/interfaces";
+import { IRequest, IMyTraveler } from "models/interfaces";
 
 interface IProps {
   isOpen: boolean;
@@ -17,6 +17,9 @@ interface IProps {
   setIsLogin?: Function;
   sidebarType: string;
   data?: IRequest;
+  travelData?: IMyTraveler;
+  mode?: string;
+  trvId?: string;
 }
 
 export const RightSidebar: React.FC<IProps> = ({
@@ -25,6 +28,8 @@ export const RightSidebar: React.FC<IProps> = ({
   sidebarType,
   setIsLogin,
   data,
+  mode,
+  trvId
 }) => {
   const size = UseWindowSize();
   return (
@@ -38,11 +43,11 @@ export const RightSidebar: React.FC<IProps> = ({
       {sidebarType === "login" ? (
         <Login setIsOpen={setIsOpen} setIsLogin={setIsLogin} />
       ) : sidebarType === "offer" ? (
-        <AcceptOffer data={data} />
+        <AcceptOffer acceptOfferData={data} />
       ) : sidebarType === "request" ? (
         <SendRequest />
       ) : sidebarType === "travel" ? (
-        <AddTravel />
+        <AddTravel setIsOpen={setIsOpen} mode={mode} trvId={trvId} />
       ) : sidebarType === "package" ? (
         <AddPackage />
       ) : sidebarType === "stripe" ? (

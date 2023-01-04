@@ -3,13 +3,23 @@
   "items": [
     {
       "name": "one",
-      "label": "Jacob Arlington",
-      "size": 1.2
+      "label": "",
+      "size": 1
     },
     {
       "name": "two",
-      "label": "Jacob Arlington",
-      "size": 6
+      "label": "",
+      "size": 2
+    },
+    {
+      "name": "three",
+      "label": "",
+      "size": 3
+    },
+    {
+      "name": "four",
+      "label": "",
+      "size": 4
     }    
   ]
 }

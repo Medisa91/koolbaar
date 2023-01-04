@@ -32,7 +32,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="text-left">{data?.fromCountryAbbr}</span>
               </div>
               <div>
-                <span className="text-left">{data?.departureTime}</span>
+                <span className="text-left">{data?.fromTime1}</span>
               </div>
             </Col>
             <Col xs={6} className="text-center header-card-plane px-1">
@@ -56,7 +56,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span>{data?.toCountryAbbr}</span>
               </div>
               <div className="text-right">
-                <span>{data?.arrivalTime}</span>
+                <span>{data?.toTime1}</span>
               </div>
             </Col>
           </Row>

@@ -411,9 +411,13 @@ body {
     border,
     none
   );
-  &:hover {
+  box-sizing: unset !important;
+  &:hover,
+  &:active,
+  &:focus {
     border: none !important;
     box-shadow: none !important;
+    box-sizing: unset !important;
   }
   align-items: flex-start;
   .css-1wy0on6 {
@@ -2485,7 +2489,24 @@ body {
 
   .custom-place-from > div {
     @include custom-select-styles(
-      195px,
+      178px,
+      0 11px 15px 15px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
+  .custom-place-to > div {
+    @include custom-select-styles(
+      205px,
       0 11px 15px 15px,
       0,
       5px,
@@ -2584,7 +2605,7 @@ body {
   .package-title {
     @extend .send-pack-title;
     width: 83px;
-    margin: 33px 0 35px 20px;
+    margin: 33px 0 35px 10px;
   }
 
   .custom-input-value {
@@ -2596,8 +2617,15 @@ body {
 
   .custom-input-package {
     @extend .custom-input-send;
-    width: 140px;
-    margin: 0px 0 19px 16px;
+    width: 114px;
+    margin: 0px 0 19px 10px;
+    padding: 16px 15px 17px;
+  }
+
+  .custom-input-service {
+    @extend .custom-input-send;
+    width: 203px;
+    margin: 0px 0 19px 10px;
     padding: 16px 15px 17px;
   }
 
@@ -2641,6 +2669,12 @@ body {
     @extend .send-pack-title;
     width: 56px;
     margin: 32px 0px 36px 23px;
+  }
+
+  .at-destination-title {
+    @extend .send-pack-title;
+    width: 56px;
+    margin: 32px 4px 36px 0;
   }
 
   .custom-input-from {
@@ -2706,7 +2740,7 @@ body {
 
   .custom-select-size > div {
     @include custom-select-styles(
-      110px,
+      96px,
       0 3px 15px 3px,
       0,
       5px,
@@ -2721,6 +2755,27 @@ body {
       solid 1px $gray8
     );
   }
+  .custom-select-package-type > div {
+    @include custom-select-styles(
+      466px,
+      0 3px 15px 3px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+    height: auto;
+    align-items: start
+
+  }
+
   .custom-select-post-service > div {
     @include custom-select-styles(
       148px,
@@ -2753,13 +2808,13 @@ body {
   .carry-title {
     @extend .send-pack-title;
     width: 26px;
-    margin: 0px 40px 48px 0;
+    margin: 0px 9px 48px 0;
   }
 
   .and-destination-title {
     @extend .send-pack-title;
     width: 26px;
-    margin: 0px 58px 48px 0;
+    margin: 0px 21px 48px 0;
   }
 
   .and-carry-title {
@@ -2788,23 +2843,55 @@ body {
     padding: 16px 15px 17px 15px;
   }
 
+  .custom-input-between-destination {
+    @extend .custom-input-send;
+    width: 168px;
+    margin: 0 8px 15px 3px;
+    padding: 16px 10px 17px 10px;
+  }
+
   .between-title {
     @extend .send-pack-title;
     width: 58px;
     margin: 48px 24px 23px 0;
   }
 
+  .between-destination-title {
+    @extend .send-pack-title;
+    width: 58px;
+    margin: 48px 3px 23px 0;
+  }
+
   .custom-input-to-request {
     @extend .custom-input-send;
-    width: 224px;
+    width: 215px;
     margin: 0 4px 12px 8px;
     padding: 16px 15px 17px 15px;
+  }
+
+  .custom-input-to-request-destination {
+    @extend .custom-input-send;
+    width: 163px;
+    margin: 0 4px 12px 8px;
+    padding: 16px 10px 17px 10px;
   }
 
   .to-title {
     @extend .send-pack-title;
     width: 16px;
     margin: 30px 9px 29px 11px;
+  }
+
+  .package-type-title {
+    @extend .send-pack-title;
+    width: 93px;
+    margin: 16px 20px 82px 0;
+  }
+
+  .to-destination-title {
+    @extend .send-pack-title;
+    width: 16px;
+    margin: 30px 2px 29px 5px;
   }
 
   .custom-input-and-offer {

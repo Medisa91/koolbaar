@@ -6,6 +6,9 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { IMyTraveler } from "models/interfaces";
+import { RightSidebar } from "layers";
+import { getTravel } from "redux/actions/dashboard";
+import { useAppDispatch } from "redux/store";
 
 interface IProps {
   data: IMyTraveler;
@@ -13,6 +16,15 @@ interface IProps {
 
 export const Cards: React.FC<IProps> = ({ data }) => {
   const windowSize = UseWindowSize();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [trvId, setTrvId] = useState("");
+  const dispatch = useAppDispatch();
+
+  const openEditTravel = (id) => {
+    setShowSidebar(!showSidebar);
+    dispatch(getTravel(id));
+    setTrvId(id)
+  };
 
   return (
     <Col
@@ -34,12 +46,12 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span className="text-left">{data?.fromCountryAbbr}</span>
               </div>
               <div>
-                <span className="text-left">{data?.departureTime}</span>
+                <span className="text-left">{data?.fromTime1}</span>
               </div>
             </Col>
             <Col xs={6} className="text-center header-card-plane px-1">
               <div>
-                <span>{data?.departureDate}</span>
+                <span>{data?.fromDate1}</span>
               </div>
               <div>
                 <span className="mb-0">
@@ -58,7 +70,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                 <span>{data?.toCountryAbbr}</span>
               </div>
               <div className="text-right">
-                <span>{data?.arrivalTime}</span>
+                <span>{data?.fromTime2}</span>
               </div>
             </Col>
           </Row>
@@ -99,7 +111,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           </Button>
           <Button
             variant="gray7"
-            data-test="docs-btn-anchor"
+            onClick={() => openEditTravel(data.trvId)}
             className="edit-travel-btn"
           >
             Edit
@@ -112,6 +124,18 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             View Requests
           </Button>
         </Card.Footer>
+        {showSidebar && (
+          <div className="offer-sidebar">
+            <RightSidebar
+              isOpen={showSidebar}
+              setIsOpen={setShowSidebar}
+              sidebarType="travel"
+              travelData={data}
+              mode="edit"
+              trvId={trvId}
+            />
+          </div>
+        )}
       </Card>
     </Col>
   );

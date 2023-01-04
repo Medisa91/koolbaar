@@ -29,3 +29,37 @@ export function getNumberOfMonth(no:number) {
   if (no === 12) return "Dec";
   return "jan"
 }
+
+const getTowDigitNumberDate = (date) => {
+  if (date < 10) {
+    return "0" + date;
+  }
+  return date;
+};
+
+export function getSeparatedDate(date) {
+  const month = getTowDigitNumberDate(date.getMonth() + 1);
+  const day = getTowDigitNumberDate(date.getDate());
+  const year = date.getFullYear();
+  const data = { day, month, year };
+  return data;
+}
+
+export const convertHumanDateToUnix = (date) =>{
+  const separatedDate = date?.split("-");
+  const month = getNumberOfMonth(parseInt(date[1]));
+  return new Date(
+    parseInt(separatedDate[0]),
+    MonthNumber(month),
+    parseInt(separatedDate[2]),
+    0,
+    0
+  )
+}
+
+export const getDate = (date) => {
+  const day = getSeparatedDate(date).day;
+  const month = getSeparatedDate(date).month;
+  const year = getSeparatedDate(date).year;
+  return `${year}-${month}-${day}`;
+};

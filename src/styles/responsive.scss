@@ -693,6 +693,10 @@
       margin: 0px 0 19px 20px;
       width: 209px;
     }
+    .custom-input-service {
+      margin: 0px 0 19px 20px;
+      width: 209px;
+    }
 
     .from-title {
       margin: 0 16px 47px 0;
@@ -720,8 +724,12 @@
     .custom-input-between {
       width: 233px;
     }
+    .custom-input-between-destination {
+      width: 233px;
+    }
 
-    .custom-input-to-request {
+    .custom-input-to-request,
+    .custom-input-to-request-destination {
       width: 286px;
     }
 

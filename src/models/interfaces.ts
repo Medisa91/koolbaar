@@ -136,69 +136,78 @@ export interface ITraveler {
 }
 
 export interface IMyTraveler {
-  arrivalDate: string;
-  arrivalTime: string;
-  deliveryTypes: string;
-  departureDate: string;
-  departureTime: string;
-  description: string;
-  fromCity: string;
-  fromCountry: string;
-  fromCountryAbbr: string;
-  images: string[];
-  isIdValidation: boolean;
+  owner: string;
+  offerPrice: string;
+  userLevel: string;
   isProfilePicture: boolean;
+  isValidPassport: boolean;
+  isIdValidation: boolean;
   isProofOfAddress: boolean;
   isSuccessfulTransaction: boolean;
-  isValidPassport: boolean;
-  itemValue: string;
-  location: string;
-  offerPrice: string;
-  owner: string;
-  packagetype: string;
   rating: number;
   requests: number;
-  shippingDeadline: string;
-  size: string;
-  toCity: string;
+  trvId: string;
+  packagetype: string;
+  sizerange: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  fromCountryCity: string;
   toCountry: string;
   toCountryAbbr: string;
-  trvId: string;
-  userLevel: string;
+  toCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  fromTime1: string;
+  fromTime2: string;
+  toDate1: string;
+  toDate2: string;
+  toTime1: string;
+  toTime2: string;
+  size: string;
   weight: string;
+  itemValue: string;
+  shippingDeadline: string;
+  deliveryTypes: string;
+  description: string;
+  location: string;
+  images: string[];
 }
 
 export interface IMyPackages {
-  arrivalDate: string;
-  arrivalTime: string;
-  deliveryTypes: string;
-  departureDate: string;
-  departureTime: string;
-  description: string;
-  fromCity: string;
-  fromCountry: string;
-  fromCountryAbbr: string;
-  images: string[];
-  isIdValidation: boolean;
+  owner: string;
+  offerPrice: string;
+  userLevel: string;
   isProfilePicture: boolean;
+  isValidPassport: boolean;
+  isIdValidation: boolean;
   isProofOfAddress: boolean;
   isSuccessfulTransaction: boolean;
-  isValidPassport: boolean;
-  itemValue: string;
-  location: string;
-  offerPrice: string;
-  offers: number;
-  owner: string;
-  packagetype: string;
-  pkgId: string;
   rating: number;
-  shippingDeadline: string;
-  size: string;
-  toCity: string;
+  offers: number;
+  pkgId: string;
+  packagetype: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  fromCountryCity: string;
   toCountry: string;
   toCountryAbbr: string;
-  userLevel: string;
+  toCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  fromTime1: string;
+  fromTime2: string;
+  toDate1: string;
+  toDate2: string;
+  toTime1: string;
+  toTime2: string;
+  size: string;
   weight: string;
+  itemValue: string;
+  shippingDeadline: string;
+  deliveryTypes: string;
+  description: string;
+  location: string;
+  images: string[];
 }
 
 export interface IOfferSent {
@@ -254,26 +263,29 @@ export interface IOfferReceived {
   toCountryAbbr: string;
   weight: string;
 }
+
 export interface IAddTravel {
-  packagetypeId: string;
+  TrvId?: string[];
+  packagetypeId: string[];
   packageType: string;
+  sizerangeId: string;
   weight: string;
   value: string;
   sizeWidth: string;
   sizeHeight: string;
   sizeLength: string;
-  fromCountry: string;
-  fromCountryAbbr: string;
-  fromCity: string;
   deliverytypeIds: string;
+  fromCountry: string;
+  fromCountryCity: string;
   toCountry: string;
-  toCountryAbbr: string;
-  toCity: string;
-  fromDate: string;
-  toDate: string;
+  toCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  toDate1: string;
+  toDate2: string;
   offerPrice: string;
   message: string;
-  images: string;
+  images: string[];
 }
 
 export interface IAddPackage {

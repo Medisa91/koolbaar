@@ -6,7 +6,7 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClose } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "layers";
-import { MonthNumber } from "helpers/convertMonthNameToNumber";
+import { MonthNumber } from "helpers/convertDate";
 import { IFlightOptions } from "models/interfaces";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { ITravelInformation } from "models/interfaces";

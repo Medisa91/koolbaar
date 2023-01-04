@@ -19,6 +19,8 @@ import changeRequestStatus from "./dashboard/changeRequestStatus";
 import getChangedStatus from "./dashboard/getChangedStatus";
 import sendAgreement from "./dashboard/sendAgreement";
 import addTravel from "./dashboard/addTravel";
+import editTravel from "./dashboard/editTravel";
+import userTravel from "./dashboard/userTravelById";
 
 export {
   counter,
@@ -42,4 +44,6 @@ export {
   getChangedStatus,
   sendAgreement,
   addTravel,
+  editTravel,
+  userTravel,
 };

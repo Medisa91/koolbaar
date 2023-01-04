@@ -15,7 +15,18 @@ export const registerHttp = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
     "Content-Type": "multipart/form-data",
-    "Accept-Language": localStorage.getItem("language")
+    "Accept-Language": localStorage.getItem("language"),
+  },
+});
+
+export const authorizedFormDataHttp = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+  headers: {
+    "Content-Type": "multipart/form-data",
+    "Accept-Language": localStorage.getItem("language"),
+    Authorization: `${window.localStorage.getItem(
+      "tokenType"
+    )} ${window.localStorage.getItem("token")}`,
   },
 });
 

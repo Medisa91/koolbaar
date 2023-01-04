@@ -7,16 +7,13 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import { IRequest } from "models/interfaces";
-import {
-  getNumberOfMonth,
-  MonthNumber,
-} from "helpers/convertMonthNameToNumber";
+import { getNumberOfMonth, MonthNumber } from "helpers/convertDate";
 
 interface IProps {
-  data: IRequest;
+  acceptOfferData: IRequest;
 }
 
-export const AcceptOffer: React.FC<IProps> = ({ data }) => {
+export const AcceptOffer: React.FC<IProps> = ({ acceptOfferData }) => {
   const [offerData, setOfferData] = useState({
     offerType: "",
     from: "",
@@ -39,10 +36,10 @@ export const AcceptOffer: React.FC<IProps> = ({ data }) => {
   const services = useAppSelector((state) => state.deliveryType);
   const screenSize = UseWindowSize();
 
-  const separatedFromDate = data?.shippingDeadline?.split("-");
-  const separatedFromHour = data?.departureTime?.split(":");
-  const separatedToDate = data?.shippingDeadline?.split("-");
-  const separatedToHour = data?.arrivalTime?.split(":");
+  const separatedFromDate = acceptOfferData?.shippingDeadline?.split("-");
+  const separatedFromHour = acceptOfferData?.departureTime?.split(":");
+  const separatedToDate = acceptOfferData?.shippingDeadline?.split("-");
+  const separatedToHour = acceptOfferData?.arrivalTime?.split(":");
   const monthFrom = getNumberOfMonth(parseInt(separatedFromDate[1]));
   const monthTo = getNumberOfMonth(parseInt(separatedFromDate[1]));
   const defaultFromDate = new Date(
@@ -133,7 +130,7 @@ export const AcceptOffer: React.FC<IProps> = ({ data }) => {
                 id="from"
                 placeholder="Times Square, Ontario, Canada"
                 className="custom-input-from"
-                value={data.location}
+                value={acceptOfferData.location}
               />
             </div>
           </div>

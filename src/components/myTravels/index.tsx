@@ -4,6 +4,7 @@ import { TravelCard } from "./TravelCard";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IMyTraveler } from "models/interfaces";
 import { RightSidebar } from "layers";
+import { ToastContainer } from "react-toastify";
 
 interface IProps {
   travelerData: IMyTraveler[];
@@ -14,9 +15,9 @@ export const MyTravels: React.FC<IProps> = ({ travelerData }) => {
   const isMobile = size.width < 768;
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const openAddTravel = () =>{
+  const openAddTravel = () => {
     setShowSidebar(!showSidebar);
-  }
+  };
 
   return (
     <div className="dashboard-travels-info-wrapper">
@@ -38,9 +39,21 @@ export const MyTravels: React.FC<IProps> = ({ travelerData }) => {
             isOpen={showSidebar}
             setIsOpen={setShowSidebar}
             sidebarType="travel"
+            mode="add"
           />
         </div>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

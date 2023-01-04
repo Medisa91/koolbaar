@@ -8,7 +8,7 @@ import LocationIcon from "../../assets/images/svg/location.svg";
 import { DebounceInput } from "react-debounce-input";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { components } from "react-select";
-import { getNumberOfMonth } from "helpers/convertMonthNameToNumber";
+import { getNumberOfMonth } from "helpers/convertDate";
 
 export const TabTwo: FC<{}> = () => {
   const size = UseWindowSize();
