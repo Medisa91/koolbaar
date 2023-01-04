@@ -23,6 +23,7 @@ import {
   addTravel,
   editTravel,
   userTravel,
+  deleteTravel,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
   addTravel,
   editTravel,
   userTravel,
+  deleteTravel,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

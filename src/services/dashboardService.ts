@@ -32,6 +32,10 @@ class DashboardService {
   editNewTravel(data) {
     return authorizedFormDataHttp.put("/user/Travel/Edit", data);
   }
+
+  removeTravel(id) {
+    return authorizedHttp.delete(`/user/Travel/DelByTrvId/${id}`);
+  }
 }
 
 export default new DashboardService();

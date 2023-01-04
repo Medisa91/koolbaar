@@ -21,6 +21,7 @@ import sendAgreement from "./dashboard/sendAgreement";
 import addTravel from "./dashboard/addTravel";
 import editTravel from "./dashboard/editTravel";
 import userTravel from "./dashboard/userTravelById";
+import deleteTravel from "./dashboard/userDeleteTravelById";
 
 export {
   counter,
@@ -46,4 +47,5 @@ export {
   addTravel,
   editTravel,
   userTravel,
+  deleteTravel,
 };

@@ -28,6 +28,10 @@ import {
   userTravel,
   userTravelFailure,
 } from "redux/slices/dashboard/userTravelById";
+import {
+  deleteTravel,
+  deleteTravelFailure,
+} from "redux/slices/dashboard/userDeleteTravelById";
 import { toast } from "react-toastify";
 
 export const getAllDashboardData = () => async (dispatch) => {
@@ -115,6 +119,16 @@ export const editUserTravel = (data) => async (dispatch) => {
     if (!res?.data?.isSuccess) toast.error(res?.data?.message);
   } catch (err) {
     dispatch(editTravelFailure(err?.response));
+    toast.error(err?.response?.data?.message);
+  }
+};
+export const deleteUserTravel = (id) => async (dispatch) => {
+  try {
+    const res = await DashboardService.removeTravel(id);
+    dispatch(deleteTravel(res.data));
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+  } catch (err) {
+    dispatch(deleteTravelFailure(err?.response));
     toast.error(err?.response?.data?.message);
   }
 };

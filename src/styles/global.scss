@@ -450,6 +450,11 @@ body {
   margin: 31px 0 0 0;
 }
 
+.remove-desc-title{
+  @extend .flight-from-title;
+  font-size: $font-17
+}
+
 .flight-date-title {
   @include custom-text-style(
     $Inter-font,
@@ -1990,6 +1995,17 @@ body {
     );
   }
 }
+
+.remove-modal-wrapper {
+  @extend .info-modal-wrapper;
+  .modal-dialog {
+    .modal-content {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
 .direct-modal-wrapper {
   overflow-y: auto !important;
   .modal-dialog .modal-content {
@@ -2110,6 +2126,22 @@ body {
 .confirm-info-btn {
   @include custom-btn-style(
     547px,
+    55px,
+    37px auto,
+    0,
+    5px,
+    $Inter-font,
+    $font-18,
+    $weight-500,
+    3,
+    left,
+    $white
+  );
+  text-align-last: center;
+}
+.confirm-remove-btn{
+  @include custom-btn-style(
+    430px,
     55px,
     37px auto,
     0,
@@ -2772,8 +2804,7 @@ body {
       solid 1px $gray8
     );
     height: auto;
-    align-items: start
-
+    align-items: start;
   }
 
   .custom-select-post-service > div {

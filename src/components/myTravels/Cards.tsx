@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { Button } from "layers";
 import PlaneIcon from "../../assets/images/plane.png";
@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { IMyTraveler } from "models/interfaces";
 import { RightSidebar } from "layers";
-import { getTravel } from "redux/actions/dashboard";
+import { getTravel, deleteUserTravel } from "redux/actions/dashboard";
 import { useAppDispatch } from "redux/store";
+import { RemoveConfirmation } from "components/modals/RemoveConfirmation";
 
 interface IProps {
   data: IMyTraveler;
@@ -17,14 +18,25 @@ interface IProps {
 export const Cards: React.FC<IProps> = ({ data }) => {
   const windowSize = UseWindowSize();
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [removeConfirmed, setRemoveConfirmed] = useState(false);
   const [trvId, setTrvId] = useState("");
   const dispatch = useAppDispatch();
 
   const openEditTravel = (id) => {
     setShowSidebar(!showSidebar);
     dispatch(getTravel(id));
-    setTrvId(id)
+    setTrvId(id);
   };
+
+  const removeTravelOpenModal = (id) => {
+    setIsOpenModal(!isOpenModal);
+    setTrvId(id);
+  };
+
+  useEffect(() => {
+    if (removeConfirmed) dispatch(deleteUserTravel(trvId));
+  }, [removeConfirmed]);
 
   return (
     <Col
@@ -104,7 +116,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
         <Card.Footer className="card-request-footer">
           <Button
             variant="gray7"
-            data-test="docs-btn-anchor"
+            onClick={() => removeTravelOpenModal(data.trvId)}
             className="remove-travel-btn"
           >
             <FontAwesomeIcon icon={faTrash} />
@@ -135,6 +147,15 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               trvId={trvId}
             />
           </div>
+        )}
+        {isOpenModal && (
+          <RemoveConfirmation
+            title="Remove My Travel"
+            description="Are you sure you want to delete this item?"
+            isOpen={isOpenModal}
+            setIsOpen={setIsOpenModal}
+            setRemoveConfirmed={setRemoveConfirmed}
+          />
         )}
       </Card>
     </Col>
