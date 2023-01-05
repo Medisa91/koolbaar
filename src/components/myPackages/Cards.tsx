@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { Button } from "layers";
 import PlaneIcon from "../../assets/images/plane.png";
@@ -6,6 +6,10 @@ import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { IMyPackages } from "models/interfaces";
+import { RightSidebar } from "layers";
+import { getPackage, deleteUserPackage } from "redux/actions/dashboard";
+import { useAppDispatch } from "redux/store";
+import { RemoveConfirmation } from "components/modals/RemoveConfirmation";
 
 interface IProps {
   data: IMyPackages;
@@ -13,6 +17,26 @@ interface IProps {
 
 export const Cards: React.FC<IProps> = ({ data }) => {
   const windowSize = UseWindowSize();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [removeConfirmed, setRemoveConfirmed] = useState(false);
+  const [pkgId, setPkgId] = useState("");
+  const dispatch = useAppDispatch();
+
+  const openEditTravel = (id) => {
+    setShowSidebar(!showSidebar);
+    dispatch(getPackage(id));
+    setPkgId(id);
+  };
+
+  const removeTravelOpenModal = (id) => {
+    setIsOpenModal(!isOpenModal);
+    setPkgId(id);
+  };
+
+  useEffect(() => {
+    if (removeConfirmed) dispatch(deleteUserPackage(pkgId));
+  }, [removeConfirmed]);
 
   return (
     <Col
@@ -97,14 +121,14 @@ export const Cards: React.FC<IProps> = ({ data }) => {
         <Card.Footer className="card-request-footer">
           <Button
             variant="gray7"
-            data-test="docs-btn-anchor"
+            onClick={() => removeTravelOpenModal(data.pkgId)}
             className="remove-travel-btn"
           >
             <FontAwesomeIcon icon={faTrash} />
           </Button>
           <Button
             variant="gray7"
-            data-test="docs-btn-anchor"
+            onClick={() => openEditTravel(data.pkgId)}
             className="edit-travel-btn"
           >
             Edit
@@ -117,6 +141,27 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             View Offers
           </Button>
         </Card.Footer>
+        {showSidebar && (
+          <div className="offer-sidebar">
+            <RightSidebar
+              isOpen={showSidebar}
+              setIsOpen={setShowSidebar}
+              sidebarType="package"
+              mode="edit"
+              pkgId={pkgId}
+            />
+          </div>
+        )}
+        {isOpenModal && (
+          <RemoveConfirmation
+            title="Remove My Package"
+            description="Are you sure you want to delete this item?"
+            isOpen={isOpenModal}
+            setIsOpen={setIsOpenModal}
+            setRemoveConfirmed={setRemoveConfirmed}
+            type="package"
+          />
+        )}
       </Card>
     </Col>
   );

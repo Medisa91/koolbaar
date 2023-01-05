@@ -15,6 +15,11 @@
       "name": "three",
       "label": "Gadget",
       "size": 1.5
+    },
+    {
+      "name": "four",
+      "label": "Gadget",
+      "size": 1.5
     }
   ]
 }

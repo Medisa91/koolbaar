@@ -142,7 +142,6 @@ export const Cards: React.FC<IProps> = ({ data }) => {
               isOpen={showSidebar}
               setIsOpen={setShowSidebar}
               sidebarType="travel"
-              travelData={data}
               mode="edit"
               trvId={trvId}
             />
@@ -155,6 +154,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             isOpen={isOpenModal}
             setIsOpen={setIsOpenModal}
             setRemoveConfirmed={setRemoveConfirmed}
+            type="travel"
           />
         )}
       </Card>

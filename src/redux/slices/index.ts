@@ -22,6 +22,10 @@ import addTravel from "./dashboard/addTravel";
 import editTravel from "./dashboard/editTravel";
 import userTravel from "./dashboard/userTravelById";
 import deleteTravel from "./dashboard/userDeleteTravelById";
+import addPackage from "./dashboard/addPackage";
+import editPackage from "./dashboard/editPackage";
+import userPackage from "./dashboard/userPackageById";
+import deletePackage from "./dashboard/userDeletePackageById";
 
 export {
   counter,
@@ -48,4 +52,8 @@ export {
   editTravel,
   userTravel,
   deleteTravel,
+  addPackage,
+  editPackage,
+  userPackage,
+  deletePackage,
 };

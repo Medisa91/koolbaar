@@ -14,6 +14,7 @@ interface IProps {
   setRemoveConfirmed: (key: any) => void;
   title: string;
   description: string;
+  type: string;
 }
 
 export const RemoveConfirmation: React.FC<IProps> = ({
@@ -22,22 +23,35 @@ export const RemoveConfirmation: React.FC<IProps> = ({
   setIsOpen,
   title,
   description,
+  type,
 }) => {
   const screenSize = UseWindowSize();
   const dispatch = useAppDispatch();
   const handleClose = () => setIsOpen(false);
   const deletedTravel: any = useAppSelector((state) => state.deleteTravel);
+  const deletedPackage: any = useAppSelector((state) => state.deletePackage);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (deletedTravel.isSuccess) {
-      setIsOpen(false);
-      setIsLoading(false);
-      dispatch(getAllDashboardData());
-    } else if (!deletedTravel.isSuccess) {
-      setIsLoading(false);
+    if (type === "travel") {
+      if (deletedTravel.isSuccess) {
+        setIsOpen(false);
+        setIsLoading(false);
+        dispatch(getAllDashboardData());
+      } else if (!deletedTravel.isSuccess) {
+        setIsLoading(false);
+      }
     }
-  }, [deletedTravel]);
+    if (type === "package") {
+      if (deletedPackage.isSuccess) {
+        setIsOpen(false);
+        setIsLoading(false);
+        dispatch(getAllDashboardData());
+      } else if (!deletedPackage.isSuccess) {
+        setIsLoading(false);
+      }
+    }
+  }, [deletedTravel, type]);
 
   const confirmDeleteBtn = () => {
     setIsLoading(true);

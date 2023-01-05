@@ -4,7 +4,6 @@ import { TravelCard } from "./TravelCard";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { IMyTraveler } from "models/interfaces";
 import { RightSidebar } from "layers";
-import { ToastContainer } from "react-toastify";
 
 interface IProps {
   travelerData: IMyTraveler[];
@@ -42,18 +41,7 @@ export const MyTravels: React.FC<IProps> = ({ travelerData }) => {
             mode="add"
           />
         </div>
-      )}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-        theme="dark"
-      />
+      )}      
     </div>
   );
 };

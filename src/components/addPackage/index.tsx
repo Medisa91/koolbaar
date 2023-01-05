@@ -1,46 +1,83 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button } from "layers";
-import { Uploader } from "components";
+import { MultipleUploader } from "components";
 import { Col, Row } from "react-bootstrap";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
 import { useAppSelector, useAppDispatch } from "redux/store";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 import DatePicker from "react-datepicker";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { IAddPackage } from "models/interfaces";
 import { components } from "react-select";
-import { getAllPackagesType } from "redux/actions/types";
+import { getAllPackagesType, getAllDeliveryType } from "redux/actions/types";
+import { addNewPackage, editUserPackage } from "redux/actions/dashboard";
+import { IAddPackage, IMyPackages } from "models/interfaces";
+import { Oval } from "react-loader-spinner";
+import { getCityCountryFromGooglePlace } from "helpers/googlePlaceCityCountry";
+import { getDate, convertHumanDateToUnix } from "helpers/convertDate";
 
-export const AddPackage: React.FC = () => {
-  const size = UseWindowSize();
+interface IProp {
+  setIsOpen: Function;
+  mode: string;
+  pkgId: string;
+}
+
+export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
+  const { t } = useTranslation();
+  const windowSize = UseWindowSize();
   const dispatch = useAppDispatch();
-  const [offerData, setOfferData] = useState({
-    offerType: "",
-    from: "",
-    to: "",
-    onFrom: "",
-    and: "",
-    at: "",
-    onTo: "",
-    for: "",
-    via: "",
-    number: "",
-    message:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod massa augue, non venenatis eros sollicitudin eget. Curabitur velit risus, consequat non dolor in, consectetur commodo urna.",
+  const size = UseWindowSize();
+  const [images, setImages] = useState<any>([]);
+  const [packageData, setPackageData] = useState<IAddPackage>({
+    packagetypeId: "",
+    packageType: "",
+    weight: "0",
+    value: "0",
+    sizeWidth: "",
+    sizeHeight: "",
+    sizeLength: "",
+    deliverytypeIds: "",
+    fromCountry: "",
+    fromCountryCity: "",
+    toCountry: "",
+    toCountryCity: "",
+    fromDate1: "",
+    fromDate2: "",
+    toDate1: "",
+    toDate2: "",
+    offerPrice: "20",
+    message: "",
+    images: [],
   });
   const [termsChecked, setTermsChecked] = useState(false);
   const [governmentChecked, setGovernmentChecked] = useState(false);
   const [typeOptions, setTypeOptions] = useState([]);
-  const [type, setType] = useState({ value: 0, label: "Type" });
-  const [service, setService] = useState({ value: 0, label: "Services" });
+  const [type, setType] = useState({ value: null, label: null });
+  const [service, setService] = useState({ value: null, label: null });
   const [servicesOptions, setServicesOptions] = useState([]);
-  const services = useAppSelector((state) => state.deliveryType);
   const packagesType = useAppSelector((state) => state.packageTypes);
+  const services = useAppSelector((state) => state.deliveryType);
+  const addPackageData: any = useAppSelector((state) => state.addPackage);
+  const editPackageData: any = useAppSelector((state) => state?.editPackage);
+  const userPackage: any = useAppSelector((state) => state?.userPackage);
   const screenSize = UseWindowSize();
   const [betweenDate, setBetweenDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
+  const [arrivalBetweenDate, setArrivalBetweenDate] = useState(new Date());
+  const [arrivalToDate, setArrivalToDate] = useState(new Date());
+  const [departureBetweenDate, setDepartureBetweenDate] = useState(new Date());
+  const [departureToDate, setDepartureToDate] = useState(new Date());
+  const [fromDate1, setFromDate1] = useState(getDate(new Date()));
+  const [fromDate2, setFromDate2] = useState(getDate(new Date()));
+  const [toDate1, setToDate1] = useState(getDate(new Date()));
+  const [toDate2, setToDate2] = useState(getDate(new Date()));
   const [from, setFrom] = useState({ value: 0, label: "Canada" });
-  const [to, setTo] = useState({ value: 0, label: "Tehran" });
+  const [fromCountry, setFromCountry] = useState("Canada");
+  const [fromCountryCity, setFromCountryCity] = useState("Canada, Toronto");
+  const [to, setTo] = useState({ value: 0, label: "Iran" });
+  const [toCountry, setToCountry] = useState("Iran");
+  const [toCountryCity, setToCountryCity] = useState("Iran, Tehran");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTermsCheckedChange = () => {
     setTermsChecked(!termsChecked);
@@ -49,6 +86,80 @@ export const AddPackage: React.FC = () => {
   const handleGovernmentChange = () => {
     setGovernmentChecked(!governmentChecked);
   };
+
+  const changeFromPlace = (e) => {
+    setFrom(getCityCountryFromGooglePlace(e).location);
+    setFromCountry(getCityCountryFromGooglePlace(e).country);
+    setFromCountryCity(getCityCountryFromGooglePlace(e).countryCity);
+  };
+
+  const changeToPlace = (e) => {
+    setTo(getCityCountryFromGooglePlace(e).location);
+    setToCountry(getCityCountryFromGooglePlace(e).country);
+    setToCountryCity(getCityCountryFromGooglePlace(e).countryCity);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    setPackageData({ ...packageData, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    if (userPackage.length !== 0 && mode === "edit") {
+      const data = userPackage?.data;
+      setFrom({ value: 0, label: data.fromCountry });
+      setFromCountry(data.fromCountry);
+      setFromCountryCity(data.fromCountryCity);
+      setTo({ value: 0, label: data.toCountry });
+      setToCountry(data.toCountry);
+      setToCountryCity(data.toCountryCity);
+      setType(typeOptions.find((option) => option.label === data.packageTypes));
+      setService(
+        servicesOptions.find((option) => option.label === data.deliveryTypes)
+      );
+      setArrivalBetweenDate(convertHumanDateToUnix(data?.fromDate1));
+      setArrivalToDate(convertHumanDateToUnix(data?.fromDate2));
+      setDepartureBetweenDate(convertHumanDateToUnix(data?.toDate1));
+      setDepartureToDate(convertHumanDateToUnix(data?.toDate2));
+      setPackageData({
+        ...userPackage,
+        weight: data.weight,
+        message: data.description,
+        value: data.itemValue,
+      });
+      setImages(data.images);
+    }
+  }, [userPackage]);
+
+  useEffect(() => {
+    if (mode === "add") {
+      setFrom({ value: 0, label: "Canada" });
+      setFromCountry("Canada");
+      setFromCountryCity("Canada, Toronto");
+      setTo({ value: 0, label: "Iran" });
+      setToCountry("Iran");
+      setToCountryCity("Iran, Tehran");
+      setType({ value: null, label: null });
+      setService({ value: null, label: null });
+      setArrivalBetweenDate(new Date());
+      setArrivalToDate(new Date());
+      setDepartureBetweenDate(new Date());
+      setDepartureToDate(new Date());
+      setPackageData({
+        ...packageData,
+        weight: "0",
+        message: "",
+        value: "",
+      });
+      setImages([]);
+    }
+  }, [mode]);
+
+  useEffect(() => {
+    dispatch(getAllDeliveryType());
+    dispatch(getAllPackagesType());
+  }, []);
 
   useEffect(() => {
     const options = packagesType?.map((item) => {
@@ -61,10 +172,6 @@ export const AddPackage: React.FC = () => {
     setTypeOptions(options);
   }, [packagesType]);
 
-  const handleTypeChange = (selected) => {
-    setType(selected);
-  };
-
   useEffect(() => {
     const options = services?.map((item) => {
       return {
@@ -76,14 +183,53 @@ export const AddPackage: React.FC = () => {
     setServicesOptions(options);
   }, [services]);
 
+  useEffect(() => {
+    const options = packagesType?.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
+    setType({ value: packagesType[0]?.id, label: packagesType[0]?.name });
+    setTypeOptions(options);
+  }, [packagesType]);
+
   const handleServicesChange = (selected) => {
     setService(selected);
+  };
+
+  const handleTypeChange = (selected) => {
+    setType(selected);
+    // setPackagetypeId(
+    //   selected?.map((item) => {
+    //     return item.value;
+    //   })
+    // );
+  };
+
+  const onArrivalBetweenDateChange = (date) => {
+    setArrivalBetweenDate(date);
+    setFromDate1(getDate(date));
+  };
+
+  const onArrivalToDateChange = (date) => {
+    setArrivalToDate(date);
+    setToDate1(getDate(date));
+  };
+
+  const onDepartureFromDateChange = (date) => {
+    setDepartureBetweenDate(date);
+    setFromDate2(getDate(date));
+  };
+  const onDepartureToDateChange = (date) => {
+    setDepartureToDate(date);
+    setToDate2(getDate(date));
   };
 
   const customStyle = {
     control: (styles) => ({
       ...styles,
-      height: screenSize?.width < 768 ? 34 : 50,
+      height: windowSize?.width < 768 ? 34 : 50,
     }),
     option: (styles) => ({
       ...styles,
@@ -95,14 +241,13 @@ export const AddPackage: React.FC = () => {
       ...styles,
       color: "#00043d",
     }),
-  };
-
-  const changeFromPlace = (e) => {
-    setFrom(e);
-  };
-
-  const changeToPlace = (e) => {
-    setTo(e);
+    multiValue: (styles) => ({
+      ...styles,
+      color: "#00043d",
+      padding: "6px",
+      fontSize: "14px",
+      borderRadius: "5px",
+    }),
   };
 
   const SelectMenuButton = (props) => {
@@ -112,8 +257,53 @@ export const AddPackage: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllPackagesType());
-  }, []);
+    if (!addPackageData?.isSuccess) {
+      setIsLoading(false);
+    } else if (!addPackageData?.isSuccess) {
+      setIsLoading(false);
+      setIsOpen(false);
+    }
+  }, [addPackageData]);
+
+  useEffect(() => {
+    if (!editPackageData?.isSuccess) {
+      setIsLoading(false);
+    } else if (!editPackageData?.isSuccess) {
+      setIsLoading(false);
+      setIsOpen(false);
+    }
+  }, [editPackageData]);
+
+  const callAddEditTravelApi = () => {
+    const body = new FormData();
+    if (mode === "edit") body.append("pkgId", pkgId);
+    body.append("packagetypeId", type.value);
+    body.append("packageType", "");
+    body.append("weight", packageData.weight);
+    body.append("value", packageData.value);
+    body.append("sizeWidth", "");
+    body.append("sizeHeight", "");
+    body.append("sizeLength", "");
+    body.append("deliverytypeIds", service.value);
+    body.append("fromCountry", fromCountry);
+    body.append("fromCountryCity", fromCountryCity);
+    body.append("toCountry", toCountry);
+    body.append("toCountryCity", toCountryCity);
+    body.append("fromDate1", fromDate1);
+    body.append("fromDate2", fromDate2);
+    body.append("toDate1", toDate1);
+    body.append("toDate2", toDate2);
+    body.append("offerPrice", "20");
+    body.append("message", packageData.message);
+    body.append("images", images);
+    if (mode === "add") dispatch(addNewPackage(body));
+    else if (mode === "edit") dispatch(editUserPackage(body));
+    setIsLoading(true);
+  };
+
+  const addEditTravel = () => {
+    callAddEditTravelApi();
+  };
 
   return (
     <div className="request-slider-container">
@@ -146,9 +336,11 @@ export const AddPackage: React.FC = () => {
               <Input
                 size="sm"
                 id="weight"
+                name="weight"
                 placeholder="1.2 kg"
                 className="custom-input-weight"
-                value={offerData.from}
+                value={packageData.weight}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -160,37 +352,45 @@ export const AddPackage: React.FC = () => {
               <Input
                 size="sm"
                 id="value"
+                name="value"
                 placeholder="1250 USD"
                 className="custom-input-value"
-                value={offerData.onFrom}
+                value={packageData.value}
+                onChange={handleChange}
               />
             </div>
             <span className="size-title">And size</span>
             <div className="d-inline-block">
               <Input
                 size="sm"
-                id="size-weight"
-                placeholder="Weight"
+                id="sizeWidth"
+                name="sizeWidth"
+                placeholder="Width"
                 className="custom-input-size-width"
-                value={offerData.and}
+                value={packageData.sizeWidth}
+                onChange={handleChange}
               />
             </div>
             <div className="d-inline-block">
               <Input
                 size="sm"
-                id="size-weight"
+                id="sizeHeight"
+                name="sizeHeight"
                 placeholder="Height"
                 className="custom-input-size-height"
-                value={offerData.and}
+                value={packageData.sizeHeight}
+                onChange={handleChange}
               />
             </div>
             <div className="d-inline-block">
               <Input
                 size="sm"
-                id="size-weight"
+                id="sizeLength"
+                name="sizeLength"
                 placeholder="Length"
                 className="custom-input-size-length"
-                value={offerData.and}
+                value={packageData.sizeLength}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -199,13 +399,6 @@ export const AddPackage: React.FC = () => {
           <div className="send-input-wrapper">
             <span className="package-from-title">From</span>
             <div className="d-inline-block">
-              {/* <Input
-                size="sm"
-                id="from"
-                placeholder="Kuala Lumpur"
-                className="custom-input-from"
-                value={offerData.at}
-              /> */}
               <GooglePlacesAutocomplete
                 selectProps={{
                   className: "custom-package-place-from d-inline-block",
@@ -228,13 +421,6 @@ export const AddPackage: React.FC = () => {
           <div className="send-input-wrapper">
             <span className="package-and-title">And</span>
             <div className="d-inline-block">
-              {/* <Input
-                size="sm"
-                id="and"
-                placeholder="Drop off or Post"
-                className="custom-input-post-kind"
-                value={offerData.at}
-              /> */}
               <Select
                 className="custom-select-package-service d-inline-block"
                 value={service}
@@ -253,7 +439,7 @@ export const AddPackage: React.FC = () => {
                 id="at"
                 placeholder="No2, Razavi 22, Rezashahr, Mashhad, Iran"
                 className="custom-input-at-request"
-                value={offerData.at}
+                // value={offerData.at}
               />
             </div>
           </div>
@@ -264,8 +450,8 @@ export const AddPackage: React.FC = () => {
             <div className="d-inline-block">
               <DatePicker
                 className="custom-input-between"
-                selected={betweenDate}
-                onChange={(date) => setBetweenDate(date)}
+                selected={arrivalBetweenDate}
+                onChange={(date) => onArrivalBetweenDateChange(date)}
                 dateFormat="EEEE, MM/dd/yyyy"
                 showTimeInput
               />
@@ -274,8 +460,8 @@ export const AddPackage: React.FC = () => {
             <div className="d-inline-block">
               <DatePicker
                 className="custom-input-to-request"
-                selected={toDate}
-                onChange={(date) => setToDate(date)}
+                selected={arrivalToDate}
+                onChange={(date) => onArrivalToDateChange(date)}
                 dateFormat="EEEE, MM/dd/yyyy"
                 showTimeInput
               />
@@ -288,10 +474,12 @@ export const AddPackage: React.FC = () => {
             <div className="d-inline-block">
               <Input
                 size="sm"
-                id="and-offer"
+                id="offerPrice"
+                name="offerPrice"
                 placeholder="600 CAD"
                 className="custom-input-and-offer"
-                value={offerData.at}
+                value={packageData.offerPrice}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -300,7 +488,11 @@ export const AddPackage: React.FC = () => {
           <div
             style={size.width < 768 ? { width: "345px" } : { width: "580px" }}
           >
-            <Uploader title="Upload package photo" />
+            <MultipleUploader
+              title="Upload package photo"
+              setPhotos={setImages}
+              image={images}
+            />
           </div>
         </Col>
         <Col xs={12} className="request-form">
@@ -312,7 +504,8 @@ export const AddPackage: React.FC = () => {
                 id="message"
                 placeholder="Monday 3PM to 5PM 05/05/2022"
                 className="custom-input-message"
-                value={offerData.message}
+                value={packageData.message}
+                onChange={handleChange}
                 textArea={true}
                 rows={4}
               />
@@ -354,10 +547,20 @@ export const AddPackage: React.FC = () => {
         <div style={{ marginTop: "24px" }}>
           <Button
             variant="primary"
-            data-test="docs-btn-anchor"
+            onClick={addEditTravel}
             className="submit-request-btn mt-4"
+            disabled={!termsChecked || !governmentChecked}
           >
             Submit Request
+            {isLoading && (
+              <Oval
+                width="20"
+                height="20"
+                color="#fff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{ display: "inline", marginLeft: "8px" }}
+              />
+            )}
           </Button>
         </div>
         {/* </Col> */}

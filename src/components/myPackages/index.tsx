@@ -38,9 +38,10 @@ export const MyPackages: React.FC<IProps> = ({ packagesData }) => {
             isOpen={showSidebar}
             setIsOpen={setShowSidebar}
             sidebarType="package"
+            mode="add"
           />
         </div>
-      )}
+      )}      
     </div>
   );
 };

@@ -296,18 +296,18 @@ export interface IAddPackage {
   sizeWidth: string;
   sizeHeight: string;
   sizeLength: string;
-  fromCountry: string;
-  fromCountryAbbr: string;
-  fromCity: string;
   deliverytypeIds: string;
+  fromCountry: string;
+  fromCountryCity: string;
   toCountry: string;
-  toCountryAbbr: string;
-  toCity: string;
-  fromDate: string;
-  toDate: string;
+  toCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  toDate1: string;
+  toDate2: string;
   offerPrice: string;
   message: string;
-  images: string;
+  images: string[];
 }
 
 export interface ITravelInformation {

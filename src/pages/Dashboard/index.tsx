@@ -6,6 +6,7 @@ import {
   getAllStatusChanges,
 } from "redux/actions/dashboard";
 import { useAppDispatch, useAppSelector } from "redux/store";
+import { ToastContainer } from "react-toastify";
 
 export const Dashboard: React.FC = () => {
   const [display, setDisplay] = useState({ value: 0, label: "All" });
@@ -38,6 +39,17 @@ export const Dashboard: React.FC = () => {
         display={display}
       />
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

@@ -3,10 +3,6 @@ import { authorizedHttp, authorizedFormDataHttp } from "helpers/httpRequest";
 class DashboardService {
   getDashboard() {
     return authorizedHttp.get("/user/Dashboard");
-  
-  }
-  getTravelById(id) {
-    return authorizedHttp.get(`/user/Travel/GetByTrvId/${id}`);
   }
 
   getAllChangedStatus() {
@@ -29,12 +25,32 @@ class DashboardService {
     return authorizedFormDataHttp.post("/user/Travel/New", data);
   }
 
+  getTravelById(id) {
+    return authorizedHttp.get(`/user/Travel/GetByTrvId/${id}`);
+  }
+
   editNewTravel(data) {
     return authorizedFormDataHttp.put("/user/Travel/Edit", data);
   }
 
   removeTravel(id) {
     return authorizedHttp.delete(`/user/Travel/DelByTrvId/${id}`);
+  }
+
+  addNewPackage(data) {
+    return authorizedFormDataHttp.post("/user/Package/New", data);
+  }
+
+  getPackageById(id) {
+    return authorizedHttp.get(`/user/Package/GetByPkgId/${id}`);
+  }
+
+  editNewPackage(data) {
+    return authorizedFormDataHttp.put("/user/Package/Edit", data);
+  }
+
+  removePackage(id) {
+    return authorizedHttp.delete(`/user/Package/DelByPkgId/${id}`);
   }
 }
 
