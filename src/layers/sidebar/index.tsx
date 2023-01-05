@@ -6,6 +6,7 @@ import {
   AddPackage,
   AddTravel,
   StripePayment,
+  AddAccount,
 } from "components";
 import { slide as Menu } from "react-burger-menu";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
@@ -53,6 +54,8 @@ export const RightSidebar: React.FC<IProps> = ({
         <AddPackage setIsOpen={setIsOpen} mode={mode} pkgId={pkgId} />
       ) : sidebarType === "stripe" ? (
         <StripePayment />
+      ) : sidebarType === "account" ? (
+        <AddAccount />
       ) : null}
     </Menu>
   );

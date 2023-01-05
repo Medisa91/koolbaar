@@ -19,6 +19,7 @@ import { IAddTravel, IMyTraveler } from "models/interfaces";
 import { getCityCountryFromGooglePlace } from "helpers/googlePlaceCityCountry";
 import { getDate, convertHumanDateToUnix } from "helpers/convertDate";
 import { Oval } from "react-loader-spinner";
+import { InputOption } from "components";
 
 interface IProp {
   setIsOpen: Function;
@@ -58,13 +59,15 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
   const [governmentChecked, setGovernmentChecked] = useState(false);
   const [type, setType] = useState({ value: null, label: null });
   const [size, setSize] = useState({ value: null, label: null });
+  const [unit, setUnit] = useState({ value: 0, label: "KG" });
+  const [currency, setCurrency] = useState({ value: 0, label: "CAD" });
   const [sizeOptions, setSizeOptions] = useState([]);
   const [typeOptions, setTypeOptions] = useState([]);
   const sizeRanges = useAppSelector((state) => state.sizeRange);
   const packagesType = useAppSelector((state) => state.packageTypes);
   const services = useAppSelector((state) => state.deliveryType);
-  const addTravelData:any = useAppSelector((state) => state.addTravel);
-  const editTravelData:any = useAppSelector((state) => state?.editTravel);
+  const addTravelData: any = useAppSelector((state) => state.addTravel);
+  const editTravelData: any = useAppSelector((state) => state?.editTravel);
   const userTravel: any = useAppSelector((state) => state?.userTravel);
   const [service, setService] = useState({ value: null, label: null });
   const [servicesOptions, setServicesOptions] = useState([]);
@@ -83,7 +86,15 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
   const [toCountry, setToCountry] = useState("Iran");
   const [toCountryCity, setToCountryCity] = useState("Iran, Tehran");
   const [isLoading, setIsLoading] = useState(false);
-
+  const unitSizeOption = [
+    { value: 0, label: "KG" },
+    { value: 1, label: "LBS" },
+  ];
+  const currencySizeOption = [
+    { value: 0, label: "CAD" },
+    { value: 1, label: "USD" },
+    { value: 2, label: "IRR" },
+  ];
   const handleTermsCheckedChange = () => {
     setTermsChecked(!termsChecked);
   };
@@ -202,6 +213,10 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
     setTypeOptions(options);
   }, [packagesType]);
 
+  const handleUnitChange = (selected) => {
+    setUnit(selected);
+  };
+
   const handleSizeChange = (selected) => {
     setSize(selected);
   };
@@ -216,6 +231,9 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
 
   const handleServicesChange = (selected) => {
     setService(selected);
+  };
+  const handleCurrencyChange = (selected) => {
+    setCurrency(selected);
   };
 
   const onArrivalBetweenDateChange = (date) => {
@@ -261,6 +279,24 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
     }),
   };
 
+  const unitCustomStyle = {
+    control: (styles) => ({
+      ...styles,
+      height: 30,
+      padding: 0,
+    }),
+    option: (styles) => ({
+      ...styles,
+      color: "#fff",
+      backgroundColor: "#707070",
+      flexWrap: "nowrap",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color: "#00043d",
+    }),
+  };
+
   const SelectMenuButton = (props) => {
     return (
       <components.MenuList {...props}>{props.children}</components.MenuList>
@@ -270,18 +306,16 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
   useEffect(() => {
     if (!addTravelData?.isSuccess) {
       setIsLoading(false);
-    }
-    else if (!addTravelData?.isSuccess) {
+    } else if (!addTravelData?.isSuccess) {
       setIsLoading(false);
       setIsOpen(false);
     }
   }, [addTravelData]);
-  
+
   useEffect(() => {
     if (!editTravelData?.isSuccess) {
       setIsLoading(false);
-    }
-    else if (!editTravelData?.isSuccess) {
+    } else if (!editTravelData?.isSuccess) {
       setIsLoading(false);
       setIsOpen(false);
     }
@@ -289,7 +323,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
 
   const callAddEditTravelApi = () => {
     const body = new FormData();
-    if(mode === "edit") body.append("trvId", trvId);
+    if (mode === "edit") body.append("trvId", trvId);
     body.append("packagetypeId", packagetypeId);
     body.append("packageType", "");
     body.append("sizerangeId", size.value);
@@ -323,7 +357,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
     <div className="request-slider-container">
       <Row className="request-wrapper">
         <Col xs={12} className="request-form">
-          <h1>{mode === "edit" ? "Edit Travelers":"Add Travelers"}</h1>
+          <h1>{mode === "edit" ? "Edit Travelers" : "Add Travelers"}</h1>
           <div className="send-input-wrapper">
             <span className="send-pack-title">I will travel from</span>
             <div className="d-inline-block">
@@ -411,10 +445,21 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
                 size="sm"
                 id="weight"
                 name="weight"
-                placeholder="1 Kg"
+                placeholder="1"
                 className="custom-input-package"
                 value={travelData.weight}
                 onChange={handleChange}
+              />
+              <Select
+                className="custom-select-unit-size d-inline-block"
+                value={unit}
+                onChange={handleUnitChange}
+                options={unitSizeOption}
+                styles={unitCustomStyle}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => null,
+                }}
               />
             </div>
           </div>
@@ -430,6 +475,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
                 options={servicesOptions}
                 components={{
                   IndicatorSeparator: () => null,
+                  Option: InputOption,
                 }}
                 styles={customStyle}
               />
@@ -440,23 +486,23 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
                 size="sm"
                 id="value"
                 name="value"
-                placeholder="200 CAD"
-                className="custom-input-package"
+                placeholder="200"
+                className="custom-input-package-value"
                 value={travelData.value}
                 onChange={handleChange}
               />
-            </div>
-            <div className="d-inline-block">
-              <Input
-                size="sm"
-                id="offerPrice"
-                name="offerPrice"
-                placeholder="Drop off or Post"
-                className="custom-input-service"
-                // value={travelData.}
-                // onChange={handleChange}
+              <Select
+                className="custom-select-unit-size d-inline-block"
+                value={currency}
+                onChange={handleCurrencyChange}
+                options={currencySizeOption}
+                styles={unitCustomStyle}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => null,
+                }}
               />
-            </div>
+            </div>            
           </div>
         </Col>
         <Col xs={12} className="request-form">

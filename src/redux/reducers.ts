@@ -28,6 +28,11 @@ import {
   editPackage,
   userPackage,
   deletePackage,
+  addBankAccount,
+  bankAccounts,
+  deleteAccount,
+  editAccount,
+  gateways,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -59,6 +64,11 @@ const rootReducer = combineReducers({
   editPackage,
   userPackage,
   deletePackage,
+  addBankAccount,
+  bankAccounts,
+  deleteAccount,
+  editAccount,
+  gateways,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

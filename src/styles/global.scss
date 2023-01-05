@@ -450,9 +450,9 @@ body {
   margin: 31px 0 0 0;
 }
 
-.remove-desc-title{
+.remove-desc-title {
   @extend .flight-from-title;
-  font-size: $font-17
+  font-size: $font-17;
 }
 
 .flight-date-title {
@@ -2139,7 +2139,7 @@ body {
   );
   text-align-last: center;
 }
-.confirm-remove-btn{
+.confirm-remove-btn {
   @include custom-btn-style(
     430px,
     55px,
@@ -2653,6 +2653,12 @@ body {
     margin: 0px 0 19px 10px;
     padding: 16px 15px 17px;
   }
+  .custom-input-package-value {
+    @extend .custom-input-send;
+    width: 147px;
+    margin: 0px 0 19px 10px;
+    padding: 16px 15px 17px;
+  }
 
   .custom-input-service {
     @extend .custom-input-send;
@@ -2787,6 +2793,34 @@ body {
       solid 1px $gray8
     );
   }
+  .custom-select-unit-size {
+    position: absolute;
+    top: 6px;
+    right: 40px;
+    .css-2613qy-menu{
+      background-color: #707070
+    }
+  }
+
+  .custom-select-unit-size > div {
+    @include custom-select-styles(
+      auto,
+      0 3px 3px 3px,
+      0,
+      5px,
+      #f8f8f8,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px #f8f8f8
+    );
+    box-shadow: none
+  }
+  
   .custom-select-package-type > div {
     @include custom-select-styles(
       466px,
@@ -2809,7 +2843,7 @@ body {
 
   .custom-select-post-service > div {
     @include custom-select-styles(
-      148px,
+      327px,
       0 3px 15px 3px,
       0,
       5px,
@@ -4028,5 +4062,148 @@ input:disabled {
   }
   .deActive-lang {
     color: $white;
+  }
+}
+.checkbox-wrapper input[type="checkbox"] {
+  display: none;
+  visibility: hidden;
+}
+
+.checkbox-wrapper label {
+  display: inline-block;
+}
+
+.checkbox-wrapper .cbx {
+  position: relative;
+  top: 1px;
+  width: 18px;
+  height: 18px;
+  padding: 3px;
+  border: 1px solid #c8ccd4;
+  border-radius: 3px;
+  vertical-align: middle;
+  transition: background 0.1s ease;
+  float: right;
+
+  cursor: pointer;
+}
+.checkbox-wrapper .cbx:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  width: 5px;
+  height: 11px;
+  opacity: 0;
+  transform: rotate(45deg) scale(0);
+  border-right: 1px solid $primary;
+  border-bottom: 1px solid $primary;
+  transition: all 0.3s ease;
+  transition-delay: 0.15s;
+}
+.checkbox-wrapper .lbl {
+  margin-right: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.checkbox-wrapper input[type="checkbox"]:checked ~ .cbx {
+  border-color: transparent;
+  background: $gray10;
+  animation: jelly 0.6s ease;
+}
+.checkbox-wrapper input[type="checkbox"]:checked ~ .cbx:after {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+@-moz-keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@-webkit-keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@-o-keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
   }
 }

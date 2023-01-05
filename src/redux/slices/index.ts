@@ -26,6 +26,11 @@ import addPackage from "./dashboard/addPackage";
 import editPackage from "./dashboard/editPackage";
 import userPackage from "./dashboard/userPackageById";
 import deletePackage from "./dashboard/userDeletePackageById";
+import addBankAccount from "./banks/addBankAccount";
+import bankAccounts from "./banks/bankAccount";
+import deleteAccount from "./banks/deleteBankAount";
+import editAccount from "./banks/editBankAount";
+import gateways from "./banks/gateways";
 
 export {
   counter,
@@ -56,4 +61,9 @@ export {
   editPackage,
   userPackage,
   deletePackage,
+  addBankAccount,
+  bankAccounts,
+  deleteAccount,
+  editAccount,
+  gateways,
 };
