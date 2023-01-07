@@ -26,10 +26,6 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const allStatus = useAppSelector((state) => state?.getChangedStatus);
   const changeStatusData = useAppSelector((state) => state?.changeOfferStatus);
 
-  const handleShowMoreDetail = (key) => {
-    setShowMoreDetail(key);
-  };
-
   const handleMoreDetail = () => {
     setShowMoreDetail(true);
     setFade(true);
@@ -72,7 +68,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                   <span>{data.fromCountryAbbr}</span>
                 </div>
                 <div>
-                  <span>{data.departureTime}</span>
+                  <span>{data.fromTime1}</span>
                 </div>
               </div>
               <div className="header-card-plane rotate-plane-wrapper">
@@ -93,7 +89,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                   <span>{data.toCountryAbbr}</span>
                 </div>
                 <div>
-                  <span>{data.arrivalTime}</span>
+                  <span>{data.toTime1}</span>
                 </div>
               </div>
             </Col>
@@ -116,7 +112,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                     style={{ background: data?.daysLeftHex }}
                     className="receive-expire-date"
                   >
-                    {data?.daysLeft} days left
+                    {data?.daysLeft}
                   </span>
                 </span>
               </div>
@@ -228,7 +224,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
         <PackageCover
           data={data}
           fade={fade}
-          onShowCover={handleShowMoreDetail}
+          setShowMoreDetail={setShowMoreDetail}
         />
       )}
       {showSidebar && (

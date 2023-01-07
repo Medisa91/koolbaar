@@ -44,7 +44,6 @@ class DashboardService {
   getPackageById(id) {
     return authorizedHttp.get(`/user/Package/GetByPkgId/${id}`);
   }
-
   editNewPackage(data) {
     return authorizedFormDataHttp.put("/user/Package/Edit", data);
   }
@@ -52,6 +51,15 @@ class DashboardService {
   removePackage(id) {
     return authorizedHttp.delete(`/user/Package/DelByPkgId/${id}`);
   }
+
+  getRequestTimeline(id) {
+    return authorizedHttp.get(`/user/Request/GetTimelineByReqId/${id}`);
+  }
+
+  getOfferTimeline(id) {
+    return authorizedHttp.get(`/user/Offer/GetTimelineByOffId/${id}`);
+  }
+
 }
 
 export default new DashboardService();

@@ -241,15 +241,15 @@ export interface IMyPackages {
 }
 
 export interface IOfferSent {
-  arrivalDate: string;
-  arrivalTime: string;
   daysLeft: string;
   daysLeftHex: string;
-  departureDate: string;
-  departureTime: string;
-  fromCity: string;
   fromCountry: string;
   fromCountryAbbr: string;
+  fromCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  fromTime1: string;
+  fromTime2: string;
   id: string;
   itemValue: string;
   message: string;
@@ -261,36 +261,45 @@ export interface IOfferSent {
   size: string;
   status: string;
   statusHex: string;
-  toCity: string;
   toCountry: string;
   toCountryAbbr: string;
+  toCountryCity: string;
+  toDate1: string;
+  toDate2: string;
+  toTime1: string;
+  toTime2: string;
   weight: string;
 }
 
 export interface IOfferReceived {
-  arrivalDate: string;
-  arrivalTime: string;
   daysLeft: string;
   daysLeftHex: string;
-  departureDate: string;
-  departureTime: string;
-  fromCity: string;
   fromCountry: string;
   fromCountryAbbr: string;
+  fromCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  fromTime1: string;
+  fromTime2: string;
   id: string;
+  images: string[];
   itemValue: string;
   message: string;
   offerPrice: string;
   owner: string;
-  packagetype: string;
+  packagetypes: string;
   reqId: string;
-  shippingDeadline: number;
+  shippingDeadline: string;
   size: string;
   status: string;
   statusHex: string;
-  toCity: string;
   toCountry: string;
   toCountryAbbr: string;
+  toCountryCity: string;
+  toDate1: string;
+  toDate2: string;
+  toTime1: string;
+  toTime2: string;
   weight: string;
 }
 
@@ -368,6 +377,10 @@ export interface ArrivalOptions {
   toTime: string;
 }
 
+export interface ITimeline {
+  date: string;
+  name: string;
+}
 export interface Option {
   value: string | number;
   label: string;

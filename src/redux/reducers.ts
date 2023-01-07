@@ -33,6 +33,8 @@ import {
   deleteAccount,
   editAccount,
   gateways,
+  offerTimeline,
+  requestTimeline,
 } from "redux/slices";
 
 const rootReducer = combineReducers({
@@ -69,6 +71,8 @@ const rootReducer = combineReducers({
   deleteAccount,
   editAccount,
   gateways,
+  offerTimeline,
+  requestTimeline,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

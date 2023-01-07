@@ -33,13 +33,9 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   );
   const dispatch = useAppDispatch();
 
-  const handleShowMoreDetail = (key) => {
-    setShowMoreDetail(key);
-  };
-
   const handleMoreDetail = () => {
-    setShowMoreDetail(true);
-    setFade(true);
+    setShowMoreDetail(!showMoreDetail);
+    setFade(!fade);
   };
 
   const openContractModal = () => {
@@ -83,7 +79,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                   <span>{data?.fromCountryAbbr}</span>
                 </div>
                 <div>
-                  <span>{data?.departureTime}</span>
+                  <span>{data?.fromTime1}</span>
                 </div>
               </div>
               <div className="header-card-plane rotate-plane-wrapper">
@@ -104,12 +100,12 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                   <span>{data?.toCountryAbbr}</span>
                 </div>
                 <div>
-                  <span>{data?.arrivalTime}</span>
+                  <span>{data?.toTime1}</span>
                 </div>
               </div>
             </Col>
             <Col xs={6} className="receive-body-info">
-              <h3 className="received-card-label">{data?.packagetype}</h3>
+              <h3 className="received-card-label">{data?.packagetypes}</h3>
               <div className="size-received-container">
                 <span className="card-text">Size: {data?.size}</span>
                 <span className="card-text ml-3">Weight: {data?.weight}</span>
@@ -127,7 +123,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
                     style={{ background: data?.daysLeftHex }}
                     className="receive-expire-date"
                   >
-                    {data?.daysLeft} days left
+                    {data?.daysLeft}
                   </span>
                 </span>
               </div>
@@ -241,7 +237,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
         </Card.Footer>
       </Card>
       {showMoreDetail && (
-        <PackageCover data={data} fade={fade} onShowCover={handleShowMoreDetail} />
+        <PackageCover data={data} fade={fade} setShowMoreDetail={setShowMoreDetail} />
       )}
       {showSidebar && (
         <div className="offer-sidebar">

@@ -45,6 +45,14 @@ import {
   deletePackage,
   deletePackageFailure,
 } from "redux/slices/dashboard/userDeletePackageById";
+import {
+  requestTimeline,
+  requestTimelineFailure,
+} from "redux/slices/dashboard/requestTimeline";
+import {
+  offerTimeline,
+  offerTimelineFailure,
+} from "redux/slices/dashboard/offerTimeline";
 import { toast } from "react-toastify";
 
 export const getAllDashboardData = () => async (dispatch) => {
@@ -189,5 +197,27 @@ export const deleteUserPackage = (id) => async (dispatch) => {
   } catch (err) {
     dispatch(deletePackageFailure(err?.response));
     toast.error(err?.response?.data?.message);
+  }
+};
+
+export const getRequestTimeline = (id) => async (dispatch) => {
+  try {
+    const res = await DashboardService.getRequestTimeline(id);
+    dispatch(requestTimeline(res.data));
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+  } catch (err) {
+    toast.error(err?.response?.data?.message);
+    dispatch(requestTimelineFailure(err?.response));
+  }
+};
+
+export const getOfferTimeline = (id) => async (dispatch) => {
+  try {
+    const res = await DashboardService.getOfferTimeline(id);
+    dispatch(offerTimeline(res.data));
+    if (!res?.data?.isSuccess) toast.error(res?.data?.message);
+  } catch (err) {
+    toast.error(err?.response?.data?.message);
+    dispatch(offerTimelineFailure(err?.response));
   }
 };

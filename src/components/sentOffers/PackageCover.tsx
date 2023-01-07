@@ -1,25 +1,42 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { Button } from "layers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { IOfferSent } from "models/interfaces";
+import { getOfferTimeline } from "redux/actions/dashboard";
+import { useAppDispatch, useAppSelector } from "redux/store";
 
 interface IProp {
-  onShowCover: (key: any) => void;
+  setShowMoreDetail: (key: any) => void;
   fade: boolean;
   data: IOfferSent;
 }
-export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
+export const PackageCover: React.FC<IProp> = ({
+  setShowMoreDetail,
+  fade,
+  data,
+}) => {
   const [showCover, setShowCover] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [timelines, setTimelines] = useState([]);
+  const dispatch = useAppDispatch();
+  const offerTimelines: any = useAppSelector((state) => state.offerTimeline);
 
   const handleShow = () => {
     setShowCover(!showCover);
-    onShowCover(showCover);
+    setShowMoreDetail(showCover);
     setFadeOut(true);
   };
+
+  useEffect(() => {
+    dispatch(getOfferTimeline(data.offId));
+  }, []);
+
+  useEffect(() => {
+    if (offerTimelines?.length !== 0) setTimelines(offerTimelines);
+  }, [offerTimelines]);
 
   return (
     <div className="dashboard-more-detail-wrapper more-detail-wrapper">
@@ -34,25 +51,16 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
         <Card.Body className="request-card-border location-cover-info offer-card-cover-body">
           <Row className="detail-cover-wrapper">
             <Col xs={6} className="deliver-status text-left">
-              <div>
-                <span className="offer-deliver-bullet"></span>
-                <p className="offer-deliver-status">05/05/2022</p>
-                <p className="offer-deliver-status-desc">Offer accepted</p>
-              </div>
-              <div>
-                <span className="offer-deliver-bullet"></span>
-                <p className="offer-deliver-status">06/05/2022</p>
-                <p className="offer-deliver-status-desc">
-                  Picked up by Traveler
-                </p>
-              </div>
-              <div>
-                <span className="offer-deliver-bullet"></span>
-                <p className="offer-deliver-status">07/05/2022</p>
-                <p className="offer-deliver-status-desc">
-                  Traveler reaches destination Airport
-                </p>
-              </div>
+              {timelines?.length !== 0 &&
+                timelines?.map((item) => {
+                  return (
+                    <div>
+                      <span className="offer-deliver-bullet"></span>
+                      <p className="offer-deliver-status">{item.date}</p>
+                      <p className="offer-deliver-status-desc">{item.name}</p>
+                    </div>
+                  );
+                })}
             </Col>
             <Col xs={6} className="note-offer-detail">
               <span className="d-block">Note:</span>

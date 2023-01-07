@@ -31,6 +31,8 @@ import bankAccounts from "./banks/bankAccount";
 import deleteAccount from "./banks/deleteBankAccount";
 import editAccount from "./banks/editBankAount";
 import gateways from "./banks/gateways";
+import offerTimeline from "./dashboard/offerTimeline";
+import requestTimeline from "./dashboard/requestTimeline";
 
 export {
   counter,
@@ -66,4 +68,6 @@ export {
   deleteAccount,
   editAccount,
   gateways,
+  offerTimeline,
+  requestTimeline
 };
