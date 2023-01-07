@@ -28,7 +28,7 @@ import userPackage from "./dashboard/userPackageById";
 import deletePackage from "./dashboard/userDeletePackageById";
 import addBankAccount from "./banks/addBankAccount";
 import bankAccounts from "./banks/bankAccount";
-import deleteAccount from "./banks/deleteBankAount";
+import deleteAccount from "./banks/deleteBankAccount";
 import editAccount from "./banks/editBankAount";
 import gateways from "./banks/gateways";
 

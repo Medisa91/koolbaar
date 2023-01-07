@@ -55,7 +55,7 @@ export const RightSidebar: React.FC<IProps> = ({
       ) : sidebarType === "stripe" ? (
         <StripePayment />
       ) : sidebarType === "account" ? (
-        <AddAccount />
+        <AddAccount setIsOpen={setIsOpen} />
       ) : null}
     </Menu>
   );

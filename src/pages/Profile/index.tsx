@@ -5,6 +5,7 @@ import { PersonalInfo, FinancialInfo } from "components";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { getUserInfo } from "redux/actions/authorization";
 import { UseWindowSize } from "components/windowSize/UseWindowSize";
+import { ToastContainer } from "react-toastify";
 
 export const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -80,6 +81,17 @@ export const Profile: React.FC = () => {
         )}
       </div>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

@@ -97,7 +97,7 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
                   Successful Transaction (10+)
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
-                  {data.isRating ? (
+                  {data.rating ? (
                     <FontAwesomeIcon className="mr-2" icon={faCheck} />
                   ) : (
                     <FontAwesomeIcon className="mr-2" icon={faClose} />

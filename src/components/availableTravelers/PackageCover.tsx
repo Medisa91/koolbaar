@@ -49,7 +49,7 @@ export const PackageCover: React.FC<IProp> = ({ onShowCover, fade, data }) => {
               />
             </Col>
             <Col xs={8}>
-              <span className="d-block">About Me:</span> {data?.aboutMe}
+              <span className="d-block">About Me:</span> {data?.description}
             </Col>
             <Col xs={1}></Col>
           </Row>

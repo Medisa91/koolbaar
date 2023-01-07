@@ -33,25 +33,22 @@ export const RemoveConfirmation: React.FC<IProps> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (type === "travel") {
-      if (deletedTravel.isSuccess) {
-        setIsOpen(false);
-        setIsLoading(false);
-        dispatch(getAllDashboardData());
-      } else if (!deletedTravel.isSuccess) {
-        setIsLoading(false);
-      }
+    if (type === "travel" && deletedTravel.isSuccess) {
+      setIsOpen(false);
+      setIsLoading(false);
+      dispatch(getAllDashboardData());
+    } else if (!deletedTravel.isSuccess) {
+      setIsLoading(false);
     }
-    if (type === "package") {
-      if (deletedPackage.isSuccess) {
-        setIsOpen(false);
-        setIsLoading(false);
-        dispatch(getAllDashboardData());
-      } else if (!deletedPackage.isSuccess) {
-        setIsLoading(false);
-      }
+
+    if (type === "package" && deletedPackage.isSuccess) {
+      setIsOpen(false);
+      setIsLoading(false);
+      dispatch(getAllDashboardData());
+    } else if (!deletedPackage.isSuccess) {
+      setIsLoading(false);
     }
-  }, [deletedTravel, type]);
+  }, [deletedTravel, deletedPackage, type]);
 
   const confirmDeleteBtn = () => {
     setIsLoading(true);

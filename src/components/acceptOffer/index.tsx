@@ -37,9 +37,9 @@ export const AcceptOffer: React.FC<IProps> = ({ acceptOfferData }) => {
   const screenSize = UseWindowSize();
 
   const separatedFromDate = acceptOfferData?.shippingDeadline?.split("-");
-  const separatedFromHour = acceptOfferData?.departureTime?.split(":");
+  const separatedFromHour = acceptOfferData?.fromTime1?.split(":");
   const separatedToDate = acceptOfferData?.shippingDeadline?.split("-");
-  const separatedToHour = acceptOfferData?.arrivalTime?.split(":");
+  const separatedToHour = acceptOfferData?.toTime1?.split(":");
   const monthFrom = getNumberOfMonth(parseInt(separatedFromDate[1]));
   const monthTo = getNumberOfMonth(parseInt(separatedFromDate[1]));
   const defaultFromDate = new Date(

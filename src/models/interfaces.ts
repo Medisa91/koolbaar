@@ -20,6 +20,14 @@ export interface IRegister {
   playerId: string;
 }
 
+export interface IAccount {
+  gatewayId: string;
+  holderName: string;
+  number: string;
+  email: string;
+  swiftCode: string;
+}
+
 export interface ILogin {
   grantType: string;
   username: string;
@@ -83,56 +91,78 @@ export interface ITransaction {
 }
 
 export interface IRequest {
-  owner: string;
-  offerPrice: string;
-  id: string;
-  pkgId: string;
-  packagetype: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  size: string;
-  weight: string;
-  itemValue: string;
-  shippingDeadline: string;
   deliveryTypes: string;
   description: string;
-  location: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  fromCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  fromTime1: string;
+  fromTime2: string;
   images: string[];
   isIdValidation: boolean;
   isProfilePicture: boolean;
   isProofOfAddress: boolean;
-  isRating: boolean;
   isSuccessfulTransaction: boolean;
   isValidPassport: boolean;
+  itemValue: string;
+  location: string;
+  offerPrice: string;
+  offers: number;
+  owner: string;
+  packagetype: string;
+  pkgId: string;
+  rating: number;
+  shippingDeadline: string;
+  size: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  toCountryCity: string;
+  toDate1: string;
+  toDate2: string;
+  toTime1: string;
+  toTime2: string;
   userLevel: string;
+  weight: string;
 }
 
 export interface ITraveler {
-  fullName: string;
-  rating: string;
-  aboutMe: string;
-  isVerifiedUser: boolean;
-  id: string;
-  trvId: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  size: number;
-  weight: number;
-  itemValue: number;
   deliveryTypes: string;
-  location: string;
-  images: string[];
+  description: string;
+  fromCountry: string;
+  fromCountryAbbr: string;
+  fromCountryCity: string;
+  fromDate1: string;
+  fromDate2: string;
+  fromTime1: string;
+  fromTime2: string;
+  images: [];
   isIdValidation: boolean;
   isProfilePicture: boolean;
   isProofOfAddress: boolean;
-  isRating: boolean;
   isSuccessfulTransaction: boolean;
   isValidPassport: boolean;
+  itemValue: string;
+  location: string;
+  offerPrice: string;
+  owner: string;
+  packagetypes: string;
+  rating: number;
+  requests: number;
+  shippingDeadline: string;
+  size: string;
+  sizerange: string;
+  toCountry: string;
+  toCountryAbbr: string;
+  toCountryCity: string;
+  toDate1: string;
+  toDate2: string;
+  toTime1: string;
+  toTime2: string;
+  trvId: string;
   userLevel: string;
+  weight: string;
 }
 
 export interface IMyTraveler {

@@ -34,7 +34,7 @@ export const AvailableTravelers: React.FC<IProps> = ({
   useEffect(() => {
     setIsLoading(true);
     const data = {
-      type: "traveler",
+      type: "travel",
       packagetypeIds: type.value ? type.value : null,
       weightrangeIds: weight?.value ? weight?.value : null,
       deliverytypeIds: services?.value ? services?.value : null,

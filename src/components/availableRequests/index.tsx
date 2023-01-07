@@ -8,6 +8,7 @@ import { PackageCard } from "./PackageCard";
 import { Option, IRequest } from "models/interfaces";
 import { useAppDispatch, useAppSelector } from "redux/store";
 import { getAllHomeRequestFilter } from "redux/actions/flight";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   type: Option;
@@ -26,6 +27,7 @@ export const AvailableRequests: React.FC<IProps> = ({
 }) => {
   const windowSize = UseWindowSize();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const [requestData, setRequestData] = useState([]);
   const [isEmpty, setIsEmpty] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +70,7 @@ export const AvailableRequests: React.FC<IProps> = ({
   return (
     <div className="requests-info-wrapper">
       {windowSize?.width >= 768 && (
-        <h2 className="mt-2 mb-4">Available Requests</h2>
+        <h2 className="mt-2 mb-4">{t("availableRequests")}</h2>
       )}
       {windowSize?.width < 768 && (
         <Row
@@ -76,7 +78,7 @@ export const AvailableRequests: React.FC<IProps> = ({
           style={{ width: "360px", margin: "auto", alignItems: "center" }}
         >
           <Col xs={6}>
-            <h2>Available Requests</h2>
+            <h2>{t("availableRequests")}</h2>
           </Col>
           <Col xs={6} className="pl-0 text-right">
             <a className="filter-responsive-btn" href="/">

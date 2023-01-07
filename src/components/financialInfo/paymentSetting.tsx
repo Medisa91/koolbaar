@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "layers";
 import { IGateway } from "models/interfaces";
+import { RightSidebar } from "layers";
+import { useAppDispatch, useAppSelector } from "redux/store";
+import { getAllBankAccounts } from "redux/actions/banks";
 
 interface IProps {
   gateways: IGateway[];
@@ -9,74 +12,70 @@ interface IProps {
 export const PaymentSetting: React.FC<IProps> = ({ gateways }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [showSidebar, setShowSidebar] = useState(false);
+  const allBanksAccount: any = useAppSelector((state) => state.bankAccounts);
+  const dispatch = useAppDispatch();
+
+  const openSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
 
   const onNameChanged = (e) => {
     setName(e.currentTarget.value);
   };
-  // const onAddressChanged = (e) => {
-  //   setAddress(e.currentTarget.value);
-  // };
+
+  useEffect(() => {
+    dispatch(getAllBankAccounts());
+  }, []);
 
   return (
     <div
       className={`${
-        gateways?.length !== 0 ? "payment-wrapper" : "no-payment-wrapper"
+        allBanksAccount?.length !== 0 ? "payment-wrapper" : "no-payment-wrapper"
       } `}
     >
       <h2>Payment Settings</h2>
-      {gateways?.map((gateway) => {
+      {allBanksAccount?.data?.map((account) => {
         return (
           <div className="payment-card-info mt-4">
             <div className="d-flex">
-              <img
-                src={gateway?.imageUrl}
+              {/* <img
+                src={account?.imageUrl}
                 className="paypal-card-img"
                 alt="visa-img"
-              />
+              /> */}
+              <span className="visa-card-number">{account?.holderName}</span>
+              <span className="visa-card-number">{account?.email}</span>
               <input
                 className="ml-auto card-radio-btn"
                 type="radio"
                 name="site_name"
-                value={gateway?.id}
+                value={account?.gatewayId}
                 onChange={onNameChanged}
               />
             </div>
-            <span className="visa-card-number">{gateway?.text}</span>
-            <span className="visa-card-expiration">{gateway?.date}</span>
+
+            <span className="visa-card-expiration">{account?.number}</span>
+            <span className="visa-card-expiration">{account?.swiftCode}</span>
           </div>
         );
       })}
-      {/* <div className="payment-card-info mt-4">
-        <div className="d-flex">
-          <img src={PaypalImg} className="paypal-card-img" alt="visa-img" />
-          <input
-            className="ml-auto card-radio-btn"
-            type="radio"
-            name="site_name"
-            value={name}
-            onChange={onNameChanged}
-          />
-        </div>
-        <span className="paypal-card-account">myself@me.com</span>
-        <span className="paypal-card-added">Added 15-02-2017</span>
-      </div>
-      <div className="payment-card-info mt-3">
-        <div className="d-flex">
-          <img src={VisaImg} className="visa-card-img" alt="paypal-img" />
-          <input
-            className="ml-auto card-radio-btn"
-            type="radio"
-            name="site_name"
-            value={address}
-            onChange={onAddressChanged}
-          />
-        </div>
-        <span className="visa-card-number">**** **** **** 0817</span>
-        <span className="visa-card-expiration">Expires 10-19</span>
-      </div> */}
-      <Button variant="primary" className="add-new-card-btn">
+      <Button
+        variant="primary"
+        className="add-new-card-btn"
+        onClick={openSidebar}
+      >
         Add New
       </Button>
+      {showSidebar && (
+        <div className="offer-sidebar">
+          <RightSidebar
+            isOpen={showSidebar}
+            setIsOpen={setShowSidebar}
+            sidebarType="account"
+          />
+        </div>
+      )}
     </div>
   );
 };

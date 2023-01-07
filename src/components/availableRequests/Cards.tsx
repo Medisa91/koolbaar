@@ -34,7 +34,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
 
   return (
     <Col
-      key={data?.id}
+      key={data?.pkgId}
       lg={3}
       md={4}
       sm={12}
@@ -47,10 +47,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           <Row>
             <Col xs={3} className="text-left header-card-titles">
               <div>
-                <span className="text-left">{data?.from}</span>
+                <span className="text-left">{data?.fromCountryAbbr}</span>
               </div>
               <div>
-                <span className="text-left">{data?.departureTime}</span>
+                <span className="text-left">{data?.fromTime1}</span>
               </div>
             </Col>
             <Col xs={6} className="text-center header-card-plane p-0">
@@ -71,10 +71,10 @@ export const Cards: React.FC<IProps> = ({ data }) => {
             </Col>
             <Col xs={3} className="header-card-titles">
               <div className="text-right">
-                <span>{data?.to}</span>
+                <span>{data?.toCountryAbbr}</span>
               </div>
               <div className="text-right">
-                <span>{data?.arrivalTime}</span>
+                <span>{data?.toTime1}</span>
               </div>
             </Col>
           </Row>

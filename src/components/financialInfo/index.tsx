@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "layers";
-// import { PaymentSetting } from "./paymentSetting";
+import { PaymentSetting } from "./paymentSetting";
 import { Transactions } from "./transactions";
 import { IUserInfo } from "models/interfaces";
 import { SkeletonFinancial } from "components/Skeleton/skeletonFinancial";
@@ -32,7 +32,7 @@ export const FinancialInfo: React.FC<IProps> = ({ userData }) => {
               Withdraw
             </Button>
           </div>
-          {/* <PaymentSetting gateways={userData?.gateways} /> */}
+          <PaymentSetting gateways={userData?.gateways} />
           <Transactions transactions={userData?.transactions} />
         </>
       ) : (
