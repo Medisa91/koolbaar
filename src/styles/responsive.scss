@@ -698,6 +698,10 @@
       margin: 0px 0 19px 20px;
       width: 209px;
     }
+    .custom-input-package-price {
+      margin: 0px 0 19px 20px;
+      width: 209px;
+    }
     .custom-input-service {
       margin: 0px 0 19px 20px;
       width: 209px;
@@ -723,6 +727,9 @@
     }
 
     .custom-input-at-request {
+      width: 295px;
+    }
+    .custom-input-at-destination {
       width: 295px;
     }
 
@@ -751,6 +758,7 @@
     .message-title,
     .and-offer-title,
     .to-title,
+    .to-date-title,
     .between-title,
     .at-title,
     .and-title,
@@ -758,6 +766,7 @@
     .size-title,
     .value-title,
     .package-title,
+    .max-value-title,
     .weight-title {
       margin-left: 0;
     }

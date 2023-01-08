@@ -21,6 +21,7 @@ export const Cards: React.FC<IProps> = ({ data }) => {
   const [showStatusBox, setShowStatusBox] = useState(false);
   const [fade, setFade] = useState(false);
   const [isStatusLoading, setIsStatusLoading] = useState(false);
+  const [isRejectLoading, setIsRejectLoading] = useState(false);
   const windowSize = UseWindowSize();
   const isMobile = windowSize.width < 768;
   const allStatus = useAppSelector((state) => state?.getChangedStatus);
@@ -42,9 +43,26 @@ export const Cards: React.FC<IProps> = ({ data }) => {
     dispatch(getAllDashboardData());
   };
 
+  const changeStatusToAccept = (offId, acceptedId) => {
+    setIsStatusLoading(true);
+    const changestatusId = acceptedId[0];
+    const data = { offId, changestatusId };
+    dispatch(alterOfferStatus(data));
+    dispatch(getAllDashboardData());
+  };
+
+  const changeStatusToReject = (offId, rejectedId) => {
+    setIsRejectLoading(true);
+    const changestatusId = rejectedId[0];
+    const data = { offId, changestatusId };
+    dispatch(alterOfferStatus(data));
+    dispatch(getAllDashboardData());
+  };
+
   useEffect(() => {
     if (changeStatusData) {
       setIsStatusLoading(false);
+      setIsRejectLoading(false);
       setShowStatusBox(false);
     }
   }, [changeStatusData]);
@@ -177,10 +195,30 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           </Button>
           {data?.status === "Pending" ? (
             <Button
-              data-test="docs-btn-anchor"
+              onClick={() =>
+                changeStatusToReject(
+                  data.offId,
+                  allStatus
+                    ?.filter((status) => {
+                      return status.name === "Rejected";
+                    })
+                    ?.map((item) => {
+                      return item.id;
+                    })
+                )
+              }
               className={`reject-btn ${isMobile ? "mx-2" : "mx-4"}`}
             >
-              Reject
+              Reject{" "}
+              {isRejectLoading && (
+                <Oval
+                  width="15"
+                  height="15"
+                  color="#fff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{ display: "inline", marginLeft: "5px" }}
+                />
+              )}
             </Button>
           ) : (
             <Button
@@ -194,10 +232,30 @@ export const Cards: React.FC<IProps> = ({ data }) => {
           {data?.status === "Pending" ? (
             <Button
               variant="primary"
-              data-test="docs-btn-anchor"
+              onClick={() =>
+                changeStatusToAccept(
+                  data.offId,
+                  allStatus
+                    ?.filter((status) => {
+                      return status.name === "Accepted";
+                    })
+                    ?.map((item) => {
+                      return item.id;
+                    })
+                )
+              }
               className="accept-btn"
             >
-              Accept
+              Accept{" "}
+              {isStatusLoading && (
+                <Oval
+                  width="15"
+                  height="15"
+                  color="#fff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{ display: "inline", marginLeft: "5px" }}
+                />
+              )}
             </Button>
           ) : (
             <Button

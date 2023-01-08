@@ -51,7 +51,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
     fromDate2: "",
     toDate1: "",
     toDate2: "",
-    offerPrice: "20",
+    offerPrice: "",
     message: "",
     images: [],
   });
@@ -144,6 +144,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
         weight: data.weight,
         message: data.description,
         value: data.itemValue,
+        offerPrice: data.offerPrice,
       });
       setImages(data.images);
     }
@@ -175,6 +176,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
         weight: "0",
         message: "",
         value: "",
+        offerPrice: "",
       });
       setImages([]);
     }
@@ -341,7 +343,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
     body.append("fromDate2", fromDate2);
     body.append("toDate1", toDate1);
     body.append("toDate2", toDate2);
-    body.append("offerPrice", "20");
+    body.append("offerPrice", travelData.offerPrice);
     body.append("message", travelData.message);
     body.append("images", images);
     if (mode === "add") dispatch(addNewTravel(body));
@@ -440,7 +442,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
             <span className="package-title">
               Package with maximum weight of
             </span>
-            <div className="d-inline-block">
+            <div className="d-inline-block position-relative">
               <Input
                 size="sm"
                 id="weight"
@@ -466,22 +468,8 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
         </Col>
         <Col xs={12} className="request-form">
           <div className="send-input-wrapper">
-            <span className="and-destination-title">And</span>
-            <div className="d-inline-block">
-              <Select
-                className="custom-select-post-service d-inline-block"
-                value={service}
-                onChange={handleServicesChange}
-                options={servicesOptions}
-                components={{
-                  IndicatorSeparator: () => null,
-                  Option: InputOption,
-                }}
-                styles={customStyle}
-              />
-            </div>
-            <span className="package-title">For</span>
-            <div className="d-inline-block">
+            <span className="max-value-title">And max value of</span>
+            <div className="d-inline-block position-relative">
               <Input
                 size="sm"
                 id="value"
@@ -502,7 +490,44 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
                   DropdownIndicator: () => null,
                 }}
               />
-            </div>            
+            </div>
+            <span className="and-destination-title">And</span>
+            <div className="d-inline-block">
+              <Select
+                className="custom-select-post-service d-inline-block"
+                value={service}
+                onChange={handleServicesChange}
+                options={servicesOptions}
+                components={{
+                  IndicatorSeparator: () => null,
+                  Option: InputOption,
+                }}
+                styles={customStyle}
+              />
+            </div>
+            <span className="package-title">For</span>
+            <div className="d-inline-block position-relative">
+              <Input
+                size="sm"
+                id="offerPrice"
+                name="offerPrice"
+                placeholder="200"
+                className="custom-input-package-price"
+                value={travelData.offerPrice}
+                onChange={handleChange}
+              />
+              <Select
+                className="custom-select-unit-size d-inline-block"
+                value={currency}
+                onChange={handleCurrencyChange}
+                options={currencySizeOption}
+                styles={unitCustomStyle}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => null,
+                }}
+              />
+            </div>
           </div>
         </Col>
         <Col xs={12} className="request-form">
@@ -555,7 +580,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
             }
           >
             <MultipleUploader
-              title="Upload package photo"
+              title="Upload Travel Documents"
               setPhotos={setImages}
               image={images}
             />
@@ -569,7 +594,7 @@ export const AddTravel: React.FC<IProp> = ({ setIsOpen, mode, trvId }) => {
                 size="sm"
                 id="message"
                 name="message"
-                placeholder="Write your message"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod massa augue, non venenatis eros sollicitudin eget. Curabitur velit risus, consequat non dolor in, consectetur commodo urna."
                 className="custom-input-message"
                 value={travelData.message}
                 rows={4}

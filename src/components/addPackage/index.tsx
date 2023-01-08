@@ -45,7 +45,7 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
     fromDate2: "",
     toDate1: "",
     toDate2: "",
-    offerPrice: "20",
+    offerPrice: "",
     message: "",
     images: [],
   });
@@ -60,6 +60,7 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
   const addPackageData: any = useAppSelector((state) => state.addPackage);
   const editPackageData: any = useAppSelector((state) => state?.editPackage);
   const userPackage: any = useAppSelector((state) => state?.userPackage);
+  const [currency, setCurrency] = useState({ value: 0, label: "CAD" });
   const screenSize = UseWindowSize();
   const [betweenDate, setBetweenDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -78,7 +79,11 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
   const [toCountry, setToCountry] = useState("Iran");
   const [toCountryCity, setToCountryCity] = useState("Iran, Tehran");
   const [isLoading, setIsLoading] = useState(false);
-
+  const currencySizeOption = [
+    { value: 0, label: "CAD" },
+    { value: 1, label: "USD" },
+    { value: 2, label: "IRR" },
+  ];
   const handleTermsCheckedChange = () => {
     setTermsChecked(!termsChecked);
   };
@@ -151,6 +156,7 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
         weight: "0",
         message: "",
         value: "",
+        offerPrice: "",
       });
       setImages([]);
     }
@@ -207,6 +213,10 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
     // );
   };
 
+  const handleCurrencyChange = (selected) => {
+    setCurrency(selected);
+  };
+
   const onArrivalBetweenDateChange = (date) => {
     setArrivalBetweenDate(date);
     setFromDate1(getDate(date));
@@ -224,6 +234,24 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
   const onDepartureToDateChange = (date) => {
     setDepartureToDate(date);
     setToDate2(getDate(date));
+  };
+
+  const unitCustomStyle = {
+    control: (styles) => ({
+      ...styles,
+      height: 30,
+      padding: 0,
+    }),
+    option: (styles) => ({
+      ...styles,
+      color: "#fff",
+      backgroundColor: "#707070",
+      flexWrap: "nowrap",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color: "#00043d",
+    }),
   };
 
   const customStyle = {
@@ -293,7 +321,7 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
     body.append("fromDate2", fromDate2);
     body.append("toDate1", toDate1);
     body.append("toDate2", toDate2);
-    body.append("offerPrice", "20");
+    body.append("offerPrice", packageData.offerPrice);
     body.append("message", packageData.message);
     body.append("images", images);
     if (mode === "add") dispatch(addNewPackage(body));
@@ -348,15 +376,26 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
         <Col xs={12} className="request-form">
           <div className="send-input-wrapper">
             <span className="value-title">And value of</span>
-            <div className="d-inline-block">
+            <div className="d-inline-block position-relative">
               <Input
                 size="sm"
                 id="value"
                 name="value"
-                placeholder="1250 USD"
+                placeholder="200"
                 className="custom-input-value"
                 value={packageData.value}
                 onChange={handleChange}
+              />
+              <Select
+                className="custom-select-unit-size d-inline-block"
+                value={currency}
+                onChange={handleCurrencyChange}
+                options={currencySizeOption}
+                styles={unitCustomStyle}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => null,
+                }}
               />
             </div>
             <span className="size-title">And size</span>
@@ -434,12 +473,27 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
             </div>
             <span className="at-title">At</span>
             <div className="d-inline-block">
-              <Input
+              {/* <Input
                 size="sm"
                 id="at"
                 placeholder="No2, Razavi 22, Rezashahr, Mashhad, Iran"
                 className="custom-input-at-request"
                 // value={offerData.at}
+              /> */}
+              <GooglePlacesAutocomplete
+                selectProps={{
+                  className: "custom-input-at-destination d-inline-block",
+                  value: to,
+                  placeholder: "City or Country",
+                  onChange: (e) => changeToPlace(e),
+                  noOptionsMessage: () => null,
+                  components: {
+                    IndicatorSeparator: () => null,
+                    MenuList: SelectMenuButton,
+                  },
+                  styles: customStyle,
+                }}
+                apiKey="AIzaSyBxY7vo5Y6IHZ2_0Xk0g3ZBFyVL_wZTuho"
               />
             </div>
           </div>
@@ -456,7 +510,7 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
                 showTimeInput
               />
             </div>
-            <span className="to-title">To</span>
+            <span className="to-date-title">To</span>
             <div className="d-inline-block">
               <DatePicker
                 className="custom-input-to-request"
@@ -471,15 +525,26 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
         <Col xs={12} className="request-form">
           <div className="send-input-wrapper">
             <span className="and-offer-title">And offer</span>
-            <div className="d-inline-block">
+            <div className="d-inline-block position-relative">
               <Input
                 size="sm"
                 id="offerPrice"
                 name="offerPrice"
-                placeholder="600 CAD"
+                placeholder="600"
                 className="custom-input-and-offer"
                 value={packageData.offerPrice}
                 onChange={handleChange}
+              />
+              <Select
+                className="custom-select-unit-price d-inline-block"
+                value={currency}
+                onChange={handleCurrencyChange}
+                options={currencySizeOption}
+                styles={unitCustomStyle}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => null,
+                }}
               />
             </div>
           </div>
@@ -502,7 +567,7 @@ export const AddPackage: React.FC<IProp> = ({ setIsOpen, mode, pkgId }) => {
               <Input
                 size="sm"
                 id="message"
-                placeholder="Monday 3PM to 5PM 05/05/2022"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod massa augue, non venenatis eros sollicitudin eget. Curabitur velit risus, consequat non dolor in, consectetur commodo urna."
                 className="custom-input-message"
                 value={packageData.message}
                 onChange={handleChange}

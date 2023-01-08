@@ -2560,10 +2560,27 @@ body {
       solid 1px $gray8
     );
   }
+  .custom-input-at-destination > div {
+    @include custom-select-styles(
+      320px,
+      0 0px 15px 4px,
+      0,
+      5px,
+      $white,
+      $Inter-font,
+      $font-14,
+      $weight-500,
+      1.21,
+      left,
+      $primary,
+      border,
+      solid 1px $gray8
+    );
+  }
 
   .custom-package-place-from > div {
     @include custom-select-styles(
-      490px,
+      486px,
       0 11px 15px 15px,
       0,
       5px,
@@ -2639,18 +2656,23 @@ body {
   .value-title {
     @extend .send-pack-title;
     width: 83px;
-    margin: 33px 3px 35px;
+    margin: 33px 0 35px;
   }
   .package-title {
     @extend .send-pack-title;
     width: 83px;
     margin: 33px 0 35px 10px;
   }
+  .max-value-title {
+    @extend .send-pack-title;
+    width: 83px;
+    margin: 33px 0 35px 0;
+  }
 
   .custom-input-value {
     @extend .custom-input-send;
-    width: 96px;
-    margin: 0px 0 19px 46px;
+    width: 125px;
+    margin: 0px 0 19px 20px;
     padding: 16px 15px 17px;
   }
 
@@ -2662,8 +2684,14 @@ body {
   }
   .custom-input-package-value {
     @extend .custom-input-send;
-    width: 147px;
+    width: 104px;
     margin: 0px 0 19px 10px;
+    padding: 16px 15px 17px;
+  }
+  .custom-input-package-price {
+    @extend .custom-input-send;
+    width: 120px;
+    margin: 0px 0 19px 12px;
     padding: 16px 15px 17px;
   }
 
@@ -2803,13 +2831,14 @@ body {
   .custom-select-unit-size {
     position: absolute;
     top: 6px;
-    right: 40px;
+    right: 3px;
     .css-2613qy-menu {
       background-color: #707070;
     }
   }
 
-  .custom-select-unit-size > div {
+  .custom-select-unit-size > div ,
+  .custom-select-unit-price > div {
     @include custom-select-styles(
       auto,
       0 3px 3px 3px,
@@ -2826,6 +2855,14 @@ body {
       solid 1px #f8f8f8
     );
     box-shadow: none;
+  }
+  .custom-select-unit-price {
+    position: absolute;
+    top: 6px;
+    right: 22px;
+    .css-2613qy-menu {
+      background-color: #707070;
+    }
   }
 
   .custom-select-package-type > div {
@@ -2850,8 +2887,8 @@ body {
 
   .custom-select-post-service > div {
     @include custom-select-styles(
-      327px,
-      0 3px 15px 3px,
+      125px,
+      0 0 15px 0,
       0,
       5px,
       $white,
@@ -2886,7 +2923,7 @@ body {
   .and-destination-title {
     @extend .send-pack-title;
     width: 26px;
-    margin: 0px 21px 48px 0;
+    margin: 0px 12px 48px 10px;
   }
 
   .and-carry-title {
@@ -2952,6 +2989,11 @@ body {
     @extend .send-pack-title;
     width: 16px;
     margin: 30px 9px 29px 11px;
+  }
+  .to-date-title {
+    @extend .send-pack-title;
+    width: 16px;
+    margin: 30px 13px 29px 14px;
   }
 
   .package-type-title {
